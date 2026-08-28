@@ -1,0 +1,13 @@
+{
+  "slug": "service-proof-loop",
+  "title": "Service Proof Loop",
+  "summary": "Send visit proof and carry approved extras into the next recurring visit.",
+  "territory": "utilities",
+  "user": "Recurring cleaning and maintenance businesses that need post-job proof, client feedback, and approved extras to flow into the next visit without building a custom customer portal.",
+  "smallest_useful_product": "Technician upload/checklist, client proof page, one-tap accept/problem/rating, configurable extras, and automatic attachment to the next recurring job export.",
+  "non_goals": ["dispatch", "payments", "payroll", "public-review solicitation", "worker tracking"],
+  "success_measure": "At least 40% of completed recurring jobs receive a client response within 48 hours and 80% of requested extras arrive on the next job card without staff re-entry.",
+  "artifact_class": "web-with-backend",
+  "monetization": "$59 per business each month plus technician seats",
+  "state": "BUILT"
+}
