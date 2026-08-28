@@ -1,0 +1,6 @@
+.git
+target
+dist
+node_modules
+test-results
+assets/src
