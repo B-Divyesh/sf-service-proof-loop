@@ -1,5 +1,11 @@
-node_modules/
-dist/
+/target/
+/node_modules/
+/dist/
+/test-results/
+/playwright-report/
+*.db
+*.db-shm
+*.db-wal
 .env
 *.log
 graphify-out/

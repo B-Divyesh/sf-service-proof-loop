@@ -1,14 +1,82 @@
 # Service Proof Loop
 
-Live: https://service-proof-loop.sociobot.in — built by the Param Factory (`web-with-backend`).
+Send visit proof and carry approved extras into the next recurring visit.
 
-See `.factory/brief.json` for the researched problem this solves and `.factory/design.md` for the visual system.
+Service Proof Loop is for cleaning and maintenance businesses with repeat
+clients. A technician records a checklist, note, and consented photos. The
+client opens a private link without an account. Their reply and selected extras
+appear beside the next visit and in a CSV export.
 
-## Develop
+The product does not handle dispatch, payments, payroll, public reviews, or
+worker tracking.
 
-```
+## Try the sample
+
+Open `/demo`, or visit
+<https://service-proof-loop.sociobot.in/demo> after deployment. The demo creates
+an isolated 24-hour workspace. Choose **Reset demo** to start with new sample
+data. See [.factory/demo.md](.factory/demo.md) for the exact sandbox behavior.
+
+## Run locally
+
+You need Node.js 22+, Rust 1.88+, and SQLite development libraries.
+
+```sh
 npm install
-npm run dev
-npm test
-npm run build   # -> dist/
+npm run build
+DATABASE_URL='sqlite:service-proof-loop.db?mode=rwc' STATIC_DIR=dist cargo run
 ```
+
+Open <http://localhost:8080>. The container needs no environment variables and
+listens on port 8080 by default.
+
+For frontend development, run the API on port 8080. Then run `npm run dev` in a
+second terminal and open <http://localhost:5173>.
+
+## Test and verify
+
+```sh
+cargo test
+npm test
+npm run build
+docker build --build-arg BUILD_SHA=local -t service-proof-loop .
+docker run --rm -p 8080:8080 service-proof-loop
+```
+
+`npm test` starts the built service and runs Chromium at desktop and 390 px.
+The suite covers the demo sandbox, client reply, extra configuration, CSV
+contents, offline messaging, keyboard-ready semantics, and serious axe issues.
+Every product claim and its command is listed in
+[.factory/claims.json](.factory/claims.json).
+
+## Configuration
+
+- `PORT`: HTTP port. Defaults to `8080`.
+- `DATABASE_URL`: SQLite URL. Defaults to `/data/service-proof-loop.db`.
+- `STATIC_DIR`: built frontend directory. Defaults to `frontend/dist`.
+- `BUILD_SHA`: embedded during the container build and returned by `/health`.
+
+No signing secret is required. Workspace and proof access use random tokens;
+only token hashes are stored. Proof links expire after 14 days. Every API route
+except `/health` has a forwarded-IP rate limit.
+
+## Billing
+
+The free plan holds three completed visits. The business plan is $59 per
+business each month and adds unlimited visits. Checkout and license verification
+use the Sociobot billing API. The repository contains no payment provider key or
+product identifier beyond the public product slug.
+
+## Deployment
+
+The multi-stage [Dockerfile](Dockerfile) builds the Vite frontend and Rust
+service. It runs as a non-root user and serves the API and frontend from one
+container. The factory supplies `BUILD_SHA`; it may deploy with only `PORT`.
+
+## Privacy and license
+
+The product includes `/privacy` and `/terms`. It does not load third-party
+fonts, scripts, or analytics. Generated art provenance is recorded in
+[.factory/design.md](.factory/design.md).
+
+The source is available under the [MIT License](LICENSE).

@@ -1,0 +1,20 @@
+{
+  "name": "service-proof-loop",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --config frontend/vite.config.ts",
+    "build": "vite build --config frontend/vite.config.ts",
+    "test": "playwright test",
+    "test:claims": "playwright test --grep @claim",
+    "test:a11y": "playwright test --grep @a11y",
+    "test:all": "cargo test && playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.10.2",
+    "@playwright/test": "1.58.2",
+    "typescript": "5.9.2",
+    "vite": "7.3.6"
+  }
+}

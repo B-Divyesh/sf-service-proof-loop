@@ -1,0 +1,58 @@
+[
+  {
+    "id": "demo-sandbox",
+    "claim": "The demo uses sample data, never real workspace data",
+    "where": "demo banner and README",
+    "test": "npm test -- --grep @claim:demo-sandbox",
+    "sandbox": "fresh browser context; reset demo; assert its workspace token changes and real storage stays empty"
+  },
+  {
+    "id": "no-account",
+    "claim": "Clients open proof links without an account",
+    "where": "landing facts",
+    "test": "npm test -- --grep @claim:no-account",
+    "sandbox": "create demo proof; open its link in a fresh browser context without workspace storage"
+  },
+  {
+    "id": "proof-expiry",
+    "claim": "Proof links expire after 14 days",
+    "where": "landing facts, privacy page",
+    "test": "npm test -- --grep @claim:proof-expiry",
+    "sandbox": "open demo proof; compare completion and displayed expiry dates"
+  },
+  {
+    "id": "next-visit-export",
+    "claim": "Approved extras appear in the next-visit CSV",
+    "where": "landing, workspace, README",
+    "test": "npm test -- --grep @claim:next-visit-export",
+    "sandbox": "choose an extra on demo proof; return to workspace; download CSV and assert the row"
+  },
+  {
+    "id": "same-origin-demo",
+    "claim": "Demo actions send data only to this service",
+    "where": "demo documentation",
+    "test": "npm test -- --grep @claim:same-origin-demo",
+    "sandbox": "record every request while loading a fresh demo; assert every origin matches the product"
+  },
+  {
+    "id": "configurable-extras",
+    "claim": "Businesses choose which extras appear on client proof pages",
+    "where": "workspace and README",
+    "test": "npm test -- --grep @claim:configurable-extras",
+    "sandbox": "add an extra in the demo workspace; open its proof page and assert that choice appears"
+  },
+  {
+    "id": "paid-license",
+    "claim": "The $59 monthly plan uses Sociobot checkout and supports license restore",
+    "where": "landing price section and README",
+    "test": "npm test -- --grep @claim:paid-license",
+    "sandbox": "fresh landing page; assert price and checkout URL; mock a valid verify response and restore a license"
+  },
+  {
+    "id": "rate-limit",
+    "claim": "Every API route except health is limited by forwarded client IP",
+    "where": "README",
+    "test": "npm test -- --grep @claim:rate-limit",
+    "sandbox": "send 45 demo requests as one forwarded client; assert a 429 response with Retry-After"
+  }
+]
