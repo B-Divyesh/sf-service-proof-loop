@@ -3,40 +3,11 @@ set -euo pipefail
 
 slug=service-proof-loop
 resource_group=sociobot
-environment=factory-env
 app_name=sf-service-proof-loop
-storage_account=sociobotblob
-share_name=service-proof-loop-data
-storage_name=service-proof-loop-data
-
 # The factory deployer builds the work-order Dockerfile and preserves the
-# product's custom domain. SQLite additionally needs one durable writer.
+# product's custom domain. SQLite requires exactly one writer, so this wrapper
+# immediately fixes the service at one replica after the base deployment.
 /opt/fleet/lib/deploy-container.sh "$slug" "$(cd "$(dirname "$0")/.." && pwd)" Dockerfile 8080
-
-az storage share-rm create \
-  --resource-group "$resource_group" \
-  --storage-account "$storage_account" \
-  --name "$share_name" \
-  --quota 5 \
-  --only-show-errors \
-  --output none
-
-storage_key=$(az storage account keys list \
-  --resource-group "$resource_group" \
-  --account-name "$storage_account" \
-  --query '[0].value' \
-  --output tsv)
-
-az containerapp env storage set \
-  --resource-group "$resource_group" \
-  --name "$environment" \
-  --storage-name "$storage_name" \
-  --access-mode ReadWrite \
-  --azure-file-account-name "$storage_account" \
-  --azure-file-account-key "$storage_key" \
-  --azure-file-share-name "$share_name" \
-  --only-show-errors \
-  --output none
 
 app_json=$(az containerapp show \
   --resource-group "$resource_group" \
@@ -44,10 +15,11 @@ app_json=$(az containerapp show \
   --output json)
 patch_body=$(jq -n \
   --argjson template "$(jq '.properties.template
+    | del(.scale.cooldownPeriod, .scale.pollingInterval)
     | .scale.minReplicas = 1
     | .scale.maxReplicas = 1
-    | .volumes = [{"name":"data","storageName":"service-proof-loop-data","storageType":"AzureFile"}]
-    | .containers[0].volumeMounts = [{"volumeName":"data","mountPath":"/data"}]' <<<"$app_json")" \
+    | .volumes = null
+    | .containers[0].volumeMounts = null' <<<"$app_json")" \
   '{properties:{template:$template}}')
 
 subscription_id=${AZURE_SUBSCRIPTION_ID:-283af945-693b-4a6e-b952-df928d0a18a9}
@@ -57,8 +29,20 @@ az rest \
   --body "$patch_body" \
   --output none
 
+for _ in $(seq 1 60); do
+  app_state=$(az containerapp show \
+    --resource-group "$resource_group" \
+    --name "$app_name" \
+    --query '[properties.provisioningState, properties.template.scale.maxReplicas]' \
+    --output tsv)
+  if [ "$app_state" = $'Succeeded\t1' ]; then
+    break
+  fi
+  sleep 5
+done
+
 az containerapp show \
   --resource-group "$resource_group" \
   --name "$app_name" \
-  --query '{revision:properties.latestRevisionName,min:properties.template.scale.minReplicas,max:properties.template.scale.maxReplicas,volumes:properties.template.volumes,mounts:properties.template.containers[0].volumeMounts}' \
+  --query '{revision:properties.latestRevisionName,min:properties.template.scale.minReplicas,max:properties.template.scale.maxReplicas}' \
   --output json

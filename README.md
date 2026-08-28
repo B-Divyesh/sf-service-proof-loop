@@ -75,8 +75,9 @@ API. The server enforces the limit even when its browser controls are bypassed.
 The multi-stage [Dockerfile](Dockerfile) builds the Vite frontend and Rust
 service. It runs as a non-root user and serves the API and frontend from one
 container. The factory supplies `BUILD_SHA`; it may deploy with only `PORT`.
-The factory deployment wrapper mounts durable Azure Files storage at `/data`
-and fixes the service at one replica because SQLite has one writer.
+The factory deployment wrapper fixes the service at one replica because SQLite
+has one writer. Do not raise the replica count without moving to a shared
+database.
 
 ## Privacy and license
 

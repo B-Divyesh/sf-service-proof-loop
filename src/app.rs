@@ -13,7 +13,7 @@ use rand::RngCore;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use sqlx::{Row, SqlitePool};
-use std::{net::IpAddr, path::PathBuf, time::Duration as StdDuration};
+use std::{path::PathBuf, time::Duration as StdDuration};
 use tower_governor::{
     errors::GovernorError, governor::GovernorConfigBuilder, key_extractor::KeyExtractor,
     GovernorLayer,
@@ -78,9 +78,8 @@ pub fn build_app(pool: SqlitePool, config: AppConfig) -> Router {
             .build()
             .expect("build HTTP client"),
     };
-    let period_ms = (1_000u64 / u64::from(config.rate_limit.max(1))).max(1);
     let governor = GovernorConfigBuilder::default()
-        .per_millisecond(period_ms)
+        .per_second(1)
         .burst_size(config.rate_limit.max(1))
         .key_extractor(ForwardedClientIp)
         .finish()
@@ -167,7 +166,7 @@ async fn security_headers(req: Request, next: Next) -> Response {
 struct ForwardedClientIp;
 
 impl KeyExtractor for ForwardedClientIp {
-    type Key = IpAddr;
+    type Key = String;
 
     fn extract<T>(&self, req: &axum::http::Request<T>) -> Result<Self::Key, GovernorError> {
         Ok(req
@@ -176,13 +175,14 @@ impl KeyExtractor for ForwardedClientIp {
             .and_then(|v| v.to_str().ok())
             .and_then(|v| v.split(',').next())
             .map(str::trim)
-            .and_then(|v| v.parse().ok())
+            .filter(|value| !value.is_empty())
+            .map(str::to_string)
             .or_else(|| {
                 req.extensions()
                     .get::<axum::extract::ConnectInfo<std::net::SocketAddr>>()
-                    .map(|value| value.ip())
+                    .map(|value| value.ip().to_string())
             })
-            .unwrap_or(IpAddr::from([127, 0, 0, 1])))
+            .unwrap_or_else(|| "local".into()))
     }
 }
 

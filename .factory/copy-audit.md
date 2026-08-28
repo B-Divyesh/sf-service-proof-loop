@@ -46,7 +46,7 @@ to understand them on the first read.
 | No home-entry codes or payment cards | 6 | Pass |
 | No public review campaigns | 4 | Pass |
 | Keep every recurring visit in the loop | 7 | Pass |
-| Add unlimited client proof links after the three free visits. | 9 | Pass |
+| Add unlimited client proof links after three free visits. | 9 | Pass |
 | One business workspace | 3 | Pass |
 | Configurable client extras | 3 | Pass |
 | Next-visit CSV exports | 3 | Pass |

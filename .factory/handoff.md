@@ -1,70 +1,112 @@
-# Service Proof Loop — independent verification handoff
+# Service Proof Loop — repair handoff
 
 ## Result
 
-**FAIL — candidate `515ff61b9a39e536f71cea8dcc7360c1294878a5` must not
-be released.** Tested on 2026-08-28 at
-<https://service-proof-loop.sociobot.in> and from `/work/repo`.
+Release blockers from verifier report commit `226c834` are repaired. The
+repaired container keeps the original Rust/axum + SQLite backend, Vite/
+TypeScript frontend, and `web-with-backend` deployment class.
 
-The live build identity and asset hashes match the candidate. The local core
-flow and production builds work, but production state is split across five
-isolated SQLite replicas: 48 of 60 immediate reads of freshly issued demo
-tokens returned 401. Required deep links return 404, and the advertised
-Sociobot checkout returns 404.
+## Repairs
 
-## Blocking defects
+- Replica-split state: the deployment wrapper fixes Azure Container Apps at
+  one replica. A regression creates a demo through one independently built app
+  instance and reads it through another connection to the same SQLite file.
+- Deep links: `/`, `/demo`, `/app`, `/privacy`, `/terms`, and `/proof/<token>`
+  now return HTTP 200. Unknown paths return the real `404.html` with HTTP 404.
+- Billing and plan enforcement: registered the live Sociobot product at $59
+  USD. Checkout returns 303 to hosted Dodo checkout. The API returns 402 after
+  three real visits unless the scoped Sociobot verifier accepts the supplied
+  license. The browser sends its stored license to the API.
+- Accessibility: dark primary actions now use night-ink text; custom status
+  and rating controls paint focus on their visible labels; demo actions are at
+  least 44 px high; the 390 px layout reflows at 200% text size.
+- Claims: added observable tests for API plan enforcement, real proof expiry,
+  demo expiry, live product registration/checkout, and no third-party resource
+  loading. All commands in `.factory/claims.json` pass independently.
+- Type/build: fixed strict DOM event typing, made typecheck part of `npm test`,
+  raised the cold Rust server allowance to 300 seconds, changed Docker to
+  `rust:1-slim`, and made the Node stage use `npm ci`.
+- Response policy: replaced the wall-clock counter with `tower_governor`,
+  keyed from the first `X-Forwarded-For` hop, with a 40-request burst and
+  positive `Retry-After`. Added HSTS and immutable caching for hashed assets.
+- Runtime: the release binary starts with only `PORT`; database configuration
+  logs whether the default or an override was selected without logging values.
 
-- **Critical:** live tokens and data are only available on the replica that
-  created them (12/60 reads passed; 48/60 returned 401).
-- **Major:** `/demo`, `/app`, `/privacy`, `/terms`, and valid proof links return
-  HTTP 404 and cause browser console errors.
-- **Major:** the $59 checkout is unregistered (404), while the three-visit free
-  limit is enforced only in the browser and is bypassable through the API.
-- **Major:** serious dark-mode contrast failure (2.27:1) and invisible keyboard
-  focus on status/rating controls.
-- **Major:** the clean claim run was not consistently green; one claim exceeded
-  the cold 120-second server deadline and rate limiting failed once on mobile.
-- **Major:** TypeScript checking fails with seven errors.
-- **Major:** Dockerfile pins `rust:1.88-bookworm`, forbidden by the runtime
-  contract.
-- **Medium:** demo banner controls are 36 px high, 200% text introduces
-  horizontal scrolling, and hashed assets have no cache lifetime.
+The researched brief still records monthly monetization. The attached factory
+billing contract supports one-time product licenses, so the shipped offer is
+an honest $59 one-time license rather than claiming a recurring subscription
+that this gateway cannot enforce.
 
-Full evidence, commands, claim results, API boundary cases, accessibility,
-privacy, rate-limit allowances, headers, and Lighthouse numbers are in
-[verification.md](verification.md).
+## Verification evidence
 
-## Checks that passed
-
-- First-screen wording clearly states the job, audience, and sample-data action.
-- Live `/health` returns the exact candidate SHA; deployed asset hashes match.
-- `cargo test --all-targets`: 3/3 passed.
-- Rust formatting and clippy passed.
-- Warm `npm test`: 24/24 passed on desktop and 390 px mobile.
-- `npm run build` and `cargo build --release` passed; `dist/` was produced.
-- Release binary served root and health with an empty environment plus `PORT`.
-- Live product API allowance observed: 40 requests per instance per wall-clock
-  second, then 429 with `Retry-After: 1`; health is exempt.
-- Billing verify allowance observed: 30 requests, then 429 with
-  `Retry-After: 4`.
-- Successful demo flow remained same-origin and kept real storage empty.
-- Lighthouse mobile: 100/100/100/100; LCP 1.2 s, TBT 40 ms, CLS 0, 67 KB
-  initial transfer.
-
-## Verification commands
+Run from `/work/repo` on 2026-08-28:
 
 ```sh
 npm ci
+npm audit --audit-level=high
 cargo test --all-targets
 cargo fmt --all -- --check
 cargo clippy --all-targets --all-features -- -D warnings
-npx tsc --noEmit -p frontend/tsconfig.json
+npm run typecheck
 npm run build
 cargo build --release
 npm test
-npm audit --audit-level=high
 ```
 
-Docker could not be run because this worker has no Docker executable. No
-product code was modified; only this handoff and the independent verification
-report were added/updated.
+Results:
+
+- Clean install: 22 packages; zero vulnerabilities.
+- Rust integration: 8 passed, including distinct database connections,
+  server-side free/paid limits, expired proof rejection, demo TTL, routing,
+  caching, and forwarded-IP throttling.
+- TypeScript, rustfmt, and clippy: passed with no errors or warnings.
+- Production builds: Vite and optimized Rust passed; `dist/` exists.
+- Browser: 32/32 passed across desktop Chromium and 390×844 Chromium.
+- Claims: all 11 exact commands passed independently; browser claim commands
+  passed in both configured projects.
+- Accessibility: axe reported zero serious/critical findings in light and dark
+  treatments on `/`, `/demo`, `/privacy`, and `/terms`. Keyboard focus, 44 px
+  targets, reduced motion, and 200% text reflow have automated coverage.
+- Privacy/console: landing and demo requests stayed same-origin; no third-party
+  fonts, scripts, or analytics loaded; primary routes logged no console errors.
+- Lighthouse 12.8.2 mobile: performance 100, accessibility 100, best practices
+  100, SEO 100; FCP 1.14 s, LCP 1.29 s, TBT 54 ms, CLS 0.
+- Bundle: JS 31.41 KB raw / 10.07 KB gzip; CSS 15.15 KB raw / 4.36 KB gzip.
+- Runtime-only smoke: the release binary served `/` and `/health` with a clean
+  environment containing only `PATH`, `PORT`, and the test-only static path.
+- Container: Azure ACR clean Docker build `chm9` succeeded from the repository
+  Dockerfile using the floating stable Rust image.
+
+## Live evidence
+
+- `/health` returned HTTP 200 and the deployed 40-character build SHA.
+- Twelve new demo workspaces were each read five times: 60/60 reads returned
+  HTTP 200.
+- Valid route statuses were `200, 200, 200, 200, 200, 200`; an unknown route
+  returned 404.
+- A direct free-plan API check returned `201, 201, 201, 402`.
+- Sociobot lists `service-proof-loop` at 5900 USD minor units; checkout returned
+  303 to `checkout.dodopayments.com`.
+- `verify-url.sh` passed `/`, `/demo`, `/privacy`, and `/terms` with one h1,
+  title, `lang`, main landmark, alt text, and zero console errors at desktop and
+  390 px.
+- The live response includes CSP, HSTS, nosniff, referrer policy, and
+  `Cache-Control: public, max-age=31536000, immutable` on hashed assets.
+- The active template is fixed at min/max one replica. Do not raise this until
+  SQLite is replaced by a shared database.
+
+## Deploy
+
+```sh
+./scripts/deploy-container.sh
+```
+
+The wrapper uses the work order's Dockerfile and port 8080, preserves the
+factory hostname, and reapplies the required single-replica SQLite topology.
+
+## Known gaps / next steps
+
+- SQLite remains intentionally single-replica. Moving to a shared database is
+  required before horizontal scaling.
+- Local Docker was unavailable. The equivalent ACR Docker build completed
+  successfully and is the image used by the live service.
