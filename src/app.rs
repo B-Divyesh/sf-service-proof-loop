@@ -4,7 +4,7 @@ use axum::{
     http::{header, HeaderMap, HeaderValue, StatusCode},
     middleware::{self, Next},
     response::{IntoResponse, Response},
-    routing::{get, post},
+    routing::{get, get_service, post},
     Json, Router,
 };
 use base64::{engine::general_purpose::URL_SAFE_NO_PAD, Engine};
@@ -13,21 +13,20 @@ use rand::RngCore;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use sqlx::{Row, SqlitePool};
-use std::{
-    collections::HashMap,
-    path::PathBuf,
-    sync::Arc,
-    time::{SystemTime, UNIX_EPOCH},
+use std::{net::IpAddr, path::PathBuf, time::Duration as StdDuration};
+use tower_governor::{
+    errors::GovernorError, governor::GovernorConfigBuilder, key_extractor::KeyExtractor,
+    GovernorLayer,
 };
-use tokio::sync::Mutex;
 use tower_http::services::{ServeDir, ServeFile};
 use uuid::Uuid;
 
 #[derive(Clone)]
 pub struct AppState {
     pool: SqlitePool,
-    limiter: Arc<Mutex<HashMap<String, (u64, u32)>>>,
     build_sha: String,
+    billing_base_url: String,
+    http: reqwest::Client,
 }
 
 #[derive(Clone)]
@@ -35,6 +34,7 @@ pub struct AppConfig {
     pub build_sha: String,
     pub static_dir: PathBuf,
     pub rate_limit: u32,
+    pub billing_base_url: String,
 }
 
 impl Default for AppConfig {
@@ -45,6 +45,9 @@ impl Default for AppConfig {
                 .unwrap_or_else(|_| "dist".into())
                 .into(),
             rate_limit: 40,
+            billing_base_url: std::env::var("BILLING_BASE_URL").unwrap_or_else(|_| {
+                "https://api.sociobot.in/api/v1/products/service-proof-loop".into()
+            }),
         }
     }
 }
@@ -68,9 +71,20 @@ fn problem(status: StatusCode, message: impl Into<String>) -> (StatusCode, Json<
 pub fn build_app(pool: SqlitePool, config: AppConfig) -> Router {
     let state = AppState {
         pool,
-        limiter: Arc::new(Mutex::new(HashMap::new())),
         build_sha: config.build_sha,
+        billing_base_url: config.billing_base_url,
+        http: reqwest::Client::builder()
+            .timeout(StdDuration::from_secs(5))
+            .build()
+            .expect("build HTTP client"),
     };
+    let period_ms = (1_000u64 / u64::from(config.rate_limit.max(1))).max(1);
+    let governor = GovernorConfigBuilder::default()
+        .per_millisecond(period_ms)
+        .burst_size(config.rate_limit.max(1))
+        .key_extractor(ForwardedClientIp)
+        .finish()
+        .expect("valid rate limit");
     let api = Router::new()
         .route("/demo", post(create_demo))
         .route("/workspaces", post(create_workspace))
@@ -81,21 +95,40 @@ pub fn build_app(pool: SqlitePool, config: AppConfig) -> Router {
         .route("/proof/{token}/respond", post(respond_to_proof))
         .fallback(|| async { problem(StatusCode::NOT_FOUND, "That API route does not exist.") })
         .layer(DefaultBodyLimit::max(4 * 1024 * 1024))
-        .layer(middleware::from_fn_with_state(
-            (state.clone(), config.rate_limit),
-            rate_limit,
-        ));
+        .layer(GovernorLayer::new(governor).error_handler(|error| {
+            if matches!(error, GovernorError::TooManyRequests { .. }) {
+                let mut response = problem(
+                    StatusCode::TOO_MANY_REQUESTS,
+                    "Too many requests. Try again in one second.",
+                )
+                .into_response();
+                response
+                    .headers_mut()
+                    .insert(header::RETRY_AFTER, HeaderValue::from_static("1"));
+                response
+            } else {
+                error.into()
+            }
+        }));
+    let index = ServeFile::new(config.static_dir.join("index.html"));
     let fallback = ServeDir::new(&config.static_dir)
-        .not_found_service(ServeFile::new(config.static_dir.join("index.html")));
+        .not_found_service(ServeFile::new(config.static_dir.join("404.html")));
     Router::new()
         .route("/health", get(health))
         .nest("/api", api)
+        .route("/", get_service(index.clone()))
+        .route("/demo", get_service(index.clone()))
+        .route("/app", get_service(index.clone()))
+        .route("/privacy", get_service(index.clone()))
+        .route("/terms", get_service(index.clone()))
+        .route("/proof/{token}", get_service(index))
         .fallback_service(fallback)
         .layer(middleware::from_fn(security_headers))
         .with_state(state)
 }
 
 async fn security_headers(req: Request, next: Next) -> Response {
+    let path = req.uri().path().to_string();
     let mut response = next.run(req).await;
     let headers = response.headers_mut();
     headers.insert(
@@ -108,51 +141,49 @@ async fn security_headers(req: Request, next: Next) -> Response {
     );
     headers.insert("x-frame-options", HeaderValue::from_static("DENY"));
     headers.insert(
+        "strict-transport-security",
+        HeaderValue::from_static("max-age=31536000; includeSubDomains"),
+    );
+    headers.insert(
         "permissions-policy",
         HeaderValue::from_static("camera=(), microphone=(), geolocation=()"),
     );
     headers.insert("content-security-policy", HeaderValue::from_static("default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'"));
+    if path.starts_with("/assets/index-") {
+        headers.insert(
+            header::CACHE_CONTROL,
+            HeaderValue::from_static("public, max-age=31536000, immutable"),
+        );
+    } else if path.starts_with("/assets/") {
+        headers.insert(
+            header::CACHE_CONTROL,
+            HeaderValue::from_static("public, max-age=86400"),
+        );
+    }
     response
 }
 
-async fn rate_limit(
-    State((state, limit)): State<(AppState, u32)>,
-    req: Request,
-    next: Next,
-) -> Response {
-    let ip = req
-        .headers()
-        .get("x-forwarded-for")
-        .and_then(|v| v.to_str().ok())
-        .and_then(|v| v.split(',').next())
-        .map(str::trim)
-        .filter(|v| !v.is_empty())
-        .unwrap_or("local")
-        .to_string();
-    let second = SystemTime::now()
-        .duration_since(UNIX_EPOCH)
-        .unwrap_or_default()
-        .as_secs();
-    let mut map = state.limiter.lock().await;
-    let entry = map.entry(ip).or_insert((second, 0));
-    if entry.0 != second {
-        *entry = (second, 0);
+#[derive(Clone)]
+struct ForwardedClientIp;
+
+impl KeyExtractor for ForwardedClientIp {
+    type Key = IpAddr;
+
+    fn extract<T>(&self, req: &axum::http::Request<T>) -> Result<Self::Key, GovernorError> {
+        Ok(req
+            .headers()
+            .get("x-forwarded-for")
+            .and_then(|v| v.to_str().ok())
+            .and_then(|v| v.split(',').next())
+            .map(str::trim)
+            .and_then(|v| v.parse().ok())
+            .or_else(|| {
+                req.extensions()
+                    .get::<axum::extract::ConnectInfo<std::net::SocketAddr>>()
+                    .map(|value| value.ip())
+            })
+            .unwrap_or(IpAddr::from([127, 0, 0, 1])))
     }
-    entry.1 += 1;
-    let blocked = entry.1 > limit;
-    drop(map);
-    if blocked {
-        let mut response = problem(
-            StatusCode::TOO_MANY_REQUESTS,
-            "Too many requests. Try again in one second.",
-        )
-        .into_response();
-        response
-            .headers_mut()
-            .insert(header::RETRY_AFTER, HeaderValue::from_static("1"));
-        return response;
-    }
-    next.run(req).await
 }
 
 async fn health(State(state): State<AppState>) -> Json<serde_json::Value> {
@@ -333,6 +364,7 @@ async fn create_visit(
     Json(input): Json<VisitInput>,
 ) -> ApiResult<(StatusCode, Json<CreatedVisit>)> {
     let workspace_id = authenticate(&state.pool, &headers).await?;
+    enforce_visit_plan(&state, &workspace_id, &headers).await?;
     if !input.photo_consent && !input.photos.is_empty() {
         return Err(problem(
             StatusCode::BAD_REQUEST,
@@ -379,6 +411,62 @@ async fn create_visit(
             proof_expires_at: expires.to_rfc3339(),
         }),
     ))
+}
+
+#[derive(Deserialize)]
+struct LicenseVerdict {
+    valid: bool,
+}
+
+async fn enforce_visit_plan(
+    state: &AppState,
+    workspace_id: &str,
+    headers: &HeaderMap,
+) -> ApiResult<()> {
+    let workspace = sqlx::query("SELECT is_demo FROM workspaces WHERE id = ?")
+        .bind(workspace_id)
+        .fetch_one(&state.pool)
+        .await
+        .map_err(db_error)?;
+    if workspace.get::<bool, _>("is_demo") {
+        return Ok(());
+    }
+    let count: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM visits WHERE workspace_id = ?")
+        .bind(workspace_id)
+        .fetch_one(&state.pool)
+        .await
+        .map_err(db_error)?;
+    if count < 3 {
+        return Ok(());
+    }
+    let license = headers
+        .get("x-product-license")
+        .and_then(|value| value.to_str().ok())
+        .map(str::trim)
+        .filter(|value| !value.is_empty())
+        .ok_or_else(plan_required)?;
+    let response = state
+        .http
+        .get(format!("{}/verify", state.billing_base_url))
+        .query(&[("license", license)])
+        .send()
+        .await
+        .map_err(|_| plan_required())?;
+    if !response.status().is_success() {
+        return Err(plan_required());
+    }
+    let verdict: LicenseVerdict = response.json().await.map_err(|_| plan_required())?;
+    if !verdict.valid {
+        return Err(plan_required());
+    }
+    Ok(())
+}
+
+fn plan_required() -> (StatusCode, Json<ErrorBody>) {
+    problem(
+        StatusCode::PAYMENT_REQUIRED,
+        "The free plan includes three visits. Add a valid business license to record more.",
+    )
 }
 
 #[derive(Serialize)]

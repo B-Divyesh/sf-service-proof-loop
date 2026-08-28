@@ -15,7 +15,7 @@ to understand them on the first read.
 | Nothing is saved. | 3 | Pass |
 | Proof links expire after 14 days. | 6 | Pass |
 | Clients open links without an account. | 6 | Pass |
-| $59 per business each month. | 5 | Pass |
+| Three visits free. $59 once for unlimited visits. | 8 | Pass |
 | One client choice moves into the next visit. | 8 | Pass |
 | See the full loop on one screen | 7 | Pass |
 | Crews record the visit. | 4 | Pass |
@@ -46,12 +46,12 @@ to understand them on the first read.
 | No home-entry codes or payment cards | 6 | Pass |
 | No public review campaigns | 4 | Pass |
 | Keep every recurring visit in the loop | 7 | Pass |
-| Includes unlimited client proof links, extra choices, and next-visit CSV exports. | 10 | Pass |
+| Add unlimited client proof links after the three free visits. | 9 | Pass |
 | One business workspace | 3 | Pass |
-| Technician seats added as your team grows | 7 | Pass |
-| Cancel before the next billing month | 6 | Pass |
-| $59 per business / month | 5 | Pass |
-| Buy the business plan | 4 | Pass |
+| Configurable client extras | 3 | Pass |
+| Next-visit CSV exports | 3 | Pass |
+| $59 one-time purchase | 3 | Pass |
+| Buy the business license | 4 | Pass |
 | Have a license? | 3 | Pass |
 | Verify license | 2 | Pass |
 | Sociobot is the merchant of record. | 6 | Pass |

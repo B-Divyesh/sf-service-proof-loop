@@ -15,19 +15,28 @@ async fn main() {
         .ok()
         .and_then(|v| v.parse().ok())
         .unwrap_or(8080);
-    let database_url = env::var("DATABASE_URL").unwrap_or_else(|_| {
-        std::fs::create_dir_all("/data").ok();
-        "sqlite:///data/service-proof-loop.db?mode=rwc".into()
-    });
+    let (database_url, database_source) = match env::var("DATABASE_URL") {
+        Ok(value) => (value, "supplied"),
+        Err(_) => {
+            std::fs::create_dir_all("/data").ok();
+            (
+                "sqlite:///data/service-proof-loop.db?mode=rwc".into(),
+                "generated default",
+            )
+        }
+    };
     let data_dir = if Path::new("/data").is_dir() {
         "/data"
     } else {
         "."
     };
-    info!(database = %database_url, data_dir, "configuration loaded; no external secrets required");
+    info!(
+        database_source,
+        data_dir, "configuration loaded; no external secrets required"
+    );
 
     let pool = SqlitePoolOptions::new()
-        .max_connections(8)
+        .max_connections(1)
         .connect(&database_url)
         .await
         .expect("open database");
@@ -38,10 +47,13 @@ async fn main() {
         .await
         .expect("bind port");
     info!(%address, "service started");
-    axum::serve(listener, app)
-        .with_graceful_shutdown(shutdown())
-        .await
-        .expect("serve");
+    axum::serve(
+        listener,
+        app.into_make_service_with_connect_info::<SocketAddr>(),
+    )
+    .with_graceful_shutdown(shutdown())
+    .await
+    .expect("serve");
 }
 
 async fn shutdown() {

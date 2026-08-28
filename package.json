@@ -6,10 +6,12 @@
   "scripts": {
     "dev": "vite --config frontend/vite.config.ts",
     "build": "vite build --config frontend/vite.config.ts",
-    "test": "playwright test",
+    "typecheck": "tsc --noEmit -p frontend/tsconfig.json",
+    "lint": "cargo fmt --all -- --check && cargo clippy --all-targets --all-features -- -D warnings",
+    "test": "npm run typecheck && playwright test",
     "test:claims": "playwright test --grep @claim",
     "test:a11y": "playwright test --grep @a11y",
-    "test:all": "cargo test && playwright test"
+    "test:all": "cargo test --all-targets && npm test"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.10.2",

@@ -29,8 +29,9 @@ use a wide workbench with a narrow visit rail and a large evidence sheet.
 | Night ice | `--night` | `#10252b` | Dark treatment for footer/demo rail |
 
 Dark mode inverts the workbench to night ice, uses `#17323a` surfaces,
-`#f1f7f5` text, `#a8bdc0` muted text, and `#72b6c8` cobalt. Both treatments
-keep body text above 4.5:1.
+`#f1f7f5` text, `#a8bdc0` muted text, and `#72b6c8` cobalt. Primary actions
+pair that light cobalt with night-ink text. Both treatments keep text above
+4.5:1.
 
 ## Type
 

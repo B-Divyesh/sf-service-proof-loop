@@ -1,11 +1,11 @@
 FROM node:22-alpine AS web
 WORKDIR /build
 COPY package.json package-lock.json* ./
-RUN npm install
+RUN npm ci
 COPY frontend ./frontend
 RUN npm run build
 
-FROM rust:1.88-bookworm AS server
+FROM rust:1-slim AS server
 ARG BUILD_SHA=dev
 ENV BUILD_SHA=$BUILD_SHA
 WORKDIR /build

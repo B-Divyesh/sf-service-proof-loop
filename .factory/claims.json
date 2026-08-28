@@ -17,8 +17,8 @@
     "id": "proof-expiry",
     "claim": "Proof links expire after 14 days",
     "where": "landing facts, privacy page",
-    "test": "npm test -- --grep @claim:proof-expiry",
-    "sandbox": "open demo proof; compare completion and displayed expiry dates"
+    "test": "cargo test claim_proof_expiry_rejects_an_expired_proof",
+    "sandbox": "create a demo proof; force its server expiry into the past; assert the API returns 410 Gone"
   },
   {
     "id": "next-visit-export",
@@ -43,10 +43,10 @@
   },
   {
     "id": "paid-license",
-    "claim": "The $59 monthly plan uses Sociobot checkout and supports license restore",
+    "claim": "The $59 one-time business license uses Sociobot checkout and supports license restore",
     "where": "landing price section and README",
     "test": "npm test -- --grep @claim:paid-license",
-    "sandbox": "fresh landing page; assert price and checkout URL; mock a valid verify response and restore a license"
+    "sandbox": "fresh landing page; assert the live public Sociobot registry has this $59 product; mock a valid verify response and restore a license"
   },
   {
     "id": "rate-limit",
@@ -54,5 +54,26 @@
     "where": "README",
     "test": "npm test -- --grep @claim:rate-limit",
     "sandbox": "send 45 demo requests as one forwarded client; assert a 429 response with Retry-After"
+  },
+  {
+    "id": "plan-limit",
+    "claim": "The free plan accepts three completed visits; a valid business license permits more",
+    "where": "workspace, pricing, README",
+    "test": "cargo test claim_plan_limit_is_server_enforced_and_a_valid_license_allows_more",
+    "sandbox": "create a real workspace; assert visits one through three return 201, the fourth returns 402, and a fixture-verified license permits it"
+  },
+  {
+    "id": "demo-expiry",
+    "claim": "Demo workspaces expire within 24 hours",
+    "where": "privacy page, demo documentation, README",
+    "test": "cargo test claim_demo_expiry_is_24_hours_and_expired_access_is_rejected",
+    "sandbox": "create a demo; assert its TTL is no more than 24 hours; force expiry and assert workspace access is rejected"
+  },
+  {
+    "id": "no-tracking",
+    "claim": "No third-party fonts, scripts, or analytics load",
+    "where": "README",
+    "test": "npm test -- --grep @claim:no-tracking",
+    "sandbox": "record all landing and demo requests in a fresh browser context; assert every request stays on the product origin"
   }
 ]

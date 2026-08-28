@@ -15,7 +15,7 @@ export default defineConfig({
   webServer: {
     command: "npm run build && DATABASE_URL='sqlite:/tmp/service-proof-loop-e2e.db?mode=rwc' STATIC_DIR=dist PORT=4173 cargo run",
     url: 'http://127.0.0.1:4173/health',
-    timeout: 120_000,
+    timeout: 300_000,
     reuseExistingServer: !process.env.CI,
   },
 });

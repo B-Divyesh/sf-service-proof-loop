@@ -19,10 +19,10 @@ data. See [.factory/demo.md](.factory/demo.md) for the exact sandbox behavior.
 
 ## Run locally
 
-You need Node.js 22+, Rust 1.88+, and SQLite development libraries.
+You need Node.js 22+, current stable Rust, and SQLite development libraries.
 
 ```sh
-npm install
+npm ci
 npm run build
 DATABASE_URL='sqlite:service-proof-loop.db?mode=rwc' STATIC_DIR=dist cargo run
 ```
@@ -36,7 +36,9 @@ second terminal and open <http://localhost:5173>.
 ## Test and verify
 
 ```sh
-cargo test
+cargo test --all-targets
+npm run typecheck
+npm run lint
 npm test
 npm run build
 docker build --build-arg BUILD_SHA=local -t service-proof-loop .
@@ -53,25 +55,28 @@ Every product claim and its command is listed in
 
 - `PORT`: HTTP port. Defaults to `8080`.
 - `DATABASE_URL`: SQLite URL. Defaults to `/data/service-proof-loop.db`.
+- `BILLING_BASE_URL`: license verifier URL. Defaults to the Sociobot product endpoint.
 - `STATIC_DIR`: built frontend directory. Defaults to `frontend/dist`.
 - `BUILD_SHA`: embedded during the container build and returned by `/health`.
 
-No signing secret is required. Workspace and proof access use random tokens;
-only token hashes are stored. Proof links expire after 14 days. Every API route
-except `/health` has a forwarded-IP rate limit.
+No signing secret is required. Workspace and production proof access use random
+tokens stored as hashes. Demo proof tokens are also retained inside the isolated,
+24-hour demo workspace so the sample link can be reopened. Proof links expire
+after 14 days. Every API route except `/health` has a forwarded-IP rate limit.
 
 ## Billing
 
-The free plan holds three completed visits. The business plan is $59 per
-business each month and adds unlimited visits. Checkout and license verification
-use the Sociobot billing API. The repository contains no payment provider key or
-product identifier beyond the public product slug.
+The free plan accepts three completed visits. A $59 one-time business license
+adds unlimited visits. Checkout and license verification use the Sociobot billing
+API. The server enforces the limit even when its browser controls are bypassed.
 
 ## Deployment
 
 The multi-stage [Dockerfile](Dockerfile) builds the Vite frontend and Rust
 service. It runs as a non-root user and serves the API and frontend from one
 container. The factory supplies `BUILD_SHA`; it may deploy with only `PORT`.
+The factory deployment wrapper mounts durable Azure Files storage at `/data`
+and fixes the service at one replica because SQLite has one writer.
 
 ## Privacy and license
 
