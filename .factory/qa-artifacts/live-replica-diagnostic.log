@@ -1,0 +1,98 @@
+browser_events [
+  {
+    url: 'https://service-proof-loop.sociobot.in/api/demo',
+    status: 200,
+    requestAuthorization: false,
+    body: '{"workspace_id":"d2f1cbe4-dd10-4ce7-8b78-1437e6e873c7","access_token":"[redacted]","demo":true,"expires_at":"2026-08-29T21:50:47.179816227+00:00"}'
+  },
+  {
+    url: 'https://service-proof-loop.sociobot.in/api/visits',
+    status: 401,
+    requestAuthorization: true,
+    body: '{"error":"Your workspace access is not valid."}'
+  }
+]
+browser_body Demo — sample data, nothing is saved
+Reset demo
+Start for real
+Skip to main content
+Service Proof Loop
+Demo
+Workspace
+Price
+Privacy
+Visits could not load
+
+Your workspace access is not valid.
+
+Try loading again
+Service Proof Loop
+
+Send visit proof and plan the next visit.
+
+Original product art was generated for this service.
+
+Privacy
+Terms
+Built by Param Factory
+(external site)
+
+Version 1.0.0 · Build 2026.08
+
+Visits could not load
+token_hash 35db34560e884ac8bc5172ae55b8a621e0253d5c55508c31787572e16ab09def
+browser_token_fresh_connection_reads [
+  401, 200, 401, 401, 401,
+  200, 401, 200, 401, 200,
+  401, 401, 401, 401, 401,
+  401, 401, 401, 401, 200
+]
+https_created_status 200 token_hash 40e47772a80cc922130761d750283067378a7db4a42f7bf0224c1a4a72f65b93
+https_token_fresh_connection_reads [
+  401, 401, 401, 401, 401,
+  200, 401, 200, 200, 401,
+  200, 200, 200, 401, 401,
+  401, 401, 401, 200, 200
+]
+fresh_health [
+  {
+    status: 200,
+    body: '{"build_sha":"5b6e3d4e86fef70c1c80427dd722393d931a9fd4","status":"ok"}'
+  },
+  {
+    status: 200,
+    body: '{"build_sha":"5b6e3d4e86fef70c1c80427dd722393d931a9fd4","status":"ok"}'
+  },
+  {
+    status: 200,
+    body: '{"build_sha":"5b6e3d4e86fef70c1c80427dd722393d931a9fd4","status":"ok"}'
+  },
+  {
+    status: 200,
+    body: '{"build_sha":"5b6e3d4e86fef70c1c80427dd722393d931a9fd4","status":"ok"}'
+  },
+  {
+    status: 200,
+    body: '{"build_sha":"5b6e3d4e86fef70c1c80427dd722393d931a9fd4","status":"ok"}'
+  },
+  {
+    status: 200,
+    body: '{"build_sha":"5b6e3d4e86fef70c1c80427dd722393d931a9fd4","status":"ok"}'
+  },
+  {
+    status: 200,
+    body: '{"build_sha":"5b6e3d4e86fef70c1c80427dd722393d931a9fd4","status":"ok"}'
+  },
+  {
+    status: 200,
+    body: '{"build_sha":"5b6e3d4e86fef70c1c80427dd722393d931a9fd4","status":"ok"}'
+  },
+  {
+    status: 200,
+    body: '{"build_sha":"5b6e3d4e86fef70c1c80427dd722393d931a9fd4","status":"ok"}'
+  },
+  {
+    status: 200,
+    body: '{"build_sha":"5b6e3d4e86fef70c1c80427dd722393d931a9fd4","status":"ok"}'
+  }
+]

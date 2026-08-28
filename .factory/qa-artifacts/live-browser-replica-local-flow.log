@@ -1,0 +1,51 @@
+candidate_count 15
+winner_index 1
+proof_loaded true
+replica_local_flow {
+  "dims": {
+    "Reset demo": {
+      "x": 24,
+      "y": 40.328125,
+      "width": 100.3125,
+      "height": 44
+    },
+    "Start for real": {
+      "x": 148.3125,
+      "y": 40.328125,
+      "width": 103.953125,
+      "height": 44
+    },
+    "Manage extras": {
+      "x": 16,
+      "y": 423.65625,
+      "width": 149.171875,
+      "height": 48.796875
+    },
+    "Record a visit": {
+      "x": 177.171875,
+      "y": 423.65625,
+      "width": 142.9375,
+      "height": 48.796875
+    }
+  },
+  "demoSerious": [],
+  "proofSerious": [],
+  "state": {
+    "localKeys": [],
+    "sessionKeys": [
+      "demo:workspace"
+    ],
+    "cookies": "",
+    "reduced": true,
+    "scroll": "auto",
+    "overflow": 0
+  },
+  "origins": [
+    "https://service-proof-loop.sociobot.in"
+  ],
+  "requestCount": 22,
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 401 ()",
+    "Failed to load resource: the server responded with a status of 404 ()"
+  ]
+}

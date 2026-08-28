@@ -1,0 +1,29 @@
+{
+  "statuses": [
+    201,
+    201,
+    201,
+    201,
+    201,
+    201,
+    201,
+    201
+  ],
+  "count": 8
+}
+past {
+  status: 201,
+  data: {
+    id: 'f5a8bfb4-c526-4e27-ab70-100da7b0cda4',
+    proof_token: '[redacted]',
+    proof_expires_at: '2026-09-11T21:56:48.315543349+00:00'
+  }
+}
+blank-check {
+  status: 201,
+  data: {
+    id: '7158e124-2df1-4dcb-89b5-6951d60d9684',
+    proof_token: '[redacted]',
+    proof_expires_at: '2026-09-11T21:56:48.326537992+00:00'
+  }
+}

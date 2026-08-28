@@ -1,0 +1,31 @@
+APP SCALE
+{
+  "activeMode": "Single",
+  "latest": "sf-service-proof-loop--0000008",
+  "max": 3,
+  "min": 1,
+  "traffic": [
+    {
+      "latestRevision": true,
+      "weight": 100
+    }
+  ]
+}
+REVISIONS
+[
+  {
+    "active": true,
+    "created": "2026-08-28T21:18:28+00:00",
+    "health": "Healthy",
+    "name": "sf-service-proof-loop--0000008",
+    "provisioning": "Provisioned",
+    "replicas": 3,
+    "traffic": 100
+  }
+]
+REPLICA NAMES
+[
+  "sf-service-proof-loop--0000008-5995fb9687-4v9w4",
+  "sf-service-proof-loop--0000008-5995fb9687-lffsc",
+  "sf-service-proof-loop--0000008-5995fb9687-tbz8w"
+]

@@ -1,0 +1,250 @@
+health {
+  status: 200,
+  retryAfter: null,
+  location: null,
+  body: {
+    build_sha: '5b6e3d4e86fef70c1c80427dd722393d931a9fd4',
+    status: 'ok'
+  }
+}
+route / 200
+route /demo 200
+route /app 200
+route /privacy 200
+route /terms 200
+route /proof/example-token 200
+route /definitely-missing 404
+billing_registry {
+  checkout_url: 'https://api.sociobot.in/api/v1/products/service-proof-loop/checkout',
+  currency: 'USD',
+  name: 'Service Proof Loop Business License',
+  price_minor: 5900,
+  product_url: 'https://service-proof-loop.sociobot.in/',
+  slug: 'service-proof-loop'
+}
+checkout {
+  status: 303,
+  location: 'https://checkout.dodopayments.com/session/[redacted]'
+}
+demo_persistence 0 { create: 200, reads: [ 200, 200, 200, 200, 200 ] }
+demo_persistence 1 { create: 200, reads: [ 200, 200, 200, 200, 200 ] }
+demo_persistence 2 { create: 200, reads: [ 200, 200, 200, 200, 200 ] }
+demo_persistence 3 { create: 200, reads: [ 200, 200, 200, 200, 200 ] }
+demo_persistence 4 { create: 200, reads: [ 200, 200, 200, 200, 200 ] }
+demo_persistence 5 { create: 200, reads: [ 200, 200, 200, 200, 200 ] }
+demo_persistence 6 { create: 200, reads: [ 200, 200, 200, 200, 200 ] }
+demo_persistence 7 { create: 200, reads: [ 200, 200, 200, 200, 200 ] }
+demo_persistence_summary { persistenceOk: 40, persistenceTotal: 40 }
+plan_sequential [ 201, 201, 201, 402 ]
+plan_concurrent [
+  {
+    status: 201,
+    body: {
+      id: 'e21a0fb9-ff2e-4c5a-b5aa-dfee0153a05f',
+      proof_token: '[redacted]',
+      proof_expires_at: '2026-09-11T21:47:27.153723097+00:00'
+    }
+  },
+  {
+    status: 201,
+    body: {
+      id: '6b23d513-a82c-4854-ab2f-6988d303abf8',
+      proof_token: '[redacted]',
+      proof_expires_at: '2026-09-11T21:47:27.163101463+00:00'
+    }
+  },
+  {
+    status: 402,
+    body: {
+      error: 'The free plan includes three visits. Add a valid business license to record more.'
+    }
+  },
+  {
+    status: 402,
+    body: {
+      error: 'The free plan includes three visits. Add a valid business license to record more.'
+    }
+  },
+  {
+    status: 201,
+    body: {
+      id: '24fd8551-dcb3-47ee-ab5d-8a7536475c29',
+      proof_token: '[redacted]',
+      proof_expires_at: '2026-09-11T21:47:27.163322665+00:00'
+    }
+  },
+  {
+    status: 402,
+    body: {
+      error: 'The free plan includes three visits. Add a valid business license to record more.'
+    }
+  },
+  {
+    status: 201,
+    body: {
+      id: 'a4e205ff-2eea-474d-927c-fbed26a088f2',
+      proof_token: '[redacted]',
+      proof_expires_at: '2026-09-11T21:47:27.162899562+00:00'
+    }
+  },
+  {
+    status: 402,
+    body: {
+      error: 'The free plan includes three visits. Add a valid business license to record more.'
+    }
+  }
+]
+plan_concurrent_list_count 4
+workspace_empty {
+  status: 400,
+  retryAfter: null,
+  location: null,
+  body: { error: 'Enter between 1 and 80 characters.' }
+}
+visits_no_auth {
+  status: 401,
+  retryAfter: null,
+  location: null,
+  body: { error: 'Open your workspace again to continue.' }
+}
+validation empty_checklist {
+  status: 400,
+  retryAfter: null,
+  location: null,
+  body: { error: 'Add at least one checklist item.' }
+}
+validation past_next_date {
+  status: 201,
+  retryAfter: null,
+  location: null,
+  body: {
+    id: '3edb4621-300b-4ef2-ba61-3431df5e46f3',
+    proof_token: '[redacted]',
+    proof_expires_at: '2026-09-11T21:47:27.244733941+00:00'
+  }
+}
+validation blank_check_label {
+  status: 201,
+  retryAfter: null,
+  location: null,
+  body: {
+    id: '5e02c480-09d8-41b5-a45d-116d39703c32',
+    proof_token: '[redacted]',
+    proof_expires_at: '2026-09-11T21:47:27.256130421+00:00'
+  }
+}
+validation name_81 {
+  status: 400,
+  retryAfter: null,
+  location: null,
+  body: { error: 'Enter between 1 and 80 characters.' }
+}
+validation notes_601 {
+  status: 400,
+  retryAfter: null,
+  location: null,
+  body: { error: 'Keep notes under 600 characters.' }
+}
+validation photo_without_consent {
+  status: 400,
+  retryAfter: null,
+  location: null,
+  body: { error: 'Photo consent is required before photos can be shared.' }
+}
+validation four_photos {
+  status: 400,
+  retryAfter: null,
+  location: null,
+  body: { error: 'Use up to three image files under 1 MB each.' }
+}
+validation extra_negative {
+  status: 400,
+  retryAfter: null,
+  location: null,
+  body: { error: 'Set an extra price from $0 to $1,000.' }
+}
+validation extra_zero {
+  status: 201,
+  retryAfter: null,
+  location: null,
+  body: {
+    id: 'c2b8485c-8bd0-4166-970a-a90898ea1528',
+    name: 'Free',
+    detail: 'Valid boundary',
+    price_cents: 0
+  }
+}
+validation extra_100000 {
+  status: 201,
+  retryAfter: null,
+  location: null,
+  body: {
+    id: '195ad723-4555-4475-b361-8e2fd761e43e',
+    name: 'Upper',
+    detail: 'Valid boundary',
+    price_cents: 100000
+  }
+}
+validation extra_100001 {
+  status: 400,
+  retryAfter: null,
+  location: null,
+  body: { error: 'Set an extra price from $0 to $1,000.' }
+}
+cross_tenant_export {
+  status: 404,
+  retryAfter: null,
+  location: null,
+  body: { error: 'That visit was not found.' }
+}
+proof_invalid_status {
+  status: 400,
+  retryAfter: null,
+  location: null,
+  body: { error: 'Choose accepted or report a problem.' }
+}
+proof_invalid_rating {
+  status: 400,
+  retryAfter: null,
+  location: null,
+  body: { error: 'Choose a rating from 1 to 5.' }
+}
+proof_recovery {
+  status: 200,
+  retryAfter: null,
+  location: null,
+  body: { next_visit_at: '2026-09-11', saved: true }
+}
+proof_after_recovery {
+  status: 200,
+  retryAfter: null,
+  location: null,
+  body: {
+    id: 'c10ec731-4460-4376-8619-7304314e3973',
+    business_name: 'Northstar Home Care — sample',
+    client_name: 'Maya Chen',
+    location_label: 'Willow Street',
+    completed_at: '2026-08-28T21:12:27.344194644+00:00',
+    next_visit_at: '2026-09-11',
+    technician: 'Elena',
+    checklist: [ [Object], [Object], [Object], [Object] ],
+    notes: 'The entry mat was left on the bench to dry.',
+    photos: [ [Object], [Object] ],
+    response_status: 'problem',
+    rating: 1,
+    client_comment: 'Missed the sill',
+    extras: [ [Object], [Object], [Object] ],
+    requested_extras: [],
+    expires_at: '2026-09-11T21:47:27.344194644+00:00'
+  }
+}
+rate_burst { counts: { '200': 40, '429': 10 }, retryAfter: [ '1' ] }
+health_after_burst {
+  status: 200,
+  retryAfter: null,
+  location: null,
+  body: {
+    build_sha: '5b6e3d4e86fef70c1c80427dd722393d931a9fd4',
+    status: 'ok'
+  }
+}

@@ -1,0 +1,423 @@
+demo_missing_link {
+  viewport: 'desktop',
+  colorScheme: 'light',
+  text: 'Demo — sample data, nothing is saved\n' +
+    'Reset demo\n' +
+    'Start for real\n' +
+    'Skip to main content\n' +
+    'Service Proof Loop\n' +
+    'Demo\n' +
+    'Workspace\n' +
+    'Price\n' +
+    'Privacy\n' +
+    'Visits could not load\n' +
+    '\n' +
+    'Your workspace access is not valid.\n' +
+    '\n' +
+    'Try loading again\n' +
+    'Service Proof Loop\n' +
+    '\n' +
+    'Send visit proof and plan the next visit.\n' +
+    '\n' +
+    'Original product art was generated for this service.\n' +
+    '\n' +
+    'Privacy\n' +
+    'Terms\n' +
+    'Built by Param Factory\n' +
+    '(external site)\n' +
+    '\n' +
+    'Version 1.0.0 · Build 2026.08\n' +
+    '\n' +
+    'Visits could not load'
+}
+mode_summary {
+  viewport: 'desktop',
+  colorScheme: 'light',
+  errors: [
+    'console:Failed to load resource: the server responded with a status of 401 ()'
+  ],
+  motion: { reduced: true, scroll: 'auto', transition: undefined }
+}
+demo_missing_link {
+  viewport: 'desktop',
+  colorScheme: 'dark',
+  text: 'Demo — sample data, nothing is saved\n' +
+    'Reset demo\n' +
+    'Start for real\n' +
+    'Skip to main content\n' +
+    'Service Proof Loop\n' +
+    'Demo\n' +
+    'Workspace\n' +
+    'Price\n' +
+    'Privacy\n' +
+    'Visits could not load\n' +
+    '\n' +
+    'Your workspace access is not valid.\n' +
+    '\n' +
+    'Try loading again\n' +
+    'Service Proof Loop\n' +
+    '\n' +
+    'Send visit proof and plan the next visit.\n' +
+    '\n' +
+    'Original product art was generated for this service.\n' +
+    '\n' +
+    'Privacy\n' +
+    'Terms\n' +
+    'Built by Param Factory\n' +
+    '(external site)\n' +
+    '\n' +
+    'Version 1.0.0 · Build 2026.08\n' +
+    '\n' +
+    'Visits could not load'
+}
+mode_summary {
+  viewport: 'desktop',
+  colorScheme: 'dark',
+  errors: [
+    'console:Failed to load resource: the server responded with a status of 401 ()'
+  ],
+  motion: { reduced: true, scroll: 'auto', transition: undefined }
+}
+demo_missing_link {
+  viewport: 'mobile',
+  colorScheme: 'light',
+  text: 'Demo — sample data, nothing is saved\n' +
+    'Reset demo\n' +
+    'Start for real\n' +
+    'Skip to main content\n' +
+    'Service Proof Loop\n' +
+    'Demo\n' +
+    'Workspace\n' +
+    'Privacy\n' +
+    'Visits could not load\n' +
+    '\n' +
+    'Your workspace access is not valid.\n' +
+    '\n' +
+    'Try loading again\n' +
+    'Service Proof Loop\n' +
+    '\n' +
+    'Send visit proof and plan the next visit.\n' +
+    '\n' +
+    'Original product art was generated for this service.\n' +
+    '\n' +
+    'Privacy\n' +
+    'Terms\n' +
+    'Built by Param Factory\n' +
+    '(external site)\n' +
+    '\n' +
+    'Version 1.0.0 · Build 2026.08\n' +
+    '\n' +
+    'Visits could not load'
+}
+mode_summary {
+  viewport: 'mobile',
+  colorScheme: 'light',
+  errors: [
+    'console:Failed to load resource: the server responded with a status of 401 ()'
+  ],
+  motion: { reduced: true, scroll: 'auto', transition: undefined }
+}
+demo_missing_link {
+  viewport: 'mobile',
+  colorScheme: 'dark',
+  text: 'Demo — sample data, nothing is saved\n' +
+    'Reset demo\n' +
+    'Start for real\n' +
+    'Skip to main content\n' +
+    'Service Proof Loop\n' +
+    'Demo\n' +
+    'Workspace\n' +
+    'Privacy\n' +
+    'Visits could not load\n' +
+    '\n' +
+    'Your workspace access is not valid.\n' +
+    '\n' +
+    'Try loading again\n' +
+    'Service Proof Loop\n' +
+    '\n' +
+    'Send visit proof and plan the next visit.\n' +
+    '\n' +
+    'Original product art was generated for this service.\n' +
+    '\n' +
+    'Privacy\n' +
+    'Terms\n' +
+    'Built by Param Factory\n' +
+    '(external site)\n' +
+    '\n' +
+    'Version 1.0.0 · Build 2026.08\n' +
+    '\n' +
+    'Visits could not load'
+}
+mode_summary {
+  viewport: 'mobile',
+  colorScheme: 'dark',
+  errors: [
+    'console:Failed to load resource: the server responded with a status of 401 ()'
+  ],
+  motion: { reduced: true, scroll: 'auto', transition: undefined }
+}
+axe_and_structure [
+  {
+    "viewport": "desktop",
+    "colorScheme": "light",
+    "path": "/",
+    "status": 200,
+    "serious": [],
+    "metrics": {
+      "title": "Service Proof Loop — Send proof after each visit",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "skip": true,
+      "scrollWidth": 1440,
+      "clientWidth": 1440
+    }
+  },
+  {
+    "viewport": "desktop",
+    "colorScheme": "light",
+    "path": "/demo",
+    "status": 200,
+    "serious": [],
+    "metrics": {
+      "title": "Demo — Service Proof Loop",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "skip": true,
+      "scrollWidth": 1440,
+      "clientWidth": 1440
+    }
+  },
+  {
+    "viewport": "desktop",
+    "colorScheme": "light",
+    "path": "/privacy",
+    "status": 200,
+    "serious": [],
+    "metrics": {
+      "title": "Privacy — Service Proof Loop",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "skip": true,
+      "scrollWidth": 1440,
+      "clientWidth": 1440
+    }
+  },
+  {
+    "viewport": "desktop",
+    "colorScheme": "light",
+    "path": "/terms",
+    "status": 200,
+    "serious": [],
+    "metrics": {
+      "title": "Terms — Service Proof Loop",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "skip": true,
+      "scrollWidth": 1440,
+      "clientWidth": 1440
+    }
+  },
+  {
+    "viewport": "desktop",
+    "colorScheme": "dark",
+    "path": "/",
+    "status": 200,
+    "serious": [],
+    "metrics": {
+      "title": "Service Proof Loop — Send proof after each visit",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "skip": true,
+      "scrollWidth": 1440,
+      "clientWidth": 1440
+    }
+  },
+  {
+    "viewport": "desktop",
+    "colorScheme": "dark",
+    "path": "/demo",
+    "status": 200,
+    "serious": [],
+    "metrics": {
+      "title": "Demo — Service Proof Loop",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "skip": true,
+      "scrollWidth": 1440,
+      "clientWidth": 1440
+    }
+  },
+  {
+    "viewport": "desktop",
+    "colorScheme": "dark",
+    "path": "/privacy",
+    "status": 200,
+    "serious": [],
+    "metrics": {
+      "title": "Privacy — Service Proof Loop",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "skip": true,
+      "scrollWidth": 1440,
+      "clientWidth": 1440
+    }
+  },
+  {
+    "viewport": "desktop",
+    "colorScheme": "dark",
+    "path": "/terms",
+    "status": 200,
+    "serious": [],
+    "metrics": {
+      "title": "Terms — Service Proof Loop",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "skip": true,
+      "scrollWidth": 1440,
+      "clientWidth": 1440
+    }
+  },
+  {
+    "viewport": "mobile",
+    "colorScheme": "light",
+    "path": "/",
+    "status": 200,
+    "serious": [],
+    "metrics": {
+      "title": "Service Proof Loop — Send proof after each visit",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "skip": true,
+      "scrollWidth": 390,
+      "clientWidth": 390
+    }
+  },
+  {
+    "viewport": "mobile",
+    "colorScheme": "light",
+    "path": "/demo",
+    "status": 200,
+    "serious": [],
+    "metrics": {
+      "title": "Demo — Service Proof Loop",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "skip": true,
+      "scrollWidth": 390,
+      "clientWidth": 390
+    }
+  },
+  {
+    "viewport": "mobile",
+    "colorScheme": "light",
+    "path": "/privacy",
+    "status": 200,
+    "serious": [],
+    "metrics": {
+      "title": "Privacy — Service Proof Loop",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "skip": true,
+      "scrollWidth": 390,
+      "clientWidth": 390
+    }
+  },
+  {
+    "viewport": "mobile",
+    "colorScheme": "light",
+    "path": "/terms",
+    "status": 200,
+    "serious": [],
+    "metrics": {
+      "title": "Terms — Service Proof Loop",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "skip": true,
+      "scrollWidth": 390,
+      "clientWidth": 390
+    }
+  },
+  {
+    "viewport": "mobile",
+    "colorScheme": "dark",
+    "path": "/",
+    "status": 200,
+    "serious": [],
+    "metrics": {
+      "title": "Service Proof Loop — Send proof after each visit",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "skip": true,
+      "scrollWidth": 390,
+      "clientWidth": 390
+    }
+  },
+  {
+    "viewport": "mobile",
+    "colorScheme": "dark",
+    "path": "/demo",
+    "status": 200,
+    "serious": [],
+    "metrics": {
+      "title": "Demo — Service Proof Loop",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "skip": true,
+      "scrollWidth": 390,
+      "clientWidth": 390
+    }
+  },
+  {
+    "viewport": "mobile",
+    "colorScheme": "dark",
+    "path": "/privacy",
+    "status": 200,
+    "serious": [],
+    "metrics": {
+      "title": "Privacy — Service Proof Loop",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "skip": true,
+      "scrollWidth": 390,
+      "clientWidth": 390
+    }
+  },
+  {
+    "viewport": "mobile",
+    "colorScheme": "dark",
+    "path": "/terms",
+    "status": 200,
+    "serious": [],
+    "metrics": {
+      "title": "Terms — Service Proof Loop",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "skip": true,
+      "scrollWidth": 390,
+      "clientWidth": 390
+    }
+  }
+]
+locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByText('Willow Street').first() to be visible
+
+    at [stdin]:45:48 {
+  name: 'TimeoutError'
+}

@@ -1,0 +1,108 @@
+{
+  step: 1,
+  tag: 'A',
+  text: 'Try it with sample data',
+  focus: true,
+  focusVisible: true,
+  outline: 'rgb(217, 104, 59) solid 3px',
+  outlineWidth: '3px',
+  outlineColor: 'rgb(217, 104, 59)',
+  border: '1px solid rgba(0, 0, 0, 0)',
+  boxShadow: 'none'
+}
+{
+  step: 2,
+  tag: 'A',
+  text: 'Buy the business license at Sociobot checkout',
+  focus: true,
+  focusVisible: true,
+  outline: 'rgb(217, 104, 59) solid 3px',
+  outlineWidth: '3px',
+  outlineColor: 'rgb(217, 104, 59)',
+  border: '1px solid rgba(0, 0, 0, 0)',
+  boxShadow: 'none'
+}
+{
+  step: 3,
+  tag: 'INPUT',
+  text: 'license',
+  focus: true,
+  focusVisible: true,
+  outline: 'rgb(217, 104, 59) solid 3px',
+  outlineWidth: '3px',
+  outlineColor: 'rgb(217, 104, 59)',
+  border: '1px solid rgb(145, 168, 168)',
+  boxShadow: 'none'
+}
+{
+  step: 4,
+  tag: 'BUTTON',
+  text: 'Verify license',
+  focus: true,
+  focusVisible: true,
+  outline: 'rgb(217, 104, 59) solid 3px',
+  outlineWidth: '3px',
+  outlineColor: 'rgb(217, 104, 59)',
+  border: '1px solid rgb(21, 91, 114)',
+  boxShadow: 'none'
+}
+{
+  step: 5,
+  tag: 'A',
+  text: 'Privacy',
+  focus: true,
+  focusVisible: true,
+  outline: 'rgb(217, 104, 59) solid 3px',
+  outlineWidth: '3px',
+  outlineColor: 'rgb(217, 104, 59)',
+  border: '0px none rgb(12, 64, 82)',
+  boxShadow: 'none'
+}
+{
+  step: 6,
+  tag: 'A',
+  text: 'Terms',
+  focus: true,
+  focusVisible: true,
+  outline: 'rgb(217, 104, 59) solid 3px',
+  outlineWidth: '3px',
+  outlineColor: 'rgb(217, 104, 59)',
+  border: '0px none rgb(12, 64, 82)',
+  boxShadow: 'none'
+}
+{
+  step: 7,
+  tag: 'A',
+  text: 'Privacy',
+  focus: true,
+  focusVisible: true,
+  outline: 'rgb(217, 104, 59) solid 3px',
+  outlineWidth: '3px',
+  outlineColor: 'rgb(217, 104, 59)',
+  border: '0px none rgb(12, 64, 82)',
+  boxShadow: 'none'
+}
+{
+  step: 8,
+  tag: 'A',
+  text: 'Terms',
+  focus: true,
+  focusVisible: true,
+  outline: 'rgb(217, 104, 59) solid 3px',
+  outlineWidth: '3px',
+  outlineColor: 'rgb(217, 104, 59)',
+  border: '0px none rgb(12, 64, 82)',
+  boxShadow: 'none'
+}
+{
+  step: 9,
+  tag: 'A',
+  text: 'Built by Param Factory (external site)',
+  focus: true,
+  focusVisible: true,
+  outline: 'rgb(217, 104, 59) solid 3px',
+  outlineWidth: '3px',
+  outlineColor: 'rgb(217, 104, 59)',
+  border: '0px none rgb(12, 64, 82)',
+  boxShadow: 'none'
+}

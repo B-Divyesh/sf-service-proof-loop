@@ -1,0 +1,14 @@
+{
+  "url": "https://service-proof-loop.sociobot.in/",
+  "loadMs": 593,
+  "errors": [],
+  "a11y": {
+    "title": "Service Proof Loop — Send proof after each visit",
+    "lang": "en",
+    "h1": 1,
+    "main": true,
+    "imgsMissingAlt": 0,
+    "buttonsUnlabeled": 0,
+    "textLength": 2252
+  }
+}

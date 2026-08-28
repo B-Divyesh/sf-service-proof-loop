@@ -1,0 +1,129 @@
+LOCAL HASHES
+9229c20a0edfa05ae904e3e0b38179e585c90ae9fa4c99e91aad8e4e89d173c6  dist/404.html
+85d32983c147909433eaf616716e887595f7bc0a825cfbe4b9d7239a34378954  dist/apple-touch-icon.png
+4e385033ff91f74a36dcc0f93d5003eb0862ae3ba4effabc9dc45e92ae8abc83  dist/assets/index-BBHhmD-C.css
+131744dfb94848f1c536d3f9ab5f2ab3c5b495bb3a64dd8f44ca3b22a15ad775  dist/assets/index-Du72bGbY.js
+ae4634f842108fa6e6fb72b5302216bd96fefae27523a8b77c5477e284f6f955  dist/assets/proof-loop-hero.webp
+c4629cd31be99b527c07529f9f6c50b658ef765965ce71ef6afbbd283e49a61b  dist/assets/sample-entry.svg
+d72a1f7b213cf97b489ac0523ed95537bebdba4881e84f6cfe1173fc46f59341  dist/assets/sample-kitchen.svg
+43ce69b31c8fd9df5c950a8cde7a6306bdbc6a4618596236a0662caa85a316c8  dist/assets/social.jpg
+e16e7420360c0dd1da2dc29643a9d7c6bd8cc597b92414e452274c4de7049377  dist/favicon.svg
+3d9745371ada1b213c61c85597050743186f5e44a78926687ba619f8c5089173  dist/index.html
+8c4aab1e7c0896a55b24ab4dba05b71f37c4448d89ba3cf6b3cb213de74f0f17  dist/robots.txt
+6ca29bcd25b45e9b04a433217f449c534ed00cc875fc48c0535833ef04169f08  dist/sitemap.xml
+8558246021c87fbe354391238957bf4b7bc1847adeb57eb94e5c024722faf751  dist/staticwebapp.config.json
+LIVE COMPARE
+200 MATCH 404.html
+200 MATCH apple-touch-icon.png
+200 MATCH assets/index-BBHhmD-C.css
+200 MATCH assets/index-Du72bGbY.js
+200 MATCH assets/proof-loop-hero.webp
+200 MATCH assets/sample-entry.svg
+200 MATCH assets/sample-kitchen.svg
+200 MATCH assets/social.jpg
+200 MATCH favicon.svg
+200 MATCH index.html
+200 MATCH robots.txt
+200 MATCH sitemap.xml
+200 MATCH staticwebapp.config.json
+HEADERS
+URL /
+HTTP/2 200
+content-type: text/html
+accept-ranges: bytes
+last-modified: Fri, 28 Aug 2026 21:13:32 GMT
+content-length: 1656
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: DENY
+strict-transport-security: max-age=31536000; includeSubDomains
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'
+date: Fri, 28 Aug 2026 21:47:44 GMT
+
+URL /assets/index-Du72bGbY.js
+HTTP/2 200
+content-type: text/javascript
+accept-ranges: bytes
+last-modified: Fri, 28 Aug 2026 21:13:32 GMT
+content-length: 31404
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: DENY
+strict-transport-security: max-age=31536000; includeSubDomains
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'
+cache-control: public, max-age=31536000, immutable
+date: Fri, 28 Aug 2026 21:47:44 GMT
+
+URL /assets/index-BBHhmD-C.css
+HTTP/2 200
+content-type: text/css
+accept-ranges: bytes
+last-modified: Fri, 28 Aug 2026 21:13:32 GMT
+content-length: 15152
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: DENY
+strict-transport-security: max-age=31536000; includeSubDomains
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'
+cache-control: public, max-age=31536000, immutable
+date: Fri, 28 Aug 2026 21:47:44 GMT
+
+URL /assets/proof-loop-hero.webp
+HTTP/2 200
+content-type: image/webp
+accept-ranges: bytes
+last-modified: Fri, 28 Aug 2026 21:13:32 GMT
+content-length: 18322
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: DENY
+strict-transport-security: max-age=31536000; includeSubDomains
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'
+cache-control: public, max-age=86400
+date: Fri, 28 Aug 2026 21:47:44 GMT
+
+URL /robots.txt
+HTTP/2 200
+content-type: text/plain
+accept-ranges: bytes
+last-modified: Fri, 28 Aug 2026 21:13:32 GMT
+content-length: 83
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: DENY
+strict-transport-security: max-age=31536000; includeSubDomains
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'
+date: Fri, 28 Aug 2026 21:47:44 GMT
+
+URL /sitemap.xml
+HTTP/2 200
+content-type: text/xml
+accept-ranges: bytes
+last-modified: Fri, 28 Aug 2026 21:13:32 GMT
+content-length: 449
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: DENY
+strict-transport-security: max-age=31536000; includeSubDomains
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'
+date: Fri, 28 Aug 2026 21:47:44 GMT
+
+URL /404.html
+HTTP/2 200
+content-type: text/html
+accept-ranges: bytes
+last-modified: Fri, 28 Aug 2026 21:13:32 GMT
+content-length: 333
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: DENY
+strict-transport-security: max-age=31536000; includeSubDomains
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'
+date: Fri, 28 Aug 2026 21:47:45 GMT

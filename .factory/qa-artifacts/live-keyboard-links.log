@@ -1,0 +1,376 @@
+{
+  "tabs": [
+    {
+      "tag": "A",
+      "text": "Try it with sample data",
+      "href": "https://service-proof-loop.sociobot.in/demo",
+      "outline": "solid",
+      "outlineWidth": "3px",
+      "outlineColor": "rgb(217, 104, 59)"
+    },
+    {
+      "tag": "A",
+      "text": "Buy the business license at Sociobot checkout",
+      "href": "https://api.sociobot.in/api/v1/products/service-proof-loop/checkout",
+      "outline": "solid",
+      "outlineWidth": "3px",
+      "outlineColor": "rgb(217, 104, 59)"
+    },
+    {
+      "tag": "INPUT",
+      "text": "",
+      "href": null,
+      "outline": "solid",
+      "outlineWidth": "0px",
+      "outlineColor": "rgb(23, 42, 48)"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Verify license",
+      "href": null,
+      "outline": "solid",
+      "outlineWidth": "3px",
+      "outlineColor": "rgb(217, 104, 59)"
+    },
+    {
+      "tag": "A",
+      "text": "Privacy",
+      "href": "https://service-proof-loop.sociobot.in/privacy",
+      "outline": "solid",
+      "outlineWidth": "0px",
+      "outlineColor": "rgb(12, 64, 82)"
+    },
+    {
+      "tag": "A",
+      "text": "Terms",
+      "href": "https://service-proof-loop.sociobot.in/terms",
+      "outline": "solid",
+      "outlineWidth": "0px",
+      "outlineColor": "rgb(12, 64, 82)"
+    },
+    {
+      "tag": "A",
+      "text": "Privacy",
+      "href": "https://service-proof-loop.sociobot.in/privacy",
+      "outline": "solid",
+      "outlineWidth": "0px",
+      "outlineColor": "rgb(12, 64, 82)"
+    },
+    {
+      "tag": "A",
+      "text": "Terms",
+      "href": "https://service-proof-loop.sociobot.in/terms",
+      "outline": "solid",
+      "outlineWidth": "0px",
+      "outlineColor": "rgb(12, 64, 82)"
+    },
+    {
+      "tag": "A",
+      "text": "Built by Param Factory (external site)",
+      "href": "https://sociobot.in/",
+      "outline": "solid",
+      "outlineWidth": "0px",
+      "outlineColor": "rgb(12, 64, 82)"
+    },
+    {
+      "tag": "BODY",
+      "text": "Skip to main content\n    \n      Service Proof Loop\n      \n        Demo\n        Workspace\n        Price\n        Privacy\n      \n    \n    \n      \n        After-visit proof for recurring services\n        Send proof. Plan the next visit.\n        For recurring service teams that need client feedback and approved extras without another customer app.\n        Try it with sample dataLoads a sample visit. Nothing is saved.\n        Proof links expire after 14 days.Clients open links without an account.Three visits free. $59 once for unlimited visits.\n      \n      \n        \n        One client choice moves into the next visit.\n      \n    \n    \n      The productSee the full loop on one screenCrews record the visit. Clients review the proof. The office exports approved extras without typing them again.\n      \n        Northstar Home CareWaiting for client\n        VisitsWillow StreetToday · ElenaLake AvenueYesterday · Sam\n          Visit completeMaya’s visit at Willow StreetFour checks · Two photos · Next visit Sep 11\n            ✓Kitchen surfaces and sink✓Two bathrooms✓Floors vacuumed and mopped\n            Next visitInside refrigerator · Client approved · $28\n          \n        \n      \n    \n    \n      How it worksClose the visit before work gets lost\n      Record the visitThe technician checks the work, adds photos with consent, and sends one private link.Collect one clear replyThe client accepts the work or reports a problem. They can rate it and choose extras.Carry work forwardApproved extras appear beside the next date. Export them as a ready-to-use CSV.\n    \n    \n      Clear boundariesProof only, not another field systemThis service keeps the after-visit exchange small and clear.\n      What it handlesVisit checklists and consented photosClient acceptance, problems, and ratingsApproved extras for the next visitWhat it leaves aloneNo dispatch, payroll, or worker trackingNo home-entry codes or payment cardsNo public review campaigns\n    \n    \n      Business licenseKeep every recurring visit in the loopAdd unlimited client proof links after three free visits.One business workspaceConfigurable client extrasNext-visit CSV exports\n      $59 one-time purchaseBuy the business license at Sociobot checkout\n        Have a license?Verify licenseSociobot is the merchant of record. Refunds are handled there.\n        Privacy · Terms\n    \n    Service Proof LoopSend visit proof and plan the next visit.Original product art was generated for this service.\n    PrivacyTermsBuilt by Param Factory (external site)\n    Version 1.0.0 · Build 2026.08\n  Send proof. Plan the next visit.",
+      "href": null,
+      "outline": "none",
+      "outlineWidth": "0px",
+      "outlineColor": "rgb(23, 42, 48)"
+    },
+    {
+      "tag": "A",
+      "text": "Skip to main content",
+      "href": "https://service-proof-loop.sociobot.in/#main",
+      "outline": "solid",
+      "outlineWidth": "0px",
+      "outlineColor": "rgb(23, 42, 48)"
+    },
+    {
+      "tag": "A",
+      "text": "Service Proof Loop",
+      "href": "https://service-proof-loop.sociobot.in/",
+      "outline": "solid",
+      "outlineWidth": "0px",
+      "outlineColor": "rgb(23, 42, 48)"
+    },
+    {
+      "tag": "A",
+      "text": "Demo",
+      "href": "https://service-proof-loop.sociobot.in/demo",
+      "outline": "solid",
+      "outlineWidth": "0px",
+      "outlineColor": "rgb(23, 42, 48)"
+    },
+    {
+      "tag": "A",
+      "text": "Workspace",
+      "href": "https://service-proof-loop.sociobot.in/app",
+      "outline": "solid",
+      "outlineWidth": "0px",
+      "outlineColor": "rgb(23, 42, 48)"
+    },
+    {
+      "tag": "A",
+      "text": "Privacy",
+      "href": "https://service-proof-loop.sociobot.in/privacy",
+      "outline": "solid",
+      "outlineWidth": "0px",
+      "outlineColor": "rgb(23, 42, 48)"
+    },
+    {
+      "tag": "A",
+      "text": "Try it with sample data",
+      "href": "https://service-proof-loop.sociobot.in/demo",
+      "outline": "solid",
+      "outlineWidth": "3px",
+      "outlineColor": "rgb(217, 104, 59)"
+    },
+    {
+      "tag": "A",
+      "text": "Buy the business license at Sociobot checkout",
+      "href": "https://api.sociobot.in/api/v1/products/service-proof-loop/checkout",
+      "outline": "solid",
+      "outlineWidth": "3px",
+      "outlineColor": "rgb(217, 104, 59)"
+    },
+    {
+      "tag": "INPUT",
+      "text": "",
+      "href": null,
+      "outline": "solid",
+      "outlineWidth": "0px",
+      "outlineColor": "rgb(23, 42, 48)"
+    }
+  ],
+  "targets": [
+    {
+      "tag": "A",
+      "text": "Skip to main content",
+      "width": 185,
+      "height": 52.8,
+      "display": "block",
+      "inline": false
+    },
+    {
+      "tag": "A",
+      "text": "Service Proof Loop",
+      "width": 342,
+      "height": 30,
+      "display": "flex",
+      "inline": false
+    },
+    {
+      "tag": "A",
+      "text": "Demo",
+      "width": 37.6,
+      "height": 44,
+      "display": "flex",
+      "inline": false
+    },
+    {
+      "tag": "A",
+      "text": "Workspace",
+      "width": 70.2,
+      "height": 44,
+      "display": "flex",
+      "inline": false
+    },
+    {
+      "tag": "A",
+      "text": "Price",
+      "width": 0,
+      "height": 0,
+      "display": "none",
+      "inline": false
+    },
+    {
+      "tag": "A",
+      "text": "Privacy",
+      "width": 46.2,
+      "height": 44,
+      "display": "flex",
+      "inline": false
+    },
+    {
+      "tag": "A",
+      "text": "Try it with sample data",
+      "width": 209.6,
+      "height": 48.8,
+      "display": "flex",
+      "inline": false
+    },
+    {
+      "tag": "A",
+      "text": "Buy the business license at Sociobot checkout",
+      "width": 229.2,
+      "height": 48.8,
+      "display": "inline-flex",
+      "inline": false
+    },
+    {
+      "tag": "INPUT",
+      "text": "license",
+      "width": 300,
+      "height": 46.8,
+      "display": "block",
+      "inline": false
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Verify license",
+      "width": 140.3,
+      "height": 48.8,
+      "display": "flex",
+      "inline": false
+    },
+    {
+      "tag": "A",
+      "text": "Privacy",
+      "width": 43,
+      "height": 15,
+      "display": "inline",
+      "inline": true
+    },
+    {
+      "tag": "A",
+      "text": "Terms",
+      "width": 35.7,
+      "height": 15,
+      "display": "inline",
+      "inline": true
+    },
+    {
+      "tag": "A",
+      "text": "Privacy",
+      "width": 52.5,
+      "height": 24.8,
+      "display": "block",
+      "inline": false
+    },
+    {
+      "tag": "A",
+      "text": "Terms",
+      "width": 43.6,
+      "height": 24.8,
+      "display": "block",
+      "inline": false
+    },
+    {
+      "tag": "A",
+      "text": "Built by Param Factory (external site)",
+      "width": 161.8,
+      "height": 24.8,
+      "display": "block",
+      "inline": false
+    }
+  ],
+  "sub44": [
+    {
+      "tag": "A",
+      "text": "Service Proof Loop",
+      "width": 342,
+      "height": 30,
+      "display": "flex",
+      "inline": false
+    },
+    {
+      "tag": "A",
+      "text": "Demo",
+      "width": 37.6,
+      "height": 44,
+      "display": "flex",
+      "inline": false
+    },
+    {
+      "tag": "A",
+      "text": "Price",
+      "width": 0,
+      "height": 0,
+      "display": "none",
+      "inline": false
+    },
+    {
+      "tag": "A",
+      "text": "Privacy",
+      "width": 52.5,
+      "height": 24.8,
+      "display": "block",
+      "inline": false
+    },
+    {
+      "tag": "A",
+      "text": "Terms",
+      "width": 43.6,
+      "height": 24.8,
+      "display": "block",
+      "inline": false
+    },
+    {
+      "tag": "A",
+      "text": "Built by Param Factory (external site)",
+      "width": 161.8,
+      "height": 24.8,
+      "display": "block",
+      "inline": false
+    }
+  ],
+  "reflow": {
+    "scrollWidth": 390,
+    "clientWidth": 390
+  },
+  "motion": {
+    "reduce": true,
+    "transitionDuration": "1e-05s",
+    "scrollBehavior": "auto"
+  },
+  "links": [
+    {
+      "url": "https://service-proof-loop.sociobot.in/#main",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/demo",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/app",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/#pricing",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/privacy",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://api.sociobot.in/api/v1/products/service-proof-loop/checkout",
+      "status": 303,
+      "location": "https://checkout.dodopayments.com/session/[redacted]"
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/terms",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://sociobot.in/",
+      "status": 200,
+      "location": null
+    }
+  ]
+}

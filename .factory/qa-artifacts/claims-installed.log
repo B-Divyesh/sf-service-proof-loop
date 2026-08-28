@@ -1,0 +1,320 @@
+
+CLAIM 01 demo-sandbox
+COMMAND npm test -- --grep @claim:demo-sandbox
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && playwright test --grep @claim:demo-sandbox
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+[WebServer] (node:17774) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.86s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:17799) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17800) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17799) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17800) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/e2e/product.spec.ts:13:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (3.0s)
+  ✓  2 [mobile-chromium] › tests/e2e/product.spec.ts:13:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (2.9s)
+
+  2 passed (9.4s)
+CLAIM_RESULT demo-sandbox 0
+
+CLAIM 02 no-account
+COMMAND npm test -- --grep @claim:no-account
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && playwright test --grep @claim:no-account
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+[WebServer] (node:18016) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.88s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:18043) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18042) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18043) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18042) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:26:1 › @claim:no-account clients open proof without an account (3.1s)
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:26:1 › @claim:no-account clients open proof without an account (3.8s)
+
+  2 passed (9.4s)
+CLAIM_RESULT no-account 0
+
+CLAIM 03 proof-expiry
+COMMAND cargo test claim_proof_expiry_rejects_an_expired_proof
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.22s
+     Running unittests src/lib.rs (target/debug/deps/service_proof_loop-792ea97753dcb0de)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/service_proof_loop-e8ab0cb932ca9782)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/api.rs (target/debug/deps/api-6fcbe729112709c1)
+
+running 1 test
+test claim_proof_expiry_rejects_an_expired_proof ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.13s
+
+CLAIM_RESULT proof-expiry 0
+
+CLAIM 04 next-visit-export
+COMMAND npm test -- --grep @claim:next-visit-export
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && playwright test --grep @claim:next-visit-export
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+[WebServer] (node:18320) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.19s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:18362) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18361) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18361) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18362) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:49:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (2.8s)
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:49:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (4.6s)
+
+  2 passed (10.7s)
+CLAIM_RESULT next-visit-export 0
+
+CLAIM 05 same-origin-demo
+COMMAND npm test -- --grep @claim:same-origin-demo
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && playwright test --grep @claim:same-origin-demo
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+[WebServer] (node:18586) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:18615) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18614) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18614) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18615) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:113:1 › @claim:same-origin-demo demo sends data only to this service (1.6s)
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:113:1 › @claim:same-origin-demo demo sends data only to this service (1.8s)
+
+  2 passed (7.8s)
+CLAIM_RESULT same-origin-demo 0
+
+CLAIM 06 configurable-extras
+COMMAND npm test -- --grep @claim:configurable-extras
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && playwright test --grep @claim:configurable-extras
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+[WebServer] (node:18840) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:18865) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18866) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18865) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18866) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:66:1 › @claim:configurable-extras a business can add a client extra (4.0s)
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:66:1 › @claim:configurable-extras a business can add a client extra (4.3s)
+
+  2 passed (10.6s)
+CLAIM_RESULT configurable-extras 0
+
+CLAIM 07 paid-license
+COMMAND npm test -- --grep @claim:paid-license
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && playwright test --grep @claim:paid-license
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+[WebServer] (node:19084) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:19109) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19110) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19110) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19109) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:80:1 › @claim:paid-license checkout registration and license restore use Sociobot billing (3.2s)
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:80:1 › @claim:paid-license checkout registration and license restore use Sociobot billing (3.0s)
+
+  2 passed (9.2s)
+CLAIM_RESULT paid-license 0
+
+CLAIM 08 rate-limit
+COMMAND npm test -- --grep @claim:rate-limit
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && playwright test --grep @claim:rate-limit
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+[WebServer] (node:19352) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:19377) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19378) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19378) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19377) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:98:1 › @claim:rate-limit API traffic is limited per forwarded client (723ms)
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:98:1 › @claim:rate-limit API traffic is limited per forwarded client (2.5s)
+
+  2 passed (8.3s)
+CLAIM_RESULT rate-limit 0
+
+CLAIM 09 plan-limit
+COMMAND cargo test claim_plan_limit_is_server_enforced_and_a_valid_license_allows_more
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.18s
+     Running unittests src/lib.rs (target/debug/deps/service_proof_loop-792ea97753dcb0de)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/service_proof_loop-e8ab0cb932ca9782)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/api.rs (target/debug/deps/api-6fcbe729112709c1)
+
+running 1 test
+test claim_plan_limit_is_server_enforced_and_a_valid_license_allows_more ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.02s
+
+CLAIM_RESULT plan-limit 0
+
+CLAIM 10 demo-expiry
+COMMAND cargo test claim_demo_expiry_is_24_hours_and_expired_access_is_rejected
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.17s
+     Running unittests src/lib.rs (target/debug/deps/service_proof_loop-792ea97753dcb0de)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/service_proof_loop-e8ab0cb932ca9782)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/api.rs (target/debug/deps/api-6fcbe729112709c1)
+
+running 1 test
+test claim_demo_expiry_is_24_hours_and_expired_access_is_rejected ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.01s
+
+CLAIM_RESULT demo-expiry 0
+
+CLAIM 11 no-tracking
+COMMAND npm test -- --grep @claim:no-tracking
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && playwright test --grep @claim:no-tracking
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+[WebServer] (node:19545) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.19s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:19572) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19571) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19571) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19572) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/e2e/product.spec.ts:157:1 › @claim:no-tracking landing and demo load no third-party resources (2.2s)
+  ✓  2 [mobile-chromium] › tests/e2e/product.spec.ts:157:1 › @claim:no-tracking landing and demo load no third-party resources (2.5s)
+
+  2 passed (8.7s)
+CLAIM_RESULT no-tracking 0
