@@ -66,11 +66,26 @@ async fn create_workspace(app: &Router) -> String {
 }
 
 fn visit_request(token: &str) -> Request<Body> {
+    let next_visit = (Utc::now() + Duration::days(30)).date_naive().to_string();
+    visit_request_with(token, &next_visit, "Kitchen")
+}
+
+fn visit_request_with(token: &str, next_visit_at: &str, checklist_label: &str) -> Request<Body> {
     Request::post("/api/visits")
         .header(header::CONTENT_TYPE, "application/json")
         .header(header::AUTHORIZATION, format!("Bearer {token}"))
         .body(Body::from(
-            r#"{"client_name":"Maya","location_label":"Willow Street","next_visit_at":"2026-09-20","technician":"Elena","checklist":[{"label":"Kitchen","done":true}],"notes":"","photos":[],"photo_consent":false}"#,
+            serde_json::json!({
+                "client_name": "Maya",
+                "location_label": "Willow Street",
+                "next_visit_at": next_visit_at,
+                "technician": "Elena",
+                "checklist": [{"label": checklist_label, "done": true}],
+                "notes": "",
+                "photos": [],
+                "photo_consent": false
+            })
+            .to_string(),
         ))
         .unwrap()
 }
@@ -290,6 +305,62 @@ async fn claim_plan_limit_is_server_enforced_and_a_valid_license_allows_more() {
         .insert("x-product-license", "valid-license".parse().unwrap());
     let allowed = app.oneshot(licensed).await.unwrap();
     assert_eq!(allowed.status(), StatusCode::CREATED);
+
+    let (concurrent_app, pool, _) = test_app(100).await;
+    let concurrent_token = create_workspace(&concurrent_app).await;
+    let mut requests = tokio::task::JoinSet::new();
+    for _ in 0..8 {
+        let app = concurrent_app.clone();
+        let token = concurrent_token.clone();
+        requests.spawn(async move { app.oneshot(visit_request(&token)).await.unwrap().status() });
+    }
+
+    let mut statuses = Vec::new();
+    while let Some(result) = requests.join_next().await {
+        statuses.push(result.unwrap());
+    }
+    assert_eq!(
+        statuses
+            .iter()
+            .filter(|status| **status == StatusCode::CREATED)
+            .count(),
+        3,
+        "only three simultaneous free visits may be created: {statuses:?}"
+    );
+    assert_eq!(
+        statuses
+            .iter()
+            .filter(|status| **status == StatusCode::PAYMENT_REQUIRED)
+            .count(),
+        5,
+        "every request after the atomic allowance must be rejected: {statuses:?}"
+    );
+    let count: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM visits")
+        .fetch_one(&pool)
+        .await
+        .unwrap();
+    assert_eq!(count, 3);
+}
+
+#[tokio::test]
+async fn controller_regression_rejects_past_dates_and_blank_checklist_labels() {
+    let (app, _, _) = test_app(100).await;
+    let token = create_workspace(&app).await;
+    let yesterday = (Utc::now() - Duration::days(1)).date_naive().to_string();
+
+    let past = app
+        .clone()
+        .oneshot(visit_request_with(&token, &yesterday, "Kitchen"))
+        .await
+        .unwrap();
+    assert_eq!(past.status(), StatusCode::BAD_REQUEST);
+
+    let future = (Utc::now() + Duration::days(1)).date_naive().to_string();
+    let blank = app
+        .oneshot(visit_request_with(&token, &future, "   \t"))
+        .await
+        .unwrap();
+    assert_eq!(blank.status(), StatusCode::BAD_REQUEST);
 }
 
 #[tokio::test]
@@ -315,4 +386,23 @@ async fn api_rate_limit_uses_forwarded_client_and_sets_retry_after() {
             assert!(response.headers().contains_key(header::RETRY_AFTER));
         }
     }
+}
+
+#[test]
+fn deployment_contract_pins_persistent_sqlite_to_one_replica() {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
+    let contract: serde_json::Value =
+        serde_json::from_slice(&std::fs::read(root.join(".factory/deployment.json")).unwrap())
+            .unwrap();
+    assert_eq!(contract["deployment_class"], "container");
+    assert_eq!(contract["active_revisions_mode"], "Single");
+    assert_eq!(contract["scale"]["min_replicas"], 1);
+    assert_eq!(contract["scale"]["max_replicas"], 1);
+    assert_eq!(contract["storage_name"], "service-proof-loop-data");
+    assert_eq!(contract["storage_mount"], "/data");
+
+    let deploy = std::fs::read_to_string(root.join("scripts/deploy-container.sh")).unwrap();
+    assert!(deploy.contains(".factory/deployment.json"));
+    assert!(deploy.contains("storageType\":\"AzureFile"));
+    assert!(!deploy.contains("/opt/fleet/lib/deploy-container.sh"));
 }

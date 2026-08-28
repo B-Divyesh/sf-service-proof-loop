@@ -60,7 +60,7 @@
     "claim": "The free plan accepts three completed visits; a valid business license permits more",
     "where": "workspace, pricing, README",
     "test": "cargo test claim_plan_limit_is_server_enforced_and_a_valid_license_allows_more",
-    "sandbox": "create a real workspace; assert visits one through three return 201, the fourth returns 402, and a fixture-verified license permits it"
+    "sandbox": "create real workspaces; assert visits one through three return 201, the fourth returns 402, a fixture-verified license permits it, and eight concurrent free writes create exactly three visits"
   },
   {
     "id": "demo-expiry",

@@ -364,7 +364,6 @@ async fn create_visit(
     Json(input): Json<VisitInput>,
 ) -> ApiResult<(StatusCode, Json<CreatedVisit>)> {
     let workspace_id = authenticate(&state.pool, &headers).await?;
-    enforce_visit_plan(&state, &workspace_id, &headers).await?;
     if !input.photo_consent && !input.photos.is_empty() {
         return Err(problem(
             StatusCode::BAD_REQUEST,
@@ -394,15 +393,54 @@ async fn create_visit(
     let notes = clean_optional(&input.notes, 600)?;
     let next_date = chrono::NaiveDate::parse_from_str(&input.next_visit_at, "%Y-%m-%d")
         .map_err(|_| problem(StatusCode::BAD_REQUEST, "Choose a valid next visit date."))?;
-    let checklist: Vec<serde_json::Value> = input.checklist.into_iter().map(|c| serde_json::json!({"label": c.label.chars().take(120).collect::<String>(), "done": c.done})).collect();
+    if next_date < Utc::now().date_naive() {
+        return Err(problem(
+            StatusCode::BAD_REQUEST,
+            "Choose today or a future next visit date.",
+        ));
+    }
+    let checklist: Vec<serde_json::Value> = input
+        .checklist
+        .into_iter()
+        .map(|item| {
+            Ok(serde_json::json!({
+                "label": clean(&item.label, 120)?,
+                "done": item.done
+            }))
+        })
+        .collect::<ApiResult<_>>()?;
     let id = Uuid::new_v4().to_string();
     let token = random_token();
     let expires = Utc::now() + Duration::days(14);
-    sqlx::query("INSERT INTO visits (id, workspace_id, client_name, location_label, completed_at, next_visit_at, technician, checklist_json, notes, photos_json, proof_token_hash, proof_expires_at, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
-        .bind(&id).bind(workspace_id).bind(client_name).bind(location).bind(Utc::now().to_rfc3339()).bind(next_date.to_string())
-        .bind(technician).bind(serde_json::to_string(&checklist).unwrap()).bind(notes).bind(serde_json::to_string(&input.photos).unwrap())
-        .bind(hash_token(&token)).bind(expires.to_rfc3339()).bind(Utc::now().to_rfc3339())
+    let completed_at = Utc::now().to_rfc3339();
+    let checklist_json = serde_json::to_string(&checklist).unwrap();
+    let photos_json = serde_json::to_string(&input.photos).unwrap();
+    let token_hash = hash_token(&token);
+    let expires_at = expires.to_rfc3339();
+    let created_at = Utc::now().to_rfc3339();
+    let inserted = sqlx::query("INSERT INTO visits (id, workspace_id, client_name, location_label, completed_at, next_visit_at, technician, checklist_json, notes, photos_json, proof_token_hash, proof_expires_at, created_at)
+        SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+        WHERE EXISTS (
+            SELECT 1 FROM workspaces AS workspace
+            WHERE workspace.id = ? AND (
+                workspace.is_demo = 1 OR
+                (SELECT COUNT(*) FROM visits WHERE workspace_id = workspace.id) < 3
+            )
+        )")
+        .bind(&id).bind(&workspace_id).bind(&client_name).bind(&location).bind(&completed_at).bind(next_date.to_string())
+        .bind(&technician).bind(&checklist_json).bind(&notes).bind(&photos_json)
+        .bind(&token_hash).bind(&expires_at).bind(&created_at).bind(&workspace_id)
         .execute(&state.pool).await.map_err(db_error)?;
+    if inserted.rows_affected() == 0 {
+        if !license_allows_more(&state, &headers).await {
+            return Err(plan_required());
+        }
+        sqlx::query("INSERT INTO visits (id, workspace_id, client_name, location_label, completed_at, next_visit_at, technician, checklist_json, notes, photos_json, proof_token_hash, proof_expires_at, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
+            .bind(&id).bind(&workspace_id).bind(&client_name).bind(&location).bind(&completed_at).bind(next_date.to_string())
+            .bind(&technician).bind(&checklist_json).bind(&notes).bind(&photos_json)
+            .bind(&token_hash).bind(&expires_at).bind(&created_at)
+            .execute(&state.pool).await.map_err(db_error)?;
+    }
     Ok((
         StatusCode::CREATED,
         Json(CreatedVisit {
@@ -418,48 +456,32 @@ struct LicenseVerdict {
     valid: bool,
 }
 
-async fn enforce_visit_plan(
-    state: &AppState,
-    workspace_id: &str,
-    headers: &HeaderMap,
-) -> ApiResult<()> {
-    let workspace = sqlx::query("SELECT is_demo FROM workspaces WHERE id = ?")
-        .bind(workspace_id)
-        .fetch_one(&state.pool)
-        .await
-        .map_err(db_error)?;
-    if workspace.get::<bool, _>("is_demo") {
-        return Ok(());
-    }
-    let count: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM visits WHERE workspace_id = ?")
-        .bind(workspace_id)
-        .fetch_one(&state.pool)
-        .await
-        .map_err(db_error)?;
-    if count < 3 {
-        return Ok(());
-    }
-    let license = headers
+async fn license_allows_more(state: &AppState, headers: &HeaderMap) -> bool {
+    let Some(license) = headers
         .get("x-product-license")
         .and_then(|value| value.to_str().ok())
         .map(str::trim)
         .filter(|value| !value.is_empty())
-        .ok_or_else(plan_required)?;
-    let response = state
+    else {
+        return false;
+    };
+    let Ok(response) = state
         .http
         .get(format!("{}/verify", state.billing_base_url))
         .query(&[("license", license)])
         .send()
         .await
-        .map_err(|_| plan_required())?;
+    else {
+        return false;
+    };
     if !response.status().is_success() {
-        return Err(plan_required());
+        return false;
     }
-    let verdict: LicenseVerdict = response.json().await.map_err(|_| plan_required())?;
-    if !verdict.valid {
-        return Err(plan_required());
-    }
-    Ok(())
+    response
+        .json::<LicenseVerdict>()
+        .await
+        .map(|verdict| verdict.valid)
+        .unwrap_or(false)
 }
 
 fn plan_required() -> (StatusCode, Json<ErrorBody>) {

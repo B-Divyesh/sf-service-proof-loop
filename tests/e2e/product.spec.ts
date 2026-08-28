@@ -10,6 +10,23 @@ test('landing explains the job and reaches the demo', async ({ page }) => {
   await expect(page.getByText('Willow Street').first()).toBeVisible();
 });
 
+test('mobile navigation and footer links have 44px touch targets', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  const targets = await page.locator('.wordmark, .nav a, .footer-links a').evaluateAll(elements =>
+    elements
+      .filter(element => getComputedStyle(element).display !== 'none')
+      .map(element => {
+        const box = element.getBoundingClientRect();
+        return { text: element.textContent?.trim(), width: box.width, height: box.height };
+      }),
+  );
+  for (const target of targets) {
+    expect(target.width, `${target.text} width`).toBeGreaterThanOrEqual(44);
+    expect(target.height, `${target.text} height`).toBeGreaterThanOrEqual(44);
+  }
+});
+
 test('@claim:demo-sandbox demo reset creates a fresh isolated workspace', async ({ page }) => {
   await page.goto('/demo');
   await expect(page.getByText('Willow Street').first()).toBeVisible();

@@ -1,0 +1,13 @@
+{
+  "deployment_class": "container",
+  "resource_group": "sociobot",
+  "environment": "factory-env",
+  "app_name": "sf-service-proof-loop",
+  "storage_name": "service-proof-loop-data",
+  "storage_mount": "/data",
+  "active_revisions_mode": "Single",
+  "scale": {
+    "min_replicas": 1,
+    "max_replicas": 1
+  }
+}

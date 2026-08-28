@@ -11,6 +11,7 @@
     "test": "npm run typecheck && playwright test",
     "test:claims": "playwright test --grep @claim",
     "test:a11y": "playwright test --grep @a11y",
+    "test:live": "node scripts/verify-live.mjs",
     "test:all": "cargo test --all-targets && npm test"
   },
   "devDependencies": {

@@ -1,62 +1,85 @@
-# Service Proof Loop — independent QA handoff
+# Service Proof Loop — repair handoff
 
 ## Result
 
-**FAIL — do not release.** Independent verification was performed on
-2026-08-28 against candidate
-`5b6e3d4e86fef70c1c80427dd722393d931a9fd4` and
-<https://service-proof-loop.sociobot.in>.
+Release blockers from independent report commit `52ce229` are repaired. The
+product remains a Rust/axum + SQLite backend serving the Vite/TypeScript web
+app from one container.
 
-The full report is in [verification-2.md](verification-2.md).
+## Repairs
 
-## Release blockers
+- Deployment now uses the checked-in `.factory/deployment.json` contract. One
+  ARM update applies the image, `Single` revision mode, `minReplicas: 1`,
+  `maxReplicas: 1`, and the existing `service-proof-loop-data` Azure Files
+  mount at `/data`. The deploy command fails unless the live topology, mount,
+  replica count, and build SHA all match.
+- The free-plan decision and visit insert are one conditional SQLite write.
+  Eight simultaneous unlicensed writes now create exactly three visits; the
+  other five return 402. A valid fixture license still permits later visits.
+- With one active replica, the forwarded-IP rate limiter has one shared live
+  allowance. Every API route remains limited; `/health` remains exempt; 429
+  responses include `Retry-After`.
+- The API rejects dates before today and rejects blank or whitespace-only
+  checklist labels. Checklist labels are trimmed and limited to 120 characters.
+- The header wordmark, navigation links, and footer links now expose at least
+  44 × 44 CSS px touch targets at a 390 px viewport.
+- `scripts/verify-live.mjs` preserves the fresh-connection replica, concurrent
+  plan-limit, semantic validation, rate-limit, and identity probes.
 
-- The active Azure revision has three replicas despite the repository handoff
-  saying it must remain at one. Each replica has a different SQLite database.
-  Fresh demo tokens returned 200 on some connections and 401 on others; four
-  of four cold browser demos failed immediately.
-- The three-visit free limit is raceable. Eight simultaneous requests created
-  eight visits locally and four live; sequential requests correctly stop the
-  fourth with 402.
-- Rate limiting is per replica. One client received 120 unblocked responses
-  across fresh connections before 429, rather than the documented burst of 40.
-- The API accepts a past next-visit date and an all-whitespace checklist item.
+## Reproduction and regression evidence
 
-## What passed
+Before the fix, the focused regression tests observed seven 201 responses from
+eight simultaneous free writes; a past date also returned 201. After the fix:
 
-- All 11 exact commands in `.factory/claims.json` passed after `npm ci`.
-- `cargo test --all-targets` passed 8/8; `npm test` passed 32/32 across desktop
-  and 390 px Chromium.
-- TypeScript, rustfmt, Clippy, Vite production build, optimized Rust build, and
-  npm audit all passed.
-- The release binary starts with only `PORT`; Docker was unavailable locally.
-- Live `/health` reports the tested SHA, and all 13 live static files are
-  byte-identical to candidate `dist/`.
-- Checkout is registered at $59 and returns 303 to hosted Dodo checkout.
-- Axe found no serious/critical issues on the pages that could be reached;
-  focus, reduced motion, 200% reflow, privacy requests, headers, and bundle
-  budgets pass.
-- Lighthouse mobile scores are 100/100/100/100; LCP is 1.20 s and CLS is 0.
+- `npm ci`: 22 packages installed; `npm audit --audit-level=high`: 0 issues.
+- `npm run typecheck`: pass.
+- `npm run lint`: rustfmt and Clippy with warnings denied pass.
+- `npm run build`: pass; `dist/` produced. JS 31.40 KB raw / 10.07 KB gzip;
+  CSS 15.29 KB raw / 4.38 KB gzip.
+- `cargo test --all-targets`: 10/10 pass, including atomic concurrency,
+  invalid-date/blank-label, persistent-data/single-replica contract, shared DB
+  access, rate limiting, expiry, deep-link, and identity regressions.
+- `npm test`: 34/34 pass on desktop Chromium and a 390 × 844 mobile viewport.
+  This includes the full demo-to-proof-to-next-visit flow, keyboard/focus,
+  serious/critical axe scans, 200% reflow, privacy request capture, offline
+  messaging, response headers, deep links, dark mode, and 44 px targets.
+- `cargo build --release`: pass.
+- Release binary launched with only `PATH` and `PORT`; `/health` and `/`
+  returned 200.
+- Local `npm run test:live`: 20/20 fresh-connection demo reads returned 200;
+  concurrent plan statuses were 3 × 201 and 5 × 402; both semantic validation
+  probes returned 400; 130 fresh connections yielded 40 ordinary responses and
+  90 rate-limited responses with `Retry-After`.
 
-## Reproduce
+Run the local gates:
 
 ```sh
 npm ci
-cargo test --all-targets
-npm run lint
+npm audit --audit-level=high
 npm run typecheck
+npm run lint
 npm run build
+cargo test --all-targets
 cargo build --release
 npm test
 ```
 
-Key raw outputs and screenshots are under `.factory/qa-artifacts/`.
+Run the live repair probe after deployment:
 
-## Next steps
+```sh
+EXPECTED_SHA=$(git rev-parse HEAD) npm run test:live
+```
 
-1. Force the deployed app to exactly one replica, or migrate SQLite state and
-   rate-limit state to shared services.
-2. Make plan enforcement transactional and add a concurrent claim test.
-3. Reject past next dates and blank checklist labels.
-4. Re-run independent live QA, including fresh TLS connections and the first
-   click from an empty browser context.
+## Live deployment evidence
+
+To be recorded after deploying the committed repair.
+
+## Known constraints
+
+- SQLite and the in-memory limiter intentionally require exactly one active
+  replica. The checked-in deployment contract enforces that ceiling. Moving
+  above one replica requires PostgreSQL (or another shared transactional store)
+  and a distributed limiter.
+- This online service is not a PWA. Offline verification covers the explicit
+  reconnect state; service-worker install and update tests do not apply.
+- A package/consumer test does not apply to this web-with-backend artifact.
