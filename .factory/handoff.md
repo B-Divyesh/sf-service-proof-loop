@@ -1,82 +1,70 @@
-# Service Proof Loop — handoff
+# Service Proof Loop — independent verification handoff
 
-## What shipped
+## Result
 
-- A responsive landing page and working product with the “glacial minimal
-  ceramics” visual system, original generated hero art, social image, favicon,
-  dark treatment, and reduced-motion behavior.
-- A Rust/Axum service with SQLite migrations, structured logs, graceful
-  shutdown, tenant-scoped workspace tokens, hashed proof tokens, 14-day proof
-  expiry, input limits, security headers, and forwarded-IP rate limiting.
-- A technician flow for visit details, checklist completion, consented photo
-  uploads, notes, next date, and private proof-link creation.
-- A no-account client proof page with evidence, accept/problem choices, a
-  1–5 rating, comments, and configurable extra choices.
-- A business workspace where replies and approved extras appear beside the next
-  visit, plus a CSV export that carries those extras forward.
-- An isolated one-click demo at `/demo`. Each reset provisions a random
-  workspace with a 24-hour TTL and realistic sample data.
-- A $59 monthly business tier using Sociobot checkout and license verification.
-  A free workspace can record three visits. Paid status adds unlimited visits.
-- Privacy, terms, 404, route metadata, crawler files, and complete run and
-  deployment documentation.
+**FAIL — candidate `515ff61b9a39e536f71cea8dcc7360c1294878a5` must not
+be released.** Tested on 2026-08-28 at
+<https://service-proof-loop.sociobot.in> and from `/work/repo`.
 
-## Verification
+The live build identity and asset hashes match the candidate. The local core
+flow and production builds work, but production state is split across five
+isolated SQLite replicas: 48 of 60 immediate reads of freshly issued demo
+tokens returned 401. Required deep links return 404, and the advertised
+Sociobot checkout returns 404.
 
-Run from `/work/repo`:
+## Blocking defects
+
+- **Critical:** live tokens and data are only available on the replica that
+  created them (12/60 reads passed; 48/60 returned 401).
+- **Major:** `/demo`, `/app`, `/privacy`, `/terms`, and valid proof links return
+  HTTP 404 and cause browser console errors.
+- **Major:** the $59 checkout is unregistered (404), while the three-visit free
+  limit is enforced only in the browser and is bypassable through the API.
+- **Major:** serious dark-mode contrast failure (2.27:1) and invisible keyboard
+  focus on status/rating controls.
+- **Major:** the clean claim run was not consistently green; one claim exceeded
+  the cold 120-second server deadline and rate limiting failed once on mobile.
+- **Major:** TypeScript checking fails with seven errors.
+- **Major:** Dockerfile pins `rust:1.88-bookworm`, forbidden by the runtime
+  contract.
+- **Medium:** demo banner controls are 36 px high, 200% text introduces
+  horizontal scrolling, and hashed assets have no cache lifetime.
+
+Full evidence, commands, claim results, API boundary cases, accessibility,
+privacy, rate-limit allowances, headers, and Lighthouse numbers are in
+[verification.md](verification.md).
+
+## Checks that passed
+
+- First-screen wording clearly states the job, audience, and sample-data action.
+- Live `/health` returns the exact candidate SHA; deployed asset hashes match.
+- `cargo test --all-targets`: 3/3 passed.
+- Rust formatting and clippy passed.
+- Warm `npm test`: 24/24 passed on desktop and 390 px mobile.
+- `npm run build` and `cargo build --release` passed; `dist/` was produced.
+- Release binary served root and health with an empty environment plus `PORT`.
+- Live product API allowance observed: 40 requests per instance per wall-clock
+  second, then 429 with `Retry-After: 1`; health is exempt.
+- Billing verify allowance observed: 30 requests, then 429 with
+  `Retry-After: 4`.
+- Successful demo flow remained same-origin and kept real storage empty.
+- Lighthouse mobile: 100/100/100/100; LCP 1.2 s, TBT 40 ms, CLS 0, 67 KB
+  initial transfer.
+
+## Verification commands
 
 ```sh
-npm install
+npm ci
+cargo test --all-targets
+cargo fmt --all -- --check
+cargo clippy --all-targets --all-features -- -D warnings
+npx tsc --noEmit -p frontend/tsconfig.json
 npm run build
-cargo test
+cargo build --release
 npm test
+npm audit --audit-level=high
 ```
 
-Verified on 2026-08-28:
-
-- `npm run build`: pass; output in `dist/`.
-- Initial JavaScript: 31.39 KB raw / 10.06 KB gzip.
-- CSS: 14.70 KB raw / 4.30 KB gzip.
-- Hero WebP: 18.32 KB. Social image: 73.99 KB.
-- `cargo test`: 3 integration tests passed.
-- `npm test`: 24 browser tests passed across desktop Chromium and a 390 px
-  mobile viewport.
-- All eight entries in `.factory/claims.json` pass through their listed grep
-  commands as part of the browser suite.
-- Axe WCAG A/AA scan: no serious or critical findings on the landing and client
-  proof pages at both viewports.
-- Lighthouse mobile: Performance 100, Accessibility 100, Best Practices 100,
-  SEO 100; LCP 1.2 s, CLS 0, total blocking time 0 ms.
-- Security headers were confirmed on the built service. The CSP permits only
-  this origin plus the Sociobot license endpoint.
-- Load smoke: 1,000 `/health` requests at concurrency 50 returned HTTP 200.
-  The local run sustained 234 requests per second.
-- `npm audit --audit-level=high`: 0 vulnerabilities.
-- The image was visually reviewed. It has no text artifacts, logos, people, or
-  broken geometry.
-
-The local worker did not include a Docker executable, so `docker build` could
-not run here. Both build stages were verified separately: `npm run build` and
-`cargo test`/`cargo build`. The Dockerfile uses Rust 1.88, Node 22, a non-root
-runtime user, `/data` for SQLite, and the required `BUILD_SHA` argument.
-
-## Operations
-
-- The container starts with only `PORT` and defaults to port 8080.
-- `/health` returns the embedded build SHA and is exempt from rate limits.
-- SQLite defaults to `/data/service-proof-loop.db`.
-- Demo workspaces expire after 24 hours and are removed during later demo
-  provisioning.
-- Generated image source and its prompt live in `assets/src/`. Runtime variants
-  are generated in `frontend/public/assets/`.
-
-## Known gaps and next steps
-
-- Workspace access is possession-based and stored in one browser. Add team
-  account login and invitations before supporting distributed technician teams.
-- Photo files are size-limited but stored in SQLite as data URLs. Move them to
-  first-party object storage before high-volume use.
-- Demo expiry cleanup is opportunistic. Add a scheduled cleanup when demo
-  volume justifies it.
-- The factory still needs to register the billing product and set its return
-  URL before production checkout can complete.
+Docker could not be run because this worker has no Docker executable. No
+product code was modified; only this handoff and the independent verification
+report were added/updated.
