@@ -76,11 +76,10 @@ The multi-stage [Dockerfile](Dockerfile) builds the Vite frontend and Rust
 service. It runs as a non-root user and serves the API and frontend from one
 container. The factory supplies `BUILD_SHA`; it may deploy with only `PORT`.
 The checked-in [.factory/deployment.json](.factory/deployment.json) fixes the
-service at one replica and mounts the `service-proof-loop-data` Azure Files
-volume at `/data`. The deployment script applies the image, mount, single-
-revision mode, and replica ceiling in one update, then verifies the live
-topology and build identity. Do not raise the replica count without moving both
-SQLite and rate-limit state to shared services.
+service at one replica. The deployment script applies the image, local-storage
+contract, single-revision mode, and replica ceiling in one update, then verifies
+the live topology and build identity. Do not raise the replica count without
+moving both SQLite and rate-limit state to shared services.
 
 ```sh
 ./scripts/deploy-container.sh

@@ -9,10 +9,11 @@ app from one container.
 ## Repairs
 
 - Deployment now uses the checked-in `.factory/deployment.json` contract. One
-  ARM update applies the image, `Single` revision mode, `minReplicas: 1`,
-  `maxReplicas: 1`, and the existing `service-proof-loop-data` Azure Files
-  mount at `/data`. The deploy command fails unless the live topology, mount,
-  replica count, and build SHA all match.
+  ARM update applies the image, replica-local storage, `Single` revision mode,
+  `minReplicas: 1`, and `maxReplicas: 1`. The deploy command fails unless the
+  live topology, storage mode, replica count, and build SHA all match. An Azure
+  Files trial was rejected after SQLite correctly reported a locked database;
+  it is not part of the shipped configuration.
 - The free-plan decision and visit insert are one conditional SQLite write.
   Eight simultaneous unlicensed writes now create exactly three visits; the
   other five return 402. A valid fixture license still permits later visits.
@@ -37,7 +38,7 @@ eight simultaneous free writes; a past date also returned 201. After the fix:
 - `npm run build`: pass; `dist/` produced. JS 31.40 KB raw / 10.07 KB gzip;
   CSS 15.29 KB raw / 4.38 KB gzip.
 - `cargo test --all-targets`: 10/10 pass, including atomic concurrency,
-  invalid-date/blank-label, persistent-data/single-replica contract, shared DB
+  invalid-date/blank-label, deployment/single-replica contract, shared DB
   access, rate limiting, expiry, deep-link, and identity regressions.
 - `npm test`: 34/34 pass on desktop Chromium and a 390 × 844 mobile viewport.
   This includes the full demo-to-proof-to-next-visit flow, keyboard/focus,
@@ -72,7 +73,33 @@ EXPECTED_SHA=$(git rev-parse HEAD) npm run test:live
 
 ## Live deployment evidence
 
-To be recorded after deploying the committed repair.
+- Repair code commit `4dd270d868ea187d0c7368ee7f2d9e150501565c`
+  deployed as healthy revision `sf-service-proof-loop--0000010`; it received
+  100% traffic with one replica. Azure reported `Single`, min 1, max 1, and no
+  volume mount. `/health` returned the full matching SHA.
+- ACR cloud build `chpd` passed from the `.git`-free context using
+  `rust:1-slim`; image digest is
+  `sha256:755c12e54cc7503db371a961201aef155adba18dc6ab347d668bfbe2c64a8bde`.
+- `EXPECTED_SHA=4dd270d… npm run test:live`: 20/20 fresh TLS demo reads returned
+  200; eight concurrent writes returned 3 × 201 and 5 × 402; past-date and
+  blank-label requests returned 400; a 130-connection rate burst returned 40
+  ordinary responses and 90 × 429, all with `Retry-After`.
+- The complete Playwright suite ran against the public URL: 34/34 passed on
+  desktop Chromium and 390 × 844 mobile Chromium. This exercised demo, proof,
+  reply, extras, CSV, keyboard, focus, offline messaging, privacy request
+  capture, response policy, deep links, and all visitor claims.
+- Factory `verify-url.sh` passed `/`, `/demo`, `/privacy`, and `/terms`: each
+  returned 200 with one h1, `lang=en`, a main landmark, complete image alt text,
+  and no browser console errors. The cold demo loaded successfully.
+- Axe scans across those four routes at 1440 px and 390 px, in both light and
+  dark treatments, found zero serious or critical issues.
+- Lighthouse 12.8.2 mobile: Performance 100, Accessibility 100, Best Practices
+  100, SEO 100; FCP 1.08 s, LCP 1.31 s, TBT 0 ms, CLS 0.
+- A 100-request `/health` load smoke completed in 343 ms (292 requests/s), with
+  100/100 HTTP 200 responses. All 13 built static files matched live bytes.
+- Live responses include CSP, HSTS, `nosniff`, frame denial, restrictive
+  permissions, and strict-origin referrer policy. Browser request capture found
+  only the product origin during landing and demo flows.
 
 ## Known constraints
 

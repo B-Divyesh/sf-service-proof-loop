@@ -398,11 +398,11 @@ fn deployment_contract_pins_persistent_sqlite_to_one_replica() {
     assert_eq!(contract["active_revisions_mode"], "Single");
     assert_eq!(contract["scale"]["min_replicas"], 1);
     assert_eq!(contract["scale"]["max_replicas"], 1);
-    assert_eq!(contract["storage_name"], "service-proof-loop-data");
-    assert_eq!(contract["storage_mount"], "/data");
+    assert_eq!(contract["state_backend"], "replica-local-sqlite");
 
     let deploy = std::fs::read_to_string(root.join("scripts/deploy-container.sh")).unwrap();
     assert!(deploy.contains(".factory/deployment.json"));
-    assert!(deploy.contains("storageType\":\"AzureFile"));
+    assert!(deploy.contains(".containers[0].volumeMounts = null"));
+    assert!(deploy.contains(".volumes = null"));
     assert!(!deploy.contains("/opt/fleet/lib/deploy-container.sh"));
 }

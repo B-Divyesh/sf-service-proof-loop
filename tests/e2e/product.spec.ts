@@ -132,7 +132,7 @@ test('@claim:same-origin-demo demo sends data only to this service', async ({ pa
   page.on('request', request => origins.add(new URL(request.url()).origin));
   await page.goto('/demo');
   await expect(page.getByText('Willow Street').first()).toBeVisible();
-  expect([...origins]).toEqual(['http://127.0.0.1:4173']);
+  expect([...origins]).toEqual([new URL(page.url()).origin]);
 });
 
 test('@a11y landing and client proof have no serious axe findings', async ({ page }) => {
@@ -177,7 +177,7 @@ test('@claim:no-tracking landing and demo load no third-party resources', async 
   await page.goto('/');
   await page.getByRole('link', { name: 'Try it with sample data' }).click();
   await expect(page.getByText('Willow Street').first()).toBeVisible();
-  expect([...origins]).toEqual(['http://127.0.0.1:4173']);
+  expect([...origins]).toEqual([new URL(page.url()).origin]);
 });
 
 test('valid deep links return 200 and unknown routes return 404', async ({ request }) => {
