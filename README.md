@@ -56,11 +56,11 @@ Every product claim and its command is listed in
 - `PORT`: HTTP port. Defaults to `8080`.
 - `DATABASE_URL`: SQLite URL. Defaults to `/data/service-proof-loop.db`.
 - `BILLING_BASE_URL`: license verifier URL. Defaults to the Sociobot product endpoint.
-- `STATIC_DIR`: built frontend directory. Defaults to `frontend/dist`.
+- `STATIC_DIR`: built frontend directory. Defaults to `dist`.
 - `BUILD_SHA`: embedded during the container build and returned by `/health`.
 
 No signing secret is required. Workspace and production proof access use random
-tokens stored as hashes. Demo proof tokens are also retained inside the isolated,
+tokens stored as SHA-256 hashes. Demo proof tokens are also retained inside the isolated,
 24-hour demo workspace so the sample link can be reopened. Proof links expire
 after 14 days. Every API route except `/health` has a forwarded-IP rate limit.
 
@@ -76,10 +76,11 @@ The multi-stage [Dockerfile](Dockerfile) builds the Vite frontend and Rust
 service. It runs as a non-root user and serves the API and frontend from one
 container. The factory supplies `BUILD_SHA`; it may deploy with only `PORT`.
 The checked-in [.factory/deployment.json](.factory/deployment.json) fixes the
-service at one replica. The deployment script applies the image, local-storage
-contract, single-revision mode, and replica ceiling in one update, then verifies
-the live topology and build identity. Do not raise the replica count without
-moving both SQLite and rate-limit state to shared services.
+service at one replica and mounts the `service-proof-loop-data` Azure Files
+share at `/data`. The deployment script applies the image, durable mount,
+single-revision mode, and replica ceiling in one update. It then verifies the
+live topology and build identity. Do not raise the replica count without moving
+SQLite and rate-limit state to shared services.
 
 ```sh
 ./scripts/deploy-container.sh

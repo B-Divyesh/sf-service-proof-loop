@@ -107,9 +107,32 @@ test('@claim:paid-license checkout registration and license restore use Sociobot
   const checkout = await request.get('https://api.sociobot.in/api/v1/products/service-proof-loop/checkout', { maxRedirects: 0 });
   expect(checkout.status()).toBe(303);
   expect(checkout.headers().location).toMatch(/^https:\/\/checkout\.dodopayments\.com\//);
+  await page.goto('/privacy');
+  await expect(page.getByText('Sociobot hosts checkout. Dodo handles payment card details on that checkout page.')).toBeVisible();
+  expect(await page.locator('input').evaluateAll(inputs => inputs.every(input => !['cc-number', 'cc-csc', 'cc-exp'].includes(input.autocomplete)))).toBeTruthy();
+  await page.goto('/#pricing');
   await page.getByLabel('Have a license?').fill('sample-license-token');
   await page.getByRole('button', { name: 'Verify license' }).click();
   await expect(page.getByText('License active on this browser.')).toBeVisible();
+});
+
+test('@claim:privacy-data-flow visit data, replies, and extras follow the stated product path', async ({ page }) => {
+  await page.goto('/demo');
+  await page.getByRole('link', { name: 'Open client view' }).click();
+  await expect(page.getByText('Maya Chen, here is the work Elena recorded at Willow Street.')).toBeVisible();
+  await page.getByText('Inside refrigerator').click();
+  await page.getByLabel('Comment').fill('Please include the refrigerator next time.');
+  await page.getByRole('button', { name: 'Save reply and extras' }).click();
+  await expect(page.getByText('Your reply is saved')).toBeVisible();
+  await page.goto('/demo');
+  await expect(page.locator('.visit-heading .state')).toContainText('accepted');
+  await expect(page.locator('.next-visit')).toContainText('Inside refrigerator');
+  const download = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Export next-visit CSV' }).click();
+  const file = await download;
+  const csv = await (await import('node:fs/promises')).readFile(await file.path() as string, 'utf8');
+  expect(csv).toContain('Willow Street');
+  expect(csv).toContain('Inside refrigerator');
 });
 
 test('@claim:rate-limit API traffic is limited per forwarded client', async ({ request }) => {

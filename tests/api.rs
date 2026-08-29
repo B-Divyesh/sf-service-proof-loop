@@ -7,6 +7,7 @@ use axum::{
 use chrono::{Duration, Utc};
 use http_body_util::BodyExt;
 use service_proof_loop::app::{build_app, AppConfig};
+use sha2::{Digest, Sha256};
 use sqlx::{sqlite::SqlitePoolOptions, Row, SqlitePool};
 use tempfile::TempDir;
 use tower::ServiceExt;
@@ -133,7 +134,7 @@ async fn demo_provisions_an_isolated_seeded_workspace() {
 }
 
 #[tokio::test]
-async fn separate_app_instances_read_the_same_database() {
+async fn durable_database_survives_app_restart() {
     let db_dir = tempfile::tempdir().unwrap();
     let database_url = format!(
         "sqlite://{}?mode=rwc",
@@ -144,10 +145,6 @@ async fn separate_app_instances_read_the_same_database() {
         .await
         .unwrap();
     sqlx::migrate!().run(&first_pool).await.unwrap();
-    let second_pool = SqlitePoolOptions::new()
-        .connect(&database_url)
-        .await
-        .unwrap();
     let static_dir = tempfile::tempdir().unwrap();
     std::fs::write(static_dir.path().join("index.html"), "app").unwrap();
     std::fs::write(static_dir.path().join("404.html"), "missing").unwrap();
@@ -158,12 +155,16 @@ async fn separate_app_instances_read_the_same_database() {
         billing_base_url: "http://127.0.0.1:9".into(),
     };
     let first = build_app(first_pool, config.clone());
-    let second = build_app(second_pool, config);
     let created = first
         .oneshot(Request::post("/api/demo").body(Body::empty()).unwrap())
         .await
         .unwrap();
     let access = response_json(created).await;
+    let second_pool = SqlitePoolOptions::new()
+        .connect(&database_url)
+        .await
+        .unwrap();
+    let second = build_app(second_pool, config);
     let response = second
         .oneshot(
             Request::get("/api/visits")
@@ -181,6 +182,56 @@ async fn separate_app_instances_read_the_same_database() {
         .await
         .to_string()
         .contains("Willow Street"));
+}
+
+#[tokio::test]
+/// @claim:access-token-hashing
+async fn claim_access_tokens_are_stored_only_as_hashes() {
+    let (app, pool, _) = test_app(100).await;
+    let created = app
+        .clone()
+        .oneshot(
+            Request::post("/api/workspaces")
+                .header(header::CONTENT_TYPE, "application/json")
+                .body(Body::from(r#"{"name":"Hash Test"}"#))
+                .unwrap(),
+        )
+        .await
+        .unwrap();
+    let workspace = response_json(created).await;
+    let access_token = workspace["access_token"].as_str().unwrap();
+    let stored_workspace: String =
+        sqlx::query_scalar("SELECT token_hash FROM workspaces WHERE id = ?")
+            .bind(workspace["workspace_id"].as_str().unwrap())
+            .fetch_one(&pool)
+            .await
+            .unwrap();
+    assert_ne!(stored_workspace, access_token);
+    assert_eq!(
+        stored_workspace,
+        format!("{:x}", Sha256::digest(access_token.as_bytes()))
+    );
+
+    let visit = app.oneshot(visit_request(access_token)).await.unwrap();
+    assert_eq!(visit.status(), StatusCode::CREATED);
+    let visit = response_json(visit).await;
+    let proof_token = visit["proof_token"].as_str().unwrap();
+    let row = sqlx::query("SELECT proof_token_hash, proof_token_demo FROM visits WHERE id = ?")
+        .bind(visit["id"].as_str().unwrap())
+        .fetch_one(&pool)
+        .await
+        .unwrap();
+    let stored_proof: String = row.get("proof_token_hash");
+    let demo_token: Option<String> = row.get("proof_token_demo");
+    assert_ne!(stored_proof, proof_token);
+    assert_eq!(
+        stored_proof,
+        format!("{:x}", Sha256::digest(proof_token.as_bytes()))
+    );
+    assert!(
+        demo_token.is_none(),
+        "real proof tokens must not be retained"
+    );
 }
 
 #[tokio::test]
@@ -219,6 +270,7 @@ async fn valid_spa_routes_are_200_unknown_routes_are_404_and_assets_cache() {
 }
 
 #[tokio::test]
+/// @claim:proof-expiry
 async fn claim_proof_expiry_rejects_an_expired_proof() {
     let (app, pool, _) = test_app(100).await;
     app.clone()
@@ -247,6 +299,7 @@ async fn claim_proof_expiry_rejects_an_expired_proof() {
 }
 
 #[tokio::test]
+/// @claim:demo-expiry
 async fn claim_demo_expiry_is_24_hours_and_expired_access_is_rejected() {
     let (app, pool, _) = test_app(100).await;
     let created = app
@@ -283,6 +336,7 @@ async fn claim_demo_expiry_is_24_hours_and_expired_access_is_rejected() {
 }
 
 #[tokio::test]
+/// @claim:plan-limit
 async fn claim_plan_limit_is_server_enforced_and_a_valid_license_allows_more() {
     let verifier = Router::new().route(
         "/verify",
@@ -389,7 +443,7 @@ async fn api_rate_limit_uses_forwarded_client_and_sets_retry_after() {
 }
 
 #[test]
-fn deployment_contract_pins_persistent_sqlite_to_one_replica() {
+fn deployment_contract_requires_durable_sqlite_and_one_replica() {
     let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
     let contract: serde_json::Value =
         serde_json::from_slice(&std::fs::read(root.join(".factory/deployment.json")).unwrap())
@@ -398,11 +452,36 @@ fn deployment_contract_pins_persistent_sqlite_to_one_replica() {
     assert_eq!(contract["active_revisions_mode"], "Single");
     assert_eq!(contract["scale"]["min_replicas"], 1);
     assert_eq!(contract["scale"]["max_replicas"], 1);
-    assert_eq!(contract["state_backend"], "replica-local-sqlite");
+    assert_eq!(contract["state_backend"], "durable-single-writer-sqlite");
+    assert_eq!(contract["storage_name"], "service-proof-loop-data");
+    assert_eq!(contract["storage_mount"], "/data");
 
     let deploy = std::fs::read_to_string(root.join("scripts/deploy-container.sh")).unwrap();
     assert!(deploy.contains(".factory/deployment.json"));
-    assert!(deploy.contains(".containers[0].volumeMounts = null"));
-    assert!(deploy.contains(".volumes = null"));
+    assert!(deploy.contains("storageType\":\"AzureFile"));
+    assert!(deploy.contains(".containers[0].volumeMounts = [{"));
+    assert!(deploy.contains(".scale.maxReplicas = $max"));
+    assert!(deploy.contains("replica_count"));
+    assert!(!deploy.contains(".containers[0].volumeMounts = null"));
     assert!(!deploy.contains("/opt/fleet/lib/deploy-container.sh"));
+}
+
+#[test]
+fn commercial_scope_deviation_is_explicit() {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
+    let brief: serde_json::Value =
+        serde_json::from_slice(&std::fs::read(root.join(".factory/brief.json")).unwrap()).unwrap();
+    assert_eq!(
+        brief["monetization"],
+        "$59 per business each month plus technician seats"
+    );
+    let handoff = std::fs::read_to_string(root.join(".factory/handoff.md"))
+        .unwrap()
+        .replace("**", "")
+        .split_whitespace()
+        .collect::<Vec<_>>()
+        .join(" ");
+    assert!(handoff.contains("Commercial scope deviation"));
+    assert!(handoff.contains("$59 per business each month plus technician seats"));
+    assert!(handoff.contains("$59 one-time business license"));
 }

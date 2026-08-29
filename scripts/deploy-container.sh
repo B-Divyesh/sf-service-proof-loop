@@ -7,7 +7,11 @@ slug=service-proof-loop
 registry=sociobotregistry
 subscription_id=${AZURE_SUBSCRIPTION_ID:-283af945-693b-4a6e-b952-df928d0a18a9}
 resource_group=$(jq -r '.resource_group' "$contract")
+environment=$(jq -r '.environment' "$contract")
 app_name=$(jq -r '.app_name' "$contract")
+state_backend=$(jq -r '.state_backend' "$contract")
+storage_name=$(jq -r '.storage_name' "$contract")
+mount_path=$(jq -r '.storage_mount' "$contract")
 min_replicas=$(jq -r '.scale.min_replicas' "$contract")
 max_replicas=$(jq -r '.scale.max_replicas' "$contract")
 revision_mode=$(jq -r '.active_revisions_mode' "$contract")
@@ -16,10 +20,17 @@ image_tag="$app_name:${source_sha:0:12}"
 image=${PREBUILT_IMAGE:-$registry.azurecr.io/$image_tag}
 management_url="https://management.azure.com/subscriptions/$subscription_id/resourceGroups/$resource_group/providers/Microsoft.App/containerApps/$app_name?api-version=2024-03-01"
 
-if [ "$min_replicas" != 1 ] || [ "$max_replicas" != 1 ] || [ "$revision_mode" != Single ]; then
-  echo "Deployment contract must keep SQLite at exactly one active replica." >&2
+if [ "$state_backend" != durable-single-writer-sqlite ] || [ "$mount_path" != /data ] || [ "$min_replicas" != 1 ] || [ "$max_replicas" != 1 ] || [ "$revision_mode" != Single ]; then
+  echo "Deployment contract must mount durable SQLite storage at /data with exactly one active replica." >&2
   exit 2
 fi
+
+az containerapp env storage show \
+  --resource-group "$resource_group" \
+  --name "$environment" \
+  --storage-name "$storage_name" \
+  --query '{accessMode:properties.azureFile.accessMode,shareName:properties.azureFile.shareName}' \
+  --output json | jq -e '.accessMode == "ReadWrite" and (.shareName | length > 0)' >/dev/null
 
 if [ -z "${PREBUILT_IMAGE:-}" ]; then
   echo "Building $image from $source_sha"
@@ -35,22 +46,24 @@ else
   echo "Deploying prebuilt image $image for $source_sha"
 fi
 
-# Image, replica-local storage, revision mode, and the one-replica ceiling
-# change in one ARM template update. Future deployments use this same checked-
-# in contract instead of the factory helper's generic 1..3 replica default.
+# Image, durable storage, revision mode, and the one-replica ceiling change in
+# one ARM template update. SQLite and the in-memory rate limiter therefore have
+# one public writer and one public allowance.
 app_json=$(az containerapp show \
   --resource-group "$resource_group" \
   --name "$app_name" \
   --output json)
 template=$(jq \
   --arg image "$image" \
+  --arg storage "$storage_name" \
+  --arg mount "$mount_path" \
   --argjson min "$min_replicas" \
   --argjson max "$max_replicas" \
   '.properties.template
    | .containers[0].image = $image
    | .containers[0].env = [{"name":"PORT","value":"8080"}]
-   | .containers[0].volumeMounts = null
-   | .volumes = null
+   | .containers[0].volumeMounts = [{"volumeName":"data","mountPath":$mount}]
+   | .volumes = [{"name":"data","storageType":"AzureFile","storageName":$storage}]
    | .scale.minReplicas = $min
    | .scale.maxReplicas = $max
    | del(.scale.cooldownPeriod, .scale.pollingInterval)
@@ -70,11 +83,13 @@ for _ in $(seq 1 60); do
   live=$(az containerapp show \
     --resource-group "$resource_group" \
     --name "$app_name" \
-    --query '{state:properties.provisioningState,revision:properties.latestRevisionName,mode:properties.configuration.activeRevisionsMode,min:properties.template.scale.minReplicas,max:properties.template.scale.maxReplicas,image:properties.template.containers[0].image,mounts:properties.template.containers[0].volumeMounts,volumes:properties.template.volumes}' \
+    --query '{state:properties.provisioningState,revision:properties.latestRevisionName,mode:properties.configuration.activeRevisionsMode,min:properties.template.scale.minReplicas,max:properties.template.scale.maxReplicas,image:properties.template.containers[0].image,mount:properties.template.containers[0].volumeMounts[0].mountPath,storage:properties.template.volumes[0].storageName,storageType:properties.template.volumes[0].storageType}' \
     --output json)
   if jq -e \
     --arg image "$image" \
-    '.state == "Succeeded" and .mode == "Single" and .min == 1 and .max == 1 and .image == $image and .mounts == null and .volumes == null' \
+    --arg storage "$storage_name" \
+    --arg mount "$mount_path" \
+    '.state == "Succeeded" and .mode == "Single" and .min == 1 and .max == 1 and .image == $image and .mount == $mount and .storage == $storage and .storageType == "AzureFile"' \
     <<<"$live" >/dev/null; then
     break
   fi
@@ -83,7 +98,9 @@ done
 
 if ! jq -e \
   --arg image "$image" \
-  '.state == "Succeeded" and .mode == "Single" and .min == 1 and .max == 1 and .image == $image and .mounts == null and .volumes == null' \
+  --arg storage "$storage_name" \
+  --arg mount "$mount_path" \
+  '.state == "Succeeded" and .mode == "Single" and .min == 1 and .max == 1 and .image == $image and .mount == $mount and .storage == $storage and .storageType == "AzureFile"' \
   <<<"$live" >/dev/null; then
   echo "Deployment did not converge to the checked-in single-replica contract." >&2
   jq . <<<"$live" >&2

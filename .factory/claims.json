@@ -43,8 +43,8 @@
   },
   {
     "id": "paid-license",
-    "claim": "The $59 one-time business license uses Sociobot checkout and supports license restore",
-    "where": "landing price section and README",
+    "claim": "The $59 one-time business license uses Sociobot-hosted checkout and supports license restore",
+    "where": "landing price section, privacy, terms, and README",
     "test": "npm test -- --grep @claim:paid-license",
     "sandbox": "fresh landing page; assert the live public Sociobot registry has this $59 product; mock a valid verify response and restore a license"
   },
@@ -75,5 +75,19 @@
     "where": "README",
     "test": "npm test -- --grep @claim:no-tracking",
     "sandbox": "record all landing and demo requests in a fresh browser context; assert every request stays on the product origin"
+  },
+  {
+    "id": "access-token-hashing",
+    "claim": "Workspace and production proof access tokens are stored only as SHA-256 hashes",
+    "where": "README",
+    "test": "cargo test claim_access_tokens_are_stored_only_as_hashes",
+    "sandbox": "create a real workspace and proof; inspect the database; assert raw tokens are absent and their SHA-256 hashes are present"
+  },
+  {
+    "id": "privacy-data-flow",
+    "claim": "Visit details appear in proof links, while replies and chosen extras appear in the workspace and next-visit export",
+    "where": "privacy page",
+    "test": "npm test -- --grep @claim:privacy-data-flow",
+    "sandbox": "use a fresh demo; inspect its proof, save a client reply and extra, then assert both the workspace and CSV show the saved result"
   }
 ]

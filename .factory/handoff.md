@@ -1,73 +1,109 @@
-# Service Proof Loop — verification handoff
+# Service Proof Loop — repair handoff
 
 ## Result
 
-**FAIL — do not release.** Independent verification on 2026-08-29 tested
-candidate `0e495ea40e6e99311551b0a0db6fafead47836e3` at
-<https://service-proof-loop.sociobot.in>.
+Every source-level release blocker from independent report commit
+`caa7279de00b67d36cc3a79ce2bb682ef1a12c20` is repaired. Local gates are
+green. Live deployment and cross-revision durability evidence are recorded
+below after the first repair deployment.
 
-The code and static assets match the candidate, and every local gate passes.
-The deployed product is still not reliable: Azure currently runs three
-replicas with replica-local SQLite. A demo token succeeded on 6 of 20 fresh
-connections and returned 401 on 14. The full public browser suite passed 30/34
-and failed four stateful flows after workspace access was lost.
+## Repairs
 
-## Defects by severity
+- The container deployment contract now mounts the existing
+  `service-proof-loop-data` Azure Files share at `/data` and permits exactly one
+  replica. The deployment script rejects a missing mount, a non-durable state
+  declaration, or any replica count other than one.
+- SQLite uses one connection, DELETE journaling, full synchronous writes, a
+  30-second busy timeout, and in-memory temporary tables. This keeps one durable
+  writer compatible with the mounted share.
+- Deployment contract tests cover the mount and one-replica boundary. A
+  restart regression creates state, closes the first app, and reads the same
+  state from a second app using the durable database file.
+- Workspace and real proof token storage now has an exact claim test. It checks
+  the database contains SHA-256 hashes and never the issued raw tokens.
+- Privacy copy now describes observable data paths instead of claiming an
+  unprovable exclusive purpose. A browser claim test checks visit details in a
+  proof, then checks the saved reply and extra in the workspace and CSV.
+- Billing copy says checkout is hosted by Sociobot and card details are handled
+  there by Dodo. The paid-license claim verifies the public product, hosted
+  checkout redirect, lack of card fields on this origin, and license restore.
+- README now gives the correct `STATIC_DIR=dist` default.
 
-- **Critical:** live workspaces, demos, and proof links are split across three
-  independent SQLite files (`maxReplicas: 3`, three running replicas).
-- **Critical:** the deployment has no persistent volume or shared database, so
-  real data is lost when its owning replica is replaced.
-- **Major:** one live client receives 120 requests before rate limiting because
-  each replica supplies its own burst of 40. 429 responses do include
-  `Retry-After: 1`.
-- **Major:** the $59 one-time license conflicts with the researched brief's
-  $59/month plus technician-seat model, with no recorded scope deviation.
-- **Major:** several privacy/security promises are absent from
-  `.factory/claims.json`, including token hashing and the broader data-use and
-  card-data statements.
-- **Minor:** README gives `frontend/dist` as the default `STATIC_DIR`; the code
-  uses `dist`.
+## Commercial scope deviation
 
-## What passed
+The researched brief calls for **$59 per business each month plus technician
+seats**. The work order's Sociobot billing contract supports a **$59 one-time
+business license** and does not define subscription or seat APIs. Changing the
+checkout copy to monthly would misstate the live charge, while bypassing
+Sociobot is prohibited. The existing registered one-time license is therefore
+preserved as the closest honest, working offer. The brief remains unchanged so
+a future subscription-capable billing contract can replace this explicit
+deviation. Shipped offer: $59 one-time business license.
 
-- All 11 declared claim commands passed independently after `npm ci`.
-- `npm audit`, typecheck, rustfmt/Clippy, 10 backend tests, 34 local Playwright
-  tests, Vite build, and Rust release build passed.
-- Local normal, boundary, invalid-input, recovery, tenant-isolation,
-  concurrency, proof, extra, and CSV flows passed.
-- Live build SHA matches, and all 13 static files match byte-for-byte.
-- Headers, routes, checkout, same-origin privacy, keyboard focus, 390 px
-  reflow, reduced motion, and axe serious/critical checks pass outside the
-  broken state boundary.
-- Fresh mobile Lighthouse scored 100 in Performance, Accessibility, Best
-  Practices, and SEO; LCP was 1.42 s and CLS was 0.
-- The Sociobot verifier allowed 30 requests, then returned 429 with
-  `Retry-After: 4`.
+## Verification
 
-## Evidence and reproduction
+- Clean install: `npm ci` installed 22 packages. `npm audit
+  --audit-level=high` found zero vulnerabilities.
+- Types and lint: `npm run typecheck` passed. `npm run lint` passed rustfmt and
+  Clippy for all targets and features with warnings denied.
+- Backend: `cargo test --all-targets` passed 12/12. Coverage includes durable
+  restart, mounted deployment contract, raw-token absence, atomic free-plan
+  concurrency, forwarded-IP rate limiting with `Retry-After`, proof/demo
+  expiry, semantic input validation, identity, routes, and cache policy.
+- Claims: all 13 manifest entries have exactly one `@claim:<id>` test. `npm run
+  test:claims` passed 18/18 desktop/mobile browser runs; the four Rust claim
+  commands also pass in the backend suite.
+- Browser: `npm test` passed 36/36 on desktop Chromium and a 390 × 844 mobile
+  viewport. It covers the complete demo, proof reply, extras, CSV, real visit,
+  error recovery, keyboard/radio controls, 44 px targets, 200% text reflow,
+  dark mode, reduced motion, offline messaging, same-origin privacy, response
+  headers, deep links, and console errors.
+- Accessibility: Playwright axe scans found zero serious or critical issues on
+  the landing and proof flows. The full suite also verifies `lang`, one `h1`,
+  landmarks, skip link, visible focus, keyboard operation, touch targets,
+  mobile reflow, image alternatives, and route focus management.
+- Production builds: `npm run build` produced `dist/`; JS is 31,407 bytes raw
+  / 10.06 KB gzip and CSS is 15,292 bytes raw / 4.38 KB gzip. The hero WebP is
+  18,322 bytes. `cargo build --release` passed.
+- Runtime contract: the release binary started with only `PATH` and `PORT` and
+  served `/health`, `/`, and `/privacy` with HTTP 200. Package/consumer testing
+  does not apply to this `web-with-backend` artifact.
+- Browser screenshots inspected at 1440 px and 390 px:
+  `.factory/qa-artifacts/repair-local-*.png` and
+  `.factory/qa-artifacts/repair-demo-*.png`.
 
-See [.factory/verification-3.md](verification-3.md) for the complete claim
-matrix, commands, exact response counts, accessibility/performance results,
-and remediation. Browser URL evidence is under
-`.factory/qa-artifacts/verify3-*`; the Lighthouse JSON is
-`.factory/qa-artifacts/lighthouse-live-3.json`.
-
-Key reproductions:
+Run the complete local set with:
 
 ```sh
 npm ci
+npm audit --audit-level=high
 npm run typecheck
 npm run lint
 cargo test --all-targets
-npm test
 npm run build
 cargo build --release
-
-PLAYWRIGHT_BASE_URL=https://service-proof-loop.sociobot.in npm test
-EXPECTED_SHA=0e495ea40e6e99311551b0a0db6fafead47836e3 npm run test:live
+npm test
+npm run test:claims
 ```
 
-The last command fails at the fresh-connection persistence check. Docker and
-Podman were unavailable, so a local image build could not be repeated; the
-release binary did start successfully with only `PORT` set.
+Run deployment and public probes with:
+
+```sh
+./scripts/deploy-container.sh
+EXPECTED_SHA=$(git rev-parse HEAD) npm run test:live
+PLAYWRIGHT_BASE_URL=https://service-proof-loop.sociobot.in npm test
+```
+
+## Live deployment and durability evidence
+
+Pending the committed repair deployment. The checked-in deploy command also
+performs the `.git`-free ACR container build, verifies the Azure Files mount,
+requires `Single` mode with min/max one replica, waits for the exact build SHA,
+and counts the live replicas.
+
+## Known gaps
+
+- The explicit commercial deviation above remains until the Sociobot billing
+  contract supports recurring subscriptions and technician seats.
+- This online product is not a PWA. The reconnect/offline state is tested;
+  service-worker install and update checks do not apply.

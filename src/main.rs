@@ -1,6 +1,6 @@
 use service_proof_loop::app::{build_app, AppConfig};
-use sqlx::sqlite::SqlitePoolOptions;
-use std::{env, net::SocketAddr, path::Path};
+use sqlx::sqlite::{SqliteConnectOptions, SqliteJournalMode, SqlitePoolOptions, SqliteSynchronous};
+use std::{env, net::SocketAddr, path::Path, str::FromStr, time::Duration};
 use tokio::signal;
 use tracing::info;
 
@@ -35,9 +35,16 @@ async fn main() {
         data_dir, "configuration loaded; no external secrets required"
     );
 
+    let database_options = SqliteConnectOptions::from_str(&database_url)
+        .expect("valid SQLite database URL")
+        .create_if_missing(true)
+        .journal_mode(SqliteJournalMode::Delete)
+        .synchronous(SqliteSynchronous::Full)
+        .busy_timeout(Duration::from_secs(30))
+        .pragma("temp_store", "MEMORY");
     let pool = SqlitePoolOptions::new()
         .max_connections(1)
-        .connect(&database_url)
+        .connect_with(database_options)
         .await
         .expect("open database");
     sqlx::migrate!().run(&pool).await.expect("run migrations");

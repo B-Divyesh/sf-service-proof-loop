@@ -3,7 +3,9 @@
   "resource_group": "sociobot",
   "environment": "factory-env",
   "app_name": "sf-service-proof-loop",
-  "state_backend": "replica-local-sqlite",
+  "state_backend": "durable-single-writer-sqlite",
+  "storage_name": "service-proof-loop-data",
+  "storage_mount": "/data",
   "active_revisions_mode": "Single",
   "scale": {
     "min_replicas": 1,
