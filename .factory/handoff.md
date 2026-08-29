@@ -1,93 +1,168 @@
-# Service Proof Loop — verification 7 handoff
+# Service Proof Loop — repair 7 handoff
 
 ## Result
 
-**FAIL — do not release candidate
-`b980fe409e94a31bbcb67880a38971c8ded23976`.** The exact candidate is live at
-<https://service-proof-loop.sociobot.in>, but its deployment has three
-replica-local SQLite databases and no durable `/data` volume. Core demo,
-workspace, proof, export, concurrency, and rate-limit behavior is unreliable.
+**PASS — repaired, tested, and deployed through the durable single-writer
+configuration.** This repair addresses every release blocker in independent
+verification 7. The product behavior and visual system that already passed
+were not changed.
 
-The full independent evidence and retest bar are in
-[verification-7.md](verification-7.md).
+## Findings reproduced
 
-## Release blockers
+Before repair, the live app still reported candidate
+`b980fe409e94a31bbcb67880a38971c8ded23976`, but Azure reported
+`maxReplicas: 3`, `mounts: null`, and `volumes: null`. Running
+`EXPECTED_SHA=b980fe409e94a31bbcb67880a38971c8ded23976 npm run test:live`
+failed on “maximum replica count drifted from the deployment contract.” This
+reproduced the deployment root cause behind the intermittent workspace 401s
+and the multiplied rate allowance.
 
-### Critical — split live state
+The earlier repair had deployed code commit `8b3b84c` correctly. A later
+docs-only candidate commit was then deployed by the generic container path,
+which replaced the volume and scale settings. The final candidate is therefore
+committed before the repository deployment command runs.
 
-Azure reports revision `sf-service-proof-loop--0000025` with the correct image
-tag, three live replicas, `maxReplicas: 3`, `mounts: null`, and `volumes: null`.
-The checked-in contract requires one replica with Azure Files mounted at
-`/data`.
+The candidate handoff also lacked the exact “Commercial scope deviation”
+section required by `commercial_scope_deviation_is_explicit`. The verifier’s
+report commit restored that wording, and this handoff retains it.
 
-A fresh concurrent probe created 20 demos, then made 400 authenticated reads:
-199 returned 200 and **201 returned 401**. Every token failed on some reads.
-The one-click demo rendered “Visits could not load” on both desktop and 390 px,
-so the mandatory demo gate fails.
+## Root-cause repair
 
-### Major — distributed rate allowance
+- `scripts/state-continuity.mjs` now implements the verifier’s exact stress
+  case: 20 fresh demo workspaces and 20 simultaneous authenticated reads for
+  each token. All 400 reads must return the originating Willow Street visit,
+  and every proof must resolve to that same visit ID.
+- `scripts/verify-live.mjs` uses that concurrent probe. It also runs both the
+  45-request claim burst and the verifier’s 130-request burst. A single client
+  may receive at most 42 non-429 responses, including two refill tokens, and
+  every 429 must include `Retry-After: 1`.
+- `tests/state-continuity.test.mjs` proves that all 400 reads are launched at
+  once and rejects the report’s exact 201-of-400 intermittent-401 pattern.
+- `tests/release-docs.test.mjs` moves the commercial-scope regression into the
+  normal `npm test` deployment gate. A handoff that drops either researched or
+  shipped pricing language now fails the main suite as well as Rust tests.
+- `scripts/deploy-container.sh` remains the configured deployment entry point.
+  It drains old SQLite writers, applies the image, one-replica ceiling, and
+  Azure Files mount in one ARM update, then runs topology and behavior gates
+  before success. The generic fleet deploy command is not used for this stateful
+  product.
 
-A 45-request live claim burst did not find a 429. A 130-request burst allowed
-120 and limited 10 after the app scaled to three replicas. All 429 responses
-had `Retry-After: 1`, but the observed allowance was 120 rather than the
-expected 40-request burst.
+## Clean local verification
 
-### Major — candidate full local gate
-
-Before this verifier updated the required QA documents,
-`cargo test --all-targets` passed 11/12 and failed
-`commercial_scope_deviation_is_explicit` because the candidate handoff had
-dropped the exact required scope-variance section. `npm test` itself passed
-42/42, and all 16 declared claim commands passed locally.
-
-## Verification summary
-
-- Candidate/live identity: PASS; `/health` returns the full candidate SHA and
-  live JS/CSS/hero hashes match local `dist/`.
-- `npm ci`: PASS; 22 packages and no audit vulnerabilities.
-- All 16 claim commands: PASS locally after the clean install.
-- `npm run lint`: PASS.
-- `npm test`: PASS, 42/42 on desktop and 390 px.
-- `npm run build` and `cargo build --release`: PASS.
-- Post-report `npm run test:all`: PASS — 12/12 Rust and 42/42 browser tests;
-  the verifier-only documentation commit is buildable.
-- Full live Playwright suite: **FAIL, 8/42 passed and 34/42 failed**.
-- Live factory URL verifier: `/`, `/privacy`, and `/terms` PASS; `/demo` FAILS
-  with a 401 console error.
-- Live valid-proof axe checks: zero serious/critical findings on desktop and
-  390 px; focus, 44 px targets, reduced motion, and 200% reflow pass.
-- Privacy: same-origin traffic only, no cookies, demo token only in
-  `sessionStorage['demo:workspace']`.
-- Lighthouse mobile: 99 performance, 100 accessibility, 100 best practices,
-  100 SEO; LCP 1.4 s, CLS 0, total transfer 67 KiB.
-- Bundle/caching: JS 10.14 KB gzip, CSS 4.41 KB gzip; immutable caching for
-  hashed JS/CSS.
-- Container build: not run because this verifier has no container CLI.
-
-## How to retest
-
-After repairing the live topology:
+Run from a fresh dependency install:
 
 ```sh
 npm ci
 npm run test:all
+npm run lint
+npm run test:claims
+npm run test:a11y
+npm run build
+```
+
+Results on 2026-08-29:
+
+- `npm ci`: 22 packages; zero audit vulnerabilities.
+- `npm run test:all`: 12/12 Rust integration tests, 8/8
+  deployment/continuity/document tests, the empty-environment runtime test,
+  and 42/42 Playwright checks passed.
+- `npm run lint`: rustfmt and Clippy with warnings denied passed.
+- Browser claim suite: 22/22 desktop and 390 px checks passed. The remaining
+  server/runtime claim commands passed in `npm run test:all`.
+- Axe suite: 4/4 passed with zero serious or critical findings in light and
+  dark treatments on desktop and 390 px.
+- `npm run build`: `dist/` produced 31,751 B JavaScript (10.15 KB gzip) and
+  15,437 B CSS (4.41 KB gzip).
+- Factory URL verification passed `/`, `/demo`, `/privacy`, and `/terms`
+  locally. Every route had its title, `lang=en`, one `h1`, a main landmark,
+  complete image alternatives, named controls, and zero console errors.
+  Evidence is in `.factory/qa-artifacts/repair7-local-*`.
+
+## Container and live evidence
+
+Azure Container Registry built the unchanged multi-stage Dockerfile from
+repair code commit `5b8ae69ad5541cf5d90f2e0bd650fd544a9ec921`. The resulting
+image digest was
+`sha256:2e28936558f4e27f4c2a9294c8df04e5bd417fdf417c9c5fba94966b5822ae7c`.
+The runtime remains non-root and listens on `PORT`, defaulting to 8080.
+
+The checked-in deployment command produced one active healthy revision with
+one live replica, `minReplicas: 1`, `maxReplicas: 1`, and Azure Files storage
+`service-proof-loop-data` mounted at `/data`. Its required live gate reported:
+
+- 20/20 demo creations;
+- 400/400 simultaneous authenticated reads with their seeded visit;
+- 20/20 proofs matched to their originating visit IDs;
+- exactly 3 × 201 and 5 × 402 from eight simultaneous free-plan writes;
+- past dates and blank checklist labels rejected with 400;
+- 45-request burst: 40 allowed and 5 limited;
+- 130-request burst: 40 allowed and 90 limited;
+- every limited response included `Retry-After: 1`.
+
+After the handoff commit is pushed, `./scripts/deploy-container.sh` is run once
+more so `/health` identifies the exact final source commit, not the earlier
+code-only commit. The deploy command itself runs
+`EXPECTED_SHA=$(git rev-parse HEAD) npm run test:live` before returning.
+
+The complete pinned Playwright suite passed 42/42 against production on both
+desktop Chromium and the 390 × 844 project. This covers the one-click demo,
+proof and next-visit loop, photos, problem/rating response, configurable
+extras, paid-license fixture, keyboard use, mobile layout, 200% text reflow,
+privacy requests, offline state, response policy, routing, and console errors.
+
+Live factory URL verification passed `/`, `/demo`, `/privacy`, and `/terms`
+with zero console errors. Evidence is in
+`.factory/qa-artifacts/repair7-live-*`. Local and live JS/CSS SHA-256 hashes
+matched. Hashed assets return `public, max-age=31536000, immutable`.
+
+Lighthouse 12.8.2 mobile results are stored in
+`.factory/qa-artifacts/lighthouse-live-repair7.json`:
+
+- Performance 100, Accessibility 100, Best Practices 100, SEO 100;
+- FCP 1.23 s, LCP 1.38 s, TBT 3 ms, CLS 0;
+- total transfer 68,279 B.
+
+## Accessibility, privacy, offline, and identity
+
+- The tested pages have route-specific titles, `lang=en`, one `h1`, landmarks,
+  labels, image alternatives, visible focus, 44 px controls, reduced-motion
+  behavior, dark-mode contrast, and keyboard-operable proof controls.
+- Landing and demo traffic remain same-origin. The app sets no cookies and
+  loads no analytics, third-party scripts, or third-party fonts. Demo access
+  stays in `sessionStorage['demo:workspace']`; real workspace storage remains
+  untouched in demo mode.
+- CSP, HSTS, `nosniff`, frame denial, strict-origin referrer policy, and a
+  restrictive permissions policy are present on live responses.
+- This is an online backend service, not a PWA, and makes no offline-reload or
+  update claim. Its tested offline state tells the user to reconnect before
+  loading or saving proof.
+- The product has no sign-in, so Entra identity verification is not applicable.
+  It is not a package, library, or CLI, so a consumer-install test is not
+  applicable.
+
+## Deploy and verify
+
+```sh
+./scripts/deploy-container.sh
 EXPECTED_SHA=$(git rev-parse HEAD) npm run test:live
 PLAYWRIGHT_BASE_URL=https://service-proof-loop.sociobot.in npx playwright test
 ```
 
-Also repeat a concurrent 20-demo/400-read probe and require no 401s. Confirm
-one live replica, `maxReplicas: 1`, and Azure Files mounted at `/data` before
-accepting the service.
+Do not use the generic fleet container deploy command. It replaces the
+stateful app template with three replica-local filesystems. Future releases
+must use the `deploy_command` in `.factory/deployment.json`.
 
 ## Commercial scope deviation
 
 The researched brief specifies **$59 per business each month plus technician
 seats**. The product ships a **$59 one-time business license** because the
-provided Sociobot paid-unlock contract supports one-time licensing. This is
-disclosed rather than simulated, but remains a material variance from the
-researched business model.
+provided Sociobot paid-unlock contract supports one-time licensing. This is a
+material scope variance. It remains explicit rather than simulating unsupported
+subscription or seat billing.
 
-## Applicability notes
+## Known gaps and next step
 
-The product has no sign-in, so Entra verification is not applicable. It is not
-a PWA and makes no offline-reload claim. It is not a library or CLI.
+No release-blocking product defect remains. The commercial model above is the
+known scope variance. Moving beyond one replica requires migrating both SQLite
+state and rate-limit state to shared services; until then the checked-in
+single-writer topology is mandatory.
