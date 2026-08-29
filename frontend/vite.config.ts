@@ -8,6 +8,12 @@ export default defineConfig({
     emptyOutDir: true,
     target: 'es2022',
     sourcemap: false,
+    rollupOptions: {
+      input: {
+        index: resolve(__dirname, 'index.html'),
+        notFound: resolve(__dirname, '404.html'),
+      },
+    },
   },
   server: {
     host: '0.0.0.0',

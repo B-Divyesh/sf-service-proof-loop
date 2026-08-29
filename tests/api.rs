@@ -31,6 +31,7 @@ async fn test_app_with_billing(
     std::fs::write(static_dir.path().join("404.html"), "<main>missing</main>").unwrap();
     std::fs::create_dir(static_dir.path().join("assets")).unwrap();
     std::fs::write(static_dir.path().join("assets/index-abc.js"), "export{};").unwrap();
+    std::fs::write(static_dir.path().join("assets/main-abc.css"), "body{}").unwrap();
     let app = build_app(
         pool.clone(),
         AppConfig {
@@ -256,6 +257,7 @@ async fn valid_spa_routes_are_200_unknown_routes_are_404_and_assets_cache() {
         .unwrap();
     assert_eq!(missing.status(), StatusCode::NOT_FOUND);
     let asset = app
+        .clone()
         .oneshot(
             Request::get("/assets/index-abc.js")
                 .body(Body::empty())
@@ -265,6 +267,18 @@ async fn valid_spa_routes_are_200_unknown_routes_are_404_and_assets_cache() {
         .unwrap();
     assert_eq!(
         asset.headers()[header::CACHE_CONTROL],
+        "public, max-age=31536000, immutable"
+    );
+    let shared_asset = app
+        .oneshot(
+            Request::get("/assets/main-abc.css")
+                .body(Body::empty())
+                .unwrap(),
+        )
+        .await
+        .unwrap();
+    assert_eq!(
+        shared_asset.headers()[header::CACHE_CONTROL],
         "public, max-age=31536000, immutable"
     );
 }

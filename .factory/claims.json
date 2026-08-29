@@ -89,5 +89,26 @@
     "where": "privacy page",
     "test": "npm test -- --grep @claim:privacy-data-flow",
     "sandbox": "use a fresh demo; inspect its proof, save a client reply and extra, then assert both the workspace and CSV show the saved result"
+  },
+  {
+    "id": "photo-upload",
+    "claim": "Technicians can add up to three consented photos under 1 MB each to a proof",
+    "where": "landing how-it-works section and README",
+    "test": "npm test -- --grep @claim:photo-upload",
+    "sandbox": "fresh demo; record a completed visit with an in-memory PNG and consent enabled; open its client proof and assert the named image is displayed from the saved data URL"
+  },
+  {
+    "id": "problem-rating",
+    "claim": "A client's problem report and rating are saved and returned to the workspace",
+    "where": "landing how-it-works section and README",
+    "test": "npm test -- --grep @claim:problem-rating",
+    "sandbox": "fresh demo proof; submit a problem with rating 2; assert the saved confirmation and the exact problem state and rating in the workspace"
+  },
+  {
+    "id": "zero-config-runtime",
+    "claim": "The service starts without configuration variables and listens on port 8080 by default",
+    "where": "README run and deployment sections",
+    "test": "npm run test:runtime",
+    "sandbox": "build the frontend and service; start the server binary with an empty environment; assert health and the landing document are served on 127.0.0.1:8080"
   }
 ]

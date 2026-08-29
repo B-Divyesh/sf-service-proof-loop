@@ -148,7 +148,7 @@ async fn security_headers(req: Request, next: Next) -> Response {
         HeaderValue::from_static("camera=(), microphone=(), geolocation=()"),
     );
     headers.insert("content-security-policy", HeaderValue::from_static("default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'"));
-    if path.starts_with("/assets/index-") {
+    if path.starts_with("/assets/") && (path.ends_with(".js") || path.ends_with(".css")) {
         headers.insert(
             header::CACHE_CONTROL,
             HeaderValue::from_static("public, max-age=31536000, immutable"),

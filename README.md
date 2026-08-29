@@ -27,8 +27,8 @@ npm run build
 DATABASE_URL='sqlite:service-proof-loop.db?mode=rwc' STATIC_DIR=dist cargo run
 ```
 
-Open <http://localhost:8080>. The container needs no environment variables and
-listens on port 8080 by default.
+Open <http://localhost:8080>. The service starts without configuration
+variables and listens on port 8080 by default.
 
 For frontend development, run the API on port 8080. Then run `npm run dev` in a
 second terminal and open <http://localhost:5173>.

@@ -119,7 +119,7 @@ function landing() {
       <div><p class="eyebrow">Business license</p><h2 id="price-title">Keep every recurring visit in the loop</h2><p>Add unlimited client proof links after three free visits.</p><ul class="plain-list"><li>One business workspace</li><li>Configurable client extras</li><li>Next-visit CSV exports</li></ul></div>
       <div><p class="price">$59 <small>one-time purchase</small></p><a class="button" href="${BILLING}/checkout">Buy the business license <span class="sr-only">at Sociobot checkout</span></a>
         <form class="license-form" id="license-form"><label for="license">Have a license?</label><input id="license" name="license" autocomplete="off" required><button class="secondary" type="submit">Verify license</button></form><p id="license-note" class="tiny" aria-live="polite">Sociobot is the merchant of record. Refunds are handled there.</p>
-        <p class="tiny"><a href="/privacy" data-route>Privacy</a> · <a href="/terms" data-route>Terms</a></p></div>
+        <p class="tiny"><a class="touch-link" href="/privacy" data-route>Privacy</a> · <a class="touch-link" href="/terms" data-route>Terms</a></p></div>
     </div></div></section>`);
   bindLicense();
 }
@@ -259,7 +259,7 @@ function renderProof(token: string, data: Proof, isDemo: boolean, saved = false)
     ${data.notes ? `<div class="message"><strong>Technician note</strong><p>${esc(data.notes)}</p></div>`:''}
     ${data.photos.length ? `<div class="photo-grid">${data.photos.map(photo => `<figure><img src="${esc(photo.url)}" alt="${esc(photo.caption)}" width="800" height="560" loading="lazy" decoding="async"><figcaption>${esc(photo.caption)}</figcaption></figure>`).join('')}</div>`:''}
     ${saved || data.response_status ? responseSummary(data) : responseForm(data)}
-    <p class="tiny form-section">This link should show only your visit. <a href="mailto:abuse@sociobot.in?subject=Service%20Proof%20Loop%20report">Report a link sent in error</a>.</p>
+    <p class="tiny form-section">This link should show only your visit. <a class="touch-link" href="mailto:abuse@sociobot.in?subject=Service%20Proof%20Loop%20report">Report a link sent in error</a>.</p>
   </div></article>`, isDemo);
   bindDemoBanner();
   const form = document.querySelector<HTMLFormElement>('#response-form');
@@ -267,7 +267,10 @@ function renderProof(token: string, data: Proof, isDemo: boolean, saved = false)
     event.preventDefault(); const button = form.querySelector<HTMLButtonElement>('button[type=submit]')!; const values = new FormData(form); button.disabled = true; button.textContent = 'Saving reply…';
     try {
       await api(`/proof/${encodeURIComponent(token)}/respond`, {method:'POST',headers:jsonHeaders,body:JSON.stringify({status:values.get('status'),rating:Number(values.get('rating')),comment:values.get('comment'),extra_ids:values.getAll('extras')})});
-      const updated = await api<Proof>(`/proof/${encodeURIComponent(token)}`); renderProof(token, updated, isDemo, true); document.querySelector('h1')?.focus();
+      const updated = await api<Proof>(`/proof/${encodeURIComponent(token)}`);
+      renderProof(token, updated, isDemo, true);
+      window.scrollTo(0, 0);
+      focusPageHeading('Your reply is saved');
     } catch(error) { showError(error); button.disabled = false; button.textContent = 'Save reply and extras'; }
   });
 }
@@ -297,18 +300,29 @@ function legal(kind: 'privacy'|'terms') {
   const privacy = kind === 'privacy';
   setMeta(`${privacy ? 'Privacy' : 'Terms'} — Service Proof Loop`, privacy ? 'How Service Proof Loop handles visit proof and client replies.' : 'Terms for using Service Proof Loop.');
   app.innerHTML = page(`<article class="shell legal measure"><p class="eyebrow">Last updated August 28, 2026</p><h1>${privacy ? 'Privacy for visit proof' : 'Terms of service'}</h1>
-    ${privacy ? `<p>Service Proof Loop stores the details needed to share completed work and plan the next visit.</p><h2>What we store</h2><p>We store business names, client labels, visit notes, consented photos, ratings, comments, and chosen extras.</p><p>Do not enter door codes, payment cards, health records, or other unnecessary private details.</p><h2>How the product uses it</h2><p>Visit details appear in proof links. Client replies and chosen extras appear in the workspace and next-visit exports.</p><h2>Proof links</h2><p>Each proof link uses a random token and expires after 14 days. Anyone with the link can view its visit.</p><h2>Demo data</h2><p>Each demo uses an isolated workspace. It expires within 24 hours and never opens a real workspace.</p><h2>Billing</h2><p>Sociobot hosts checkout. Dodo handles payment card details on that checkout page.</p><h2>Your choices</h2><p>Ask the business that sent your link to correct or remove visit data. Businesses can contact support for account deletion.</p><h2>Contact</h2><p>Email <a href="mailto:privacy@sociobot.in">privacy@sociobot.in</a> with privacy questions.</p>` : `<p>These terms apply when you use Service Proof Loop.</p><h2>Use the service fairly</h2><p>Use the service for lawful visit proof and client feedback. Get consent before taking or sharing photos.</p><p>Do not upload harmful content, access another workspace, or test proof links you did not receive.</p><h2>Your responsibilities</h2><p>You control what your team records. Keep workspace access keys on devices your business controls.</p><h2>Business license</h2><p>The business license costs $59 as a one-time purchase. Sociobot is the merchant of record.</p><p>Refunds follow the checkout terms and revoke the related license.</p><h2>Service limits</h2><p>This product does not provide dispatch, payments, payroll, worker tracking, or emergency communication.</p><h2>Availability</h2><p>We work to keep the service available. We cannot promise uninterrupted access or permanent storage.</p><h2>Contact</h2><p>Email <a href="mailto:support@sociobot.in">support@sociobot.in</a> with service questions.</p>`}
+    ${privacy ? `<p>Service Proof Loop stores the details needed to share completed work and plan the next visit.</p><h2>What we store</h2><p>We store business names, client labels, visit notes, consented photos, ratings, comments, and chosen extras.</p><p>Do not enter door codes, payment cards, health records, or other unnecessary private details.</p><h2>How the product uses it</h2><p>Visit details appear in proof links. Client replies and chosen extras appear in the workspace and next-visit exports.</p><h2>Proof links</h2><p>Each proof link uses a random token and expires after 14 days. Anyone with the link can view its visit.</p><h2>Demo data</h2><p>Each demo uses an isolated workspace. It expires within 24 hours and never opens a real workspace.</p><h2>Billing</h2><p>Sociobot hosts checkout. Dodo handles payment card details on that checkout page.</p><h2>Your choices</h2><p>Ask the business that sent your link to correct or remove visit data. Businesses can contact support for account deletion.</p><h2>Contact</h2><p>Email <a class="touch-link" href="mailto:privacy@sociobot.in">privacy@sociobot.in</a> with privacy questions.</p>` : `<p>These terms apply when you use Service Proof Loop.</p><h2>Use the service fairly</h2><p>Use the service for lawful visit proof and client feedback. Get consent before taking or sharing photos.</p><p>Do not upload harmful content, access another workspace, or test proof links you did not receive.</p><h2>Your responsibilities</h2><p>You control what your team records. Keep workspace access keys on devices your business controls.</p><h2>Business license</h2><p>The business license costs $59 as a one-time purchase. Sociobot is the merchant of record.</p><p>Refunds follow the checkout terms and revoke the related license.</p><h2>Service limits</h2><p>This product does not provide dispatch, payments, payroll, worker tracking, or emergency communication.</p><h2>Availability</h2><p>We work to keep the service available. We cannot promise uninterrupted access or permanent storage.</p><h2>Contact</h2><p>Email <a class="touch-link" href="mailto:support@sociobot.in">support@sociobot.in</a> with service questions.</p>`}
   </article>`);
 }
 
 function notFound() {
   setMeta('Page not found — Service Proof Loop', 'Return to Service Proof Loop.');
-  app.innerHTML = page(`<section class="shell legal"><p class="eyebrow">404</p><h1>This tray is empty</h1><div class="not-found-mark" aria-hidden="true"><span></span><span></span></div><p>The page you asked for does not exist.</p><a class="button" href="/" data-route>Return home</a></section>`);
+  app.innerHTML = page(`<section class="shell legal"><p class="eyebrow">404</p><h1>This page does not exist</h1><div class="not-found-mark" aria-hidden="true"><span></span><span></span></div><p>Check the address or return to the home page.</p><a class="button" href="/" data-route>Return home</a></section>`);
 }
 
 function setMeta(title: string, description: string) {
   document.title = title; document.querySelector<HTMLMetaElement>('meta[name=description]')!.content = description;
   const canonical = document.querySelector<HTMLLinkElement>('link[rel=canonical]')!; canonical.href = `https://service-proof-loop.sociobot.in${location.pathname}`;
+}
+
+function focusPageHeading(announcement?: string) {
+  const heading = document.querySelector<HTMLElement>('h1');
+  const announcer = document.querySelector<HTMLElement>('#announcer');
+  if (!heading) return;
+  heading.tabIndex = -1;
+  heading.focus({preventScroll: true});
+  requestAnimationFrame(() => {
+    if (announcer) announcer.textContent = announcement || heading.textContent || document.title;
+  });
 }
 
 function bindDemoBanner() {
@@ -343,14 +357,18 @@ async function route(push = false) {
   else if (path === '/terms') legal('terms');
   else if (path.startsWith('/proof/')) await proof(decodeURIComponent(path.slice(7)), new URLSearchParams(location.search).get('demo') === '1');
   else notFound();
-  window.scrollTo(0,0); const h1 = document.querySelector<HTMLElement>('h1'); if (h1) { h1.tabIndex = -1; requestAnimationFrame(() => h1.focus({preventScroll:true})); }
-  document.querySelector('#announcer')!.textContent = h1?.textContent || document.title;
+  window.scrollTo(0,0);
+  focusPageHeading();
 }
 
 document.addEventListener('click', event => {
   const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('a[data-route]');
   if (!link || link.origin !== location.origin || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
   event.preventDefault(); history.pushState({}, '', link.href); route();
+});
+document.addEventListener('focusin', event => {
+  const control = (event.target as HTMLElement).closest('.status-options input, .rating input');
+  control?.closest('label')?.scrollIntoView({block: 'center', behavior: 'instant'});
 });
 window.addEventListener('popstate', () => route());
 window.addEventListener('offline', () => { if (document.querySelector('#offline-note')) return; const node = document.createElement('div'); node.className = 'offline'; node.id = 'offline-note'; node.setAttribute('role','status'); node.textContent = 'You are offline. Reconnect to load or save visit proof.'; document.body.append(node); });

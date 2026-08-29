@@ -1,6 +1,13 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
+test.beforeEach(async ({ context }, testInfo) => {
+  const hash = [...testInfo.testId].reduce((value, character) => ((value * 31) + character.charCodeAt(0)) >>> 0, 0);
+  await context.setExtraHTTPHeaders({
+    'x-forwarded-for': `198.18.${(hash >>> 8) % 256}.${hash % 254 + 1}`,
+  });
+});
+
 test('landing explains the job and reaches the demo', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Send proof. Plan the next visit.');
@@ -24,6 +31,31 @@ test('mobile navigation and footer links have 44px touch targets', async ({ page
   for (const target of targets) {
     expect(target.width, `${target.text} width`).toBeGreaterThanOrEqual(44);
     expect(target.height, `${target.text} height`).toBeGreaterThanOrEqual(44);
+  }
+});
+
+test('mobile inline links have 44px touch targets', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const targets = [];
+  for (const [path, selector] of [
+    ['/', '.price-sheet .touch-link'],
+    ['/privacy', '.legal .touch-link'],
+    ['/terms', '.legal .touch-link'],
+  ]) {
+    await page.goto(path);
+    for (const link of await page.locator(selector).all()) {
+      targets.push({ text: (await link.textContent())?.trim(), box: await link.boundingBox() });
+    }
+  }
+  await page.goto('/demo');
+  await page.getByRole('link', { name: 'Open client view' }).click();
+  const report = page.getByRole('link', { name: 'Report a link sent in error' });
+  targets.push({ text: await report.textContent(), box: await report.boundingBox() });
+
+  expect(targets).toHaveLength(5);
+  for (const target of targets) {
+    expect(target.box?.width, `${target.text} width`).toBeGreaterThanOrEqual(44);
+    expect(target.box?.height, `${target.text} height`).toBeGreaterThanOrEqual(44);
   }
 });
 
@@ -123,7 +155,7 @@ test('@claim:privacy-data-flow visit data, replies, and extras follow the stated
   await page.getByText('Inside refrigerator').click();
   await page.getByLabel('Comment').fill('Please include the refrigerator next time.');
   await page.getByRole('button', { name: 'Save reply and extras' }).click();
-  await expect(page.getByText('Your reply is saved')).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: 'Your reply is saved' })).toBeVisible();
   await page.goto('/demo');
   await expect(page.locator('.visit-heading .state')).toContainText('accepted');
   await expect(page.locator('.next-visit')).toContainText('Inside refrigerator');
@@ -148,6 +180,48 @@ test('technician can record a visit and receive a proof link', async ({ page }) 
   await page.getByRole('button', { name: 'Create proof link' }).click();
   await expect(page.getByText('Cedar Lane').first()).toBeVisible();
   await expect(page.getByLabel('Private proof link')).toHaveValue(/\/proof\//);
+});
+
+test('@claim:photo-upload a technician can add a consented photo to proof', async ({ page }) => {
+  await page.goto('/demo');
+  await page.getByRole('button', { name: 'Record a visit' }).click();
+  const pixel = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M/wHwAFAgIACxW2OAAAAABJRU5ErkJggg==', 'base64');
+  const photo = (name: string) => ({ name, mimeType: 'image/png', buffer: pixel });
+  await page.getByLabel('Proof photos').setInputFiles([
+    photo('one.png'), photo('two.png'), photo('three.png'), photo('four.png'),
+  ]);
+  await page.getByRole('button', { name: 'Create proof link' }).click();
+  await expect(page.getByText('Use up to three photos under 1 MB each.')).toBeVisible();
+  await page.getByLabel('Proof photos').setInputFiles({
+    name: 'too-large.png', mimeType: 'image/png', buffer: Buffer.alloc(1_000_001),
+  });
+  await page.getByRole('button', { name: 'Create proof link' }).click();
+  await expect(page.getByText('Use up to three photos under 1 MB each.')).toBeVisible();
+  await page.getByLabel('Proof photos').setInputFiles([
+    photo('kitchen-after.png'), photo('bathroom-after.png'), photo('entry-after.png'),
+  ]);
+  await page.getByRole('button', { name: 'Create proof link' }).click();
+  await expect(page.getByText('Cedar Lane').first()).toBeVisible();
+  await page.getByRole('link', { name: 'Open client view' }).click();
+  for (const name of ['kitchen-after.png', 'bathroom-after.png', 'entry-after.png']) {
+    const savedPhoto = page.getByAltText(`Proof photo: ${name}`);
+    await expect(savedPhoto).toBeVisible();
+    await expect(savedPhoto).toHaveAttribute('src', /^data:image\/png;base64,/);
+  }
+});
+
+test('@claim:problem-rating a client problem and rating return to the workspace', async ({ page }) => {
+  await page.goto('/demo');
+  await page.getByRole('link', { name: 'Open client view' }).click();
+  await page.getByText('Report a problem', { exact: true }).click();
+  await page.getByText('2', { exact: true }).click();
+  await page.getByLabel('Comment').fill('Please check the entry glass next time.');
+  await page.getByRole('button', { name: 'Save reply and extras' }).click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Your reply is saved');
+  await expect(page.getByText('The team can now see your problem report and rating.')).toBeVisible();
+  await page.goto('/demo');
+  await expect(page.locator('.visit-heading .state')).toHaveText('problem');
+  await expect(page.getByLabel('Client rating 2 out of 5')).toBeVisible();
 });
 
 test('@claim:same-origin-demo demo sends data only to this service', async ({ page }) => {
@@ -178,11 +252,31 @@ test('@a11y dark treatment, keyboard focus, touch targets, and 200% text reflow'
   await page.keyboard.press('Tab');
   await expect(status).toBeFocused();
   expect(await status.evaluate(input => getComputedStyle(input.nextElementSibling!).outlineStyle)).not.toBe('none');
+  const statusBounds = await status.evaluate(input => {
+    const box = input.getBoundingClientRect();
+    const visible = input.nextElementSibling!.getBoundingClientRect();
+    return { top: box.top, bottom: box.bottom, visibleTop: visible.top, visibleBottom: visible.bottom, viewport: innerHeight };
+  });
+  expect(statusBounds.top).toBeGreaterThanOrEqual(0);
+  expect(statusBounds.bottom).toBeLessThanOrEqual(statusBounds.viewport);
+  expect(statusBounds.visibleTop).toBeGreaterThanOrEqual(0);
+  expect(statusBounds.visibleBottom).toBeLessThanOrEqual(statusBounds.viewport);
   const rating = page.getByLabel('4');
   await page.keyboard.press('Tab');
   await page.keyboard.press('ArrowLeft');
   await expect(rating).toBeFocused();
   expect(await rating.evaluate(input => getComputedStyle(input.nextElementSibling!).outlineStyle)).not.toBe('none');
+  const ratingBounds = await rating.evaluate(input => {
+    const box = input.getBoundingClientRect();
+    return { top: box.top, bottom: box.bottom, viewport: innerHeight };
+  });
+  expect(ratingBounds.top).toBeGreaterThanOrEqual(0);
+  expect(ratingBounds.bottom).toBeLessThanOrEqual(ratingBounds.viewport);
+  await page.getByRole('button', { name: 'Save reply and extras' }).focus();
+  await page.keyboard.press('Enter');
+  const savedHeading = page.getByRole('heading', { level: 1, name: 'Your reply is saved' });
+  await expect(savedHeading).toBeFocused();
+  await expect(page.locator('#announcer')).toHaveText('Your reply is saved');
   await page.goto('/demo');
   for (const control of [page.getByRole('button', { name: 'Reset demo' }), page.getByRole('link', { name: 'Start for real' })]) {
     expect((await control.boundingBox())!.height).toBeGreaterThanOrEqual(44);
@@ -232,7 +326,11 @@ test('offline state and unknown route give a clear next step', async ({ page, co
   await page.evaluate(() => window.dispatchEvent(new Event('offline')));
   await expect(page.getByText('You are offline. Reconnect to load or save visit proof.')).toBeVisible();
   await context.setOffline(false);
-  await page.goto('/not-a-page');
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('This tray is empty');
+  const response = await page.goto('/not-a-page');
+  expect(response?.status()).toBe(404);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('This page does not exist');
   await expect(page.getByRole('link', { name: 'Return home' })).toBeVisible();
+  await expect(page.locator('header')).toBeVisible();
+  await expect(page.locator('footer')).toBeVisible();
+  expect(await page.evaluate(() => getComputedStyle(document.body).backgroundColor)).not.toBe('rgba(0, 0, 0, 0)');
 });

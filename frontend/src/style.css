@@ -25,6 +25,7 @@ button, input, textarea, select { font: inherit; }
 button, .button { min-height: 44px; }
 a { color: var(--cobalt-deep); text-decoration-thickness: .08em; text-underline-offset: .18em; }
 a:hover { color: var(--apricot); }
+.touch-link { display: inline-flex; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; vertical-align: middle; }
 img { max-width: 100%; display: block; }
 :focus-visible { outline: 3px solid var(--apricot); outline-offset: 3px; }
 h1[tabindex='-1']:focus { outline: none; }
@@ -151,7 +152,7 @@ fieldset { border: 0; padding: 0; margin: 0; }
 .proof-client .panel { padding: clamp(24px, 6vw, 64px); }
 .proof-client h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); }
 .rating { display: flex; gap: 8px; flex-wrap: wrap; }
-.rating label { cursor: pointer; }
+.rating label { position: relative; cursor: pointer; }
 .rating input { position: absolute; opacity: 0; pointer-events: none; }
 .rating span { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: var(--porcelain); }
 .rating input:checked + span { color: #fff; background: var(--cobalt); border-color: var(--cobalt); }
