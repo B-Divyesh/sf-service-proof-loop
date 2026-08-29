@@ -5,6 +5,7 @@ import {
   READS_PER_DEMO,
   SAMPLE_LOCATION,
   assertDemoStateContinuity,
+  probeDemoStateContinuity,
 } from '../scripts/state-continuity.mjs';
 
 function healthySequence() {
@@ -20,17 +21,73 @@ function healthySequence() {
   };
 }
 
-test('accepts 30 demos whose repeated fresh reads retain the seeded workspace', () => {
+test('accepts the exact 20-demo, 400-read verifier scenario when state is coherent', () => {
   assert.doesNotThrow(() => {
     assertDemoStateContinuity(Array.from({ length: DEMO_SEQUENCE_COUNT }, healthySequence));
   });
 });
 
-test('rejects the verifier’s intermittent 401 read pattern', () => {
+test('rejects verifier 7’s 201-of-400 intermittent 401 read pattern', () => {
   const sequences = Array.from({ length: DEMO_SEQUENCE_COUNT }, healthySequence);
-  sequences[6].reads[3] = { status: 401, location: undefined, visitId: undefined };
+  let failures = 0;
+  for (const sequence of sequences) {
+    for (const [readIndex] of sequence.reads.entries()) {
+      if (failures < 201 && (readIndex + failures) % 2 === 0) {
+        sequence.reads[readIndex] = { status: 401, location: undefined, visitId: undefined };
+        failures += 1;
+      }
+    }
+  }
+  assert.equal(failures, 201);
   assert.throws(
     () => assertDemoStateContinuity(sequences),
-    /demo sequence 7, read 4 lost its seeded workspace \(401, no visit\)/,
+    /lost its seeded workspace \(401, no visit\)/,
   );
+});
+
+test('live continuity probe launches all 400 authenticated reads concurrently', async () => {
+  let demoIndex = 0;
+  let readCalls = 0;
+  let activeReads = 0;
+  let maxActiveReads = 0;
+  const pendingReads = [];
+  const call = async (path, options = {}) => {
+    if (path === '/api/demo') {
+      const token = `workspace-${demoIndex}`;
+      demoIndex += 1;
+      return { status: 200, data: { access_token: token } };
+    }
+    if (path === '/api/visits') {
+      const token = options.headers.authorization.replace('Bearer ', '');
+      readCalls += 1;
+      activeReads += 1;
+      maxActiveReads = Math.max(maxActiveReads, activeReads);
+      return new Promise(resolve => {
+        pendingReads.push(() => {
+          activeReads -= 1;
+          resolve({
+            status: 200,
+            data: [{
+              id: `visit-${token}`,
+              location_label: SAMPLE_LOCATION,
+              proof_token: `proof-${token}`,
+            }],
+          });
+        });
+        if (pendingReads.length === DEMO_SEQUENCE_COUNT * READS_PER_DEMO) {
+          queueMicrotask(() => pendingReads.splice(0).forEach(release => release()));
+        }
+      });
+    }
+    const token = decodeURIComponent(path.slice('/api/proof/'.length)).replace('proof-', '');
+    return {
+      status: 200,
+      data: { id: `visit-${token}`, location_label: SAMPLE_LOCATION },
+    };
+  };
+
+  const sequences = await probeDemoStateContinuity(call);
+  assertDemoStateContinuity(sequences);
+  assert.equal(readCalls, 400);
+  assert.equal(maxActiveReads, 400);
 });

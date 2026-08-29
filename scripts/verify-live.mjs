@@ -5,6 +5,7 @@ import {
   DEMO_SEQUENCE_COUNT,
   READS_PER_DEMO,
   assertDemoStateContinuity,
+  probeDemoStateContinuity,
 } from './state-continuity.mjs';
 
 const base = new URL(process.env.LIVE_BASE_URL || 'https://service-proof-loop.sociobot.in');
@@ -66,50 +67,15 @@ if (process.env.EXPECTED_SHA) {
 }
 evidence.health = health.data;
 
-const demoSequences = [];
-for (let index = 0; index < DEMO_SEQUENCE_COUNT; index += 1) {
-  const demo = await call('/api/demo', {
-    method: 'POST',
-    headers: { 'x-forwarded-for': `198.51.100.${100 + index}` },
-  });
-  const reads = [];
-  for (let readIndex = 0; readIndex < READS_PER_DEMO && demo.status === 200; readIndex += 1) {
-    const visits = await call('/api/visits', {
-        headers: {
-          authorization: `Bearer ${demo.data.access_token}`,
-          'x-forwarded-for': `198.51.101.${10 + readIndex}`,
-        },
-      });
-    reads.push({
-      status: visits.status,
-      location: visits.data?.[0]?.location_label,
-      visitId: visits.data?.[0]?.id,
-    });
-  }
-  const proofToken = demo.status === 200
-    ? (await call('/api/visits', {
-        headers: {
-          authorization: `Bearer ${demo.data.access_token}`,
-          'x-forwarded-for': `198.51.102.${10 + index}`,
-        },
-      })).data?.[0]?.proof_token
-    : undefined;
-  const proof = proofToken
-    ? await call(`/api/proof/${encodeURIComponent(proofToken)}`, {
-        headers: { 'x-forwarded-for': `198.51.100.${160 + index}` },
-      })
-    : { status: 0 };
-  demoSequences.push({
-    create: demo.status,
-    reads,
-    proof: {
-      status: proof.status,
-      location: proof.data?.location_label,
-      visitId: proof.data?.id,
-    },
-  });
-}
-evidence.fresh_demo_workspace_proof_sequences = demoSequences;
+const demoSequences = await probeDemoStateContinuity(call);
+evidence.concurrent_demo_workspace_proof = {
+  demos: DEMO_SEQUENCE_COUNT,
+  simultaneous_reads_per_demo: READS_PER_DEMO,
+  total_reads: DEMO_SEQUENCE_COUNT * READS_PER_DEMO,
+  successful_reads: demoSequences.flatMap(sequence => sequence.reads)
+    .filter(read => read.status === 200).length,
+  successful_proofs: demoSequences.filter(sequence => sequence.proof.status === 200).length,
+};
 try {
   assertDemoStateContinuity(demoSequences);
 } catch (error) {
@@ -151,17 +117,25 @@ const blank = await call('/api/visits', { method: 'POST', headers: auth, json: v
 evidence.validation_statuses = { past_date: past.status, blank_checklist_label: blank.status };
 check(past.status === 400 && blank.status === 400, 'semantic visit validation failed', evidence.validation_statuses);
 
-const rateClient = `198.51.100.${Math.floor(Math.random() * 30 + 220)}`;
-const started = Date.now();
-const burst = await Promise.all(Array.from({ length: 130 }, () => call('/api/not-found', {
-  headers: { 'x-forwarded-for': rateClient },
-})));
-const rateStatuses = burst.map(result => result.status);
-const allowed = rateStatuses.filter(status => status !== 429).length;
-const limited = rateStatuses.filter(status => status === 429);
-evidence.fresh_connection_rate_burst = { elapsed_ms: Date.now() - started, allowed, limited: limited.length };
-check(rateStatuses.every(status => status === 404 || status === 429), 'rate probe returned an unexpected response', rateStatuses);
-check(allowed <= 42 && limited.length >= 88, 'rate allowance exceeds one replica plus two refill tokens', evidence.fresh_connection_rate_burst);
-check(burst.filter(result => result.status === 429).every(result => result.headers['retry-after']), '429 response omitted Retry-After', evidence.fresh_connection_rate_burst);
+async function verifyRateBurst(size, client, minimumLimited) {
+  const started = Date.now();
+  const responses = await Promise.all(Array.from({ length: size }, () => call('/api/not-found', {
+    headers: { 'x-forwarded-for': client },
+  })));
+  const statuses = responses.map(result => result.status);
+  const allowed = statuses.filter(status => status !== 429).length;
+  const limited = statuses.filter(status => status === 429).length;
+  const result = { requests: size, elapsed_ms: Date.now() - started, allowed, limited };
+  check(statuses.every(status => status === 404 || status === 429), 'rate probe returned an unexpected response', statuses);
+  check(allowed <= 42 && limited >= minimumLimited, 'rate allowance exceeds one replica plus two refill tokens', result);
+  check(responses.filter(response => response.status === 429)
+    .every(response => response.headers['retry-after'] === '1'), '429 response omitted Retry-After: 1', result);
+  return result;
+}
+
+evidence.rate_bursts = {
+  claim_45: await verifyRateBurst(45, '198.21.0.1', 3),
+  verifier_130: await verifyRateBurst(130, '198.21.0.2', 88),
+};
 
 console.log(JSON.stringify(evidence, null, 2));
