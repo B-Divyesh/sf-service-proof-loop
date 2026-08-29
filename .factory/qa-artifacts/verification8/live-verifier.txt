@@ -1,0 +1,30 @@
+
+> service-proof-loop@1.0.0 test:live
+> node scripts/verify-live.mjs
+
+file:///work/repo/scripts/verify-deployment.mjs:9
+    const error = new Error(message);
+                  ^
+
+Error: maximum replica count drifted from the deployment contract
+    at required (file:///work/repo/scripts/verify-deployment.mjs:9:19)
+    at assertDeploymentTopology (file:///work/repo/scripts/verify-deployment.mjs:33:3)
+    at verifyDeployment (file:///work/repo/scripts/verify-deployment.mjs:88:10)
+    at file:///work/repo/scripts/verify-live.mjs:61:34
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
+  evidence: {
+    image: 'sociobotregistry.azurecr.io/sf-service-proof-loop:6fde7c3f605a',
+    latestReadyRevision: 'sf-service-proof-loop--0000028',
+    latestRevision: 'sf-service-proof-loop--0000028',
+    maxReplicas: 3,
+    minReplicas: 1,
+    mode: 'Single',
+    mounts: null,
+    provisioningState: 'Succeeded',
+    volumes: null
+  }
+}
+
+Node.js v22.23.2

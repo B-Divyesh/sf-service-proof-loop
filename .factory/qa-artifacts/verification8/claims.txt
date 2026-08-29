@@ -1,0 +1,1385 @@
+
+===== CLAIM demo-sandbox: The demo uses sample data, never real workspace data =====
+npm test -- --grep @claim:demo-sandbox
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:demo-sandbox
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 2.74117
+  type: 'test'
+  ...
+# Subtest: rejects the verifier report topology with multiple ephemeral SQLite writers
+ok 2 - rejects the verifier report topology with multiple ephemeral SQLite writers
+  ---
+  duration_ms: 1.03695
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 1.46923
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.235689
+  type: 'test'
+  ...
+# Subtest: handoff keeps the researched and shipped commercial scopes explicit
+ok 5 - handoff keeps the researched and shipped commercial scopes explicit
+  ---
+  duration_ms: 3.429037
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 6 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.854964
+  type: 'test'
+  ...
+# Subtest: rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+ok 7 - rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+  ---
+  duration_ms: 1.021251
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 8 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 9.166463
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 283.988366
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   0.74 kB │ gzip:  0.41 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 253ms
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 98.230376
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 234.054735
+
+Running 2 tests using 2 workers
+
+  ✓  1 [chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (2.6s)
+  ✓  2 [mobile-chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (2.8s)
+
+  2 passed (28.8s)
+CLAIM_RESULT demo-sandbox PASS exit=0
+
+===== CLAIM no-account: Clients open proof links without an account =====
+npm test -- --grep @claim:no-account
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:no-account
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 2.584413
+  type: 'test'
+  ...
+# Subtest: rejects the verifier report topology with multiple ephemeral SQLite writers
+ok 2 - rejects the verifier report topology with multiple ephemeral SQLite writers
+  ---
+  duration_ms: 0.994805
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 1.235306
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.244202
+  type: 'test'
+  ...
+# Subtest: handoff keeps the researched and shipped commercial scopes explicit
+ok 5 - handoff keeps the researched and shipped commercial scopes explicit
+  ---
+  duration_ms: 3.478517
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 6 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.776414
+  type: 'test'
+  ...
+# Subtest: rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+ok 7 - rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+  ---
+  duration_ms: 1.077305
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 8 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 9.271945
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 281.260863
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   0.74 kB │ gzip:  0.41 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 257ms
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 180.702475
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 305.40168
+
+Running 2 tests using 2 workers
+
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (3.0s)
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (3.4s)
+
+  2 passed (9.2s)
+CLAIM_RESULT no-account PASS exit=0
+
+===== CLAIM proof-expiry: Proof links expire after 14 days =====
+cargo test claim_proof_expiry_rejects_an_expired_proof
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test claim_proof_expiry_rejects_an_expired_proof ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.06s
+
+CLAIM_RESULT proof-expiry PASS exit=0
+
+===== CLAIM next-visit-export: Approved extras appear in the next-visit CSV =====
+npm test -- --grep @claim:next-visit-export
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:next-visit-export
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 2.094912
+  type: 'test'
+  ...
+# Subtest: rejects the verifier report topology with multiple ephemeral SQLite writers
+ok 2 - rejects the verifier report topology with multiple ephemeral SQLite writers
+  ---
+  duration_ms: 0.532003
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 1.145706
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.304401
+  type: 'test'
+  ...
+# Subtest: handoff keeps the researched and shipped commercial scopes explicit
+ok 5 - handoff keeps the researched and shipped commercial scopes explicit
+  ---
+  duration_ms: 2.797416
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 6 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.906916
+  type: 'test'
+  ...
+# Subtest: rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+ok 7 - rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+  ---
+  duration_ms: 1.033906
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 8 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 7.175541
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 298.774597
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   0.74 kB │ gzip:  0.41 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 258ms
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 74.168221
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 225.992684
+
+Running 2 tests using 2 workers
+
+  ✓  1 [chromium] › tests/e2e/product.spec.ts:98:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (2.6s)
+  ✓  2 [mobile-chromium] › tests/e2e/product.spec.ts:98:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (4.3s)
+
+  2 passed (10.3s)
+CLAIM_RESULT next-visit-export PASS exit=0
+
+===== CLAIM same-origin-demo: Demo actions send data only to this service =====
+npm test -- --grep @claim:same-origin-demo
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:same-origin-demo
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 2.620115
+  type: 'test'
+  ...
+# Subtest: rejects the verifier report topology with multiple ephemeral SQLite writers
+ok 2 - rejects the verifier report topology with multiple ephemeral SQLite writers
+  ---
+  duration_ms: 0.592104
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 1.230207
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.251701
+  type: 'test'
+  ...
+# Subtest: handoff keeps the researched and shipped commercial scopes explicit
+ok 5 - handoff keeps the researched and shipped commercial scopes explicit
+  ---
+  duration_ms: 3.004217
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 6 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.246313
+  type: 'test'
+  ...
+# Subtest: rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+ok 7 - rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+  ---
+  duration_ms: 0.873605
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 8 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 7.657044
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 329.28057
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   0.74 kB │ gzip:  0.41 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 234ms
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 81.523563
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 213.329612
+
+Running 2 tests using 2 workers
+
+  ✓  1 [chromium] › tests/e2e/product.spec.ts:233:1 › @claim:same-origin-demo demo sends data only to this service (1.3s)
+  ✓  2 [mobile-chromium] › tests/e2e/product.spec.ts:233:1 › @claim:same-origin-demo demo sends data only to this service (1.6s)
+
+  2 passed (7.5s)
+CLAIM_RESULT same-origin-demo PASS exit=0
+
+===== CLAIM configurable-extras: Businesses choose which extras appear on client proof pages =====
+npm test -- --grep @claim:configurable-extras
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:configurable-extras
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 2.352713
+  type: 'test'
+  ...
+# Subtest: rejects the verifier report topology with multiple ephemeral SQLite writers
+ok 2 - rejects the verifier report topology with multiple ephemeral SQLite writers
+  ---
+  duration_ms: 0.733304
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 70.131499
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.401602
+  type: 'test'
+  ...
+# Subtest: handoff keeps the researched and shipped commercial scopes explicit
+ok 5 - handoff keeps the researched and shipped commercial scopes explicit
+  ---
+  duration_ms: 67.837186
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 6 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.448114
+  type: 'test'
+  ...
+# Subtest: rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+ok 7 - rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+  ---
+  duration_ms: 0.952705
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 8 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 7.098841
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 348.163378
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   0.74 kB │ gzip:  0.41 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 275ms
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 95.861044
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 239.640361
+
+Running 2 tests using 2 workers
+
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:115:1 › @claim:configurable-extras a business can add a client extra (6.2s)
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:115:1 › @claim:configurable-extras a business can add a client extra (6.2s)
+
+  2 passed (12.3s)
+CLAIM_RESULT configurable-extras PASS exit=0
+
+===== CLAIM paid-license: The $59 one-time business license uses Sociobot-hosted checkout and supports license restore =====
+npm test -- --grep @claim:paid-license
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:paid-license
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 2.168612
+  type: 'test'
+  ...
+# Subtest: rejects the verifier report topology with multiple ephemeral SQLite writers
+ok 2 - rejects the verifier report topology with multiple ephemeral SQLite writers
+  ---
+  duration_ms: 0.480703
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 1.240207
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.231502
+  type: 'test'
+  ...
+# Subtest: handoff keeps the researched and shipped commercial scopes explicit
+ok 5 - handoff keeps the researched and shipped commercial scopes explicit
+  ---
+  duration_ms: 3.124918
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 6 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.253113
+  type: 'test'
+  ...
+# Subtest: rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+ok 7 - rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+  ---
+  duration_ms: 0.662204
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 8 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 6.672938
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 305.816637
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   0.74 kB │ gzip:  0.41 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 262ms
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 96.75485
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 228.447897
+
+Running 2 tests using 2 workers
+
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:135:1 › @claim:paid-license checkout registration and license restore use Sociobot billing (4.1s)
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:135:1 › @claim:paid-license checkout registration and license restore use Sociobot billing (4.1s)
+
+  2 passed (10.4s)
+CLAIM_RESULT paid-license PASS exit=0
+
+===== CLAIM rate-limit: Every API route except health is limited by forwarded client IP =====
+npm test -- --grep @claim:rate-limit
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:rate-limit
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 71.130302
+  type: 'test'
+  ...
+# Subtest: rejects the verifier report topology with multiple ephemeral SQLite writers
+ok 2 - rejects the verifier report topology with multiple ephemeral SQLite writers
+  ---
+  duration_ms: 0.675304
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 1.302207
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.240401
+  type: 'test'
+  ...
+# Subtest: handoff keeps the researched and shipped commercial scopes explicit
+ok 5 - handoff keeps the researched and shipped commercial scopes explicit
+  ---
+  duration_ms: 3.320119
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 6 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 3.277219
+  type: 'test'
+  ...
+# Subtest: rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+ok 7 - rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+  ---
+  duration_ms: 0.680704
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 8 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 71.643405
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 299.028891
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   0.74 kB │ gzip:  0.41 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 230ms
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 80.847358
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 211.567897
+
+Running 2 tests using 2 workers
+
+  ✓  1 [chromium] › tests/e2e/product.spec.ts:176:1 › @claim:rate-limit API traffic is limited per forwarded client (801ms)
+  ✓  2 [mobile-chromium] › tests/e2e/product.spec.ts:176:1 › @claim:rate-limit API traffic is limited per forwarded client (817ms)
+
+  2 passed (6.8s)
+CLAIM_RESULT rate-limit PASS exit=0
+
+===== CLAIM plan-limit: The free plan accepts three completed visits; a valid business license permits more =====
+cargo test claim_plan_limit_is_server_enforced_and_a_valid_license_allows_more
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test claim_plan_limit_is_server_enforced_and_a_valid_license_allows_more ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.03s
+
+CLAIM_RESULT plan-limit PASS exit=0
+
+===== CLAIM demo-expiry: Demo workspaces expire within 24 hours =====
+cargo test claim_demo_expiry_is_24_hours_and_expired_access_is_rejected
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test claim_demo_expiry_is_24_hours_and_expired_access_is_rejected ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.01s
+
+CLAIM_RESULT demo-expiry PASS exit=0
+
+===== CLAIM no-tracking: No third-party fonts, scripts, or analytics load =====
+npm test -- --grep @claim:no-tracking
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:no-tracking
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 2.734115
+  type: 'test'
+  ...
+# Subtest: rejects the verifier report topology with multiple ephemeral SQLite writers
+ok 2 - rejects the verifier report topology with multiple ephemeral SQLite writers
+  ---
+  duration_ms: 0.509803
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 1.366207
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.232201
+  type: 'test'
+  ...
+# Subtest: handoff keeps the researched and shipped commercial scopes explicit
+ok 5 - handoff keeps the researched and shipped commercial scopes explicit
+  ---
+  duration_ms: 2.197412
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 6 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.900517
+  type: 'test'
+  ...
+# Subtest: rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+ok 7 - rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+  ---
+  duration_ms: 0.957806
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 8 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 7.323142
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 298.459988
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   0.74 kB │ gzip:  0.41 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 262ms
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 85.644185
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 224.221468
+
+Running 2 tests using 2 workers
+
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:297:1 › @claim:no-tracking landing and demo load no third-party resources (1.9s)
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:297:1 › @claim:no-tracking landing and demo load no third-party resources (2.2s)
+
+  2 passed (8.1s)
+CLAIM_RESULT no-tracking PASS exit=0
+
+===== CLAIM access-token-hashing: Workspace and production proof access tokens are stored only as SHA-256 hashes =====
+cargo test claim_access_tokens_are_stored_only_as_hashes
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test claim_access_tokens_are_stored_only_as_hashes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.01s
+
+CLAIM_RESULT access-token-hashing PASS exit=0
+
+===== CLAIM privacy-data-flow: Visit details appear in proof links, while replies and chosen extras appear in the workspace and next-visit export =====
+npm test -- --grep @claim:privacy-data-flow
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:privacy-data-flow
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 3.034517
+  type: 'test'
+  ...
+# Subtest: rejects the verifier report topology with multiple ephemeral SQLite writers
+ok 2 - rejects the verifier report topology with multiple ephemeral SQLite writers
+  ---
+  duration_ms: 0.657903
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 1.471708
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.409902
+  type: 'test'
+  ...
+# Subtest: handoff keeps the researched and shipped commercial scopes explicit
+ok 5 - handoff keeps the researched and shipped commercial scopes explicit
+  ---
+  duration_ms: 72.621011
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 6 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.357514
+  type: 'test'
+  ...
+# Subtest: rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+ok 7 - rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+  ---
+  duration_ms: 1.106706
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 8 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 78.031441
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 292.784456
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   0.74 kB │ gzip:  0.41 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 265ms
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 86.079887
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 215.295118
+
+Running 2 tests using 2 workers
+
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:157:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (2.9s)
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:157:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (4.6s)
+
+  2 passed (10.7s)
+CLAIM_RESULT privacy-data-flow PASS exit=0
+
+===== CLAIM photo-upload: Technicians can add up to three consented photos under 1 MB each to a proof =====
+npm test -- --grep @claim:photo-upload
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:photo-upload
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 3.013317
+  type: 'test'
+  ...
+# Subtest: rejects the verifier report topology with multiple ephemeral SQLite writers
+ok 2 - rejects the verifier report topology with multiple ephemeral SQLite writers
+  ---
+  duration_ms: 0.721404
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 2.952617
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.345302
+  type: 'test'
+  ...
+# Subtest: handoff keeps the researched and shipped commercial scopes explicit
+ok 5 - handoff keeps the researched and shipped commercial scopes explicit
+  ---
+  duration_ms: 2.340213
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 6 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 1.956811
+  type: 'test'
+  ...
+# Subtest: rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+ok 7 - rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+  ---
+  duration_ms: 0.711604
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 8 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 71.199703
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 319.989309
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   0.74 kB │ gzip:  0.41 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 262ms
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 87.054793
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 230.789905
+
+Running 2 tests using 2 workers
+
+  ✓  1 [chromium] › tests/e2e/product.spec.ts:191:1 › @claim:photo-upload a technician can add a consented photo to proof (4.1s)
+  ✓  2 [mobile-chromium] › tests/e2e/product.spec.ts:191:1 › @claim:photo-upload a technician can add a consented photo to proof (4.1s)
+
+  2 passed (10.2s)
+CLAIM_RESULT photo-upload PASS exit=0
+
+===== CLAIM problem-rating: A client's problem report and rating are saved and returned to the workspace =====
+npm test -- --grep @claim:problem-rating
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:problem-rating
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 2.110812
+  type: 'test'
+  ...
+# Subtest: rejects the verifier report topology with multiple ephemeral SQLite writers
+ok 2 - rejects the verifier report topology with multiple ephemeral SQLite writers
+  ---
+  duration_ms: 0.497603
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 1.222607
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.293601
+  type: 'test'
+  ...
+# Subtest: handoff keeps the researched and shipped commercial scopes explicit
+ok 5 - handoff keeps the researched and shipped commercial scopes explicit
+  ---
+  duration_ms: 3.024517
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 6 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.520015
+  type: 'test'
+  ...
+# Subtest: rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+ok 7 - rejects verifier 7’s 201-of-400 intermittent 401 read pattern
+  ---
+  duration_ms: 1.001305
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 8 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 5.905234
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 295.116469
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   0.74 kB │ gzip:  0.41 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 267ms
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 81.101162
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 237.386454
+
+Running 2 tests using 2 workers
+
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:219:1 › @claim:problem-rating a client problem and rating return to the workspace (2.7s)
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:219:1 › @claim:problem-rating a client problem and rating return to the workspace (3.6s)
+
+  2 passed (9.2s)
+CLAIM_RESULT problem-rating PASS exit=0
+
+===== CLAIM zero-config-runtime: The service starts without configuration variables and listens on port 8080 by default =====
+npm run test:runtime
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   0.74 kB │ gzip:  0.41 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 266ms
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 73.60072
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 225.076984
+CLAIM_RESULT zero-config-runtime PASS exit=0
+
+CLAIM_SUMMARY total=16 failed=0
