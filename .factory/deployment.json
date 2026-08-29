@@ -7,6 +7,9 @@
   "storage_name": "service-proof-loop-data",
   "storage_mount": "/data",
   "active_revisions_mode": "Single",
+  "rollout": {
+    "drain_writers": true
+  },
   "scale": {
     "min_replicas": 1,
     "max_replicas": 1

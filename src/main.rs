@@ -35,13 +35,20 @@ async fn main() {
         data_dir, "configuration loaded; no external secrets required"
     );
 
-    let database_options = SqliteConnectOptions::from_str(&database_url)
+    let mut database_options = SqliteConnectOptions::from_str(&database_url)
         .expect("valid SQLite database URL")
         .create_if_missing(true)
         .journal_mode(SqliteJournalMode::Delete)
         .synchronous(SqliteSynchronous::Full)
         .busy_timeout(Duration::from_secs(30))
         .pragma("temp_store", "MEMORY");
+    let sqlite_locking = if database_source == "generated default" {
+        database_options = database_options.vfs("unix-none");
+        "single-process VFS; deployment drains writers"
+    } else {
+        "filesystem locks"
+    };
+    info!(sqlite_locking, "SQLite locking configured");
     let pool = SqlitePoolOptions::new()
         .max_connections(1)
         .connect_with(database_options)

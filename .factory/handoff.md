@@ -14,8 +14,10 @@ below after the first repair deployment.
   replica. The deployment script rejects a missing mount, a non-durable state
   declaration, or any replica count other than one.
 - SQLite uses one connection, DELETE journaling, full synchronous writes, a
-  30-second busy timeout, and in-memory temporary tables. This keeps one durable
-  writer compatible with the mounted share.
+  30-second busy timeout, and in-memory temporary tables. The `/data` default
+  uses SQLite's single-process VFS because Azure Files rejects its advisory
+  locks. Deployment drains every old revision before starting the new writer
+  and reactivates the prior ready revision if rollout fails.
 - Deployment contract tests cover the mount and one-replica boundary. A
   restart regression creates state, closes the first app, and reads the same
   state from a second app using the durable database file.

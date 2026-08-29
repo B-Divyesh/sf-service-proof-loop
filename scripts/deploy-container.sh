@@ -15,12 +15,13 @@ mount_path=$(jq -r '.storage_mount' "$contract")
 min_replicas=$(jq -r '.scale.min_replicas' "$contract")
 max_replicas=$(jq -r '.scale.max_replicas' "$contract")
 revision_mode=$(jq -r '.active_revisions_mode' "$contract")
+drain_writers=$(jq -r '.rollout.drain_writers' "$contract")
 source_sha=$(git -C "$repo_dir" rev-parse HEAD)
 image_tag="$app_name:${source_sha:0:12}"
 image=${PREBUILT_IMAGE:-$registry.azurecr.io/$image_tag}
 management_url="https://management.azure.com/subscriptions/$subscription_id/resourceGroups/$resource_group/providers/Microsoft.App/containerApps/$app_name?api-version=2024-03-01"
 
-if [ "$state_backend" != durable-single-writer-sqlite ] || [ "$mount_path" != /data ] || [ "$min_replicas" != 1 ] || [ "$max_replicas" != 1 ] || [ "$revision_mode" != Single ]; then
+if [ "$state_backend" != durable-single-writer-sqlite ] || [ "$mount_path" != /data ] || [ "$min_replicas" != 1 ] || [ "$max_replicas" != 1 ] || [ "$revision_mode" != Single ] || [ "$drain_writers" != true ]; then
   echo "Deployment contract must mount durable SQLite storage at /data with exactly one active replica." >&2
   exit 2
 fi
@@ -44,6 +45,56 @@ if [ -z "${PREBUILT_IMAGE:-}" ]; then
     "$repo_dir"
 else
   echo "Deploying prebuilt image $image for $source_sha"
+fi
+
+# Azure Files does not provide SQLite's advisory byte-range locking semantics.
+# The runtime uses SQLite's single-process VFS, so all old writers must stop
+# before a new revision can mount the database. A failed rollout reactivates
+# the prior ready revision.
+previous_ready=$(az containerapp show \
+  --resource-group "$resource_group" \
+  --name "$app_name" \
+  --query properties.latestReadyRevisionName \
+  --output tsv)
+rollback_needed=0
+rollback() {
+  if [ "$rollback_needed" -eq 1 ] && [ -n "$previous_ready" ]; then
+    echo "Reactivating prior ready revision $previous_ready after failed rollout." >&2
+    az containerapp revision activate \
+      --resource-group "$resource_group" \
+      --name "$app_name" \
+      --revision "$previous_ready" \
+      --output none || true
+  fi
+}
+trap rollback EXIT
+
+rollback_needed=1
+active_revisions=$(az containerapp revision list \
+  --resource-group "$resource_group" \
+  --name "$app_name" \
+  --query '[?properties.active].name' \
+  --output tsv)
+for revision in $active_revisions; do
+  az containerapp revision deactivate \
+    --resource-group "$resource_group" \
+    --name "$app_name" \
+    --revision "$revision" \
+    --output none
+done
+for _ in $(seq 1 60); do
+  replica_total=$(az containerapp revision list \
+    --resource-group "$resource_group" \
+    --name "$app_name" \
+    --output json | jq '[.[].properties.replicas // 0] | add // 0')
+  if [ "$replica_total" -eq 0 ]; then
+    break
+  fi
+  sleep 2
+done
+if [ "$replica_total" -ne 0 ]; then
+  echo "Existing SQLite writers did not drain before deployment." >&2
+  false
 fi
 
 # Image, durable storage, revision mode, and the one-replica ceiling change in
@@ -132,4 +183,6 @@ if [ "$replica_count" -ne 1 ]; then
   exit 1
 fi
 
+rollback_needed=0
+trap - EXIT
 jq --argjson replicas "$replica_count" '. + {replicas:$replicas}' <<<"$live"
