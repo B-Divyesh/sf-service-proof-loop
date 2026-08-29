@@ -1,0 +1,27 @@
+{
+  "desktop": {
+    "viewport": { "width": 1440, "height": 900 },
+    "focused_element": "INPUT",
+    "label": "Accept the work",
+    "focused_bounds": { "top": 423.34375, "bottom": 445.34375 },
+    "visible_label_bounds": { "top": 420.34375, "bottom": 480.34375 },
+    "saved_active_element": "H1",
+    "saved_active_text": "Your reply is saved",
+    "announcer": "Your reply is saved"
+  },
+  "mobile": {
+    "viewport": { "width": 390, "height": 844 },
+    "focused_element": "INPUT",
+    "label": "Accept the work",
+    "focused_bounds": { "top": 404.140625, "bottom": 426.140625 },
+    "visible_label_bounds": { "top": 401.140625, "bottom": 461.140625 },
+    "saved_active_element": "H1",
+    "saved_active_text": "Your reply is saved",
+    "announcer": "Your reply is saved"
+  },
+  "not_found": {
+    "status": 404,
+    "header_visible": true,
+    "footer_visible": true
+  }
+}
