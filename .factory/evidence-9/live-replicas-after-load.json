@@ -1,0 +1,77 @@
+[
+  {
+    "id": "/subscriptions/283af945-693b-4a6e-b952-df928d0a18a9/resourceGroups/sociobot/providers/Microsoft.App/containerApps/sf-service-proof-loop/revisions/sf-service-proof-loop--0000031/replicas/sf-service-proof-loop--0000031-54bd8ccb85-b7v7w",
+    "name": "sf-service-proof-loop--0000031-54bd8ccb85-b7v7w",
+    "properties": {
+      "containers": [
+        {
+          "containerId": "containerd://8b2d4d3547ac4b639b1465dba66288a0",
+          "execEndpoint": "wss://eastus2.azurecontainerapps.dev/subscriptions/283af945-693b-4a6e-b952-df928d0a18a9/resourceGroups/sociobot/containerApps/sf-service-proof-loop/revisions/sf-service-proof-loop--0000031/replicas/sf-service-proof-loop--0000031-54bd8ccb85-b7v7w/containers/app/exec",
+          "logStreamEndpoint": "https://eastus2.azurecontainerapps.dev/subscriptions/283af945-693b-4a6e-b952-df928d0a18a9/resourceGroups/sociobot/containerApps/sf-service-proof-loop/revisions/sf-service-proof-loop--0000031/replicas/sf-service-proof-loop--0000031-54bd8ccb85-b7v7w/containers/app/logstream",
+          "name": "app",
+          "ready": true,
+          "restartCount": 0,
+          "runningState": "Running",
+          "runningStateDetails": "Container started at: 8/29/2026 10:26:22 PM.",
+          "started": true
+        }
+      ],
+      "createdTime": "2026-08-29T22:26:06Z",
+      "initContainers": [],
+      "runningState": "Running",
+      "runningStateDetails": ""
+    },
+    "resourceGroup": "sociobot",
+    "type": "Microsoft.App/containerapps/revisions/replicas"
+  },
+  {
+    "id": "/subscriptions/283af945-693b-4a6e-b952-df928d0a18a9/resourceGroups/sociobot/providers/Microsoft.App/containerApps/sf-service-proof-loop/revisions/sf-service-proof-loop--0000031/replicas/sf-service-proof-loop--0000031-54bd8ccb85-bjdlp",
+    "name": "sf-service-proof-loop--0000031-54bd8ccb85-bjdlp",
+    "properties": {
+      "containers": [
+        {
+          "containerId": "containerd://deb4bfd72ed8460da1873b8943b38759",
+          "execEndpoint": "wss://eastus2.azurecontainerapps.dev/subscriptions/283af945-693b-4a6e-b952-df928d0a18a9/resourceGroups/sociobot/containerApps/sf-service-proof-loop/revisions/sf-service-proof-loop--0000031/replicas/sf-service-proof-loop--0000031-54bd8ccb85-bjdlp/containers/app/exec",
+          "logStreamEndpoint": "https://eastus2.azurecontainerapps.dev/subscriptions/283af945-693b-4a6e-b952-df928d0a18a9/resourceGroups/sociobot/containerApps/sf-service-proof-loop/revisions/sf-service-proof-loop--0000031/replicas/sf-service-proof-loop--0000031-54bd8ccb85-bjdlp/containers/app/logstream",
+          "name": "app",
+          "ready": true,
+          "restartCount": 0,
+          "runningState": "Running",
+          "runningStateDetails": "Container started at: 8/29/2026 10:26:22 PM.",
+          "started": true
+        }
+      ],
+      "createdTime": "2026-08-29T22:26:06Z",
+      "initContainers": [],
+      "runningState": "Running",
+      "runningStateDetails": ""
+    },
+    "resourceGroup": "sociobot",
+    "type": "Microsoft.App/containerapps/revisions/replicas"
+  },
+  {
+    "id": "/subscriptions/283af945-693b-4a6e-b952-df928d0a18a9/resourceGroups/sociobot/providers/Microsoft.App/containerApps/sf-service-proof-loop/revisions/sf-service-proof-loop--0000031/replicas/sf-service-proof-loop--0000031-54bd8ccb85-m6nk8",
+    "name": "sf-service-proof-loop--0000031-54bd8ccb85-m6nk8",
+    "properties": {
+      "containers": [
+        {
+          "containerId": "containerd://6b28f26cde384ab38e9ae749542c0eb7",
+          "execEndpoint": "wss://eastus2.azurecontainerapps.dev/subscriptions/283af945-693b-4a6e-b952-df928d0a18a9/resourceGroups/sociobot/containerApps/sf-service-proof-loop/revisions/sf-service-proof-loop--0000031/replicas/sf-service-proof-loop--0000031-54bd8ccb85-m6nk8/containers/app/exec",
+          "logStreamEndpoint": "https://eastus2.azurecontainerapps.dev/subscriptions/283af945-693b-4a6e-b952-df928d0a18a9/resourceGroups/sociobot/containerApps/sf-service-proof-loop/revisions/sf-service-proof-loop--0000031/replicas/sf-service-proof-loop--0000031-54bd8ccb85-m6nk8/containers/app/logstream",
+          "name": "app",
+          "ready": true,
+          "restartCount": 0,
+          "runningState": "Running",
+          "runningStateDetails": "Container started at: 8/29/2026 9:56:26 PM.",
+          "started": true
+        }
+      ],
+      "createdTime": "2026-08-29T21:56:08Z",
+      "initContainers": [],
+      "runningState": "Running",
+      "runningStateDetails": ""
+    },
+    "resourceGroup": "sociobot",
+    "type": "Microsoft.App/containerapps/revisions/replicas"
+  }
+]

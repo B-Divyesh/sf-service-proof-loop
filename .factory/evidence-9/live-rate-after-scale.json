@@ -1,0 +1,25 @@
+{
+  "at": "2026-08-29T22:34:17.600Z",
+  "afterThreeReplicas": true,
+  "burst45": {
+    "requests": 45,
+    "statuses": {
+      "404": 45
+    },
+    "allowed": 45,
+    "limited": 0,
+    "retryAfter": []
+  },
+  "burst130": {
+    "requests": 130,
+    "statuses": {
+      "404": 120,
+      "429": 10
+    },
+    "allowed": 120,
+    "limited": 10,
+    "retryAfter": [
+      "1"
+    ]
+  }
+}

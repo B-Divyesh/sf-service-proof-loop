@@ -1,0 +1,284 @@
+{
+  "emptyWorkspace": {
+    "status": 400,
+    "headers": {
+      "content-length": "46",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Sat, 29 Aug 2026 22:31:51 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "data": {
+      "error": "Enter between 1 and 80 characters."
+    }
+  },
+  "workspace": {
+    "status": 201,
+    "demo": false
+  },
+  "unauthorized": {
+    "status": 401,
+    "headers": {
+      "content-length": "50",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Sat, 29 Aug 2026 22:31:51 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "data": {
+      "error": "Open your workspace again to continue."
+    }
+  },
+  "pastDate": {
+    "status": 400,
+    "headers": {
+      "content-length": "53",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Sat, 29 Aug 2026 22:31:51 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "data": {
+      "error": "Choose today or a future next visit date."
+    }
+  },
+  "blankChecklist": {
+    "status": 400,
+    "headers": {
+      "content-length": "47",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Sat, 29 Aug 2026 22:31:51 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "data": {
+      "error": "Enter between 1 and 120 characters."
+    }
+  },
+  "longNote": {
+    "status": 400,
+    "headers": {
+      "content-length": "44",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Sat, 29 Aug 2026 22:31:51 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "data": {
+      "error": "Keep notes under 600 characters."
+    }
+  },
+  "photoNoConsent": {
+    "status": 400,
+    "headers": {
+      "content-length": "66",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Sat, 29 Aug 2026 22:31:51 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "data": {
+      "error": "Photo consent is required before photos can be shared."
+    }
+  },
+  "fourPhotos": {
+    "status": 400,
+    "headers": {
+      "content-length": "56",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Sat, 29 Aug 2026 22:31:51 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "data": {
+      "error": "Use up to three image files under 1 MB each."
+    }
+  },
+  "extraNegative": {
+    "status": 400,
+    "headers": {
+      "content-length": "49",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Sat, 29 Aug 2026 22:31:51 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "data": {
+      "error": "Set an extra price from $0 to $1,000."
+    }
+  },
+  "extraOverMax": {
+    "status": 400,
+    "headers": {
+      "content-length": "49",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Sat, 29 Aug 2026 22:31:51 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "data": {
+      "error": "Set an extra price from $0 to $1,000."
+    }
+  },
+  "extraZero": {
+    "status": 201,
+    "price_cents": 0
+  },
+  "extraMax": {
+    "status": 201,
+    "price_cents": 100000
+  },
+  "validVisit": {
+    "status": 201,
+    "hasProof": true,
+    "expiry": "2026-09-12T22:31:51.456447567+00:00"
+  },
+  "proof": {
+    "status": 200,
+    "client": "Maya Chen",
+    "location": "18 Cedar Lane",
+    "photoCaption": "Sink after service"
+  },
+  "badStatus": {
+    "status": 400,
+    "headers": {
+      "content-length": "48",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Sat, 29 Aug 2026 22:31:51 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "data": {
+      "error": "Choose accepted or report a problem."
+    }
+  },
+  "ratingZero": {
+    "status": 400,
+    "headers": {
+      "content-length": "40",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Sat, 29 Aug 2026 22:31:51 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "data": {
+      "error": "Choose a rating from 1 to 5."
+    }
+  },
+  "sevenExtras": {
+    "status": 400,
+    "headers": {
+      "content-length": "43",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Sat, 29 Aug 2026 22:31:51 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "data": {
+      "error": "Choose no more than six extras."
+    }
+  },
+  "validResponse": {
+    "status": 200,
+    "headers": {
+      "content-length": "43",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Sat, 29 Aug 2026 22:31:51 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "data": {
+      "next_visit_at": "2026-08-30",
+      "saved": true
+    }
+  },
+  "workspaceAfter": {
+    "status": 200,
+    "response_status": "problem",
+    "rating": 2,
+    "extra": "Full reset"
+  },
+  "csv": {
+    "status": 200,
+    "contentType": "text/csv; charset=utf-8",
+    "body": "next_visit,client,location,extra,detail,price\n\"2026-08-30\",\"Maya Chen\",\"18 Cedar Lane\",\"Full reset\",\"Maximum boundary\",1000.00\n"
+  },
+  "secondVisit": 201,
+  "thirdVisit": 201,
+  "fourthVisit": {
+    "status": 402,
+    "headers": {
+      "content-length": "93",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Sat, 29 Aug 2026 22:31:51 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "data": {
+      "error": "The free plan includes three visits. Add a valid business license to record more."
+    }
+  },
+  "rate45": {
+    "allowed": 40,
+    "limited": 5,
+    "retryAfter": [
+      "1"
+    ]
+  }
+}

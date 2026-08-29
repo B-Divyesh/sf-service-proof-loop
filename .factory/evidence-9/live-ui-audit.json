@@ -1,0 +1,158 @@
+{
+  "desktop": {
+    "status": 200,
+    "cold": {
+      "title": "Service Proof Loop — Send proof after each visit",
+      "h1": "Send proof. Plan the next visit.",
+      "h1Visible": true,
+      "primaryText": "Try it with sample data",
+      "primaryVisible": true,
+      "facts": [],
+      "overflow": 0,
+      "maxMotionMs": 0.01
+    },
+    "firstFocus": {
+      "tag": "A",
+      "text": "Try it with sample data",
+      "outline": "rgb(217, 104, 59) solid 3px"
+    },
+    "secondFocus": {
+      "tag": "A",
+      "text": "Buy the business license at Sociobot checkout",
+      "outline": "rgb(217, 104, 59) solid 3px"
+    },
+    "zoomOverflow": 0,
+    "axe": {
+      "violations": [],
+      "seriousCritical": 0
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CDvb6mNL.js"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/proof-loop-hero.webp"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/demo"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CDvb6mNL.js"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css"
+      },
+      {
+        "method": "POST",
+        "url": "https://service-proof-loop.sociobot.in/api/demo"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/api/visits"
+      }
+    ],
+    "errors": [
+      "Failed to load resource: the server responded with a status of 401 ()"
+    ],
+    "demo": {
+      "h1": "Visits could not load",
+      "body": "Demo — sample data, nothing is saved\nReset demo\nStart for real\nSkip to main content\nService Proof Loop\nDemo\nWorkspace\nPrice\nPrivacy\nVisits could not load\n\nYour workspace access is not valid.\n\nTry loading again\nService Proof Loop\n\nSend visit proof and plan the next visit.\n\nOriginal product art was generated for this service.\n\nPrivacy\nTerms\nBuilt by Param Factory\n(external site)\n\nVersion 1.0.0 · Build 2026.08\n\nVisits could not load",
+      "local": {},
+      "session": {
+        "demo:workspace": "<redacted ephemeral demo access>"
+      },
+      "cookies": ""
+    }
+  },
+  "mobile": {
+    "status": 200,
+    "cold": {
+      "title": "Service Proof Loop — Send proof after each visit",
+      "h1": "Send proof. Plan the next visit.",
+      "h1Visible": true,
+      "primaryText": "Try it with sample data",
+      "primaryVisible": true,
+      "facts": [],
+      "overflow": 0,
+      "maxMotionMs": 0.01
+    },
+    "firstFocus": {
+      "tag": "A",
+      "text": "Try it with sample data",
+      "outline": "rgb(217, 104, 59) solid 3px"
+    },
+    "secondFocus": {
+      "tag": "A",
+      "text": "Buy the business license at Sociobot checkout",
+      "outline": "rgb(217, 104, 59) solid 3px"
+    },
+    "zoomOverflow": 0,
+    "axe": {
+      "violations": [],
+      "seriousCritical": 0
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CDvb6mNL.js"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/proof-loop-hero.webp"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/demo"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CDvb6mNL.js"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css"
+      },
+      {
+        "method": "POST",
+        "url": "https://service-proof-loop.sociobot.in/api/demo"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/api/visits"
+      }
+    ],
+    "errors": [
+      "Failed to load resource: the server responded with a status of 401 ()"
+    ],
+    "demo": {
+      "h1": "Visits could not load",
+      "body": "Demo — sample data, nothing is saved\nReset demo\nStart for real\nSkip to main content\nService Proof Loop\nDemo\nWorkspace\nPrivacy\nVisits could not load\n\nYour workspace access is not valid.\n\nTry loading again\nService Proof Loop\n\nSend visit proof and plan the next visit.\n\nOriginal product art was generated for this service.\n\nPrivacy\nTerms\nBuilt by Param Factory\n(external site)\n\nVersion 1.0.0 · Build 2026.08\n\nVisits could not load",
+      "local": {},
+      "session": {
+        "demo:workspace": "<redacted ephemeral demo access>"
+      },
+      "cookies": ""
+    }
+  }
+}
