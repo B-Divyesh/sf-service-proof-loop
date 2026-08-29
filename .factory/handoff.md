@@ -2,10 +2,9 @@
 
 ## Result
 
-Every source-level release blocker from independent report commit
-`caa7279de00b67d36cc3a79ce2bb682ef1a12c20` is repaired. Local gates are
-green. Live deployment and cross-revision durability evidence are recorded
-below after the first repair deployment.
+Every release blocker from independent report commit
+`caa7279de00b67d36cc3a79ce2bb682ef1a12c20` is repaired. Local and public gates
+are green on the durable container deployment.
 
 ## Repairs
 
@@ -98,10 +97,41 @@ PLAYWRIGHT_BASE_URL=https://service-proof-loop.sociobot.in npm test
 
 ## Live deployment and durability evidence
 
-Pending the committed repair deployment. The checked-in deploy command also
-performs the `.git`-free ACR container build, verifies the Azure Files mount,
-requires `Single` mode with min/max one replica, waits for the exact build SHA,
-and counts the live replicas.
+- Source commit `7f7fb5363cf253340fad168e3b100e6871fe3f7a` was built by
+  ACR run `ch108` from a `.git`-free source archive. The image digest is
+  `sha256:6f8faec6621053832773d529cd0bd62ddf82cdd46f122aedfe539bffffee0d3d`.
+- Active revision `sf-service-proof-loop--0000014` reports the exact source SHA
+  from `/health`. Azure reports `Single` mode, min/max replicas `1/1`, one live
+  replica, and the `service-proof-loop-data` Azure Files volume mounted at
+  `/data`.
+- The first mounted image failed closed before receiving traffic because Azure
+  Files rejected SQLite advisory locks. Its log reported SQLite code 5. The
+  single-process VFS plus old-writer drain repaired that root cause; the prior
+  healthy revision remained public during diagnosis.
+- `EXPECTED_SHA=7f7fb53… npm run test:live` passed: 20/20 fresh TLS demo reads
+  returned 200; eight concurrent free writes returned 3 × 201 and 5 × 402;
+  invalid date and blank-label probes returned 400; a 130-connection rate burst
+  returned 40 ordinary responses and 90 × 429, all with `Retry-After`.
+- `PLAYWRIGHT_BASE_URL=https://service-proof-loop.sociobot.in npm test` passed
+  36/36 on desktop Chromium and 390 × 844 mobile Chromium. This live run covers
+  the complete product, keyboard, accessibility, privacy, offline messaging,
+  response policy, claims, routes, and console errors.
+- Factory `verify-url.sh` passed `/`, `/demo`, `/privacy`, and `/terms`. Each
+  route returned 200 with `lang=en`, one `h1`, a main landmark, complete image
+  alternatives, and no console errors. Evidence is under
+  `.factory/qa-artifacts/repair-verify-*`.
+- Mobile Lighthouse 12.8.2 scored 100 Performance, 100 Accessibility, 100 Best
+  Practices, and 100 SEO. FCP was 1.20 s, LCP 1.22 s, TBT 0 ms, and CLS 0.
+  Evidence: `.factory/qa-artifacts/lighthouse-live-repair.json`.
+- Live privacy capture loaded only
+  `https://service-proof-loop.sociobot.in`, set no cookies, left real local
+  storage empty, and stored only `demo:workspace` in session storage.
+- Live responses include CSP, HSTS, `nosniff`, frame denial, a restrictive
+  permissions policy, and strict-origin referrer policy. The checkout returned
+  its expected hosted redirect in the live browser suite.
+- A 100-request `/health` load smoke returned 100 × 200 in 603 ms (166 req/s).
+  The mounted database was 241,664 bytes after the public functional tests,
+  confirming writes reached durable storage.
 
 ## Known gaps
 
