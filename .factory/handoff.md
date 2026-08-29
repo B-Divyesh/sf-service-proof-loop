@@ -131,6 +131,24 @@ the exact live commit, topology, 30 fresh demo/workspace/proof sequences,
 concurrent plan enforcement, validation recovery, rate limiting, routes,
 privacy, accessibility, desktop, and mobile behavior.
 
+Observed production results on 2026-08-29:
+
+- `/health` returned `status: ok` and the full expected source SHA. The live
+  topology check found one active revision, one ready replica, min/max one,
+  and the `service-proof-loop-data` Azure Files volume mounted at `/data`.
+- All 30 fresh demo → workspace → proof sequences returned 200. Eight
+  concurrent free-plan writes returned exactly 3 × 201 and 5 × 402. Invalid
+  dates and blank checklist labels returned 400.
+- A 130-request production burst allowed 40 requests and returned 90 × 429
+  with `Retry-After` in 300 ms.
+- Live Playwright passed 42/42 across desktop Chromium and 390 × 844 mobile,
+  including keyboard, axe, touch-target, privacy, offline-message, response
+  policy, direct-404, and all browser claim regressions.
+- Factory `verify-url.sh` passed `/`, `/demo`, `/privacy`, and `/terms` with
+  zero console errors. Live Lighthouse scored 100 Performance, 100
+  Accessibility, 100 Best Practices, and 100 SEO; FCP 1.1 s, LCP 1.2 s,
+  TBT 0 ms, CLS 0, and total transfer 67 KiB.
+
 ## Commercial scope deviation
 
 The brief specifies `$59 per business each month plus technician seats`. The
