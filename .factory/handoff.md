@@ -27,6 +27,9 @@ single-writer container topology from candidate
    entry changed Vite's shared asset name.
 7. Browser tests use an isolated forwarded IP per test, preventing the test
    suite itself from consuming another test's intentional 40-request bucket.
+8. Adding a client extra now renders the created server response immediately
+   instead of waiting for a redundant Azure Files read. The live desktop and
+   mobile suite covers this path under concurrent use.
 
 ## Exact regression coverage
 
@@ -44,6 +47,8 @@ single-writer container topology from candidate
   painted background.
 - The backend cache regression covers both the previous `index-*` asset name
   and Vite's shared `main-*` CSS asset.
+- The configurable-extras regression aborts any redundant post-save list read
+  and proves the saved server response appears without one.
 
 ## Local verification
 
@@ -77,7 +82,7 @@ Results:
 - Factory `verify-url.sh`: `/`, `/demo`, `/privacy`, and `/terms` pass with one
   `<h1>`, `lang=en`, a main landmark, complete image alternatives, named
   buttons, and zero console errors.
-- Production build: 31,720 B JavaScript (10.14 KB gzip), 15,437 B CSS
+- Production build: 31,750 B JavaScript (10.15 KB gzip), 15,437 B CSS
   (4.41 KB gzip), and 18,322 B hero WebP. `dist/` includes the processed 404
   entry. Initial assets remain below every stated budget.
 - Lighthouse 12.8.2 mobile: Performance 100, Accessibility 100, Best Practices

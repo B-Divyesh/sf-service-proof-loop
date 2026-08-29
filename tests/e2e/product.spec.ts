@@ -113,6 +113,11 @@ test('@claim:next-visit-export chosen extras reach the next-visit CSV', async ({
 });
 
 test('@claim:configurable-extras a business can add a client extra', async ({ page }) => {
+  let extrasReads = 0;
+  await page.route('**/api/extras', route => {
+    if (route.request().method() === 'GET' && ++extrasReads > 1) return route.abort();
+    return route.continue();
+  });
   await page.goto('/demo');
   await page.getByRole('button', { name: 'Manage extras' }).click();
   await page.getByLabel('Extra name').fill('Wipe baseboards');
@@ -121,6 +126,7 @@ test('@claim:configurable-extras a business can add a client extra', async ({ pa
   await page.getByRole('button', { name: 'Add client choice' }).click();
   await expect(page.getByRole('heading', { name: 'Manage next-visit extras' })).toBeVisible();
   await expect(page.getByText('Wipe baseboards', { exact: true })).toBeVisible();
+  expect(extrasReads).toBe(1);
   await page.getByRole('button', { name: 'Back to visits' }).click();
   await page.getByRole('link', { name: 'Open client view' }).click();
   await expect(page.getByText('Wipe baseboards', { exact: true })).toBeVisible();
