@@ -466,6 +466,8 @@ fn deployment_contract_requires_durable_sqlite_and_one_replica() {
     assert!(deploy.contains("replica_count"));
     assert!(deploy.contains("revision deactivate"));
     assert!(deploy.contains("Existing SQLite writers did not drain"));
+    assert!(deploy.contains("Stale revisions did not drain after deployment"));
+    assert!(deploy.contains(".name != $current"));
     assert!(!deploy.contains(".containers[0].volumeMounts = null"));
     assert!(!deploy.contains("/opt/fleet/lib/deploy-container.sh"));
     let live_verifier =

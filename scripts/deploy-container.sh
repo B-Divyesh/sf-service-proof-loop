@@ -60,6 +60,17 @@ rollback_needed=0
 rollback() {
   if [ "$rollback_needed" -eq 1 ] && [ -n "$previous_ready" ]; then
     echo "Reactivating prior ready revision $previous_ready after failed rollout." >&2
+    current_revisions=$(az containerapp revision list \
+      --resource-group "$resource_group" \
+      --name "$app_name" \
+      --output json || echo '[]')
+    for revision in $(jq -r --arg previous "$previous_ready" '.[] | select(.properties.active and .name != $previous) | .name' <<<"$current_revisions"); do
+      az containerapp revision deactivate \
+        --resource-group "$resource_group" \
+        --name "$app_name" \
+        --revision "$revision" \
+        --output none || true
+    done
     az containerapp revision activate \
       --resource-group "$resource_group" \
       --name "$app_name" \
@@ -172,6 +183,34 @@ if ! jq -e --arg sha "$source_sha" '.status == "ok" and .build_sha == $sha' <<<"
 fi
 
 active_revision=$(jq -r '.revision' <<<"$live")
+for _ in $(seq 1 60); do
+  revision_state=$(az containerapp revision list \
+    --resource-group "$resource_group" \
+    --name "$app_name" \
+    --output json)
+  stale_active=$(jq -r --arg current "$active_revision" \
+    '.[] | select(.properties.active and .name != $current) | .name' <<<"$revision_state")
+  for revision in $stale_active; do
+    az containerapp revision deactivate \
+      --resource-group "$resource_group" \
+      --name "$app_name" \
+      --revision "$revision" \
+      --output none || true
+  done
+  stale_writers=$(jq --arg current "$active_revision" \
+    '[.[] | select(.name != $current and (.properties.active or ((.properties.replicas // 0) > 0)))] | length' \
+    <<<"$revision_state")
+  if [ "$stale_writers" -eq 0 ]; then
+    break
+  fi
+  sleep 2
+done
+if [ "$stale_writers" -ne 0 ]; then
+  echo "Stale revisions did not drain after deployment." >&2
+  jq . <<<"$revision_state" >&2
+  exit 1
+fi
+
 replica_count=$(az containerapp replica list \
   --resource-group "$resource_group" \
   --name "$app_name" \
@@ -183,6 +222,6 @@ if [ "$replica_count" -ne 1 ]; then
   exit 1
 fi
 
+EXPECTED_SHA="$source_sha" node "$repo_dir/scripts/verify-deployment.mjs"
 rollback_needed=0
 trap - EXIT
-EXPECTED_SHA="$source_sha" node "$repo_dir/scripts/verify-deployment.mjs"

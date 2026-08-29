@@ -61,16 +61,34 @@ if (process.env.EXPECTED_SHA) {
 }
 evidence.health = health.data;
 
-const demo = await call('/api/demo', { method: 'POST', headers: { 'x-forwarded-for': '198.51.100.201' } });
-check(demo.status === 200, 'demo creation failed', demo);
-const demoReads = await Promise.all(Array.from({ length: 20 }, () => call('/api/visits', {
-  headers: {
-    authorization: `Bearer ${demo.data.access_token}`,
-    'x-forwarded-for': '198.51.100.202',
-  },
-})));
-evidence.fresh_connection_demo_reads = demoReads.map(result => result.status);
-check(demoReads.every(result => result.status === 200), 'fresh connections did not share demo state', evidence.fresh_connection_demo_reads);
+const demoSequences = [];
+for (let index = 0; index < 30; index += 1) {
+  const demo = await call('/api/demo', {
+    method: 'POST',
+    headers: { 'x-forwarded-for': `198.51.100.${100 + index}` },
+  });
+  const visits = demo.status === 200
+    ? await call('/api/visits', {
+        headers: {
+          authorization: `Bearer ${demo.data.access_token}`,
+          'x-forwarded-for': `198.51.100.${130 + index}`,
+        },
+      })
+    : { status: 0, data: [] };
+  const proofToken = visits.data?.[0]?.proof_token;
+  const proof = proofToken
+    ? await call(`/api/proof/${encodeURIComponent(proofToken)}`, {
+        headers: { 'x-forwarded-for': `198.51.100.${160 + index}` },
+      })
+    : { status: 0 };
+  demoSequences.push({ create: demo.status, visits: visits.status, proof: proof.status });
+}
+evidence.fresh_demo_workspace_proof_sequences = demoSequences;
+check(
+  demoSequences.every(result => result.create === 200 && result.visits === 200 && result.proof === 200),
+  'fresh demo, workspace, and proof requests did not share state',
+  demoSequences,
+);
 
 const workspace = await call('/api/workspaces', {
   method: 'POST',

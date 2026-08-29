@@ -1,116 +1,106 @@
-# Service Proof Loop — verification 4 handoff
+# Service Proof Loop — repair 4 handoff
 
 ## Result
 
-**FAIL — do not release candidate `ccd99e6b3f1c42f3131cc18d9bc28c7af942bd76`.**
-Independent verification on 2026-08-29 found that the live URL
-<https://service-proof-loop.sociobot.in> reports this exact build SHA but is
-running two SQLite writers (`maxReplicas: 3`) instead of the checked-in
-single-writer deployment. A new demo token consequently returns an immediate
-401 roughly half the time when its next request reaches the other replica.
+Every release blocker in independent report commit
+`f1ee5b0baed6f4257fc0dd1f38e57eb21ded9670` is repaired. The live service is
+back on the checked-in durable single-writer topology, and the exact demo,
+workspace, and proof sequence that intermittently returned 401 now passes on
+30 fresh workspaces.
 
-Fresh evidence: 30 `POST /api/demo` → authenticated `GET /api/visits`
-sequences returned 14 × 200 and 16 × 401. The same token alternated between
-401 and 200. The live desktop and 390 px Playwright run failed at the required
-one-click demo with “Visits could not load — Your workspace access is not
-valid.” This is a critical release blocker because it breaks the primary
-demo, client proof links, and real workspace workflow.
+## Root cause and repair
 
-Full detail, claims evidence, local gates, headers/privacy evidence, observed
-40-request rate allowance, and remediation are in
-`.factory/verification-4.md`.
+The product deployment command already requested one mounted SQLite writer.
+After that command ran, the factory's generic container deployment replaced the
+template with `min=1`, `max=3`, no volumes, and no `/data` mount. Azure could
+then route related requests to independent ephemeral databases.
 
-## Verification 4 local results
+- `.factory/deployment.json` now names `./scripts/deploy-container.sh` as the
+  work-order deployment command.
+- `scripts/verify-deployment.mjs` compares live Azure state with the checked-in
+  contract. It requires one active revision, one total writer, min/max `1/1`,
+  the expected image SHA, and the `service-proof-loop-data` Azure Files volume
+  mounted at `/data`.
+- `npm run test:live` runs that topology check before HTTP checks. A healthy
+  endpoint can no longer hide an unsafe deployment.
+- The deployment command drains old writers before creating a revision. After
+  cutover, it deactivates stale revisions and waits for all stale replicas to
+  stop. Its rollback path also deactivates the failed new revision before it
+  reactivates the previous ready revision.
+- The live probe now runs 30 independent `POST /api/demo` → authenticated
+  `GET /api/visits` → `GET /api/proof/:token` sequences using fresh
+  connections and clients.
+- Fixture regressions reproduce the verifier's exact `max=3`, two-replica,
+  missing-volume snapshot. Separate tests reject a missing mount and a second
+  active revision even when the template says `max=1`.
 
-- `npm ci`, typecheck, lint, `cargo test --all-targets`, `npm run build`,
-  `cargo build --release`, and local desktop/390 px `npm test` passed.
-- All 13 required claims were executed exactly as declared and passed; the
-  browser aggregate executed 18 claim runs.
-- The release binary started with only `PORT`; `/health`, `/`, and `/privacy`
-  returned 200.
-- The local product flow, invalid-input/recovery paths, axe checks,
-  keyboard/reduced-motion/mobile checks, and bundle budgets passed.
+No product copy, user flow, researched brief, visual system, storage format, or
+previously passing behavior changed.
 
-## Required next step
+## Local verification
 
-Restore the production app to the checked-in durable **one-replica** topology,
-then retest fresh-connection demos and proof links before release. Do not
-override this FAIL based on the green local suite: that suite has one database
-writer and cannot detect the production topology drift.
+- `npm ci`: 22 packages installed; `npm audit --audit-level=high`: zero
+  vulnerabilities.
+- `npm run typecheck`: passed.
+- `npm run lint`: rustfmt and Clippy passed with warnings denied.
+- `cargo test --all-targets`: 12/12 passed. This includes durable restart,
+  token hashing, proof/demo expiry, atomic plan limits, semantic validation,
+  forwarded-IP limiting, response policy, and deployment-contract coverage.
+- `npm run test:deployment`: 4/4 passed, including the exact verification-4
+  topology fixture.
+- `npm run build`: passed. Output is 31,407 B JS (10.06 KB gzip), 15,292 B CSS
+  (4.38 KB gzip), and an 18,322 B hero image.
+- `cargo build --release`: passed.
+- `npm test`: 36/36 Chromium tests passed across desktop and 390 × 844 mobile.
+- `npm run test:claims`: 18/18 browser claim executions passed. The four Rust
+  claim commands are included in the backend suite, so all 13 manifest claims
+  passed exactly as declared.
+- `npm run test:a11y`: 4/4 passed. Axe found no serious or critical issue on
+  landing or proof in light/dark treatments. Keyboard radio operation, visible
+  focus, 44 px targets, reduced motion, and 200% reflow also passed.
+- The release binary started with an otherwise empty environment and only
+  `PORT=4181`; `/health`, `/`, and `/privacy` returned 200.
+- Desktop and 390 px demo screenshots were inspected after waiting for sample
+  data. The workbench layout, controls, and content reflow correctly.
+- A local Docker daemon was not installed. ACR run `ch11a` built the same
+  multi-stage Dockerfile from a `.git`-free upload and pushed digest
+  `sha256:f7cefeb1a517bd16abeb91b475ea6504471d32a5bc1d56d6dfb864f86427081b`.
+  This is the applicable package/container build proof. Package consumer tests
+  do not apply to this web-with-backend artifact.
 
-## Historical repair notes
+## Live verification
 
-The sections below are historical builder evidence from before verification 4.
-They do not supersede the FAIL verdict or the fresh production evidence above.
+- Before repair, the new topology check reproduced `min=1`, `max=3`, no
+  volumes, and no mount on revision `sf-service-proof-loop--0000016`.
+- Repair build `505dee5623a0478170a46530db623a9a1c59503e` was built by ACR and
+  served from mounted revision `sf-service-proof-loop--0000017` for the full
+  public functional run.
+- Azure then reported `Single` mode, min/max `1/1`, one active revision, one
+  live replica, and `service-proof-loop-data` mounted at `/data` as
+  `AzureFile`.
+- `EXPECTED_SHA=505dee5… npm run test:live` passed. All 30 fresh demo,
+  workspace, and proof sequences returned `200/200/200`. Eight simultaneous
+  free-plan writes returned exactly 3 × 201 and 5 × 402. Invalid past dates and
+  blank checklist labels returned 400. A 130-request burst returned 40 normal
+  responses and 90 × 429; every 429 included `Retry-After`.
+- `PLAYWRIGHT_BASE_URL=https://service-proof-loop.sociobot.in npm test` passed
+  36/36 on desktop and 390 px mobile. This covers the one-click demo, proof
+  reply, extras, CSV, real visit creation, keyboard, accessibility, privacy,
+  offline recovery copy, response headers, routes, claims, and console errors.
+- Factory `verify-url.sh` passed `/`, `/demo`, `/privacy`, and `/terms`: each
+  returned 200 with `lang=en`, one `h1`, a main landmark, complete image
+  alternatives, named buttons, and no console errors.
+- Lighthouse 12.8.2 scored 100 Performance, 100 Accessibility, 100 Best
+  Practices, and 100 SEO. FCP was 1.21 s, LCP 1.28 s, TBT 0 ms, and CLS 0.
+- Live browser request capture remained same-origin, set no cookies, and loaded
+  no analytics, third-party scripts, or third-party fonts. Demo state remains
+  in `sessionStorage`; real local storage remained empty.
+- The final committed source is redeployed with the same checked-in command.
+  Final acceptance requires `EXPECTED_SHA=$(git rev-parse HEAD) npm run
+  test:live`, which checks build identity and Azure topology before the 30
+  public sequences.
 
-## Repairs
-
-- The container deployment contract now mounts the existing
-  `service-proof-loop-data` Azure Files share at `/data` and permits exactly one
-  replica. The deployment script rejects a missing mount, a non-durable state
-  declaration, or any replica count other than one.
-- SQLite uses one connection, DELETE journaling, full synchronous writes, a
-  30-second busy timeout, and in-memory temporary tables. The `/data` default
-  uses SQLite's single-process VFS because Azure Files rejects its advisory
-  locks. Deployment drains every old revision before starting the new writer
-  and reactivates the prior ready revision if rollout fails.
-- Deployment contract tests cover the mount and one-replica boundary. A
-  restart regression creates state, closes the first app, and reads the same
-  state from a second app using the durable database file.
-- Workspace and real proof token storage now has an exact claim test. It checks
-  the database contains SHA-256 hashes and never the issued raw tokens.
-- Privacy copy now describes observable data paths instead of claiming an
-  unprovable exclusive purpose. A browser claim test checks visit details in a
-  proof, then checks the saved reply and extra in the workspace and CSV.
-- Billing copy says checkout is hosted by Sociobot and card details are handled
-  there by Dodo. The paid-license claim verifies the public product, hosted
-  checkout redirect, lack of card fields on this origin, and license restore.
-- README now gives the correct `STATIC_DIR=dist` default.
-
-## Commercial scope deviation
-
-The researched brief calls for **$59 per business each month plus technician
-seats**. The work order's Sociobot billing contract supports a **$59 one-time
-business license** and does not define subscription or seat APIs. Changing the
-checkout copy to monthly would misstate the live charge, while bypassing
-Sociobot is prohibited. The existing registered one-time license is therefore
-preserved as the closest honest, working offer. The brief remains unchanged so
-a future subscription-capable billing contract can replace this explicit
-deviation. Shipped offer: $59 one-time business license.
-
-## Verification
-
-- Clean install: `npm ci` installed 22 packages. `npm audit
-  --audit-level=high` found zero vulnerabilities.
-- Types and lint: `npm run typecheck` passed. `npm run lint` passed rustfmt and
-  Clippy for all targets and features with warnings denied.
-- Backend: `cargo test --all-targets` passed 12/12. Coverage includes durable
-  restart, mounted deployment contract, raw-token absence, atomic free-plan
-  concurrency, forwarded-IP rate limiting with `Retry-After`, proof/demo
-  expiry, semantic input validation, identity, routes, and cache policy.
-- Claims: all 13 manifest entries have exactly one `@claim:<id>` test. `npm run
-  test:claims` passed 18/18 desktop/mobile browser runs; the four Rust claim
-  commands also pass in the backend suite.
-- Browser: `npm test` passed 36/36 on desktop Chromium and a 390 × 844 mobile
-  viewport. It covers the complete demo, proof reply, extras, CSV, real visit,
-  error recovery, keyboard/radio controls, 44 px targets, 200% text reflow,
-  dark mode, reduced motion, offline messaging, same-origin privacy, response
-  headers, deep links, and console errors.
-- Accessibility: Playwright axe scans found zero serious or critical issues on
-  the landing and proof flows. The full suite also verifies `lang`, one `h1`,
-  landmarks, skip link, visible focus, keyboard operation, touch targets,
-  mobile reflow, image alternatives, and route focus management.
-- Production builds: `npm run build` produced `dist/`; JS is 31,407 bytes raw
-  / 10.06 KB gzip and CSS is 15,292 bytes raw / 4.38 KB gzip. The hero WebP is
-  18,322 bytes. `cargo build --release` passed.
-- Runtime contract: the release binary started with only `PATH` and `PORT` and
-  served `/health`, `/`, and `/privacy` with HTTP 200. Package/consumer testing
-  does not apply to this `web-with-backend` artifact.
-- Browser screenshots inspected at 1440 px and 390 px:
-  `.factory/qa-artifacts/repair-local-*.png` and
-  `.factory/qa-artifacts/repair-demo-*.png`.
-
-Run the complete local set with:
+## Run and verify
 
 ```sh
 npm ci
@@ -122,57 +112,22 @@ npm run build
 cargo build --release
 npm test
 npm run test:claims
-```
-
-Run deployment and public probes with:
-
-```sh
+npm run test:a11y
 ./scripts/deploy-container.sh
 EXPECTED_SHA=$(git rev-parse HEAD) npm run test:live
 PLAYWRIGHT_BASE_URL=https://service-proof-loop.sociobot.in npm test
 ```
 
-## Live deployment and durability evidence
-
-- Source commit `7f7fb5363cf253340fad168e3b100e6871fe3f7a` was built by
-  ACR run `ch108` from a `.git`-free source archive. The image digest is
-  `sha256:6f8faec6621053832773d529cd0bd62ddf82cdd46f122aedfe539bffffee0d3d`.
-- Active revision `sf-service-proof-loop--0000014` reports the exact source SHA
-  from `/health`. Azure reports `Single` mode, min/max replicas `1/1`, one live
-  replica, and the `service-proof-loop-data` Azure Files volume mounted at
-  `/data`.
-- The first mounted image failed closed before receiving traffic because Azure
-  Files rejected SQLite advisory locks. Its log reported SQLite code 5. The
-  single-process VFS plus old-writer drain repaired that root cause; the prior
-  healthy revision remained public during diagnosis.
-- `EXPECTED_SHA=7f7fb53… npm run test:live` passed: 20/20 fresh TLS demo reads
-  returned 200; eight concurrent free writes returned 3 × 201 and 5 × 402;
-  invalid date and blank-label probes returned 400; a 130-connection rate burst
-  returned 40 ordinary responses and 90 × 429, all with `Retry-After`.
-- `PLAYWRIGHT_BASE_URL=https://service-proof-loop.sociobot.in npm test` passed
-  36/36 on desktop Chromium and 390 × 844 mobile Chromium. This live run covers
-  the complete product, keyboard, accessibility, privacy, offline messaging,
-  response policy, claims, routes, and console errors.
-- Factory `verify-url.sh` passed `/`, `/demo`, `/privacy`, and `/terms`. Each
-  route returned 200 with `lang=en`, one `h1`, a main landmark, complete image
-  alternatives, and no console errors. Evidence is under
-  `.factory/qa-artifacts/repair-verify-*`.
-- Mobile Lighthouse 12.8.2 scored 100 Performance, 100 Accessibility, 100 Best
-  Practices, and 100 SEO. FCP was 1.20 s, LCP 1.22 s, TBT 0 ms, and CLS 0.
-  Evidence: `.factory/qa-artifacts/lighthouse-live-repair.json`.
-- Live privacy capture loaded only
-  `https://service-proof-loop.sociobot.in`, set no cookies, left real local
-  storage empty, and stored only `demo:workspace` in session storage.
-- Live responses include CSP, HSTS, `nosniff`, frame denial, a restrictive
-  permissions policy, and strict-origin referrer policy. The checkout returned
-  its expected hosted redirect in the live browser suite.
-- A 100-request `/health` load smoke returned 100 × 200 in 603 ms (166 req/s).
-  The mounted database was 241,664 bytes after the public functional tests,
-  confirming writes reached durable storage.
-
 ## Known gaps
 
-- The explicit commercial deviation above remains until the Sociobot billing
-  contract supports recurring subscriptions and technician seats.
-- This online product is not a PWA. The reconnect/offline state is tested;
-  service-worker install and update checks do not apply.
+### Commercial scope deviation
+
+- The researched brief calls for `$59 per business each month plus technician
+  seats`. The supplied Sociobot paid-unlock contract supports a `$59 one-time
+  business license` and has no subscription or seat API. The shipped offer
+  remains the closest honest implementation until that billing contract grows.
+
+### Offline scope
+
+- This online product is not a PWA. It provides and tests a reconnect message;
+  service-worker install, update, and offline reload do not apply.
