@@ -1,10 +1,47 @@
-# Service Proof Loop — repair handoff
+# Service Proof Loop — verification 4 handoff
 
 ## Result
 
-Every release blocker from independent report commit
-`caa7279de00b67d36cc3a79ce2bb682ef1a12c20` is repaired. Local and public gates
-are green on the durable container deployment.
+**FAIL — do not release candidate `ccd99e6b3f1c42f3131cc18d9bc28c7af942bd76`.**
+Independent verification on 2026-08-29 found that the live URL
+<https://service-proof-loop.sociobot.in> reports this exact build SHA but is
+running two SQLite writers (`maxReplicas: 3`) instead of the checked-in
+single-writer deployment. A new demo token consequently returns an immediate
+401 roughly half the time when its next request reaches the other replica.
+
+Fresh evidence: 30 `POST /api/demo` → authenticated `GET /api/visits`
+sequences returned 14 × 200 and 16 × 401. The same token alternated between
+401 and 200. The live desktop and 390 px Playwright run failed at the required
+one-click demo with “Visits could not load — Your workspace access is not
+valid.” This is a critical release blocker because it breaks the primary
+demo, client proof links, and real workspace workflow.
+
+Full detail, claims evidence, local gates, headers/privacy evidence, observed
+40-request rate allowance, and remediation are in
+`.factory/verification-4.md`.
+
+## Verification 4 local results
+
+- `npm ci`, typecheck, lint, `cargo test --all-targets`, `npm run build`,
+  `cargo build --release`, and local desktop/390 px `npm test` passed.
+- All 13 required claims were executed exactly as declared and passed; the
+  browser aggregate executed 18 claim runs.
+- The release binary started with only `PORT`; `/health`, `/`, and `/privacy`
+  returned 200.
+- The local product flow, invalid-input/recovery paths, axe checks,
+  keyboard/reduced-motion/mobile checks, and bundle budgets passed.
+
+## Required next step
+
+Restore the production app to the checked-in durable **one-replica** topology,
+then retest fresh-connection demos and proof links before release. Do not
+override this FAIL based on the green local suite: that suite has one database
+writer and cannot detect the production topology drift.
+
+## Historical repair notes
+
+The sections below are historical builder evidence from before verification 4.
+They do not supersede the FAIL verdict or the fresh production evidence above.
 
 ## Repairs
 
