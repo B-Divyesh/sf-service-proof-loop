@@ -303,11 +303,16 @@ test('@claim:no-tracking landing and demo load no third-party resources', async 
   expect([...origins]).toEqual([new URL(page.url()).origin]);
 });
 
-test('valid deep links return 200 and unknown routes return 404', async ({ request }) => {
+test('valid deep links return 200 and the real 404 includes social metadata', async ({ request }) => {
   for (const path of ['/', '/demo', '/app', '/privacy', '/terms', '/proof/example-token']) {
     expect((await request.get(path)).status(), path).toBe(200);
   }
-  expect((await request.get('/definitely-missing')).status()).toBe(404);
+  const missing = await request.get('/definitely-missing');
+  expect(missing.status()).toBe(404);
+  const html = await missing.text();
+  expect(html).toContain('<meta property="og:title" content="Page not found — Service Proof Loop">');
+  expect(html).toContain('<meta name="twitter:card" content="summary_large_image">');
+  expect(html).toContain('https://service-proof-loop.sociobot.in/assets/social.jpg');
 });
 
 test('security response policy and primary flows have no console errors', async ({ page, request }) => {

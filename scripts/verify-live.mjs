@@ -7,6 +7,7 @@ import {
   assertDemoStateContinuity,
   probeDemoStateContinuity,
 } from './state-continuity.mjs';
+import { assertRateBurst } from './rate-limit.mjs';
 
 const base = new URL(process.env.LIVE_BASE_URL || 'https://service-proof-loop.sociobot.in');
 const transport = base.protocol === 'https:' ? https : http;
@@ -122,15 +123,14 @@ async function verifyRateBurst(size, client, minimumLimited) {
   const responses = await Promise.all(Array.from({ length: size }, () => call('/api/not-found', {
     headers: { 'x-forwarded-for': client },
   })));
-  const statuses = responses.map(result => result.status);
-  const allowed = statuses.filter(status => status !== 429).length;
-  const limited = statuses.filter(status => status === 429).length;
-  const result = { requests: size, elapsed_ms: Date.now() - started, allowed, limited };
-  check(statuses.every(status => status === 404 || status === 429), 'rate probe returned an unexpected response', statuses);
-  check(allowed <= 42 && limited >= minimumLimited, 'rate allowance exceeds one replica plus two refill tokens', result);
-  check(responses.filter(response => response.status === 429)
-    .every(response => response.headers['retry-after'] === '1'), '429 response omitted Retry-After: 1', result);
-  return result;
+  const result = assertRateBurst(
+    responses.map(response => ({
+      status: response.status,
+      retryAfter: response.headers['retry-after'],
+    })),
+    { requests: size, minimumLimited },
+  );
+  return { ...result, elapsed_ms: Date.now() - started };
 }
 
 evidence.rate_bursts = {
