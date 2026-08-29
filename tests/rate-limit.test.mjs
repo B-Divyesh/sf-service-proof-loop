@@ -14,14 +14,14 @@ test('accepts one 40-request allowance for the 45-request claim probe', () => {
   );
 });
 
-test('rejects verifier 8\'s 45-of-45 unbounded request result', () => {
+test('rejects verifier 9\'s 45-of-45 unbounded request result', () => {
   assert.throws(
     () => assertRateBurst(responses(45, 0), { requests: 45, minimumLimited: 3 }),
     /rate allowance exceeds one replica plus two refill tokens/,
   );
 });
 
-test('rejects verifier 8\'s tripled 120-request allowance', () => {
+test('rejects verifier 9\'s tripled 120-request allowance', () => {
   assert.throws(
     () => assertRateBurst(responses(120, 10), { requests: 130, minimumLimited: 88 }),
     /rate allowance exceeds one replica plus two refill tokens/,

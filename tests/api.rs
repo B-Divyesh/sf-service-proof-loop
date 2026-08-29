@@ -493,7 +493,7 @@ fn deployment_contract_requires_durable_sqlite_and_one_replica() {
 }
 
 #[test]
-fn commercial_scope_deviation_is_explicit() {
+fn commercial_scope_is_formally_rescoped_without_rewriting_research() {
     let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
     let brief: serde_json::Value =
         serde_json::from_slice(&std::fs::read(root.join(".factory/brief.json")).unwrap()).unwrap();
@@ -501,13 +501,23 @@ fn commercial_scope_deviation_is_explicit() {
         brief["monetization"],
         "$59 per business each month plus technician seats"
     );
+    let decision: serde_json::Value =
+        serde_json::from_slice(&std::fs::read(root.join(".factory/scope-decision.json")).unwrap())
+            .unwrap();
+    assert_eq!(decision["status"], "formally-rescoped");
+    assert_eq!(decision["researched_scope"], brief["monetization"]);
+    assert_eq!(
+        decision["delivery_scope"],
+        "$59 one-time business license for one workspace"
+    );
     let handoff = std::fs::read_to_string(root.join(".factory/handoff.md"))
         .unwrap()
         .replace("**", "")
         .split_whitespace()
         .collect::<Vec<_>>()
         .join(" ");
-    assert!(handoff.contains("Commercial scope deviation"));
+    assert!(handoff.contains("Formal commercial scope decision"));
+    assert!(handoff.contains(".factory/scope-decision.json"));
     assert!(handoff.contains("$59 per business each month plus technician seats"));
-    assert!(handoff.contains("$59 one-time business license"));
+    assert!(handoff.contains("$59 one-time business license for one workspace"));
 }

@@ -27,19 +27,25 @@ test('accepts the exact 20-demo, 400-read verifier scenario when state is cohere
   });
 });
 
-test('rejects verifier 8\'s 266-of-400 intermittent 401 read pattern', () => {
+test('rejects verifier 9\'s exact 138-of-400 reads and 1-of-20 proofs', () => {
   const sequences = Array.from({ length: DEMO_SEQUENCE_COUNT }, healthySequence);
   let failures = 0;
   for (const sequence of sequences) {
     for (const [readIndex] of sequence.reads.entries()) {
-      if (failures < 266) {
+      if (failures < 262) {
         sequence.reads[readIndex] = { status: 401, location: undefined, visitId: undefined };
         failures += 1;
       }
     }
   }
-  assert.equal(failures, 266);
-  assert.equal(sequences.flatMap(sequence => sequence.reads).filter(read => read.status === 200).length, 134);
+  for (const [index, sequence] of sequences.entries()) {
+    sequence.proof = index === 19
+      ? sequence.proof
+      : { status: index < 14 ? 0 : 404, location: undefined, visitId: undefined };
+  }
+  assert.equal(failures, 262);
+  assert.equal(sequences.flatMap(sequence => sequence.reads).filter(read => read.status === 200).length, 138);
+  assert.equal(sequences.filter(sequence => sequence.proof.status === 200).length, 1);
   assert.throws(
     () => assertDemoStateContinuity(sequences),
     /lost its seeded workspace \(401, no visit\)/,

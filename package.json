@@ -9,7 +9,7 @@
     "typecheck": "tsc --noEmit -p frontend/tsconfig.json",
     "lint": "cargo fmt --all -- --check && cargo clippy --all-targets --all-features -- -D warnings",
     "test": "npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test",
-    "test:deployment": "node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/rate-limit.test.mjs tests/release-docs.test.mjs",
+    "test:deployment": "node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/rate-limit.test.mjs tests/plan-limit.test.mjs tests/release-docs.test.mjs",
     "test:runtime": "npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs",
     "test:claims": "playwright test --grep @claim",
     "test:a11y": "playwright test --grep @a11y",

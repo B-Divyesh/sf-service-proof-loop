@@ -1,0 +1,15 @@
+{
+  "id": "commercial-model-2026-08-29",
+  "status": "formally-rescoped",
+  "research_source": ".factory/brief.json",
+  "researched_scope": "$59 per business each month plus technician seats",
+  "delivery_scope": "$59 one-time business license for one workspace",
+  "effective_for": "service-proof-loop container artifact",
+  "reason": "The work order's required Sociobot paid-unlock contract supports a one-time product license and does not provide recurring technician-seat billing.",
+  "guardrails": [
+    "Keep the researched monetization text unchanged in .factory/brief.json.",
+    "Describe the registered checkout truthfully as a one-time purchase.",
+    "Do not implement direct provider billing or claim technician-seat billing.",
+    "Revisit this decision only when the factory supplies a subscription-capable Sociobot billing contract."
+  ]
+}

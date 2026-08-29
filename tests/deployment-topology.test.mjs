@@ -18,12 +18,12 @@ test('accepts the checked-in durable single-writer topology', () => {
   );
 });
 
-test('rejects the verifier report topology with multiple ephemeral SQLite writers', () => {
+test('rejects verifier 9\'s exact three-replica ephemeral SQLite topology', () => {
   assert.throws(
     () => assertDeploymentTopology(
       contract,
       fixture('deployment-topology-verifier-failure.json'),
-      'ccd99e6b3f1c42f3131cc18d9bc28c7af942bd76',
+      '7fbc18756626b21a0633d96210b8c330d82e9a44',
     ),
     /maximum replica count drifted from the deployment contract/,
   );

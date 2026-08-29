@@ -69,6 +69,10 @@ after 14 days. Every API route except `/health` has a forwarded-IP rate limit.
 The free plan accepts three completed visits. A $59 one-time business license
 adds unlimited visits. Checkout and license verification use the Sociobot billing
 API. The server enforces the limit even when its browser controls are bypassed.
+This delivery model is formally recorded in
+[.factory/scope-decision.json](.factory/scope-decision.json). The researched
+monthly-plus-seat model remains unchanged in the opportunity brief; the supplied
+Sociobot paid-unlock contract does not support that billing shape.
 
 ## Deployment
 

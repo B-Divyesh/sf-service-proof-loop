@@ -8,6 +8,7 @@ import {
   probeDemoStateContinuity,
 } from './state-continuity.mjs';
 import { assertRateBurst } from './rate-limit.mjs';
+import { assertConcurrentFreePlan } from './plan-limit.mjs';
 
 const base = new URL(process.env.LIVE_BASE_URL || 'https://service-proof-loop.sociobot.in');
 const transport = base.protocol === 'https:' ? https : http;
@@ -102,8 +103,7 @@ const concurrent = await Promise.all(Array.from({ length: 8 }, () => call('/api/
   json: visit(tomorrow),
 })));
 evidence.concurrent_plan_statuses = concurrent.map(result => result.status);
-check(evidence.concurrent_plan_statuses.filter(status => status === 201).length === 3, 'concurrent free limit was not atomic', evidence.concurrent_plan_statuses);
-check(evidence.concurrent_plan_statuses.filter(status => status === 402).length === 5, 'requests beyond the free limit were not rejected', evidence.concurrent_plan_statuses);
+assertConcurrentFreePlan(evidence.concurrent_plan_statuses);
 
 const validationWorkspace = await call('/api/workspaces', {
   method: 'POST',

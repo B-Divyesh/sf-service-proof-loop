@@ -1,17 +1,17 @@
 {
   "app": {
     "provisioningState": "Succeeded",
-    "latestRevision": "sf-service-proof-loop--0000016",
-    "latestReadyRevision": "sf-service-proof-loop--0000016",
+    "latestRevision": "sf-service-proof-loop--0000031",
+    "latestReadyRevision": "sf-service-proof-loop--0000031",
     "mode": "Single",
     "minReplicas": 1,
     "maxReplicas": 3,
-    "image": "sociobotregistry.azurecr.io/sf-service-proof-loop:ccd99e6b3f1c",
+    "image": "sociobotregistry.azurecr.io/sf-service-proof-loop:7fbc18756626",
     "mounts": null,
     "volumes": null
   },
   "revisions": [
-    {"name": "sf-service-proof-loop--0000016", "active": true, "replicas": 2}
+    {"name": "sf-service-proof-loop--0000031", "active": true, "replicas": 3}
   ],
-  "replicas": 2
+  "replicas": 3
 }
