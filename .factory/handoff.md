@@ -2,7 +2,9 @@
 
 ## Result
 
-Verifier 9's release blockers have exact regression coverage and pass locally.
+**PASS — verifier 9's release blockers are repaired, tested, and deployed.**
+They have exact regression coverage locally and passed against the configured
+production topology.
 The repair keeps the Rust/axum + SQLite backend, Vite frontend, container
 artifact, researched job, visual system, demo, proof flow, and prior behavior.
 Release deployment must use `./scripts/deploy-container.sh`; it is the only
@@ -131,6 +133,54 @@ writers, attaches Azure Files at `/data`, applies the one-replica ceiling,
 waits for one ready replica, checks `/health` identity, and then runs the 400
 read, 20 proof, concurrent plan, semantic validation, and both rate-limit
 probes. It rolls back if any gate fails.
+
+Repair implementation commit
+`cfdb7139c483509d26d4a8f110307a618951dc57` was deployed with that command.
+ACR produced image digest
+`sha256:4eb68fd685f27b6880cc69110d438c03179b3fd36d6fae49d4cbe20113b47ebe`.
+Azure created revision `sf-service-proof-loop--0000032` and reported:
+
+- one active revision and one running replica after the complete browser load;
+- `minReplicas: 1`, `maxReplicas: 1`;
+- Azure Files `service-proof-loop-data` mounted at `/data`;
+- image `sociobotregistry.azurecr.io/sf-service-proof-loop:cfdb7139c483`;
+- `/health` build SHA
+  `cfdb7139c483509d26d4a8f110307a618951dc57`.
+
+The deployment transaction and a separate SHA-pinned `npm run test:live`
+both passed:
+
+- 20/20 demos created;
+- 400/400 simultaneous authenticated reads returned the seeded workspace;
+- 20/20 proofs resolved to their matching visit;
+- eight concurrent free-plan writes returned 3 × 201 and 5 × 402;
+- past dates and blank checklist labels returned 400;
+- the 45-request burst returned 40 allowed and 5 limited;
+- the 130-request burst returned 40 allowed and 90 limited in 239 ms;
+- every limited response included `Retry-After: 1`.
+
+The 130-request probe is also the backend load smoke: it sustained over 500
+requests per second while enforcing the public allowance. The full live
+Playwright run passed 42/42 on desktop and 390 px. Live factory URL audits for
+`/`, `/demo`, `/privacy`, and `/terms` found no console errors and passed the
+title, language, heading, landmark, image-alternative, and control-name checks.
+Evidence is in `.factory/qa-artifacts/repair9-live-*`.
+
+All live JS, CSS, hero, sample, and social asset SHA-256 values matched local
+`dist/`. Hashed assets returned immutable one-year caching. Unknown routes
+returned the styled HTTP 404, and security headers matched the response policy.
+
+Lighthouse 12.8.2 mobile evidence is in
+`.factory/qa-artifacts/lighthouse-live-repair9.json`:
+
+- Performance 100, Accessibility 100, Best Practices 100, SEO 100;
+- FCP 1.201 s, LCP 1.351 s, TBT 57 ms, CLS 0;
+- total transfer 68,297 B.
+
+After this evidence commit, the same configured deployment command is run once
+more so live `/health` identifies the final repository commit. That transaction
+repeats the topology, continuity, proof, validation, plan, and rate gates before
+returning success.
 
 ## Known constraints
 

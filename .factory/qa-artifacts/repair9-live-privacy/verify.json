@@ -1,0 +1,14 @@
+{
+  "url": "https://service-proof-loop.sociobot.in/privacy",
+  "loadMs": 553,
+  "errors": [],
+  "a11y": {
+    "title": "Privacy — Service Proof Loop",
+    "lang": "en",
+    "h1": 1,
+    "main": true,
+    "imgsMissingAlt": 0,
+    "buttonsUnlabeled": 0,
+    "textLength": 1322
+  }
+}
