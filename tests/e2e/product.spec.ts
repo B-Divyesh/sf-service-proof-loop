@@ -174,7 +174,7 @@ test('@claim:privacy-data-flow visit data, replies, and extras follow the stated
 });
 
 test('@claim:rate-limit API traffic is limited per forwarded client', async ({ request }) => {
-  const responses = await Promise.all(Array.from({ length: 45 }, () => request.post('/api/demo', { headers: { 'x-forwarded-for': '198.51.100.44' } })));
+  const responses = await Promise.all(Array.from({ length: 45 }, () => request.get('/api/not-found', { headers: { 'x-forwarded-for': '198.51.100.44' } })));
   const blocked = responses.find(response => response.status() === 429);
   expect(blocked).toBeTruthy();
   expect(blocked!.headers()['retry-after']).toBe('1');

@@ -53,7 +53,7 @@
     "claim": "Every API route except health is limited by forwarded client IP",
     "where": "README",
     "test": "npm test -- --grep @claim:rate-limit",
-    "sandbox": "send 45 demo requests as one forwarded client; assert a 429 response with Retry-After"
+    "sandbox": "send 45 non-mutating API requests as one forwarded client; assert a 429 response with Retry-After"
   },
   {
     "id": "plan-limit",

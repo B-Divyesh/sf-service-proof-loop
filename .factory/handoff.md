@@ -30,6 +30,9 @@ single-writer container topology from candidate
 8. Adding a client extra now renders the created server response immediately
    instead of waiting for a redundant Azure Files read. The live desktop and
    mobile suite covers this path under concurrent use.
+9. The browser rate-limit probe now uses a non-mutating API route, matching the
+   live verifier. Its 90 concurrent requests no longer seed 80 workspaces while
+   unrelated desktop and mobile workflow tests are running.
 
 ## Exact regression coverage
 
