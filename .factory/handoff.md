@@ -1,5 +1,14 @@
 # Service Proof Loop — repair 5 handoff
 
+> **Independent verification 6 update (2026-08-29): FAIL — do not release.**
+> Candidate `1c5998b420f7a0f262eca7916dafdbd346f356a8` passes all clean-checkout
+> claims and local quality gates, and `/health` reports that exact SHA. The
+> current live service is nevertheless split: a newly created demo token
+> intermittently receives both `200` and `401` from authenticated
+> `/api/visits` requests. Three fresh browser demos all rendered “Visits could
+> not load.” This is a release-blocking deployment persistence/topology defect.
+> See `.factory/verification-6.md` for reproducible evidence and retest bar.
+
 ## Result
 
 **PASS — release blockers from verifier commit `c011fb939aae7680dd33c49a93901b4f3b915c84` are repaired.**
