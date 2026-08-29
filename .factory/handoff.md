@@ -1,70 +1,55 @@
-# Service Proof Loop — repair 5 handoff
-
-> **Independent verification 6 update (2026-08-29): FAIL — do not release.**
-> Candidate `1c5998b420f7a0f262eca7916dafdbd346f356a8` passes all clean-checkout
-> claims and local quality gates, and `/health` reports that exact SHA. The
-> current live service is nevertheless split: a newly created demo token
-> intermittently receives both `200` and `401` from authenticated
-> `/api/visits` requests. Three fresh browser demos all rendered “Visits could
-> not load.” This is a release-blocking deployment persistence/topology defect.
-> See `.factory/verification-6.md` for reproducible evidence and retest bar.
+# Service Proof Loop — repair 6 handoff
 
 ## Result
 
-**PASS — release blockers from verifier commit `c011fb939aae7680dd33c49a93901b4f3b915c84` are repaired.**
+**PASS — deployed and verified.** Repair commit
+`8b3b84ca5c2c4d1ad18a6f30b8b75d6b77e4f850` is live at
+<https://service-proof-loop.sociobot.in>. `/health` returns that exact source
+SHA.
 
-The repair preserves the accepted product workflow and the durable,
-single-writer container topology from candidate
-`b2fc763480bffbe801f1d759646e7573fa10d39f`.
+## Root cause and repair
 
-## Repairs
+Verification 6 correctly found that the candidate image had been deployed with
+the factory's generic, replica-local topology: a maximum of three replicas and
+no Azure Files volume. SQLite state could therefore split between requests.
+The report's direct topology evidence reproduced before this deployment:
+`maxReplicas: 3`, `mounts: null`, and `volumes: null`.
 
-1. Proof status and rating controls now scroll their visible labels into the
-   viewport when keyboard focus enters them. The focused radio itself and its
-   designed outline are both visible on desktop and 390 px mobile.
-2. A saved client reply now moves focus to the new confirmation `<h1>` and
-   writes “Your reply is saved” to the page announcer.
-3. `.factory/claims.json` now covers consented photo upload, saved problem and
-   rating replies, and zero-configuration port-8080 startup. Each new claim has
-   one exact tagged regression.
-4. Pricing, legal-contact, and proof-report links now provide at least a 44 px
-   target in both dimensions.
-5. Vite now builds a dedicated `404.html` entry that boots the same product
-   shell. Direct unknown requests retain HTTP 404 while showing the standard
-   header, navigation, visual system, footer, and return action.
-6. Hashed JavaScript and CSS remain immutable-cacheable after the second HTML
-   entry changed Vite's shared asset name.
-7. Browser tests use an isolated forwarded IP per test, preventing the test
-   suite itself from consuming another test's intentional 40-request bucket.
-8. Adding a client extra now renders the created server response immediately
-   instead of waiting for a redundant Azure Files read. The live desktop and
-   mobile suite covers this path under concurrent use.
-9. The browser rate-limit probe now uses a non-mutating API route, matching the
-   live verifier. Its 90 concurrent requests no longer seed 80 workspaces while
-   unrelated desktop and mobile workflow tests are running.
+The checked-in deployment contract already requires one durable writer. This
+repair makes that contract operationally release-blocking:
+
+1. `scripts/deploy-container.sh` still drains writers, mounts
+   `service-proof-loop-data` at `/data`, requires one active revision and a
+   one-replica ceiling, and now runs the full live state-continuity probe before
+   declaring success. Its rollback trap restores the prior ready revision if a
+   topology or continuity check fails.
+2. `scripts/verify-live.mjs` now creates 30 fresh demos. Each token receives
+   10 independent authenticated workspace reads and a proof read. Every read
+   must return its own seeded Willow Street visit and the proof must resolve to
+   that same visit ID.
+3. `scripts/state-continuity.mjs` centralizes that contract. Its exact unit
+   regression rejects the verifier's mixed `200`/`401` pattern. It is included
+   in the normal `npm test` deployment gate.
+4. README deployment instructions now describe the durable topology and the
+   no-401 live gate.
+
+The accepted proof, client reply, extra, CSV, privacy, and paid-license
+behaviors were not changed.
 
 ## Exact regression coverage
 
-- `@claim:photo-upload`: rejects four files and a file over 1 MB, then saves
-  and displays three named consented PNGs on the client proof.
-- `@claim:problem-rating`: saves a problem, rating 2, and comment, then checks
-  the exact problem state and accessible rating in the workspace.
-- `@claim:zero-config-runtime`: starts the release binary with an empty
-  environment and checks `/health` and `/` on port 8080.
-- The accessibility regression checks the focused radio and visible label
-  bounds against the viewport on both projects. It then submits with Enter and
-  checks the active confirmation heading and live-region text.
-- The touch regression measures all five formerly undersized inline targets at
-  390 px. The route regression checks a direct 404 response, shared shell, and
-  painted background.
-- The backend cache regression covers both the previous `index-*` asset name
-  and Vite's shared `main-*` CSS asset.
-- The configurable-extras regression aborts any redundant post-save list read
-  and proves the saved server response appears without one.
+- `tests/state-continuity.test.mjs` accepts 30 healthy repeated-read sequences
+  and rejects the verifier's seventh-demo, fourth-read `401` state loss.
+- `npm run test:live` checks Azure topology before product requests and fails
+  if the image, mount, volume type, active revision count, or replica count
+  diverges from `.factory/deployment.json`.
+- The post-deploy live probe additionally checks all 30 × 10 workspace reads,
+  matched proof IDs, atomic free-plan enforcement, semantic validation, and a
+  130-request rate-limit burst.
 
-## Local verification
+## Verification
 
-Run from `/work/repo`:
+Clean local verification from this checkout:
 
 ```sh
 npm ci
@@ -81,93 +66,73 @@ cargo build --release
 
 Results:
 
-- Clean install: 22 packages; zero audit vulnerabilities.
+- `npm ci`: 22 packages; audit reports zero vulnerabilities.
 - TypeScript, rustfmt, and Clippy with warnings denied: pass.
-- Backend unit/integration suite: 12/12 pass.
-- Deployment topology suite: 4/4 pass.
-- Empty-environment release runtime: 1/1 pass on default port 8080.
-- Playwright: 42/42 pass across desktop Chromium and 390 × 844 mobile.
-- Browser claim run: 22/22 pass. All 16 manifest commands were also run
-  separately and passed; every claim tag occurs exactly once in the sources.
-- Axe, dark treatment, keyboard, focus bounds, touch targets, reduced motion,
-  and 200% reflow: 4/4 pass.
-- Factory `verify-url.sh`: `/`, `/demo`, `/privacy`, and `/terms` pass with one
-  `<h1>`, `lang=en`, a main landmark, complete image alternatives, named
-  buttons, and zero console errors.
-- Production build: 31,750 B JavaScript (10.15 KB gzip), 15,437 B CSS
-  (4.41 KB gzip), and 18,322 B hero WebP. `dist/` includes the processed 404
-  entry. Initial assets remain below every stated budget.
-- Lighthouse 12.8.2 mobile: Performance 100, Accessibility 100, Best Practices
-  100, SEO 100; FCP 1.1 s, LCP 1.4 s, TBT 70 ms, CLS 0, total 69 KiB.
-- A 100-request local health burst returned 100 × 200 in 128 ms. The API rate
-  regression still proves 429 plus `Retry-After: 1` beyond the allowed burst.
+- Backend suite: 12/12 pass. Deployment/continuity suite: 6/6 pass.
+- `npm test`: 42/42 Playwright checks across desktop Chromium and 390 × 844
+  mobile; the empty-environment, default-port runtime claim passes.
+- All browser claim tags and axe checks pass; the claim suite checks the demo,
+  no-account proof, export, extras, paid-license registry/checkout, plan
+  behavior, photo consent, privacy flow, rate limit, and no-tracking behavior.
+- Production build: JavaScript 31,751 B (10.15 KB gzip), CSS 15,437 B
+  (4.41 KB gzip). `dist/` includes the dedicated 404 shell.
+- Docker CLI is not installed in this worker, but Azure Container Registry
+  completed the exact multi-stage Docker build successfully from this commit.
+- Local factory URL verification passed `/`, `/demo`, `/privacy`, and `/terms`:
+  each has a title, `lang=en`, one `h1`, a main landmark, complete image
+  alternatives, named controls, and no console errors. Evidence is under
+  `.factory/qa-artifacts/repair6-verify-*`.
 
-Manual focus evidence:
+Live verification after deployment:
 
-- Desktop 1440 × 900: focused radio top/bottom 423/445 px; visible label
-  top/bottom 420/480 px.
-- Mobile 390 × 844: focused radio top/bottom 404/426 px; visible label
-  top/bottom 401/461 px.
-- After keyboard submission in both viewports, `document.activeElement` is the
-  saved-state `<h1>` and `#announcer` contains “Your reply is saved”.
-- A direct unknown URL returns 404 with visible header and footer.
-
-Evidence is in `.factory/qa-artifacts/repair5-*` and
-`.factory/qa-artifacts/lighthouse-local-repair5.json`.
+- Azure revision `sf-service-proof-loop--0000024` is the only active, healthy
+  revision and has exactly one replica. It uses image
+  `sociobotregistry.azurecr.io/sf-service-proof-loop:8b3b84ca5c2c`, has
+  `minReplicas: 1` and `maxReplicas: 1`, and mounts Azure Files storage
+  `service-proof-loop-data` at `/data`.
+- `EXPECTED_SHA=8b3b84ca5c2c4d1ad18a6f30b8b75d6b77e4f850 npm run test:live`
+  passed: 30 demo creations, 300 repeated authenticated reads, and 30 proof
+  reads all returned 200 with their original Willow Street visit IDs. The same
+  run returned 3 × 201 and 5 × 402 for eight concurrent free-plan writes,
+  rejected invalid date and checklist input with 400, and returned 40 allowed
+  plus 90 `429 Retry-After` responses in the 130-request rate burst.
+- The pinned local Playwright 1.58.2 suite passed against the live URL on both
+  desktop and 390 px mobile, including keyboard focus, dark mode, 200% reflow,
+  same-origin privacy, offline messaging, response policy, direct routes, and
+  axe scans.
+- Live factory URL verification passed `/`, `/demo`, `/privacy`, and `/terms`
+  with zero console errors. Evidence is in
+  `.factory/qa-artifacts/repair6-live-*`.
+- Lighthouse 12.8.2 mobile: Performance 100, Accessibility 100, Best
+  Practices 100, SEO 100; FCP 1.2 s, LCP 1.4 s, TBT 60 ms, CLS 0, total
+  transfer 67 KiB. Raw evidence:
+  `.factory/qa-artifacts/lighthouse-live-repair6.json`.
 
 ## Privacy, offline, and response policy
 
-- The claim suite records same-origin traffic for the landing and demo flows.
-  There are no analytics, third-party scripts, third-party fonts, cookies, or
-  landing-page local storage.
-- Demo state remains isolated in `sessionStorage['demo:workspace']`; real
-  workspace state is not read or written while the demo banner is shown.
-- This online service does not register a service worker or claim offline
-  reload/update behavior. Its reconnect message remains covered by both
-  browser projects.
-- Local responses include CSP, HSTS, `nosniff`, frame denial, strict-origin
-  referrer policy, and a restrictive permissions policy. Hashed JS/CSS use
-  one-year immutable caching.
+- Demo data stays in its `sessionStorage['demo:workspace']` namespace; normal
+  workspace storage is not read or written during demo use.
+- Browser request recording confirms landing and demo flows make only
+  same-origin product requests. There are no analytics, third-party scripts,
+  third-party fonts, or product cookies.
+- This is an online backend service. It deliberately has no service worker or
+  offline-reload claim; its tested offline state tells the user to reconnect
+  before loading or saving proof.
+- Live CSP, HSTS, `nosniff`, frame denial, strict-origin referrer policy,
+  permissions policy, and immutable caching for hashed JS/CSS are present.
 
-## Deployment and live verification
+## Deploy and retest
 
-The checked-in `./scripts/deploy-container.sh` builds the commit containing
-this handoff, drains the old SQLite writer, deploys one active revision with
-one replica and the Azure Files mount at `/data`, and checks build identity.
-After deployment, `EXPECTED_SHA=$(git rev-parse HEAD) npm run test:live` and
-the full browser suite against `https://service-proof-loop.sociobot.in` verify
-the exact live commit, topology, 30 fresh demo/workspace/proof sequences,
-concurrent plan enforcement, validation recovery, rate limiting, routes,
-privacy, accessibility, desktop, and mobile behavior.
+```sh
+./scripts/deploy-container.sh
+EXPECTED_SHA=$(git rev-parse HEAD) npm run test:live
+PLAYWRIGHT_BASE_URL=https://service-proof-loop.sociobot.in ./node_modules/.bin/playwright test
+```
 
-Observed production results on 2026-08-29:
+## Known gaps
 
-- `/health` returned `status: ok` and the full expected source SHA. The live
-  topology check found one active revision, one ready replica, min/max one,
-  and the `service-proof-loop-data` Azure Files volume mounted at `/data`.
-- All 30 fresh demo → workspace → proof sequences returned 200. Eight
-  concurrent free-plan writes returned exactly 3 × 201 and 5 × 402. Invalid
-  dates and blank checklist labels returned 400.
-- A 130-request production burst allowed 40 requests and returned 90 × 429
-  with `Retry-After` in 300 ms.
-- Live Playwright passed 42/42 across desktop Chromium and 390 × 844 mobile,
-  including keyboard, axe, touch-target, privacy, offline-message, response
-  policy, direct-404, and all browser claim regressions.
-- Factory `verify-url.sh` passed `/`, `/demo`, `/privacy`, and `/terms` with
-  zero console errors. Live Lighthouse scored 100 Performance, 100
-  Accessibility, 100 Best Practices, and 100 SEO; FCP 1.1 s, LCP 1.2 s,
-  TBT 0 ms, CLS 0, and total transfer 67 KiB.
-
-## Commercial scope deviation
-
-The brief specifies `$59 per business each month plus technician seats`. The
-available paid-unlock contract supports a `$59 one-time business license` and
-has no subscription or seat API. This repair preserves the already disclosed
-one-time model, uses Sociobot-hosted checkout, and does not add direct billing.
-
-## Known gaps and next steps
-
-- Subscription and technician-seat billing remain blocked on a compatible
-  Sociobot billing contract. Do not simulate that model in this repository.
-- No service-worker update path is applicable because the product is an online
-  `web-with-backend` service and makes no offline-use claim.
+The researched brief calls for $59/month plus technician seats. The supplied
+Sociobot paid-unlock contract supports a $59 one-time business license, not
+subscription or seat billing. The product continues to disclose that variance
+plainly and does not simulate unsupported billing. No offline-update path is
+applicable because this online service makes no offline-use claim.
