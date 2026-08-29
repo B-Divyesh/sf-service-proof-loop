@@ -185,4 +185,4 @@ fi
 
 rollback_needed=0
 trap - EXIT
-jq --argjson replicas "$replica_count" '. + {replicas:$replicas}' <<<"$live"
+EXPECTED_SHA="$source_sha" node "$repo_dir/scripts/verify-deployment.mjs"

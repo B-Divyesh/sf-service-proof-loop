@@ -77,13 +77,16 @@ service. It runs as a non-root user and serves the API and frontend from one
 container. The factory supplies `BUILD_SHA`; it may deploy with only `PORT`.
 The checked-in [.factory/deployment.json](.factory/deployment.json) fixes the
 service at one replica and mounts the `service-proof-loop-data` Azure Files
-share at `/data`. The deployment script applies the image, durable mount,
-single-revision mode, and replica ceiling in one update. It then verifies the
-live topology and build identity. Do not raise the replica count without moving
-SQLite and rate-limit state to shared services.
+share at `/data`. The configured deployment command applies the image, durable
+mount, single-revision mode, and replica ceiling in one update. It then verifies
+the live topology, active writer count, durable storage, and build identity. The
+live test fails before product checks if Azure drifts from that contract. Do not
+raise the replica count without moving SQLite and rate-limit state to shared
+services.
 
 ```sh
 ./scripts/deploy-container.sh
+EXPECTED_SHA=$(git rev-parse HEAD) npm run test:live
 ```
 
 ## Privacy and license

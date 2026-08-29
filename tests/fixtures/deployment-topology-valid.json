@@ -1,0 +1,18 @@
+{
+  "app": {
+    "provisioningState": "Succeeded",
+    "latestRevision": "sf-service-proof-loop--0000017",
+    "latestReadyRevision": "sf-service-proof-loop--0000017",
+    "mode": "Single",
+    "minReplicas": 1,
+    "maxReplicas": 1,
+    "image": "sociobotregistry.azurecr.io/sf-service-proof-loop:0123456789ab",
+    "mounts": [{"volumeName": "data", "mountPath": "/data"}],
+    "volumes": [{"name": "data", "storageType": "AzureFile", "storageName": "service-proof-loop-data"}]
+  },
+  "revisions": [
+    {"name": "sf-service-proof-loop--0000016", "active": false, "replicas": 0},
+    {"name": "sf-service-proof-loop--0000017", "active": true, "replicas": 1}
+  ],
+  "replicas": 1
+}

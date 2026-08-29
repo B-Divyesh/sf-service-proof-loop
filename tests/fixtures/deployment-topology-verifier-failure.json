@@ -1,0 +1,17 @@
+{
+  "app": {
+    "provisioningState": "Succeeded",
+    "latestRevision": "sf-service-proof-loop--0000016",
+    "latestReadyRevision": "sf-service-proof-loop--0000016",
+    "mode": "Single",
+    "minReplicas": 1,
+    "maxReplicas": 3,
+    "image": "sociobotregistry.azurecr.io/sf-service-proof-loop:ccd99e6b3f1c",
+    "mounts": null,
+    "volumes": null
+  },
+  "revisions": [
+    {"name": "sf-service-proof-loop--0000016", "active": true, "replicas": 2}
+  ],
+  "replicas": 2
+}

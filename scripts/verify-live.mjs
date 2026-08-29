@@ -1,5 +1,6 @@
 import http from 'node:http';
 import https from 'node:https';
+import { verifyDeployment } from './verify-deployment.mjs';
 
 const base = new URL(process.env.LIVE_BASE_URL || 'https://service-proof-loop.sociobot.in');
 const transport = base.protocol === 'https:' ? https : http;
@@ -50,6 +51,9 @@ function visit(nextVisitAt, label = 'Kitchen') {
 }
 
 const evidence = {};
+if (base.hostname === 'service-proof-loop.sociobot.in' || process.env.VERIFY_AZURE_TOPOLOGY === '1') {
+  evidence.deployment_topology = verifyDeployment();
+}
 const health = await call('/health');
 check(health.status === 200, 'health must return 200', health);
 if (process.env.EXPECTED_SHA) {

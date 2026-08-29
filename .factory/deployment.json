@@ -1,5 +1,6 @@
 {
   "deployment_class": "container",
+  "deploy_command": "./scripts/deploy-container.sh",
   "resource_group": "sociobot",
   "environment": "factory-env",
   "app_name": "sf-service-proof-loop",

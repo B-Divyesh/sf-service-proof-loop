@@ -449,6 +449,7 @@ fn deployment_contract_requires_durable_sqlite_and_one_replica() {
         serde_json::from_slice(&std::fs::read(root.join(".factory/deployment.json")).unwrap())
             .unwrap();
     assert_eq!(contract["deployment_class"], "container");
+    assert_eq!(contract["deploy_command"], "./scripts/deploy-container.sh");
     assert_eq!(contract["active_revisions_mode"], "Single");
     assert_eq!(contract["scale"]["min_replicas"], 1);
     assert_eq!(contract["scale"]["max_replicas"], 1);
@@ -467,6 +468,10 @@ fn deployment_contract_requires_durable_sqlite_and_one_replica() {
     assert!(deploy.contains("Existing SQLite writers did not drain"));
     assert!(!deploy.contains(".containers[0].volumeMounts = null"));
     assert!(!deploy.contains("/opt/fleet/lib/deploy-container.sh"));
+    let live_verifier =
+        std::fs::read_to_string(root.join("scripts/verify-deployment.mjs")).unwrap();
+    assert!(live_verifier.contains("exactly one SQLite writer may be running"));
+    assert!(live_verifier.contains("durable volume is not mounted"));
     let main = std::fs::read_to_string(root.join("src/main.rs")).unwrap();
     assert!(main.contains(".vfs(\"unix-none\")"));
 }
