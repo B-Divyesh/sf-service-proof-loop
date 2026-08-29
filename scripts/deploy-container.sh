@@ -223,5 +223,10 @@ if [ "$replica_count" -ne 1 ]; then
 fi
 
 EXPECTED_SHA="$source_sha" node "$repo_dir/scripts/verify-deployment.mjs"
+# A matching image and Azure template are not sufficient: verification 6
+# observed one token alternating between 200 and 401. Keep this post-deploy
+# probe in the deployment transaction so a mount, replica, or routing drift
+# cannot be handed off as a healthy release.
+EXPECTED_SHA="$source_sha" node "$repo_dir/scripts/verify-live.mjs"
 rollback_needed=0
 trap - EXIT

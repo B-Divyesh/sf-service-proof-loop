@@ -80,9 +80,10 @@ service at one replica and mounts the `service-proof-loop-data` Azure Files
 share at `/data`. The configured deployment command applies the image, durable
 mount, single-revision mode, and replica ceiling in one update. It then verifies
 the live topology, active writer count, durable storage, and build identity. The
-live test fails before product checks if Azure drifts from that contract. It
-then runs 30 fresh demo → workspace → proof sequences. Do not raise the replica
-count without moving SQLite and rate-limit state to shared services.
+deploy transaction also creates 30 fresh demos and performs 10 fresh workspace
+reads plus a proof read for each one. It fails on any missing seeded visit or
+401 response. Do not raise the replica count without moving SQLite and
+rate-limit state to shared services.
 
 ```sh
 ./scripts/deploy-container.sh

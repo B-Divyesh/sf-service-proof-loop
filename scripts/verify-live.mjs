@@ -1,6 +1,11 @@
 import http from 'node:http';
 import https from 'node:https';
 import { verifyDeployment } from './verify-deployment.mjs';
+import {
+  DEMO_SEQUENCE_COUNT,
+  READS_PER_DEMO,
+  assertDemoStateContinuity,
+} from './state-continuity.mjs';
 
 const base = new URL(process.env.LIVE_BASE_URL || 'https://service-proof-loop.sociobot.in');
 const transport = base.protocol === 'https:' ? https : http;
@@ -62,33 +67,57 @@ if (process.env.EXPECTED_SHA) {
 evidence.health = health.data;
 
 const demoSequences = [];
-for (let index = 0; index < 30; index += 1) {
+for (let index = 0; index < DEMO_SEQUENCE_COUNT; index += 1) {
   const demo = await call('/api/demo', {
     method: 'POST',
     headers: { 'x-forwarded-for': `198.51.100.${100 + index}` },
   });
-  const visits = demo.status === 200
-    ? await call('/api/visits', {
+  const reads = [];
+  for (let readIndex = 0; readIndex < READS_PER_DEMO && demo.status === 200; readIndex += 1) {
+    const visits = await call('/api/visits', {
         headers: {
           authorization: `Bearer ${demo.data.access_token}`,
-          'x-forwarded-for': `198.51.100.${130 + index}`,
+          'x-forwarded-for': `198.51.101.${10 + readIndex}`,
         },
-      })
-    : { status: 0, data: [] };
-  const proofToken = visits.data?.[0]?.proof_token;
+      });
+    reads.push({
+      status: visits.status,
+      location: visits.data?.[0]?.location_label,
+      visitId: visits.data?.[0]?.id,
+    });
+  }
+  const proofToken = demo.status === 200
+    ? (await call('/api/visits', {
+        headers: {
+          authorization: `Bearer ${demo.data.access_token}`,
+          'x-forwarded-for': `198.51.102.${10 + index}`,
+        },
+      })).data?.[0]?.proof_token
+    : undefined;
   const proof = proofToken
     ? await call(`/api/proof/${encodeURIComponent(proofToken)}`, {
         headers: { 'x-forwarded-for': `198.51.100.${160 + index}` },
       })
     : { status: 0 };
-  demoSequences.push({ create: demo.status, visits: visits.status, proof: proof.status });
+  demoSequences.push({
+    create: demo.status,
+    reads,
+    proof: {
+      status: proof.status,
+      location: proof.data?.location_label,
+      visitId: proof.data?.id,
+    },
+  });
 }
 evidence.fresh_demo_workspace_proof_sequences = demoSequences;
-check(
-  demoSequences.every(result => result.create === 200 && result.visits === 200 && result.proof === 200),
-  'fresh demo, workspace, and proof requests did not share state',
-  demoSequences,
-);
+try {
+  assertDemoStateContinuity(demoSequences);
+} catch (error) {
+  check(false, 'fresh demo, repeated workspace reads, and proof requests did not share state', {
+    message: error.message,
+    sequences: demoSequences,
+  });
+}
 
 const workspace = await call('/api/workspaces', {
   method: 'POST',
