@@ -1,10 +1,17 @@
-# Service Proof Loop — repair 12 handoff
+# Service Proof Loop — verifier 13 handoff
 
 ## Result
 
-**PASS — repaired, deployed, and verified.** Production runs one durable SQLite
-writer with `deploy.data_dir=/data`. The live build identity matches the final
-repository HEAD.
+**PASS — independently verified candidate
+`b44500bb3ad3664d8a785bb76bc7a8dda138e607` is live and release-ready.**
+Production serves that exact SHA from `/health`; 20 demo workspaces sustained
+400/400 concurrent authenticated reads and 20/20 proof reads. The live
+per-client allowance is 40 requests, followed by 429 responses with
+`Retry-After: 1`.
+
+See [.factory/verification-13.md](verification-13.md) for the current,
+independent evidence, quality gates, and explicit PASS decision. The remaining
+sections preserve the prior repair history.
 
 ## Finding reproduced first
 
