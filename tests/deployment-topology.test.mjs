@@ -29,6 +29,17 @@ test('rejects verifier 9\'s exact three-replica ephemeral SQLite topology', () =
   );
 });
 
+test('rejects verifier 10\'s exact candidate topology before any functional probe', () => {
+  assert.throws(
+    () => assertDeploymentTopology(
+      contract,
+      fixture('deployment-topology-verifier-10.json'),
+      'f85577356b7108ad203b5e802c1180b8b497b914',
+    ),
+    /maximum replica count drifted from the deployment contract/,
+  );
+});
+
 test('rejects ephemeral storage even if the replica ceiling is repaired', () => {
   const snapshot = fixture('deployment-topology-verifier-failure.json');
   snapshot.app.maxReplicas = 1;

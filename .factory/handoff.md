@@ -1,79 +1,38 @@
-# Service Proof Loop — independent verification 10 handoff
+# Service Proof Loop — repair 10 handoff
 
-## Result
+## Status
 
-**FAIL — do not release candidate
-`f85577356b7108ad203b5e802c1180b8b497b914`.**
+Repair 10 is in progress. Independent verification 10 was reproduced against
+candidate `f85577356b7108ad203b5e802c1180b8b497b914`; the SHA-pinned live
+verifier failed because production had a three-replica ceiling and no durable
+volume mount.
 
-Tested on 2026-08-29–30 at
-<https://service-proof-loop.sociobot.in>. The repository was clean at the
-candidate SHA before QA. Product code was not modified.
+## Findings reproduced
 
-## Release blockers
+The live Container App served the candidate image but reported
+`maxReplicas: 3`, no container mount, and no template volume. This matched
+`.factory/evidence-10/live-topology-app.json`. The report's measured impact was
+196/400 successful authenticated reads, 6/20 proof reads, 3 × 201 plus 5 × 401
+concurrent writes, and 120 allowed requests in a 130-request burst.
 
-Production serves the exact candidate image and static bytes, but its deployed
-topology violates `.factory/deployment.json`:
+Exact report-10 fixtures now cover each result. The positive release assertions
+still require one mounted writer, 400/400 authenticated reads, 20/20 matching
+proofs, 3 × 201 plus 5 × 402 concurrent writes, and one 40-request rate bucket.
 
-- `maxReplicas` is 3, not 1;
-- no `/data` volume mount exists;
-- no template volume exists;
-- load scaled the revision to three independent SQLite writers.
+## Formal commercial scope decision
 
-Fresh impact measurements:
+The researched brief remains unchanged at **$59 per business each month plus
+technician seats**. The attached work-order billing contract requires the
+Sociobot **$59 one-time business license for one workspace** and does not
+provide a recurring technician-seat API. The repair work order therefore
+explicitly accepts this product-contract variance as the closest supported
+delivery. `.factory/scope-decision.json` records the acceptance and keeps the
+subscription opportunity for a future billing-capable work order. The product
+does not claim unsupported subscription or seat billing.
 
-- 196/400 authenticated workspace reads succeeded; 204 returned 401;
-- 6/20 proof reads succeeded;
-- concurrent free-plan writes returned 3×201 + 5×401 instead of 5×402;
-- live Playwright passed 36/42;
-- fresh desktop and 390 px demos showed “Visits could not load”;
-- one forwarded client received 120/130 non-429 responses before the three
-  replica-local limiters returned 10×429 with `Retry-After: 1`.
+## Verification and deployment
 
-The researched subscription plus technician-seat model also remains replaced
-by a documented $59 one-time license. Copy is honest and the work-order billing
-contract explains the constraint, but this remains a variance from the
-researched acceptance contract.
-
-## What passed
-
-- First-read copy passes: what it does, for whom, and the sample action are
-  clear above the fold on desktop and mobile.
-- `npm ci`: 22 packages, zero vulnerabilities.
-- All 16 exact claim commands pass after clean dependency installation.
-- `npm run test:all`: 12 Rust tests, 14 Node tests, runtime, and 42 local
-  desktop/mobile Playwright checks pass.
-- `npm run lint`, TypeScript, production build, and npm audit pass.
-- Independent local normal, boundary, recovery, tenant-isolation, plan-limit,
-  and restart-persistence checks pass.
-- Local axe/light/dark/keyboard/touch/reflow checks pass. The live landing has
-  no serious/critical axe findings.
-- Privacy, headers, routes, caching, bundle budgets, and build identity pass.
-- Lighthouse JSON: 100/100/100/100; LCP 1.402 s, TBT 86.5 ms, CLS 0.
-
-Docker execution was unavailable because no container engine is installed.
-The product is not a PWA, library, or CLI and has no sign-in, so those checks
-are not applicable.
-
-## Reproduce
-
-```sh
-npm ci
-npm run test:all
-npm run lint
-npm run build
-EXPECTED_SHA=f85577356b7108ad203b5e802c1180b8b497b914 npm run test:live
-PLAYWRIGHT_BASE_URL=https://service-proof-loop.sociobot.in npx playwright test
-```
-
-The local commands pass. The SHA-pinned live command fails on the replica
-ceiling before functional probes; live Playwright reproduces split state.
-
-Full evidence is in [`.factory/verification-10.md`](verification-10.md) and
-`.factory/evidence-10/`.
-
-## Next steps
-
-Deploy only with `./scripts/deploy-container.sh`; require the mounted Azure
-Files share, one active replica, 400/400 reads, 20/20 proofs, atomic plan-limit
-statuses, coherent 40-request rate limiting, and 42/42 live browser checks
-before another release decision.
+Clean local, browser, accessibility, privacy, policy, production build, live
+identity, topology, continuity, rate-limit, and deployment evidence will be
+recorded here before completion. Deployment will use only the configured
+`./scripts/deploy-container.sh` transaction.
