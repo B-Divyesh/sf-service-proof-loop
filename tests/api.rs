@@ -477,7 +477,7 @@ fn deployment_contract_requires_durable_sqlite_and_one_replica() {
     assert_eq!(contract["scale"]["max_replicas"], 1);
     assert_eq!(contract["state_backend"], "durable-single-writer-sqlite");
     assert_eq!(contract["data_dir"], "/data");
-    assert_eq!(contract["storage_name"], "service-proof-loop-data");
+    assert_eq!(contract["storage_name"], "sf-service-proof-loop-data");
     assert_eq!(contract["storage_mount"], "/data");
     assert_eq!(contract["rollout"]["drain_writers"], true);
 

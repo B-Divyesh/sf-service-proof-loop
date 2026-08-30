@@ -81,7 +81,7 @@ service. It runs as a non-root user and serves the API and frontend from one
 container. The factory supplies `BUILD_SHA`; it may deploy with only `PORT`.
 The checked-in [.factory/deployment.json](.factory/deployment.json) sets
 `data_dir` to `/data`, fixes the service at one replica, and mounts the
-`service-proof-loop-data` Azure Files share there. The configured deployment
+`sf-service-proof-loop-data` Azure Files share there. The configured deployment
 command applies the image, durable mount, single-revision mode, and replica
 ceiling in one update. It then verifies
 the live topology, active writer count, durable storage, and build identity. The

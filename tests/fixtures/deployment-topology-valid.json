@@ -8,7 +8,7 @@
     "maxReplicas": 1,
     "image": "sociobotregistry.azurecr.io/sf-service-proof-loop:0123456789ab",
     "mounts": [{"volumeName": "data", "mountPath": "/data"}],
-    "volumes": [{"name": "data", "storageType": "AzureFile", "storageName": "service-proof-loop-data"}]
+    "volumes": [{"name": "data", "storageType": "AzureFile", "storageName": "sf-service-proof-loop-data"}]
   },
   "revisions": [
     {"name": "sf-service-proof-loop--0000016", "active": false, "replicas": 0},

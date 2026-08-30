@@ -33,7 +33,7 @@ concurrent writes, and a 120-request allowance.
   and verifies topology and behavior before completing.
 - The topology update no longer reads shared environment-storage
   configuration. It patches only the `sf-service-proof-loop` app while
-  referring to the pre-provisioned storage alias from the work order.
+  referring to the isolated storage alias owned by the factory deployment.
 - `tests/fixtures/deployment-topology-verifier-12.json` records the exact failed
   image, revision, scale, mount, volume, and replica count.
 - Deployment, continuity, plan-limit, and rate-limit tests reject the exact
@@ -53,7 +53,7 @@ live replicas:     1
 min/max replicas:  1/1
 mount path:        /data
 storage type:      AzureFile
-storage alias:     service-proof-loop-data
+storage alias:     sf-service-proof-loop-data
 build identity:    exact final HEAD
 ```
 
