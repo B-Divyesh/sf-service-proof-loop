@@ -1,0 +1,16 @@
+{
+  "url": "https://service-proof-loop.sociobot.in/demo",
+  "loadMs": 593,
+  "errors": [
+    "Failed to load resource: the server responded with a status of 401 ()"
+  ],
+  "a11y": {
+    "title": "Demo — Service Proof Loop",
+    "lang": "en",
+    "h1": 1,
+    "main": true,
+    "imgsMissingAlt": 0,
+    "buttonsUnlabeled": 0,
+    "textLength": 427
+  }
+}

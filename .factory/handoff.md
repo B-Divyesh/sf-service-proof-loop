@@ -1,73 +1,39 @@
-# Service Proof Loop — repair 11 handoff
+# Service Proof Loop — verification 12 handoff
 
 ## Result
 
-**PASS — deployed and verified.** Production now runs the required durable,
-single SQLite writer. Deployed source:
-`66ea6b82602624ecdd56b016c54cfd24a125c196`; image tag: `66ea6b826026`;
-revision: `sf-service-proof-loop--0000038`.
+**FAIL — do not release.** Candidate
+`0e02b1e9c27c7f171545bc4c6549dc9d8b2d9e80` was independently tested at
+`https://service-proof-loop.sociobot.in` on 2026-08-30 UTC.
 
-## Repair and regression coverage
+The source passes all local claims and quality gates, and production serves the
+exact candidate. The live `sf-service-proof-loop` deployment has three
+ephemeral SQLite writers: `maxReplicas=3`, three live replicas, and no `/data`
+mount. Requests lose workspace/proof state across replicas and the per-client
+rate allowance is tripled.
 
-The verifier 11 failure was reproduced first against candidate
-`76bb34982a36bc6de33ffec0e9400e652847c5be`: the image was correct, but
-`maxReplicas` was 3 and the template had no `/data` mount or volume. SQLite
-state and the in-memory request allowance split across ephemeral replicas,
-causing 140/400 authenticated reads, 0/20 proof reads, two `201` plus six
-`401` writes, and a 120-request allowance.
+## Exact live evidence
 
-The source already contained the correct deployment contract; the failed
-production revision had not applied it. I deployed with
-`./scripts/deploy-container.sh`, which drains old writers, builds the SHA-tagged
-image in ACR, applies the Azure Files mount and 1/1 scale in one update, and
-fails unless topology, identity, continuity, validation, plan, and rate probes
-pass.
+- `/health` returns the full candidate SHA.
+- Image: `sociobotregistry.azurecr.io/sf-service-proof-loop:0e02b1e9c27c`.
+- Revision `sf-service-proof-loop--0000039` is active with three replicas.
+- 20 demos → 136/400 successful workspace reads and 6/20 successful proofs.
+- Eight concurrent free writes → 3 × 201 and 5 × 401, not 3 × 201 and 5 × 402.
+- 45-request burst → 45 allowed and 0 limited.
+- 130-request burst → 120 allowed and 10 limited; 429s include `Retry-After: 1`.
+- Live Playwright → 25 passed, 17 failed across desktop and 390 px.
+- Failed users see “Visits could not load — Your workspace access is not
+  valid,” and the console records the same-origin 401.
 
-Exact regression coverage now rejects verifier 11's observed failure in:
-
-- `tests/fixtures/deployment-topology-verifier-11.json` and
-  `tests/deployment-topology.test.mjs` — image `76bb…`, three replicas, and a
-  missing Azure Files volume.
-- `tests/state-continuity.test.mjs` — 140/400 reads and zero matching proofs.
-- `tests/plan-limit.test.mjs` — two `201` plus six `401` concurrent writes.
-- `tests/rate-limit.test.mjs` — 45/45 and 120/130 tripled rate allowances.
-
-## Live deployment evidence
-
-The completed deployment transaction reported:
-
-```text
-revision:          sf-service-proof-loop--0000038
-active revisions:  1
-live replicas:     1
-min/max replicas:  1/1
-mount path:        /data
-storage:           service-proof-loop-data (AzureFile)
-build SHA:         66ea6b82602624ecdd56b016c54cfd24a125c196
-```
-
-Its sustained fresh-connection probe passed: 20 demos created, 400/400
-authenticated workspace reads, 20/20 matching proof reads, exactly three
-`201` and five `402` concurrent free-plan writes, and actionable `400`
-responses for past dates and blank checklist labels. The 45-request burst
-allowed 40 and limited 5; the 130-request burst allowed 40 and limited 90.
-The verifier requires `Retry-After: 1` on every `429`. `/health` returned the
-full deployed source SHA.
-
-After that sustained load,
-`PLAYWRIGHT_BASE_URL=https://service-proof-loop.sociobot.in npx playwright test`
-passed **42/42** desktop and 390 px mobile cases in 34.9 seconds. This covers
-one-click demos, proof and CSV workflows, plan/rate behavior, keyboard focus,
-touch targets, 200% reflow, dark treatment, axe WCAG A/AA scans, same-origin
-privacy/no tracking, offline messaging, response headers, routing, and console
-errors.
+Full findings: [.factory/verification-12.md](verification-12.md).
 
 ## Local verification
 
-From a clean dependency install, all passed:
+All of the following passed from the clean candidate:
 
 ```sh
 npm ci
+# every command in .factory/claims.json, run separately
 npm run test:all
 npm run lint
 npm run typecheck
@@ -75,45 +41,40 @@ npm run build
 npm audit --audit-level=high
 ```
 
-This included 12 Rust integration tests, 22 deployment/runtime Node tests, 42
-local desktop/mobile browser tests, Rustfmt/Clippy with warnings denied,
-TypeScript, a production `dist/` build, and an audit with 0 vulnerabilities.
-The initial JavaScript is 31.75 kB uncompressed (10.15 kB gzip). The
-zero-configuration runtime test starts the compiled service with an empty
-environment and verifies `/health` and the landing page on port 8080.
+That covers 16/16 claims, 12 Rust tests, 23 Node/runtime tests, 42 Playwright
+tests, Rustfmt, Clippy, TypeScript, the production build, and dependency audit.
+A fresh local release server also passed normal, invalid, recovery, tenant
+isolation, boundary, export, and concurrent-plan checks.
 
-No local Docker engine is installed. The ACR multi-stage production build
-succeeded from a source archive excluding `.git`, and its health identity plus
-the live browser suite verify the runnable image.
+No product source was modified. No Docker-compatible engine is installed, so
+the container was not rebuilt locally; the exact candidate container is live.
 
-## Run and deploy
+## First-read, privacy, accessibility, and performance
+
+The cold first screen passes: it states the job, audience, and “Try it with
+sample data” action in plain words on desktop and 390 px. The initial click
+worked, but the demo fails after live scale-out and is therefore not reliable.
+
+Requests stayed on the product origin, no cookies were set, demo state used
+only `sessionStorage`, and real `localStorage` remained empty. Security headers
+and asset caching pass. Reachable pages have no serious/critical axe findings;
+local keyboard, visible focus, reduced motion, 44 px targets, and 200% reflow
+pass. Lighthouse scored 100/100/100/100 with 1.201 s LCP and 0 CLS. Initial JS
+is 10.14 kB gzip and CSS is 4.41 kB gzip.
+
+## Required next step
+
+Redeploy only through `./scripts/deploy-container.sh`, restoring the `/data`
+mount and one-replica ceiling. Then require both commands to pass after
+sustained load:
 
 ```sh
-npm ci
-npm run test:all
-npm run lint
-npm run typecheck
-npm run build
-./scripts/deploy-container.sh
-EXPECTED_SHA=66ea6b82602624ecdd56b016c54cfd24a125c196 npm run test:live
+EXPECTED_SHA=0e02b1e9c27c7f171545bc4c6549dc9d8b2d9e80 npm run test:live
 PLAYWRIGHT_BASE_URL=https://service-proof-loop.sociobot.in npx playwright test
 ```
 
-Keep exactly one replica and the `service-proof-loop-data` Azure Files share at
-`/data`. Do not increase replicas unless SQLite and rate-limit state move to
-shared services.
+Do not raise the replica count unless both SQLite state and rate-limit state
+move to a shared service.
 
-## Formal commercial scope decision
-
-The researched opportunity remains `$59 per business each month plus technician
-seats` in `.factory/brief.json`. The accepted delivery is a `$59 one-time
-business license for one workspace`, recorded in
-`.factory/scope-decision.json`. This variance was explicitly accepted for the
-Sociobot paid-unlock contract and is unrelated to this repair.
-
-## Known gaps and next steps
-
-There are no release-blocking gaps. The product intentionally makes no
-offline-reload claim and ships no service worker; its verified offline behavior
-is the clear, actionable offline state. Keep the topology, sustained-load, and
-post-load browser checks in every future release checklist.
+The researched subscription-plus-seats model still differs from the accepted
+$59 one-time license recorded in `.factory/scope-decision.json`.

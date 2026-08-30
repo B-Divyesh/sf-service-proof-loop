@@ -1,0 +1,21 @@
+Candidate: 0e02b1e9c27c7f171545bc4c6549dc9d8b2d9e80
+Live /health build_sha: 0e02b1e9c27c7f171545bc4c6549dc9d8b2d9e80
+
+Live/local SHA-256 matches:
+index.html 85e79a6340cc06022d8fc264154fee43a4ce40aa89e63070ccdfed736b01b8f7
+main-CDvb6mNL.js 5faea0f8a3ef6a2bfa5db42e1bf467ffdc1e4e07e4af1b352c7147ebb23b2b65
+main-CgVTc3e8.css 66ce0eecf6c2a09cdd994ea365930d830fe00bd5530f37770a1525131f517a89
+proof-loop-hero.webp ae4634f842108fa6e6fb72b5302216bd96fefae27523a8b77c5477e284f6f955
+
+Raw/gzip sizes:
+JavaScript 31,751 / 10,144 bytes
+CSS 15,437 / 4,414 bytes
+Hero WebP 18,322 bytes
+Fonts 0 bytes
+
+Hashed JS/CSS: Cache-Control public, max-age=31536000, immutable
+Hero: Cache-Control public, max-age=86400
+
+Lighthouse 12.8.2 mobile:
+Performance 100; Accessibility 100; Best Practices 100; SEO 100
+FCP 1,051 ms; LCP 1,201 ms; TBT 25.5 ms; CLS 0; transfer 68,256 bytes

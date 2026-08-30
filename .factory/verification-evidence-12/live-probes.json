@@ -1,0 +1,12 @@
+{
+  "candidate_sha": "0e02b1e9c27c7f171545bc4c6549dc9d8b2d9e80",
+  "health_sha_matches": true,
+  "demo_creates": { "200": 20 },
+  "authenticated_workspace_reads": { "200": 136, "401": 264 },
+  "proof_reads": { "200": 6, "404": 14 },
+  "concurrent_free_plan_writes": { "201": 3, "401": 5 },
+  "rate_burst_45": { "404": 45, "429": 0 },
+  "rate_burst_130": { "404": 120, "429": 10 },
+  "retry_after_on_429": "1",
+  "live_playwright": { "passed": 25, "failed": 17, "total": 42 }
+}

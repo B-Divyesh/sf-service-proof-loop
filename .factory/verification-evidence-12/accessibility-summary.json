@@ -1,0 +1,22 @@
+{
+  "local_playwright": {
+    "desktop_and_390px": "pass",
+    "axe_serious_critical": 0,
+    "keyboard_flow": "pass",
+    "visible_radio_focus": "3px solid rgb(241, 145, 103)",
+    "touch_targets_44px": "pass",
+    "text_reflow_200_percent": "pass"
+  },
+  "live_reachable_proof": {
+    "desktop_axe_serious_critical": 0,
+    "mobile_390px_axe_serious_critical": 0,
+    "reduced_motion_max_duration_ms": 0.01,
+    "horizontal_overflow_px": 0,
+    "horizontal_overflow_at_200_percent_px": 0,
+    "note": "Proof loading required retries because state was split across replicas."
+  },
+  "live_full_suite": {
+    "result": "fail",
+    "reason": "401 workspace failures prevented proof controls from loading"
+  }
+}

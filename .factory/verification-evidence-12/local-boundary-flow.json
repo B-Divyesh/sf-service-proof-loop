@@ -1,0 +1,28 @@
+{
+  "workspace_and_demo": "pass",
+  "extra_price_boundaries": {
+    "minus_0_01": 400,
+    "zero": 201,
+    "one_thousand": 201,
+    "one_thousand_and_0_01": 400
+  },
+  "invalid_visit_inputs": {
+    "past_date": 400,
+    "malformed_date": 400,
+    "empty_checklist": 400,
+    "blank_checklist_label": 400,
+    "photo_without_consent": 400,
+    "four_photos": 400,
+    "notes_601_characters": 400
+  },
+  "accepted_boundaries": {
+    "three_photos": 201,
+    "notes_600_characters": 201
+  },
+  "invalid_reply_then_recovery": { "invalid": 400, "valid_problem_rating_2": 200 },
+  "workspace_received_reply_and_extra": true,
+  "csv_received_extra_and_price_1000_00": true,
+  "cross_tenant_export": 404,
+  "missing_authorization": 401,
+  "concurrent_free_plan_writes": { "201": 3, "402": 5 }
+}

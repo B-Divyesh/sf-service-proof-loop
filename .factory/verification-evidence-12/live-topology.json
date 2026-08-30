@@ -1,0 +1,13 @@
+{
+  "app": "sf-service-proof-loop",
+  "image": "sociobotregistry.azurecr.io/sf-service-proof-loop:0e02b1e9c27c",
+  "latest_revision": "sf-service-proof-loop--0000039",
+  "latest_ready_revision": "sf-service-proof-loop--0000039",
+  "active_revisions": 1,
+  "live_replicas": 3,
+  "min_replicas": 1,
+  "max_replicas": 3,
+  "revision_mode": "Single",
+  "volume_mounts": null,
+  "volumes": null
+}

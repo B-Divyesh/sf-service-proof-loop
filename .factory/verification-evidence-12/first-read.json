@@ -1,0 +1,28 @@
+{
+  "desktop_and_390px": {
+    "headline": "Send proof. Plan the next visit.",
+    "audience": "For recurring service teams that need client feedback and approved extras without another customer app.",
+    "first_action": "Try it with sample data",
+    "action_explanation": "Loads a sample visit. Nothing is saved.",
+    "one_h1": true,
+    "one_main": true,
+    "lang": "en",
+    "horizontal_overflow_px": 0
+  },
+  "cold_click": {
+    "opened": "/demo",
+    "seeded_location": "Willow Street",
+    "demo_banner": true,
+    "reset_demo": true,
+    "start_for_real": true,
+    "request_origins": ["https://service-proof-loop.sociobot.in"],
+    "cookies": [],
+    "session_storage": ["demo:workspace"],
+    "local_storage": []
+  },
+  "under_two_worker_load": {
+    "result": "Visits could not load",
+    "reason": "Your workspace access is not valid.",
+    "console_error": "same-origin API request returned 401"
+  }
+}
