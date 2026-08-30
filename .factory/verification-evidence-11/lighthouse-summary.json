@@ -1,0 +1,16 @@
+{
+  "categories": {
+    "performance": 99,
+    "accessibility": 100,
+    "best-practices": 100,
+    "seo": 100
+  },
+  "metrics": {
+    "fcp_ms": 1201.3139999999999,
+    "lcp_ms": 1354.8139999999999,
+    "tbt_ms": 107,
+    "cls": 0,
+    "inp_ms": null
+  },
+  "transfer_bytes": 68288
+}

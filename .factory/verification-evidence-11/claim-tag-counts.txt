@@ -1,0 +1,16 @@
+      1 access-token-hashing
+      1 configurable-extras
+      1 demo-expiry
+      1 demo-sandbox
+      1 next-visit-export
+      1 no-account
+      1 no-tracking
+      1 paid-license
+      1 photo-upload
+      1 plan-limit
+      1 privacy-data-flow
+      1 problem-rating
+      1 proof-expiry
+      1 rate-limit
+      1 same-origin-demo
+      1 zero-config-runtime

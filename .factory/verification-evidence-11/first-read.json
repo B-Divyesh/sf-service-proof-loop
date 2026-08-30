@@ -1,0 +1,128 @@
+{
+  "url": "https://service-proof-loop.sociobot.in/",
+  "status": 200,
+  "headers": {
+    "accept-ranges": "bytes",
+    "content-length": "1654",
+    "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+    "content-type": "text/html",
+    "date": "Sun, 30 Aug 2026 01:21:06 GMT",
+    "last-modified": "Sun, 30 Aug 2026 00:50:10 GMT",
+    "permissions-policy": "camera=(), microphone=(), geolocation=()",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "strict-transport-security": "max-age=31536000; includeSubDomains",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "DENY"
+  },
+  "title": "Service Proof Loop — Send proof after each visit",
+  "lang": "en",
+  "h1": [
+    "Send proof. Plan the next visit."
+  ],
+  "mainText": "AFTER-VISIT PROOF FOR RECURRING SERVICES\n\nSend proof. Plan the next visit.\n\nFor recurring service teams that need client feedback and approved extras without another customer app.\n\nTry it with sample data\nLoads a sample visit. Nothing is saved.\nProof links expire after 14 days.\nClients open links without an account.\nThree visits free. $59 once for unlimited visits.\nOne client choice moves into the next visit.\n\nTHE PRODUCT\n\nSee the full loop on one screen\n\nCrews record the visit. Clients review the proof. The office exports approved extras without typing them again.\n\nNorthstar Home Care\nWAITING FOR CLIENT\nVisits\nWillow Street\nToday · Elena\nLake Avenue\nYesterday · Sam\n\nVISIT COMPLETE\n\nMaya’s visit at Willow Street\n\nFour checks · Two photos · Next visit Sep 11\n\n✓\nKitchen surfaces and sink\n✓\nTwo bathrooms\n✓\nFloors vacuumed and mopped\nNext visit\n\nInside refrigerator · Client approved · $28\n\nHOW IT WORKS\n\nClose the visit before work gets lost\nRecord the visit\n\nThe technician checks the work, adds photos with consent, and sends one private link.\n\nCollect one clear reply\n\nThe client accepts the work or reports a problem. They can rate it and choose extras.\n\nCarry work forward\n\nApproved extras appear beside the next date. Export them as a ready-to-use CSV.\n\nCLEAR BOUNDARIES\n\nProof only, not another field system\n\nThis service keeps the after-visit exchange small and clear.\n\nWhat it handles\nVisit checklists and consented photos\nClient acceptance, problems, and ratings\nApproved extras for the next visit\nWhat it leaves alone\nNo dispatch, payroll, or worker tracking\nNo home-entry codes or payment cards\nNo public review campaigns\n\nBUSINESS LICENSE\n\nKeep every recurring visit in the loop\n\nAdd unlimited client proof links after three free visits.\n\nOne business workspace\nConfigurable client extras\nNext-visit CSV exports\n\n$59 one-time purchase\n\nBuy the business license\nat Sociobot checkout\nHave a license?\nVerify license\n\nSociobot is the merchant of record. Refunds are handled there.\n\nPrivacy · Terms",
+  "visibleViewport": [
+    {
+      "tag": "A",
+      "text": "Service Proof Loop",
+      "top": 14
+    },
+    {
+      "tag": "A",
+      "text": "Demo",
+      "top": 14
+    },
+    {
+      "tag": "A",
+      "text": "Workspace",
+      "top": 14
+    },
+    {
+      "tag": "A",
+      "text": "Price",
+      "top": 14
+    },
+    {
+      "tag": "A",
+      "text": "Privacy",
+      "top": 14
+    },
+    {
+      "tag": "P",
+      "text": "After-visit proof for recurring services",
+      "top": 237
+    },
+    {
+      "tag": "H1",
+      "text": "Send proof. Plan the next visit.",
+      "top": 269
+    },
+    {
+      "tag": "P",
+      "text": "For recurring service teams that need client feedback and approved extras without another customer app.",
+      "top": 462
+    },
+    {
+      "tag": "A",
+      "text": "Try it with sample data",
+      "top": 559
+    },
+    {
+      "tag": "LI",
+      "text": "Proof links expire after 14 days.",
+      "top": 640
+    },
+    {
+      "tag": "LI",
+      "text": "Clients open links without an account.",
+      "top": 674
+    },
+    {
+      "tag": "LI",
+      "text": "Three visits free. $59 once for unlimited visits.",
+      "top": 709
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "url": "https://service-proof-loop.sociobot.in/",
+      "resourceType": "document"
+    },
+    {
+      "method": "GET",
+      "url": "https://service-proof-loop.sociobot.in/assets/main-CDvb6mNL.js",
+      "resourceType": "script"
+    },
+    {
+      "method": "GET",
+      "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css",
+      "resourceType": "stylesheet"
+    },
+    {
+      "method": "GET",
+      "url": "https://service-proof-loop.sociobot.in/assets/proof-loop-hero.webp",
+      "resourceType": "image"
+    },
+    {
+      "method": "POST",
+      "url": "https://service-proof-loop.sociobot.in/api/demo",
+      "resourceType": "fetch"
+    },
+    {
+      "method": "GET",
+      "url": "https://service-proof-loop.sociobot.in/api/visits",
+      "resourceType": "fetch"
+    }
+  ],
+  "consoleEvents": [],
+  "pageErrors": [],
+  "demoActionCount": 1,
+  "afterClick": {
+    "url": "https://service-proof-loop.sociobot.in/demo",
+    "title": "Demo — Service Proof Loop",
+    "h1": [
+      "Preparing the sample visit"
+    ],
+    "body": "Demo — sample data, nothing is saved\nReset demo\nStart for real\nSkip to main content\nService Proof Loop\nDemo\nWorkspace\nPrice\nPrivacy\nPreparing the sample visit\n\nWe are making an isolated workspace for this demo.\n\nService Proof Loop\n\nSend visit proof and plan the next visit.\n\nOriginal product art was generated for this service.\n\nPrivacy\nTerms\nBuilt by Param Factory\n(external site)\n\nVersion 1.0.0 · Build 2026.08"
+  }
+}

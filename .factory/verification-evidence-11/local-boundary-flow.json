@@ -1,0 +1,176 @@
+{
+  "health": {
+    "status": 200,
+    "headers": {
+      "content-length": "33",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Sun, 30 Aug 2026 01:37:03 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "data": {
+      "build_sha": "dev",
+      "status": "ok"
+    }
+  },
+  "blank_workspace": {
+    "status": 400,
+    "headers": {
+      "content-length": "46",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Sun, 30 Aug 2026 01:37:03 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "data": {
+      "error": "Enter between 1 and 80 characters."
+    }
+  },
+  "missing_auth": {
+    "status": 401,
+    "headers": {
+      "content-length": "50",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Sun, 30 Aug 2026 01:37:03 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "data": {
+      "error": "Open your workspace again to continue."
+    }
+  },
+  "workspace": {
+    "status": 201,
+    "demo": false
+  },
+  "extra_boundaries": {
+    "0": {
+      "status": 201
+    },
+    "100000": {
+      "status": 201
+    },
+    "100001": {
+      "status": 400,
+      "error": "Set an extra price from $0 to $1,000."
+    },
+    "-1": {
+      "status": 400,
+      "error": "Set an extra price from $0 to $1,000."
+    }
+  },
+  "invalid_visits": {
+    "past_date": {
+      "status": 400,
+      "error": "Choose today or a future next visit date."
+    },
+    "malformed_date": {
+      "status": 400,
+      "error": "Choose a valid next visit date."
+    },
+    "empty_checklist": {
+      "status": 400,
+      "error": "Add at least one checklist item."
+    },
+    "blank_checklist": {
+      "status": 400,
+      "error": "Enter between 1 and 120 characters."
+    },
+    "photos_without_consent": {
+      "status": 400,
+      "error": "Photo consent is required before photos can be shared."
+    },
+    "four_photos": {
+      "status": 400,
+      "error": "Use up to three image files under 1 MB each."
+    },
+    "notes_601": {
+      "status": 400,
+      "error": "Keep notes under 600 characters."
+    }
+  },
+  "valid_three_photo_visit": {
+    "status": 201,
+    "expiry_present": true
+  },
+  "proof": {
+    "status": 200,
+    "location": "Willow Boundary",
+    "photo_count": 3,
+    "extras_count": 5
+  },
+  "invalid_replies": {
+    "status": {
+      "status": 400,
+      "error": "Choose accepted or report a problem."
+    },
+    "rating_0": {
+      "status": 400,
+      "error": "Choose a rating from 1 to 5."
+    },
+    "rating_6": {
+      "status": 400,
+      "error": "Choose a rating from 1 to 5."
+    },
+    "seven_extras": {
+      "status": 400,
+      "error": "Choose no more than six extras."
+    }
+  },
+  "valid_reply_after_errors": {
+    "status": 200,
+    "saved": true
+  },
+  "workspace_after_reply": {
+    "status": 200,
+    "response_status": "problem",
+    "rating": 2,
+    "requested_extra_price": 100000
+  },
+  "csv": {
+    "status": 200,
+    "content_type": "text/csv; charset=utf-8",
+    "content_disposition": "attachment; filename=next-visit.csv",
+    "contains_1000": true,
+    "contains_extra": true
+  },
+  "cross_tenant_export": {
+    "status": 404,
+    "error": "That visit was not found."
+  },
+  "free_plan_after_first_visit": [
+    {
+      "status": 201
+    },
+    {
+      "status": 201
+    },
+    {
+      "status": 402,
+      "error": "The free plan includes three visits. Add a valid business license to record more."
+    }
+  ],
+  "concurrent_free_plan": {
+    "201": 3,
+    "402": 5
+  },
+  "rate_limit": {
+    "statuses": {
+      "404": 40,
+      "429": 5
+    },
+    "retry_after_1": 5
+  }
+}

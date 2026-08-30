@@ -1,0 +1,317 @@
+{
+  "desktop": {
+    "initial": {
+      "status": 200,
+      "headers": {
+        "accept-ranges": "bytes",
+        "content-length": "1654",
+        "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+        "content-type": "text/html",
+        "date": "Sun, 30 Aug 2026 01:34:30 GMT",
+        "last-modified": "Sun, 30 Aug 2026 00:50:10 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "title": "Service Proof Loop — Send proof after each visit",
+      "lang": "en",
+      "h1": [
+        "Send proof. Plan the next visit."
+      ],
+      "main_count": 1,
+      "horizontal_overflow": 0,
+      "serious_or_critical_axe": []
+    },
+    "focus": [
+      {
+        "tag": "A",
+        "text": "Try it with sample data",
+        "href": "/demo",
+        "outline": "3px solid rgb(217, 104, 59)",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Buy the business license at Sociobot checkout",
+        "href": "https://api.sociobot.in/api/v1/products/service-proof-loop/checkout",
+        "outline": "3px solid rgb(217, 104, 59)",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "href": null,
+        "outline": "3px solid rgb(217, 104, 59)",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Verify license",
+        "href": null,
+        "outline": "3px solid rgb(217, 104, 59)",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Privacy",
+        "href": "/privacy",
+        "outline": "3px solid rgb(217, 104, 59)",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Terms",
+        "href": "/terms",
+        "outline": "3px solid rgb(217, 104, 59)",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Privacy",
+        "href": "/privacy",
+        "outline": "3px solid rgb(217, 104, 59)",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Terms",
+        "href": "/terms",
+        "outline": "3px solid rgb(217, 104, 59)",
+        "boxShadow": "none"
+      }
+    ],
+    "afterDemo": {
+      "url": "https://service-proof-loop.sociobot.in/demo",
+      "title": "Demo — Service Proof Loop",
+      "h1": [
+        "Visits could not load"
+      ],
+      "body": "Demo — sample data, nothing is saved\nReset demo\nStart for real\nSkip to main content\nService Proof Loop\nDemo\nWorkspace\nPrice\nPrivacy\nVisits could not load\n\nYour workspace access is not valid.\n\nTry loading again\nService Proof Loop\n\nSend visit proof and plan the next visit.\n\nOriginal product art was generated for this service.\n\nPrivacy\nTerms\nBuilt by Param Factory\n(external site)\n\nVersion 1.0.0 · Build 2026.08\n\nVisits could not load",
+      "session_demo_present": true,
+      "real_storage_present": false,
+      "serious_or_critical_axe": []
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/",
+        "type": "document"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CDvb6mNL.js",
+        "type": "script"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css",
+        "type": "stylesheet"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/proof-loop-hero.webp",
+        "type": "image"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/",
+        "type": "document"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CDvb6mNL.js",
+        "type": "script"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css",
+        "type": "stylesheet"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/proof-loop-hero.webp",
+        "type": "image"
+      },
+      {
+        "method": "POST",
+        "url": "https://service-proof-loop.sociobot.in/api/demo",
+        "type": "fetch"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/api/visits",
+        "type": "fetch"
+      }
+    ],
+    "origins": [
+      "https://service-proof-loop.sociobot.in"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 401 ()"
+    ],
+    "pageErrors": [],
+    "cookies": []
+  },
+  "mobile": {
+    "initial": {
+      "status": 200,
+      "headers": {
+        "accept-ranges": "bytes",
+        "content-length": "1654",
+        "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+        "content-type": "text/html",
+        "date": "Sun, 30 Aug 2026 01:34:35 GMT",
+        "last-modified": "Sun, 30 Aug 2026 00:50:10 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "title": "Service Proof Loop — Send proof after each visit",
+      "lang": "en",
+      "h1": [
+        "Send proof. Plan the next visit."
+      ],
+      "main_count": 1,
+      "horizontal_overflow": 0,
+      "serious_or_critical_axe": []
+    },
+    "focus": [
+      {
+        "tag": "A",
+        "text": "Try it with sample data",
+        "href": "/demo",
+        "outline": "3px solid rgb(217, 104, 59)",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Buy the business license at Sociobot checkout",
+        "href": "https://api.sociobot.in/api/v1/products/service-proof-loop/checkout",
+        "outline": "3px solid rgb(217, 104, 59)",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "href": null,
+        "outline": "3px solid rgb(217, 104, 59)",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Verify license",
+        "href": null,
+        "outline": "3px solid rgb(217, 104, 59)",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Privacy",
+        "href": "/privacy",
+        "outline": "3px solid rgb(217, 104, 59)",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Terms",
+        "href": "/terms",
+        "outline": "3px solid rgb(217, 104, 59)",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Privacy",
+        "href": "/privacy",
+        "outline": "3px solid rgb(217, 104, 59)",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Terms",
+        "href": "/terms",
+        "outline": "3px solid rgb(217, 104, 59)",
+        "boxShadow": "none"
+      }
+    ],
+    "afterDemo": {
+      "url": "https://service-proof-loop.sociobot.in/demo",
+      "title": "Demo — Service Proof Loop",
+      "h1": [
+        "Visits could not load"
+      ],
+      "body": "Demo — sample data, nothing is saved\nReset demo\nStart for real\nSkip to main content\nService Proof Loop\nDemo\nWorkspace\nPrivacy\nVisits could not load\n\nYour workspace access is not valid.\n\nTry loading again\nService Proof Loop\n\nSend visit proof and plan the next visit.\n\nOriginal product art was generated for this service.\n\nPrivacy\nTerms\nBuilt by Param Factory\n(external site)\n\nVersion 1.0.0 · Build 2026.08\n\nVisits could not load",
+      "session_demo_present": true,
+      "real_storage_present": false,
+      "serious_or_critical_axe": []
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/",
+        "type": "document"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CDvb6mNL.js",
+        "type": "script"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css",
+        "type": "stylesheet"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/proof-loop-hero.webp",
+        "type": "image"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/",
+        "type": "document"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CDvb6mNL.js",
+        "type": "script"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css",
+        "type": "stylesheet"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/proof-loop-hero.webp",
+        "type": "image"
+      },
+      {
+        "method": "POST",
+        "url": "https://service-proof-loop.sociobot.in/api/demo",
+        "type": "fetch"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/api/visits",
+        "type": "fetch"
+      }
+    ],
+    "origins": [
+      "https://service-proof-loop.sociobot.in"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 401 ()"
+    ],
+    "pageErrors": [],
+    "cookies": []
+  },
+  "reduced_motion": {
+    "matches": true,
+    "animated_elements": [],
+    "smooth_scroll": "auto"
+  }
+}

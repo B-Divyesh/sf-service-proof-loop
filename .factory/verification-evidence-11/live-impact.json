@@ -1,0 +1,72 @@
+{
+  "health": {
+    "status": 200,
+    "data": {
+      "build_sha": "76bb34982a36bc6de33ffec0e9400e652847c5be",
+      "status": "ok"
+    },
+    "headers": {
+      "content-type": "application/json",
+      "x-content-type-options": "nosniff",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-frame-options": "DENY",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-length": "70",
+      "date": "Sun, 30 Aug 2026 01:26:13 GMT",
+      "connection": "close"
+    }
+  },
+  "continuity": {
+    "demos_attempted": 20,
+    "demo_create_statuses": {
+      "200": 20
+    },
+    "reads_attempted": 400,
+    "read_statuses": {
+      "200": 140,
+      "401": 260
+    },
+    "successful_seeded_reads": 140,
+    "proof_statuses": {
+      "0": 14,
+      "404": 6
+    },
+    "matching_proofs": 0
+  },
+  "concurrent_plan": {
+    "workspace_status": 201,
+    "write_statuses": {
+      "201": 2,
+      "401": 6
+    },
+    "sequence": [
+      401,
+      401,
+      401,
+      401,
+      401,
+      401,
+      201,
+      201
+    ]
+  },
+  "rate_45": {
+    "requests": 45,
+    "statuses": {
+      "404": 45
+    },
+    "limited_with_retry_after_1": 0,
+    "elapsed_ms": 81
+  },
+  "rate_130": {
+    "requests": 130,
+    "statuses": {
+      "404": 120,
+      "429": 10
+    },
+    "limited_with_retry_after_1": 10,
+    "elapsed_ms": 276
+  }
+}

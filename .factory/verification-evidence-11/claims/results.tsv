@@ -1,0 +1,16 @@
+demo-sandbox	0	npm test -- --grep @claim:demo-sandbox
+no-account	0	npm test -- --grep @claim:no-account
+proof-expiry	0	cargo test claim_proof_expiry_rejects_an_expired_proof
+next-visit-export	0	npm test -- --grep @claim:next-visit-export
+same-origin-demo	0	npm test -- --grep @claim:same-origin-demo
+configurable-extras	0	npm test -- --grep @claim:configurable-extras
+paid-license	0	npm test -- --grep @claim:paid-license
+rate-limit	0	npm test -- --grep @claim:rate-limit
+plan-limit	0	cargo test claim_plan_limit_is_server_enforced_and_a_valid_license_allows_more
+demo-expiry	0	cargo test claim_demo_expiry_is_24_hours_and_expired_access_is_rejected
+no-tracking	0	npm test -- --grep @claim:no-tracking
+access-token-hashing	0	cargo test claim_access_tokens_are_stored_only_as_hashes
+privacy-data-flow	0	npm test -- --grep @claim:privacy-data-flow
+photo-upload	0	npm test -- --grep @claim:photo-upload
+problem-rating	0	npm test -- --grep @claim:problem-rating
+zero-config-runtime	0	npm run test:runtime

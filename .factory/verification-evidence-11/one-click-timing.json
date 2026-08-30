@@ -1,0 +1,55 @@
+{
+  "state": [
+    {
+      "ms": 67,
+      "url": "https://service-proof-loop.sociobot.in/demo",
+      "h1": [
+        "Preparing the sample visit"
+      ]
+    },
+    {
+      "ms": 346,
+      "url": "https://service-proof-loop.sociobot.in/demo",
+      "h1": [
+        "Completed visits"
+      ]
+    }
+  ],
+  "responses": [
+    {
+      "t": 1788052883012,
+      "url": "https://service-proof-loop.sociobot.in/api/demo",
+      "status": 200,
+      "headers": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "content-length": "179",
+        "date": "Sun, 30 Aug 2026 01:21:23 GMT",
+        "content-type": "application/json",
+        "x-frame-options": "DENY"
+      }
+    },
+    {
+      "t": 1788052883040,
+      "url": "https://service-proof-loop.sociobot.in/api/visits",
+      "status": 200,
+      "headers": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "content-length": "328",
+        "date": "Sun, 30 Aug 2026 01:21:23 GMT",
+        "content-type": "application/json",
+        "x-frame-options": "DENY"
+      }
+    }
+  ],
+  "events": [],
+  "errors": [],
+  "body": "Demo — sample data, nothing is saved\nReset demo\nStart for real\nSkip to main content\nService Proof Loop\nDemo\nWorkspace\nPrice\nPrivacy\n\nSAMPLE WORKSPACE\n\nCompleted visits\n\nProof, feedback, and next-visit work stay together.\n\nManage extras\nRecord a visit\nRecent visits\nWillow Street\nwaiting\nWAITING FOR CLIENT\nMaya Chen · Willow Street\n\nCompleted Aug 30, 2026 by Elena\n\nPrivate proof link\nCopy proof link\nOpen client view\nNext visit · Sep 13, 2026\n\nNo extras requested yet. Client choices will appear here.\n\nExport next-visit CSV\nService Proof Loop\n\nSend visit proof and plan the next visit.\n\nOriginal product art was generated for this service.\n\nPrivacy\nTerms\nBuilt by Param Factory\n(external site)\n\nVersion 1.0.0 · Build 2026.08\n\nCompleted visits"
+}
