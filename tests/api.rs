@@ -493,7 +493,7 @@ fn deployment_contract_requires_durable_sqlite_and_one_replica() {
 }
 
 #[test]
-fn commercial_scope_is_formally_rescoped_without_rewriting_research() {
+fn commercial_variance_is_explicitly_accepted_without_rewriting_research() {
     let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
     let brief: serde_json::Value =
         serde_json::from_slice(&std::fs::read(root.join(".factory/brief.json")).unwrap()).unwrap();
@@ -504,7 +504,15 @@ fn commercial_scope_is_formally_rescoped_without_rewriting_research() {
     let decision: serde_json::Value =
         serde_json::from_slice(&std::fs::read(root.join(".factory/scope-decision.json")).unwrap())
             .unwrap();
-    assert_eq!(decision["status"], "formally-rescoped");
+    assert_eq!(decision["status"], "accepted-product-contract-variance");
+    assert_eq!(
+        decision["accepted_by"],
+        "service-proof-loop-repair-10 work order"
+    );
+    assert!(decision["acceptance"]
+        .as_str()
+        .unwrap()
+        .contains("explicitly accepts the one-time license"));
     assert_eq!(decision["researched_scope"], brief["monetization"]);
     assert_eq!(
         decision["delivery_scope"],
