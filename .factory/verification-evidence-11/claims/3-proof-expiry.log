@@ -1,0 +1,42 @@
+CLAIM: proof-expiry
+COMMAND: cargo test claim_proof_expiry_rejects_an_expired_proof
+START: 2026-08-30T01:17:58Z
+ Downloading crates ...
+  Downloaded fastrand v2.5.0
+  Downloaded linux-raw-sys v0.12.1
+  Downloaded rustix v1.1.4
+  Downloaded tempfile v3.27.0
+   Compiling bitflags v2.13.1
+   Compiling raw-cpuid v11.6.0
+   Compiling quanta v0.12.6
+   Compiling governor v0.10.4
+   Compiling tower-http v0.6.11
+   Compiling rustix v1.1.4
+   Compiling reqwest v0.12.28
+   Compiling tower_governor v0.8.0
+   Compiling linux-raw-sys v0.12.1
+   Compiling fastrand v2.5.0
+   Compiling tempfile v3.27.0
+   Compiling service-proof-loop v1.0.0 (/work/repo)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 28.38s
+     Running unittests src/lib.rs (target/debug/deps/service_proof_loop-792ea97753dcb0de)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/service_proof_loop-e8ab0cb932ca9782)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/api.rs (target/debug/deps/api-6fcbe729112709c1)
+
+running 1 test
+test claim_proof_expiry_rejects_an_expired_proof ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.01s
+
+EXIT: 0
+END: 2026-08-30T01:18:27Z

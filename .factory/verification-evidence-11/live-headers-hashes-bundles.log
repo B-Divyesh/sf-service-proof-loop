@@ -1,0 +1,102 @@
+URL https://service-proof-loop.sociobot.in/
+HTTP/2 200 
+content-type: text/html
+content-length: 1654
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: DENY
+strict-transport-security: max-age=31536000; includeSubDomains
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'
+URL https://service-proof-loop.sociobot.in/demo
+HTTP/2 200 
+content-type: text/html
+content-length: 1654
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: DENY
+strict-transport-security: max-age=31536000; includeSubDomains
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'
+URL https://service-proof-loop.sociobot.in/privacy
+HTTP/2 200 
+content-type: text/html
+content-length: 1654
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: DENY
+strict-transport-security: max-age=31536000; includeSubDomains
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'
+URL https://service-proof-loop.sociobot.in/terms
+HTTP/2 200 
+content-type: text/html
+content-length: 1654
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: DENY
+strict-transport-security: max-age=31536000; includeSubDomains
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'
+URL https://service-proof-loop.sociobot.in/assets/main-CDvb6mNL.js
+HTTP/2 200 
+content-type: text/javascript
+content-length: 31751
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: DENY
+strict-transport-security: max-age=31536000; includeSubDomains
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'
+cache-control: public, max-age=31536000, immutable
+URL https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css
+HTTP/2 200 
+content-type: text/css
+content-length: 15437
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: DENY
+strict-transport-security: max-age=31536000; includeSubDomains
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'
+cache-control: public, max-age=31536000, immutable
+URL https://service-proof-loop.sociobot.in/assets/proof-loop-hero.webp
+HTTP/2 200 
+content-type: image/webp
+content-length: 18322
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: DENY
+strict-transport-security: max-age=31536000; includeSubDomains
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'
+cache-control: public, max-age=86400
+URL https://service-proof-loop.sociobot.in/definitely-not-a-route
+HTTP/2 404 
+content-type: text/html
+content-length: 1460
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: DENY
+strict-transport-security: max-age=31536000; includeSubDomains
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'
+HASH COMPARISON local live
+index.html 85e79a6340cc06022d8fc264154fee43a4ce40aa89e63070ccdfed736b01b8f7 85e79a6340cc06022d8fc264154fee43a4ce40aa89e63070ccdfed736b01b8f7
+assets/main-CDvb6mNL.js 5faea0f8a3ef6a2bfa5db42e1bf467ffdc1e4e07e4af1b352c7147ebb23b2b65 5faea0f8a3ef6a2bfa5db42e1bf467ffdc1e4e07e4af1b352c7147ebb23b2b65
+assets/main-CgVTc3e8.css 66ce0eecf6c2a09cdd994ea365930d830fe00bd5530f37770a1525131f517a89 66ce0eecf6c2a09cdd994ea365930d830fe00bd5530f37770a1525131f517a89
+assets/proof-loop-hero.webp ae4634f842108fa6e6fb72b5302216bd96fefae27523a8b77c5477e284f6f955 ae4634f842108fa6e6fb72b5302216bd96fefae27523a8b77c5477e284f6f955
+DIST SIZES
+404.html 1460
+apple-touch-icon.png 46995
+assets/main-CDvb6mNL.js 31751
+assets/main-CgVTc3e8.css 15437
+assets/proof-loop-hero.webp 18322
+assets/sample-entry.svg 564
+assets/sample-kitchen.svg 589
+assets/social.jpg 73995
+favicon.svg 324
+index.html 1654
+robots.txt 83
+sitemap.xml 449
+staticwebapp.config.json 595
