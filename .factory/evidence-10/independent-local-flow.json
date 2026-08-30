@@ -1,0 +1,65 @@
+{
+  "invalid_recovery": {
+    "empty_workspace": {
+      "status": 400,
+      "error": "Enter between 1 and 80 characters."
+    },
+    "missing_auth": {
+      "status": 401,
+      "error": "Open your workspace again to continue."
+    },
+    "past_date": {
+      "status": 400,
+      "error": "Choose today or a future next visit date."
+    },
+    "invalid_date": {
+      "status": 400,
+      "error": "Choose a valid next visit date."
+    },
+    "blank_checklist": {
+      "status": 400,
+      "error": "Enter between 1 and 120 characters."
+    },
+    "no_consent": {
+      "status": 400,
+      "error": "Photo consent is required before photos can be shared."
+    },
+    "four_photos": {
+      "status": 400,
+      "error": "Use up to three image files under 1 MB each."
+    },
+    "long_note": {
+      "status": 400,
+      "error": "Keep notes under 600 characters."
+    },
+    "price_below": {
+      "status": 400,
+      "error": "Set an extra price from $0 to $1,000."
+    },
+    "price_above": {
+      "status": 400,
+      "error": "Set an extra price from $0 to $1,000."
+    }
+  },
+  "normal_flow": {
+    "workspace": 201,
+    "visit": 201,
+    "proof": 200,
+    "invalid_reply": 400,
+    "recovered_reply": 200,
+    "saved_status": "problem",
+    "saved_rating": 2,
+    "csv_status": 200,
+    "csv_contains_boundary_price": true,
+    "cross_tenant_export": 404,
+    "plan_statuses": [
+      201,
+      201,
+      402
+    ],
+    "boundary_extra_statuses": [
+      201,
+      201
+    ]
+  }
+}

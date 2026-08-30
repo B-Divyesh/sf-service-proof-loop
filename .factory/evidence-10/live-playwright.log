@@ -1,0 +1,295 @@
+
+Running 42 tests using 2 workers
+
+(node:18525) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18526) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18525) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18526) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/e2e/product.spec.ts:11:1 › landing explains the job and reaches the demo (2.2s)
+  ✓   2 [mobile-chromium] › tests/e2e/product.spec.ts:11:1 › landing explains the job and reaches the demo (2.4s)
+  ✓   3 [chromium] › tests/e2e/product.spec.ts:20:1 › mobile navigation and footer links have 44px touch targets (836ms)
+  ✓   4 [mobile-chromium] › tests/e2e/product.spec.ts:20:1 › mobile navigation and footer links have 44px touch targets (1.6s)
+  ✓   5 [chromium] › tests/e2e/product.spec.ts:37:1 › mobile inline links have 44px touch targets (2.9s)
+  ✓   7 [chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (1.4s)
+  ✓   6 [mobile-chromium] › tests/e2e/product.spec.ts:37:1 › mobile inline links have 44px touch targets (3.4s)
+  ✓   9 [mobile-chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (1.9s)
+  ✓   8 [chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (2.7s)
+  ✓  11 [chromium] › tests/e2e/product.spec.ts:87:1 › proof shows its 14-day expiry date (1.7s)
+  ✓  10 [mobile-chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (4.0s)
+  ✓  12 [chromium] › tests/e2e/product.spec.ts:98:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (2.8s)
+  ✓  13 [mobile-chromium] › tests/e2e/product.spec.ts:87:1 › proof shows its 14-day expiry date (2.0s)
+  ✓  14 [chromium] › tests/e2e/product.spec.ts:115:1 › @claim:configurable-extras a business can add a client extra (2.9s)
+  ✓  15 [mobile-chromium] › tests/e2e/product.spec.ts:98:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (5.1s)
+  ✓  16 [chromium] › tests/e2e/product.spec.ts:135:1 › @claim:paid-license checkout registration and license restore use Sociobot billing (3.7s)
+  ✓  18 [chromium] › tests/e2e/product.spec.ts:157:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (2.5s)
+  ✓  19 [chromium] › tests/e2e/product.spec.ts:176:1 › @claim:rate-limit API traffic is limited per forwarded client (733ms)
+  ✓  17 [mobile-chromium] › tests/e2e/product.spec.ts:115:1 › @claim:configurable-extras a business can add a client extra (5.0s)
+  ✓  20 [chromium] › tests/e2e/product.spec.ts:183:1 › technician can record a visit and receive a proof link (1.5s)
+  ✓  22 [chromium] › tests/e2e/product.spec.ts:191:1 › @claim:photo-upload a technician can add a consented photo to proof (3.5s)
+  ✓  21 [mobile-chromium] › tests/e2e/product.spec.ts:135:1 › @claim:paid-license checkout registration and license restore use Sociobot billing (4.2s)
+  ✓  23 [chromium] › tests/e2e/product.spec.ts:219:1 › @claim:problem-rating a client problem and rating return to the workspace (2.5s)
+  ✓  25 [chromium] › tests/e2e/product.spec.ts:233:1 › @claim:same-origin-demo demo sends data only to this service (776ms)
+  ✓  24 [mobile-chromium] › tests/e2e/product.spec.ts:157:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (4.3s)
+  ✓  27 [mobile-chromium] › tests/e2e/product.spec.ts:176:1 › @claim:rate-limit API traffic is limited per forwarded client (831ms)
+  ✓  28 [mobile-chromium] › tests/e2e/product.spec.ts:183:1 › technician can record a visit and receive a proof link (1.8s)
+  ✓  26 [chromium] › tests/e2e/product.spec.ts:241:1 › @a11y landing and client proof have no serious axe findings (6.6s)
+  ✓  29 [mobile-chromium] › tests/e2e/product.spec.ts:191:1 › @claim:photo-upload a technician can add a consented photo to proof (3.3s)
+  ✓  30 [chromium] › tests/e2e/product.spec.ts:251:1 › @a11y dark treatment, keyboard focus, touch targets, and 200% text reflow (4.7s)
+  ✓  31 [mobile-chromium] › tests/e2e/product.spec.ts:219:1 › @claim:problem-rating a client problem and rating return to the workspace (5.0s)
+  ✓  32 [chromium] › tests/e2e/product.spec.ts:297:1 › @claim:no-tracking landing and demo load no third-party resources (1.4s)
+  ✓  34 [chromium] › tests/e2e/product.spec.ts:306:1 › valid deep links return 200 and the real 404 includes social metadata (54ms)
+  ✘  35 [chromium] › tests/e2e/product.spec.ts:318:1 › security response policy and primary flows have no console errors (961ms)
+(node:19021) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19021) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  36 [chromium] › tests/e2e/product.spec.ts:334:1 › offline state and unknown route give a clear next step (974ms)
+  ✘  33 [mobile-chromium] › tests/e2e/product.spec.ts:233:1 › @claim:same-origin-demo demo sends data only to this service (7.7s)
+(node:19092) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19092) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  37 [mobile-chromium] › tests/e2e/product.spec.ts:241:1 › @a11y landing and client proof have no serious axe findings (30.3s)
+(node:19189) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19189) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  38 [mobile-chromium] › tests/e2e/product.spec.ts:251:1 › @a11y dark treatment, keyboard focus, touch targets, and 200% text reflow (30.3s)
+(node:19276) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19276) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  39 [mobile-chromium] › tests/e2e/product.spec.ts:297:1 › @claim:no-tracking landing and demo load no third-party resources (7.8s)
+(node:19344) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19344) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  40 [mobile-chromium] › tests/e2e/product.spec.ts:306:1 › valid deep links return 200 and the real 404 includes social metadata (221ms)
+  ✘  41 [mobile-chromium] › tests/e2e/product.spec.ts:318:1 › security response policy and primary flows have no console errors (1.1s)
+(node:19418) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19418) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  42 [mobile-chromium] › tests/e2e/product.spec.ts:334:1 › offline state and unknown route give a clear next step (857ms)
+
+
+  1) [chromium] › tests/e2e/product.spec.ts:318:1 › security response policy and primary flows have no console errors
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "Failed to load resource: the server responded with a status of 401 ()",[39m
+    [31m+ ][39m
+
+      324 |     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+      325 |   }
+    > 326 |   expect(errors).toEqual([]);
+          |                  ^
+      327 |   const response = await request.get('/');
+      328 |   expect(response.headers()['content-security-policy']).toContain("default-src 'self'");
+      329 |   expect(response.headers()['strict-transport-security']).toContain('max-age=31536000');
+        at /work/repo/tests/e2e/product.spec.ts:326:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/product-security-response--6c98d-lows-have-no-console-errors-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/product-security-response--6c98d-lows-have-no-console-errors-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/product-security-response--6c98d-lows-have-no-console-errors-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/product-security-response--6c98d-lows-have-no-console-errors-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [mobile-chromium] › tests/e2e/product.spec.ts:233:1 › @claim:same-origin-demo demo sends data only to this service
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Willow Street').first()
+    Expected: visible
+    Timeout: 7000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 7000ms[22m
+    [2m  - waiting for getByText('Willow Street').first()[22m
+
+
+      235 |   page.on('request', request => origins.add(new URL(request.url()).origin));
+      236 |   await page.goto('/demo');
+    > 237 |   await expect(page.getByText('Willow Street').first()).toBeVisible();
+          |                                                         ^
+      238 |   expect([...origins]).toEqual([new URL(page.url()).origin]);
+      239 | });
+      240 |
+        at /work/repo/tests/e2e/product.spec.ts:237:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/product--claim-same-origin-7716f-s-data-only-to-this-service-mobile-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/product--claim-same-origin-7716f-s-data-only-to-this-service-mobile-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/product--claim-same-origin-7716f-s-data-only-to-this-service-mobile-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/product--claim-same-origin-7716f-s-data-only-to-this-service-mobile-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [mobile-chromium] › tests/e2e/product.spec.ts:241:1 › @a11y landing and client proof have no serious axe findings
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('link', { name: 'Open client view' })[22m
+
+
+      244 |   expect(results.violations.filter(v => ['serious','critical'].includes(v.impact || ''))).toEqual([]);
+      245 |   await page.goto('/demo');
+    > 246 |   await page.getByRole('link', { name: 'Open client view' }).click();
+          |                                                              ^
+      247 |   results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();
+      248 |   expect(results.violations.filter(v => ['serious','critical'].includes(v.impact || ''))).toEqual([]);
+      249 | });
+        at /work/repo/tests/e2e/product.spec.ts:246:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/product--a11y-landing-and--aa11f-ave-no-serious-axe-findings-mobile-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/product--a11y-landing-and--aa11f-ave-no-serious-axe-findings-mobile-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/product--a11y-landing-and--aa11f-ave-no-serious-axe-findings-mobile-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/product--a11y-landing-and--aa11f-ave-no-serious-axe-findings-mobile-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [mobile-chromium] › tests/e2e/product.spec.ts:251:1 › @a11y dark treatment, keyboard focus, touch targets, and 200% text reflow
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('link', { name: 'Open client view' })[22m
+
+
+      252 |   await page.emulateMedia({ colorScheme: 'dark' });
+      253 |   await page.goto('/demo');
+    > 254 |   await page.getByRole('link', { name: 'Open client view' }).click();
+          |                                                              ^
+      255 |   const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();
+      256 |   expect(results.violations.filter(v => ['serious','critical'].includes(v.impact || ''))).toEqual([]);
+      257 |   const status = page.getByLabel('Accept the work');
+        at /work/repo/tests/e2e/product.spec.ts:254:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/product--a11y-dark-treatme-4bb07-targets-and-200-text-reflow-mobile-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/product--a11y-dark-treatme-4bb07-targets-and-200-text-reflow-mobile-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/product--a11y-dark-treatme-4bb07-targets-and-200-text-reflow-mobile-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/product--a11y-dark-treatme-4bb07-targets-and-200-text-reflow-mobile-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [mobile-chromium] › tests/e2e/product.spec.ts:297:1 › @claim:no-tracking landing and demo load no third-party resources
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Willow Street').first()
+    Expected: visible
+    Timeout: 7000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 7000ms[22m
+    [2m  - waiting for getByText('Willow Street').first()[22m
+
+
+      300 |   await page.goto('/');
+      301 |   await page.getByRole('link', { name: 'Try it with sample data' }).click();
+    > 302 |   await expect(page.getByText('Willow Street').first()).toBeVisible();
+          |                                                         ^
+      303 |   expect([...origins]).toEqual([new URL(page.url()).origin]);
+      304 | });
+      305 |
+        at /work/repo/tests/e2e/product.spec.ts:302:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/product--claim-no-tracking-7aba2-ad-no-third-party-resources-mobile-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/product--claim-no-tracking-7aba2-ad-no-third-party-resources-mobile-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/product--claim-no-tracking-7aba2-ad-no-third-party-resources-mobile-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/product--claim-no-tracking-7aba2-ad-no-third-party-resources-mobile-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [mobile-chromium] › tests/e2e/product.spec.ts:318:1 › security response policy and primary flows have no console errors
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "Failed to load resource: the server responded with a status of 401 ()",[39m
+    [31m+ ][39m
+
+      324 |     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+      325 |   }
+    > 326 |   expect(errors).toEqual([]);
+          |                  ^
+      327 |   const response = await request.get('/');
+      328 |   expect(response.headers()['content-security-policy']).toContain("default-src 'self'");
+      329 |   expect(response.headers()['strict-transport-security']).toContain('max-age=31536000');
+        at /work/repo/tests/e2e/product.spec.ts:326:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/product-security-response--6c98d-lows-have-no-console-errors-mobile-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/product-security-response--6c98d-lows-have-no-console-errors-mobile-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/product-security-response--6c98d-lows-have-no-console-errors-mobile-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/product-security-response--6c98d-lows-have-no-console-errors-mobile-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6 failed
+    [chromium] › tests/e2e/product.spec.ts:318:1 › security response policy and primary flows have no console errors
+    [mobile-chromium] › tests/e2e/product.spec.ts:233:1 › @claim:same-origin-demo demo sends data only to this service
+    [mobile-chromium] › tests/e2e/product.spec.ts:241:1 › @a11y landing and client proof have no serious axe findings
+    [mobile-chromium] › tests/e2e/product.spec.ts:251:1 › @a11y dark treatment, keyboard focus, touch targets, and 200% text reflow
+    [mobile-chromium] › tests/e2e/product.spec.ts:297:1 › @claim:no-tracking landing and demo load no third-party resources
+    [mobile-chromium] › tests/e2e/product.spec.ts:318:1 › security response policy and primary flows have no console errors
+  36 passed (2.3m)

@@ -1,0 +1,139 @@
+{
+  "routeResults": [
+    {
+      "path": "/",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "path": "/demo",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "path": "/app",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "path": "/proof/example-token",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "content_type": "text/plain"
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "content_type": "text/xml"
+    },
+    {
+      "path": "/favicon.svg",
+      "status": 200,
+      "content_type": "image/svg+xml"
+    },
+    {
+      "path": "/apple-touch-icon.png",
+      "status": 200,
+      "content_type": "image/png"
+    },
+    {
+      "path": "/assets/social.jpg",
+      "status": 200,
+      "content_type": "image/jpeg"
+    },
+    {
+      "path": "/definitely-missing",
+      "status": 404,
+      "content_type": "text/html"
+    }
+  ],
+  "linkResults": [
+    {
+      "url": "https://service-proof-loop.sociobot.in/#main",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/demo",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/app",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/#pricing",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/privacy",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://api.sociobot.in/api/v1/products/service-proof-loop/checkout",
+      "status": 303,
+      "location": "https://checkout.dodopayments.com/session/[redacted]"
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/terms",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://sociobot.in/",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/demo#main",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/app#main",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/privacy#main",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "mailto:privacy@sociobot.in",
+      "status": "mailto"
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/terms#main",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "mailto:support@sociobot.in",
+      "status": "mailto"
+    }
+  ]
+}

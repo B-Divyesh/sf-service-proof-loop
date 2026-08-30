@@ -1,0 +1,23 @@
+{
+  "burst_45": {
+    "requests": 45,
+    "elapsed_ms": 230,
+    "allowed": 45,
+    "limited": 0,
+    "limited_missing_retry_after": 0,
+    "status_counts": {
+      "404": 45
+    }
+  },
+  "burst_130": {
+    "requests": 130,
+    "elapsed_ms": 299,
+    "allowed": 120,
+    "limited": 10,
+    "limited_missing_retry_after": 0,
+    "status_counts": {
+      "404": 120,
+      "429": 10
+    }
+  }
+}

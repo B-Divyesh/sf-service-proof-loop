@@ -1,0 +1,8 @@
+[
+  {
+    "active": true,
+    "name": "sf-service-proof-loop--0000034",
+    "replicas": 2,
+    "trafficWeight": 100
+  }
+]

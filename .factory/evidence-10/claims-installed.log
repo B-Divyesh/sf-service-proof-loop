@@ -1,0 +1,2135 @@
+CLAIM 1 demo-sandbox
+COMMAND npm test -- --grep @claim:demo-sandbox
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:demo-sandbox
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/rate-limit.test.mjs tests/plan-limit.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 2.433003
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-replica ephemeral SQLite topology
+ok 2 - rejects verifier 9's exact three-replica ephemeral SQLite topology
+  ---
+  duration_ms: 0.5248
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 1.506002
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.247301
+  type: 'test'
+  ...
+# Subtest: accepts exactly three created and five payment-required writes
+ok 5 - accepts exactly three created and five payment-required writes
+  ---
+  duration_ms: 2.500203
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-created and five-unauthorized split-state result
+ok 6 - rejects verifier 9's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 0.4339
+  type: 'test'
+  ...
+# Subtest: accepts one 40-request allowance for the 45-request claim probe
+ok 7 - accepts one 40-request allowance for the 45-request claim probe
+  ---
+  duration_ms: 46.496155
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's 45-of-45 unbounded request result
+ok 8 - rejects verifier 9's 45-of-45 unbounded request result
+  ---
+  duration_ms: 0.532701
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's tripled 120-request allowance
+ok 9 - rejects verifier 9's tripled 120-request allowance
+  ---
+  duration_ms: 0.193
+  type: 'test'
+  ...
+# Subtest: requires Retry-After: 1 on every limited response
+ok 10 - requires Retry-After: 1 on every limited response
+  ---
+  duration_ms: 0.2379
+  type: 'test'
+  ...
+# Subtest: commercial delivery is formally re-scoped without rewriting the researched brief
+ok 11 - commercial delivery is formally re-scoped without rewriting the researched brief
+  ---
+  duration_ms: 2.479203
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 12 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.363203
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+ok 13 - rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+  ---
+  duration_ms: 1.085001
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 14 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 25.60853
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 570.387874
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   1.46 kB │ gzip:  0.52 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 311ms
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.24
+   Compiling syn v3.0.4
+   Compiling libc v0.2.189
+   Compiling syn v2.0.119
+   Compiling cfg-if v1.0.4
+   Compiling synstructure v0.13.2
+   Compiling zerofrom-derive v0.1.7
+   Compiling yoke-derive v0.8.2
+   Compiling parking_lot_core v0.9.12
+   Compiling zerovec-derive v0.11.6
+   Compiling displaydoc v0.2.7
+   Compiling smallvec v1.15.2
+   Compiling find-msvc-tools v0.1.11
+   Compiling pin-project-lite v0.2.17
+   Compiling scopeguard v1.2.0
+   Compiling shlex v2.0.1
+   Compiling cc v1.4.4
+   Compiling lock_api v0.4.14
+   Compiling version_check v0.9.5
+   Compiling futures-core v0.3.34
+   Compiling once_cell v1.21.4
+   Compiling bytes v1.12.1
+   Compiling tracing-attributes v0.1.31
+   Compiling itoa v1.0.18
+   Compiling serde v1.0.229
+   Compiling futures-sink v0.3.34
+   Compiling icu_properties_data v2.3.0
+   Compiling icu_normalizer_data v2.3.0
+   Compiling parking_lot v0.12.5
+   Compiling ring v0.17.14
+   Compiling serde_derive v1.0.229
+   Compiling tracing-core v0.1.36
+   Compiling generic-array v0.14.7
+   Compiling errno v0.3.14
+   Compiling equivalent v1.0.2
+   Compiling signal-hook-registry v1.4.8
+   Compiling zerofrom v0.1.8
+   Compiling mio v1.2.2
+   Compiling socket2 v0.6.5
+   Compiling tokio-macros v2.7.2
+   Compiling stable_deref_trait v1.2.1
+   Compiling memchr v2.8.3
+   Compiling serde_core v1.0.229
+   Compiling zmij v1.0.23
+   Compiling log v0.4.34
+   Compiling slab v0.4.12
+   Compiling yoke v0.8.3
+   Compiling tokio v1.53.1
+   Compiling tracing v0.1.44
+   Compiling futures-io v0.3.34
+   Compiling autocfg v1.5.1
+   Compiling futures-task v0.3.34
+   Compiling serde_json v1.0.151
+   Compiling futures-util v0.3.34
+   Compiling num-traits v0.2.19
+   Compiling zerovec v0.11.8
+   Compiling hashbrown v0.17.1
+   Compiling indexmap v2.14.0
+   Compiling http v1.5.0
+   Compiling rustls v0.23.43
+   Compiling percent-encoding v2.3.2
+   Compiling tinystr v0.8.4
+   Compiling getrandom v0.2.17
+   Compiling writeable v0.6.4
+   Compiling litemap v0.8.3
+   Compiling thiserror v2.0.20
+   Compiling icu_locale_core v2.3.0
+   Compiling http-body v1.1.0
+   Compiling potential_utf v0.1.6
+   Compiling tokio-util v0.7.19
+   Compiling zerotrie v0.2.5
+   Compiling httparse v1.10.1
+   Compiling utf8_iter v1.0.4
+   Compiling zeroize v1.9.0
+   Compiling icu_collections v2.3.0
+   Compiling rustls-pki-types v1.15.1
+   Compiling icu_provider v2.3.1
+   Compiling form_urlencoded v1.2.2
+   Compiling futures-channel v0.3.34
+   Compiling thiserror-impl v2.0.20
+   Compiling pkg-config v0.3.34
+   Compiling base64 v0.22.1
+   Compiling vcpkg v0.2.15
+   Compiling crossbeam-utils v0.8.22
+   Compiling typenum v1.20.1
+   Compiling tower-service v0.3.3
+   Compiling libsqlite3-sys v0.30.1
+   Compiling try-lock v0.2.5
+   Compiling fnv v1.0.7
+   Compiling atomic-waker v1.1.2
+   Compiling untrusted v0.9.0
+   Compiling httpdate v1.0.3
+   Compiling zerocopy v0.8.56
+   Compiling h2 v0.4.19
+   Compiling want v0.3.1
+   Compiling icu_normalizer v2.3.0
+   Compiling icu_properties v2.3.0
+   Compiling mime v0.3.17
+   Compiling allocator-api2 v0.2.21
+   Compiling idna_adapter v1.2.2
+   Compiling hyper v1.11.1
+   Compiling rustls-webpki v0.103.15
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling sync_wrapper v1.0.2
+   Compiling spin v0.9.9
+   Compiling tower-layer v0.3.3
+   Compiling subtle v2.6.1
+   Compiling ipnet v2.12.1
+   Compiling getrandom v0.3.4
+   Compiling ryu v1.0.23
+   Compiling foldhash v0.1.5
+   Compiling hashbrown v0.15.5
+   Compiling serde_urlencoded v0.7.1
+   Compiling hyper-util v0.1.20
+   Compiling digest v0.10.7
+   Compiling ppv-lite86 v0.2.21
+   Compiling idna v1.1.0
+   Compiling webpki-roots v1.0.9
+   Compiling http-body-util v0.1.5
+   Compiling crc-catalog v2.5.0
+   Compiling parking v2.2.1
+   Compiling iana-time-zone v0.1.65
+   Compiling cpufeatures v0.2.17
+   Compiling bitflags v2.13.1
+   Compiling sha2 v0.10.9
+   Compiling chrono v0.4.45
+   Compiling event-listener v5.4.2
+   Compiling crc v3.4.0
+   Compiling webpki-roots v0.26.11
+   Compiling crossbeam-queue v0.3.13
+   Compiling futures-intrusive v0.5.0
+   Compiling url v2.5.8
+   Compiling tokio-stream v0.1.19
+   Compiling hashlink v0.10.0
+   Compiling tower v0.5.3
+   Compiling either v1.18.0
+   Compiling multer v3.1.0
+   Compiling unicase v2.9.0
+   Compiling sqlx-core v0.8.6
+   Compiling mime_guess v2.0.5
+   Compiling flume v0.11.1
+   Compiling rand_core v0.9.5
+   Compiling futures-executor v0.3.34
+   Compiling atoi v2.0.0
+   Compiling encoding_rs v0.8.35
+   Compiling thiserror v1.0.69
+   Compiling portable-atomic v1.15.0
+   Compiling sqlx-sqlite v0.8.6
+   Compiling rand_chacha v0.9.0
+   Compiling raw-cpuid v11.6.0
+   Compiling axum-core v0.5.6
+   Compiling serde_path_to_error v0.1.20
+   Compiling thiserror-impl v1.0.69
+   Compiling pin-project-internal v1.1.13
+   Compiling dotenvy v0.15.7
+   Compiling matchit v0.8.4
+   Compiling regex-syntax v0.8.11
+   Compiling hashbrown v0.14.5
+   Compiling getrandom v0.4.3
+   Compiling foldhash v0.2.0
+   Compiling heck v0.5.0
+   Compiling hex v0.4.3
+   Compiling sqlx-macros-core v0.8.6
+   Compiling hashbrown v0.16.1
+   Compiling dashmap v6.2.1
+   Compiling regex-automata v0.4.18
+   Compiling axum v0.8.9
+   Compiling pin-project v1.1.13
+   Compiling quanta v0.12.6
+   Compiling rand v0.9.5
+   Compiling tokio-rustls v0.26.4
+   Compiling hyper-timeout v0.5.2
+   Compiling rand_core v0.6.4
+   Compiling spinning_top v0.3.0
+   Compiling async-trait v0.1.92
+   Compiling nonzero_ext v0.3.0
+   Compiling http-range-header v0.4.2
+   Compiling nonempty v0.7.0
+   Compiling web-time v1.1.0
+   Compiling futures-timer v3.0.4
+   Compiling lazy_static v1.5.0
+   Compiling sharded-slab v0.1.7
+   Compiling governor v0.10.4
+   Compiling forwarded-header-value v0.1.1
+   Compiling tower-http v0.6.11
+   Compiling tonic v0.14.6
+   Compiling rand_chacha v0.3.1
+   Compiling hyper-rustls v0.27.9
+   Compiling matchers v0.2.0
+   Compiling sqlx-macros v0.8.6
+   Compiling tracing-serde v0.2.0
+   Compiling tracing-log v0.2.0
+   Compiling thread_local v1.1.10
+   Compiling service-proof-loop v1.0.0 (/work/repo)
+   Compiling nu-ansi-term v0.50.3
+   Compiling tracing-subscriber v0.3.23
+   Compiling sqlx v0.8.6
+   Compiling uuid v1.26.0
+   Compiling reqwest v0.12.28
+   Compiling rand v0.8.8
+   Compiling tower_governor v0.8.0
+    Finished `release` profile [optimized] target(s) in 6m 05s
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 192.67379
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 336.179205
+[WebServer] (node:10663) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]    Compiling bitflags v2.13.1
+[WebServer]    Compiling raw-cpuid v11.6.0
+[WebServer]    Compiling quanta v0.12.6
+[WebServer]    Compiling tower-http v0.6.11
+[WebServer]    Compiling governor v0.10.4
+[WebServer]    Compiling reqwest v0.12.28
+[WebServer]    Compiling tower_governor v0.8.0
+[WebServer]    Compiling service-proof-loop v1.0.0 (/work/repo)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 23.23s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:11292) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11291) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11292) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11291) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (3.6s)
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (3.8s)
+
+  2 passed (34.5s)
+RESULT demo-sandbox exit=0
+CLAIM 2 no-account
+COMMAND npm test -- --grep @claim:no-account
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:no-account
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/rate-limit.test.mjs tests/plan-limit.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 2.918906
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-replica ephemeral SQLite topology
+ok 2 - rejects verifier 9's exact three-replica ephemeral SQLite topology
+  ---
+  duration_ms: 1.239603
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 1.405003
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.2508
+  type: 'test'
+  ...
+# Subtest: accepts exactly three created and five payment-required writes
+ok 5 - accepts exactly three created and five payment-required writes
+  ---
+  duration_ms: 2.810006
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-created and five-unauthorized split-state result
+ok 6 - rejects verifier 9's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 0.649002
+  type: 'test'
+  ...
+# Subtest: accepts one 40-request allowance for the 45-request claim probe
+ok 7 - accepts one 40-request allowance for the 45-request claim probe
+  ---
+  duration_ms: 3.034006
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's 45-of-45 unbounded request result
+ok 8 - rejects verifier 9's 45-of-45 unbounded request result
+  ---
+  duration_ms: 0.622701
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's tripled 120-request allowance
+ok 9 - rejects verifier 9's tripled 120-request allowance
+  ---
+  duration_ms: 0.249801
+  type: 'test'
+  ...
+# Subtest: requires Retry-After: 1 on every limited response
+ok 10 - requires Retry-After: 1 on every limited response
+  ---
+  duration_ms: 44.257489
+  type: 'test'
+  ...
+# Subtest: commercial delivery is formally re-scoped without rewriting the researched brief
+ok 11 - commercial delivery is formally re-scoped without rewriting the researched brief
+  ---
+  duration_ms: 36.884475
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 12 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.281604
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+ok 13 - rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+  ---
+  duration_ms: 0.839701
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 14 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 33.104267
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 587.401689
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   1.46 kB │ gzip:  0.52 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 284ms
+    Finished `release` profile [optimized] target(s) in 1.01s
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 97.897198
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 255.086217
+[WebServer] (node:11638) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.48s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:11663) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11664) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11663) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11664) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (3.7s)
+  ✓  2 [mobile-chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (3.9s)
+
+  2 passed (10.5s)
+RESULT no-account exit=0
+CLAIM 3 proof-expiry
+COMMAND cargo test claim_proof_expiry_rejects_an_expired_proof
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.24s
+     Running unittests src/lib.rs (target/debug/deps/service_proof_loop-792ea97753dcb0de)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/service_proof_loop-e8ab0cb932ca9782)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/api.rs (target/debug/deps/api-6fcbe729112709c1)
+
+running 1 test
+test claim_proof_expiry_rejects_an_expired_proof ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.11s
+
+RESULT proof-expiry exit=0
+CLAIM 4 next-visit-export
+COMMAND npm test -- --grep @claim:next-visit-export
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:next-visit-export
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/rate-limit.test.mjs tests/plan-limit.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 3.463207
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-replica ephemeral SQLite topology
+ok 2 - rejects verifier 9's exact three-replica ephemeral SQLite topology
+  ---
+  duration_ms: 0.779102
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 2.204405
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.3619
+  type: 'test'
+  ...
+# Subtest: accepts exactly three created and five payment-required writes
+ok 5 - accepts exactly three created and five payment-required writes
+  ---
+  duration_ms: 2.636805
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-created and five-unauthorized split-state result
+ok 6 - rejects verifier 9's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 0.452501
+  type: 'test'
+  ...
+# Subtest: accepts one 40-request allowance for the 45-request claim probe
+ok 7 - accepts one 40-request allowance for the 45-request claim probe
+  ---
+  duration_ms: 4.61241
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's 45-of-45 unbounded request result
+ok 8 - rejects verifier 9's 45-of-45 unbounded request result
+  ---
+  duration_ms: 0.501801
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's tripled 120-request allowance
+ok 9 - rejects verifier 9's tripled 120-request allowance
+  ---
+  duration_ms: 0.2293
+  type: 'test'
+  ...
+# Subtest: requires Retry-After: 1 on every limited response
+ok 10 - requires Retry-After: 1 on every limited response
+  ---
+  duration_ms: 0.2453
+  type: 'test'
+  ...
+# Subtest: commercial delivery is formally re-scoped without rewriting the researched brief
+ok 11 - commercial delivery is formally re-scoped without rewriting the researched brief
+  ---
+  duration_ms: 26.418254
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 12 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.833006
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+ok 13 - rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+  ---
+  duration_ms: 1.139402
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 14 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 7.348115
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 568.320251
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   1.46 kB │ gzip:  0.52 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 289ms
+    Finished `release` profile [optimized] target(s) in 0.21s
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 86.563776
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 251.270909
+[WebServer] (node:12050) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:12076) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12075) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12076) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12075) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:98:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (3.0s)
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:98:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (4.7s)
+
+  2 passed (11.0s)
+RESULT next-visit-export exit=0
+CLAIM 5 same-origin-demo
+COMMAND npm test -- --grep @claim:same-origin-demo
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:same-origin-demo
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/rate-limit.test.mjs tests/plan-limit.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 3.882506
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-replica ephemeral SQLite topology
+ok 2 - rejects verifier 9's exact three-replica ephemeral SQLite topology
+  ---
+  duration_ms: 0.632501
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 1.428602
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.2503
+  type: 'test'
+  ...
+# Subtest: accepts exactly three created and five payment-required writes
+ok 5 - accepts exactly three created and five payment-required writes
+  ---
+  duration_ms: 5.61931
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-created and five-unauthorized split-state result
+ok 6 - rejects verifier 9's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 0.618101
+  type: 'test'
+  ...
+# Subtest: accepts one 40-request allowance for the 45-request claim probe
+ok 7 - accepts one 40-request allowance for the 45-request claim probe
+  ---
+  duration_ms: 2.043804
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's 45-of-45 unbounded request result
+ok 8 - rejects verifier 9's 45-of-45 unbounded request result
+  ---
+  duration_ms: 0.620801
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's tripled 120-request allowance
+ok 9 - rejects verifier 9's tripled 120-request allowance
+  ---
+  duration_ms: 0.196401
+  type: 'test'
+  ...
+# Subtest: requires Retry-After: 1 on every limited response
+ok 10 - requires Retry-After: 1 on every limited response
+  ---
+  duration_ms: 0.1966
+  type: 'test'
+  ...
+# Subtest: commercial delivery is formally re-scoped without rewriting the researched brief
+ok 11 - commercial delivery is formally re-scoped without rewriting the researched brief
+  ---
+  duration_ms: 2.550004
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 12 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.294104
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+ok 13 - rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+  ---
+  duration_ms: 0.919402
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 14 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 30.960052
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 561.484244
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   1.46 kB │ gzip:  0.52 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 287ms
+    Finished `release` profile [optimized] target(s) in 0.20s
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 84.656442
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 247.832517
+[WebServer] (node:12431) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:12457) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12458) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12457) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12458) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/e2e/product.spec.ts:233:1 › @claim:same-origin-demo demo sends data only to this service (2.1s)
+  ✓  2 [mobile-chromium] › tests/e2e/product.spec.ts:233:1 › @claim:same-origin-demo demo sends data only to this service (1.7s)
+
+  2 passed (8.2s)
+RESULT same-origin-demo exit=0
+CLAIM 6 configurable-extras
+COMMAND npm test -- --grep @claim:configurable-extras
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:configurable-extras
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/rate-limit.test.mjs tests/plan-limit.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 3.077705
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-replica ephemeral SQLite topology
+ok 2 - rejects verifier 9's exact three-replica ephemeral SQLite topology
+  ---
+  duration_ms: 0.728401
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 1.548102
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.329901
+  type: 'test'
+  ...
+# Subtest: accepts exactly three created and five payment-required writes
+ok 5 - accepts exactly three created and five payment-required writes
+  ---
+  duration_ms: 45.853177
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-created and five-unauthorized split-state result
+ok 6 - rejects verifier 9's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 0.540201
+  type: 'test'
+  ...
+# Subtest: accepts one 40-request allowance for the 45-request claim probe
+ok 7 - accepts one 40-request allowance for the 45-request claim probe
+  ---
+  duration_ms: 3.067905
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's 45-of-45 unbounded request result
+ok 8 - rejects verifier 9's 45-of-45 unbounded request result
+  ---
+  duration_ms: 0.671101
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's tripled 120-request allowance
+ok 9 - rejects verifier 9's tripled 120-request allowance
+  ---
+  duration_ms: 0.3114
+  type: 'test'
+  ...
+# Subtest: requires Retry-After: 1 on every limited response
+ok 10 - requires Retry-After: 1 on every limited response
+  ---
+  duration_ms: 47.85168
+  type: 'test'
+  ...
+# Subtest: commercial delivery is formally re-scoped without rewriting the researched brief
+ok 11 - commercial delivery is formally re-scoped without rewriting the researched brief
+  ---
+  duration_ms: 2.528404
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 12 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 17.618129
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+ok 13 - rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+  ---
+  duration_ms: 1.113802
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 14 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 6.430711
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 561.124343
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   1.46 kB │ gzip:  0.52 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 270ms
+    Finished `release` profile [optimized] target(s) in 0.21s
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 97.606364
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 248.600118
+[WebServer] (node:12791) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.20s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:12816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12817) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12817) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:115:1 › @claim:configurable-extras a business can add a client extra (3.6s)
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:115:1 › @claim:configurable-extras a business can add a client extra (6.9s)
+
+  2 passed (13.1s)
+RESULT configurable-extras exit=0
+CLAIM 7 paid-license
+COMMAND npm test -- --grep @claim:paid-license
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:paid-license
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/rate-limit.test.mjs tests/plan-limit.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 3.122306
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-replica ephemeral SQLite topology
+ok 2 - rejects verifier 9's exact three-replica ephemeral SQLite topology
+  ---
+  duration_ms: 0.731001
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 2.759605
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.3469
+  type: 'test'
+  ...
+# Subtest: accepts exactly three created and five payment-required writes
+ok 5 - accepts exactly three created and five payment-required writes
+  ---
+  duration_ms: 30.936452
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-created and five-unauthorized split-state result
+ok 6 - rejects verifier 9's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 0.904901
+  type: 'test'
+  ...
+# Subtest: accepts one 40-request allowance for the 45-request claim probe
+ok 7 - accepts one 40-request allowance for the 45-request claim probe
+  ---
+  duration_ms: 2.132703
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's 45-of-45 unbounded request result
+ok 8 - rejects verifier 9's 45-of-45 unbounded request result
+  ---
+  duration_ms: 0.427
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's tripled 120-request allowance
+ok 9 - rejects verifier 9's tripled 120-request allowance
+  ---
+  duration_ms: 0.21
+  type: 'test'
+  ...
+# Subtest: requires Retry-After: 1 on every limited response
+ok 10 - requires Retry-After: 1 on every limited response
+  ---
+  duration_ms: 0.201
+  type: 'test'
+  ...
+# Subtest: commercial delivery is formally re-scoped without rewriting the researched brief
+ok 11 - commercial delivery is formally re-scoped without rewriting the researched brief
+  ---
+  duration_ms: 2.758505
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 12 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 33.862057
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+ok 13 - rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+  ---
+  duration_ms: 1.371602
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 14 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 34.167457
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 551.727927
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   1.46 kB │ gzip:  0.52 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 277ms
+    Finished `release` profile [optimized] target(s) in 0.19s
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 90.188851
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 243.79921
+[WebServer] (node:13152) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:13177) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13178) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13177) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13178) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:135:1 › @claim:paid-license checkout registration and license restore use Sociobot billing (4.8s)
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:135:1 › @claim:paid-license checkout registration and license restore use Sociobot billing (5.3s)
+
+  2 passed (11.8s)
+RESULT paid-license exit=0
+CLAIM 8 rate-limit
+COMMAND npm test -- --grep @claim:rate-limit
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:rate-limit
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/rate-limit.test.mjs tests/plan-limit.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 3.268406
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-replica ephemeral SQLite topology
+ok 2 - rejects verifier 9's exact three-replica ephemeral SQLite topology
+  ---
+  duration_ms: 0.746901
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 1.614603
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.368601
+  type: 'test'
+  ...
+# Subtest: accepts exactly three created and five payment-required writes
+ok 5 - accepts exactly three created and five payment-required writes
+  ---
+  duration_ms: 49.779484
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-created and five-unauthorized split-state result
+ok 6 - rejects verifier 9's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 0.429701
+  type: 'test'
+  ...
+# Subtest: accepts one 40-request allowance for the 45-request claim probe
+ok 7 - accepts one 40-request allowance for the 45-request claim probe
+  ---
+  duration_ms: 22.462437
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's 45-of-45 unbounded request result
+ok 8 - rejects verifier 9's 45-of-45 unbounded request result
+  ---
+  duration_ms: 0.658001
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's tripled 120-request allowance
+ok 9 - rejects verifier 9's tripled 120-request allowance
+  ---
+  duration_ms: 0.2836
+  type: 'test'
+  ...
+# Subtest: requires Retry-After: 1 on every limited response
+ok 10 - requires Retry-After: 1 on every limited response
+  ---
+  duration_ms: 0.344501
+  type: 'test'
+  ...
+# Subtest: commercial delivery is formally re-scoped without rewriting the researched brief
+ok 11 - commercial delivery is formally re-scoped without rewriting the researched brief
+  ---
+  duration_ms: 2.867705
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 12 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.424104
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+ok 13 - rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+  ---
+  duration_ms: 0.892801
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 14 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 6.786212
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 494.953432
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   1.46 kB │ gzip:  0.52 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 276ms
+    Finished `release` profile [optimized] target(s) in 0.19s
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 107.933881
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 260.234738
+[WebServer] (node:13538) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:13564) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13563) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13564) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13563) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:176:1 › @claim:rate-limit API traffic is limited per forwarded client (904ms)
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:176:1 › @claim:rate-limit API traffic is limited per forwarded client (821ms)
+
+  2 passed (7.1s)
+RESULT rate-limit exit=0
+CLAIM 9 plan-limit
+COMMAND cargo test claim_plan_limit_is_server_enforced_and_a_valid_license_allows_more
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.18s
+     Running unittests src/lib.rs (target/debug/deps/service_proof_loop-792ea97753dcb0de)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/service_proof_loop-e8ab0cb932ca9782)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/api.rs (target/debug/deps/api-6fcbe729112709c1)
+
+running 1 test
+test claim_plan_limit_is_server_enforced_and_a_valid_license_allows_more ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.04s
+
+RESULT plan-limit exit=0
+CLAIM 10 demo-expiry
+COMMAND cargo test claim_demo_expiry_is_24_hours_and_expired_access_is_rejected
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.19s
+     Running unittests src/lib.rs (target/debug/deps/service_proof_loop-792ea97753dcb0de)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/service_proof_loop-e8ab0cb932ca9782)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/api.rs (target/debug/deps/api-6fcbe729112709c1)
+
+running 1 test
+test claim_demo_expiry_is_24_hours_and_expired_access_is_rejected ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.01s
+
+RESULT demo-expiry exit=0
+CLAIM 11 no-tracking
+COMMAND npm test -- --grep @claim:no-tracking
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:no-tracking
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/rate-limit.test.mjs tests/plan-limit.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 3.178212
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-replica ephemeral SQLite topology
+ok 2 - rejects verifier 9's exact three-replica ephemeral SQLite topology
+  ---
+  duration_ms: 0.756303
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 46.012072
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.363001
+  type: 'test'
+  ...
+# Subtest: accepts exactly three created and five payment-required writes
+ok 5 - accepts exactly three created and five payment-required writes
+  ---
+  duration_ms: 1.935907
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-created and five-unauthorized split-state result
+ok 6 - rejects verifier 9's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 0.476802
+  type: 'test'
+  ...
+# Subtest: accepts one 40-request allowance for the 45-request claim probe
+ok 7 - accepts one 40-request allowance for the 45-request claim probe
+  ---
+  duration_ms: 30.109112
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's 45-of-45 unbounded request result
+ok 8 - rejects verifier 9's 45-of-45 unbounded request result
+  ---
+  duration_ms: 0.667303
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's tripled 120-request allowance
+ok 9 - rejects verifier 9's tripled 120-request allowance
+  ---
+  duration_ms: 0.214701
+  type: 'test'
+  ...
+# Subtest: requires Retry-After: 1 on every limited response
+ok 10 - requires Retry-After: 1 on every limited response
+  ---
+  duration_ms: 0.209901
+  type: 'test'
+  ...
+# Subtest: commercial delivery is formally re-scoped without rewriting the researched brief
+ok 11 - commercial delivery is formally re-scoped without rewriting the researched brief
+  ---
+  duration_ms: 2.528909
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 12 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.328908
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+ok 13 - rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+  ---
+  duration_ms: 32.825223
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 14 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 6.678025
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 542.416626
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   1.46 kB │ gzip:  0.52 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 264ms
+    Finished `release` profile [optimized] target(s) in 0.21s
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 93.394849
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 263.333183
+[WebServer] (node:13927) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.20s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:13953) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13952) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13952) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13953) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/e2e/product.spec.ts:297:1 › @claim:no-tracking landing and demo load no third-party resources (2.5s)
+  ✓  2 [mobile-chromium] › tests/e2e/product.spec.ts:297:1 › @claim:no-tracking landing and demo load no third-party resources (2.4s)
+
+  2 passed (8.7s)
+RESULT no-tracking exit=0
+CLAIM 12 access-token-hashing
+COMMAND cargo test claim_access_tokens_are_stored_only_as_hashes
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.19s
+     Running unittests src/lib.rs (target/debug/deps/service_proof_loop-792ea97753dcb0de)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/service_proof_loop-e8ab0cb932ca9782)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/api.rs (target/debug/deps/api-6fcbe729112709c1)
+
+running 1 test
+test claim_access_tokens_are_stored_only_as_hashes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.02s
+
+RESULT access-token-hashing exit=0
+CLAIM 13 privacy-data-flow
+COMMAND npm test -- --grep @claim:privacy-data-flow
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:privacy-data-flow
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/rate-limit.test.mjs tests/plan-limit.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 3.030612
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-replica ephemeral SQLite topology
+ok 2 - rejects verifier 9's exact three-replica ephemeral SQLite topology
+  ---
+  duration_ms: 0.583803
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 2.011007
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.288501
+  type: 'test'
+  ...
+# Subtest: accepts exactly three created and five payment-required writes
+ok 5 - accepts exactly three created and five payment-required writes
+  ---
+  duration_ms: 21.115979
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-created and five-unauthorized split-state result
+ok 6 - rejects verifier 9's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 0.805303
+  type: 'test'
+  ...
+# Subtest: accepts one 40-request allowance for the 45-request claim probe
+ok 7 - accepts one 40-request allowance for the 45-request claim probe
+  ---
+  duration_ms: 3.002911
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's 45-of-45 unbounded request result
+ok 8 - rejects verifier 9's 45-of-45 unbounded request result
+  ---
+  duration_ms: 0.496602
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's tripled 120-request allowance
+ok 9 - rejects verifier 9's tripled 120-request allowance
+  ---
+  duration_ms: 0.186501
+  type: 'test'
+  ...
+# Subtest: requires Retry-After: 1 on every limited response
+ok 10 - requires Retry-After: 1 on every limited response
+  ---
+  duration_ms: 0.192401
+  type: 'test'
+  ...
+# Subtest: commercial delivery is formally re-scoped without rewriting the researched brief
+ok 11 - commercial delivery is formally re-scoped without rewriting the researched brief
+  ---
+  duration_ms: 2.66941
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 12 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.260309
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+ok 13 - rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+  ---
+  duration_ms: 0.870203
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 14 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 7.360727
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 541.776624
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   1.46 kB │ gzip:  0.52 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 281ms
+    Finished `release` profile [optimized] target(s) in 0.22s
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 91.094241
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 253.787748
+[WebServer] (node:14333) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.19s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:14364) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14358) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14364) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14358) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/e2e/product.spec.ts:157:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (3.3s)
+  ✓  1 [mobile-chromium] › tests/e2e/product.spec.ts:157:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (5.0s)
+
+  2 passed (11.4s)
+RESULT privacy-data-flow exit=0
+CLAIM 14 photo-upload
+COMMAND npm test -- --grep @claim:photo-upload
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:photo-upload
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/rate-limit.test.mjs tests/plan-limit.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 3.226112
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-replica ephemeral SQLite topology
+ok 2 - rejects verifier 9's exact three-replica ephemeral SQLite topology
+  ---
+  duration_ms: 0.789003
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 2.202208
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.376501
+  type: 'test'
+  ...
+# Subtest: accepts exactly three created and five payment-required writes
+ok 5 - accepts exactly three created and five payment-required writes
+  ---
+  duration_ms: 45.63747
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-created and five-unauthorized split-state result
+ok 6 - rejects verifier 9's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 0.472801
+  type: 'test'
+  ...
+# Subtest: accepts one 40-request allowance for the 45-request claim probe
+ok 7 - accepts one 40-request allowance for the 45-request claim probe
+  ---
+  duration_ms: 3.045211
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's 45-of-45 unbounded request result
+ok 8 - rejects verifier 9's 45-of-45 unbounded request result
+  ---
+  duration_ms: 0.718803
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's tripled 120-request allowance
+ok 9 - rejects verifier 9's tripled 120-request allowance
+  ---
+  duration_ms: 0.303601
+  type: 'test'
+  ...
+# Subtest: requires Retry-After: 1 on every limited response
+ok 10 - requires Retry-After: 1 on every limited response
+  ---
+  duration_ms: 0.286601
+  type: 'test'
+  ...
+# Subtest: commercial delivery is formally re-scoped without rewriting the researched brief
+ok 11 - commercial delivery is formally re-scoped without rewriting the researched brief
+  ---
+  duration_ms: 2.57431
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 12 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 39.439847
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+ok 13 - rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+  ---
+  duration_ms: 1.055704
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 14 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 6.875925
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 562.402801
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   1.46 kB │ gzip:  0.52 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 292ms
+    Finished `release` profile [optimized] target(s) in 0.20s
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 100.435375
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 264.113287
+[WebServer] (node:14704) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.20s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:14735) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14729) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14729) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14735) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/e2e/product.spec.ts:191:1 › @claim:photo-upload a technician can add a consented photo to proof (5.0s)
+  ✓  2 [mobile-chromium] › tests/e2e/product.spec.ts:191:1 › @claim:photo-upload a technician can add a consented photo to proof (5.2s)
+
+  2 passed (11.5s)
+RESULT photo-upload exit=0
+CLAIM 15 problem-rating
+COMMAND npm test -- --grep @claim:problem-rating
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test --grep @claim:problem-rating
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/rate-limit.test.mjs tests/plan-limit.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 2.094408
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-replica ephemeral SQLite topology
+ok 2 - rejects verifier 9's exact three-replica ephemeral SQLite topology
+  ---
+  duration_ms: 0.493502
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 3 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 46.153672
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 4 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.423201
+  type: 'test'
+  ...
+# Subtest: accepts exactly three created and five payment-required writes
+ok 5 - accepts exactly three created and five payment-required writes
+  ---
+  duration_ms: 46.745475
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-created and five-unauthorized split-state result
+ok 6 - rejects verifier 9's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 0.508902
+  type: 'test'
+  ...
+# Subtest: accepts one 40-request allowance for the 45-request claim probe
+ok 7 - accepts one 40-request allowance for the 45-request claim probe
+  ---
+  duration_ms: 3.569013
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's 45-of-45 unbounded request result
+ok 8 - rejects verifier 9's 45-of-45 unbounded request result
+  ---
+  duration_ms: 0.659203
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's tripled 120-request allowance
+ok 9 - rejects verifier 9's tripled 120-request allowance
+  ---
+  duration_ms: 0.302601
+  type: 'test'
+  ...
+# Subtest: requires Retry-After: 1 on every limited response
+ok 10 - requires Retry-After: 1 on every limited response
+  ---
+  duration_ms: 0.293501
+  type: 'test'
+  ...
+# Subtest: commercial delivery is formally re-scoped without rewriting the researched brief
+ok 11 - commercial delivery is formally re-scoped without rewriting the researched brief
+  ---
+  duration_ms: 3.347613
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 12 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.087208
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+ok 13 - rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+  ---
+  duration_ms: 19.628973
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 14 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 6.738925
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 584.726385
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   1.46 kB │ gzip:  0.52 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 273ms
+    Finished `release` profile [optimized] target(s) in 0.19s
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 91.167141
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 250.255635
+[WebServer] (node:15080) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 2 tests using 2 workers
+
+(node:15106) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:15107) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:15106) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:15107) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/e2e/product.spec.ts:219:1 › @claim:problem-rating a client problem and rating return to the workspace (3.2s)
+  ✓  2 [mobile-chromium] › tests/e2e/product.spec.ts:219:1 › @claim:problem-rating a client problem and rating return to the workspace (3.8s)
+
+  2 passed (10.5s)
+RESULT problem-rating exit=0
+CLAIM 16 zero-config-runtime
+COMMAND npm run test:runtime
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   1.46 kB │ gzip:  0.52 kB
+../dist/index.html                 1.65 kB │ gzip:  0.58 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CDvb6mNL.js   31.75 kB │ gzip: 10.15 kB
+✓ built in 273ms
+    Finished `release` profile [optimized] target(s) in 0.20s
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 94.521593
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 245.432641
+RESULT zero-config-runtime exit=0

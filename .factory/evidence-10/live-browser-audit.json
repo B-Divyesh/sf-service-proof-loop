@@ -1,0 +1,236 @@
+{
+  "desktop": {
+    "landing": {
+      "title": "Service Proof Loop — Send proof after each visit",
+      "lang": "en",
+      "h1": [
+        "Send proof. Plan the next visit."
+      ],
+      "mainCount": 1,
+      "sampleAction": true,
+      "horizontalOverflow": false,
+      "reducedMotion": 0.01,
+      "status": 200,
+      "headers": {
+        "accept-ranges": "bytes",
+        "content-length": "1654",
+        "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+        "content-type": "text/html",
+        "date": "Sat, 29 Aug 2026 23:57:53 GMT",
+        "last-modified": "Sat, 29 Aug 2026 23:19:47 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "axeSeriousCritical": []
+    },
+    "focusStops": [
+      {
+        "tag": "A",
+        "text": "Try it with sample data",
+        "outline": "3px solid rgb(217, 104, 59)"
+      },
+      {
+        "tag": "A",
+        "text": "Buy the business license at Sociobot checkout",
+        "outline": "3px solid rgb(217, 104, 59)"
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "outline": "0px solid rgb(23, 42, 48)"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Verify license",
+        "outline": "3px solid rgb(217, 104, 59)"
+      },
+      {
+        "tag": "A",
+        "text": "Privacy",
+        "outline": "0px solid rgb(12, 64, 82)"
+      },
+      {
+        "tag": "A",
+        "text": "Terms",
+        "outline": "0px solid rgb(12, 64, 82)"
+      },
+      {
+        "tag": "A",
+        "text": "Privacy",
+        "outline": "0px solid rgb(12, 64, 82)"
+      },
+      {
+        "tag": "A",
+        "text": "Terms",
+        "outline": "3px solid rgb(217, 104, 59)"
+      }
+    ],
+    "demo": {
+      "url": "https://service-proof-loop.sociobot.in/demo",
+      "banner": true,
+      "sampleVisible": false,
+      "accessError": true,
+      "sessionKeys": [
+        "demo:workspace"
+      ],
+      "localKeys": [],
+      "h1": [
+        "Visits could not load"
+      ]
+    },
+    "requestOrigins": [
+      "https://service-proof-loop.sociobot.in"
+    ],
+    "requests": [
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CDvb6mNL.js"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/proof-loop-hero.webp"
+      },
+      {
+        "method": "POST",
+        "url": "https://service-proof-loop.sociobot.in/api/demo"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/api/visits"
+      }
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 401 ()"
+    ],
+    "pageErrors": [],
+    "cookies": []
+  },
+  "mobile": {
+    "landing": {
+      "title": "Service Proof Loop — Send proof after each visit",
+      "lang": "en",
+      "h1": [
+        "Send proof. Plan the next visit."
+      ],
+      "mainCount": 1,
+      "sampleAction": true,
+      "horizontalOverflow": false,
+      "reducedMotion": 0.01,
+      "status": 200,
+      "headers": {
+        "accept-ranges": "bytes",
+        "content-length": "1654",
+        "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+        "content-type": "text/html",
+        "date": "Sat, 29 Aug 2026 23:57:57 GMT",
+        "last-modified": "Sat, 29 Aug 2026 23:19:47 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "axeSeriousCritical": []
+    },
+    "focusStops": [
+      {
+        "tag": "A",
+        "text": "Try it with sample data",
+        "outline": "3px solid rgb(217, 104, 59)"
+      },
+      {
+        "tag": "A",
+        "text": "Buy the business license at Sociobot checkout",
+        "outline": "3px solid rgb(217, 104, 59)"
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "outline": "0px solid rgb(23, 42, 48)"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Verify license",
+        "outline": "3px solid rgb(217, 104, 59)"
+      },
+      {
+        "tag": "A",
+        "text": "Privacy",
+        "outline": "0px solid rgb(12, 64, 82)"
+      },
+      {
+        "tag": "A",
+        "text": "Terms",
+        "outline": "0px solid rgb(12, 64, 82)"
+      },
+      {
+        "tag": "A",
+        "text": "Privacy",
+        "outline": "0px solid rgb(12, 64, 82)"
+      },
+      {
+        "tag": "A",
+        "text": "Terms",
+        "outline": "0px solid rgb(12, 64, 82)"
+      }
+    ],
+    "demo": {
+      "url": "https://service-proof-loop.sociobot.in/demo",
+      "banner": true,
+      "sampleVisible": false,
+      "accessError": true,
+      "sessionKeys": [
+        "demo:workspace"
+      ],
+      "localKeys": [],
+      "h1": [
+        "Visits could not load"
+      ]
+    },
+    "requestOrigins": [
+      "https://service-proof-loop.sociobot.in"
+    ],
+    "requests": [
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CDvb6mNL.js"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/proof-loop-hero.webp"
+      },
+      {
+        "method": "POST",
+        "url": "https://service-proof-loop.sociobot.in/api/demo"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/api/visits"
+      }
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 401 ()"
+    ],
+    "pageErrors": [],
+    "cookies": []
+  }
+}

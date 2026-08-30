@@ -1,0 +1,18 @@
+{
+  "fetchTime": "2026-08-29T23:59:02.556Z",
+  "runWarnings": [],
+  "categories": {
+    "performance": 100,
+    "accessibility": 100,
+    "best-practices": 100,
+    "seo": 100
+  },
+  "metrics": {
+    "fcp_ms": 1230,
+    "lcp_ms": 1402,
+    "tbt_ms": 86.5,
+    "cls": 0,
+    "si_ms": 1230
+  },
+  "transfer_bytes": 68288
+}

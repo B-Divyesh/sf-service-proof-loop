@@ -1,0 +1,16 @@
+{
+  "workspace_status": 201,
+  "statuses": [
+    201,
+    401,
+    201,
+    401,
+    401,
+    401,
+    401,
+    201
+  ],
+  "created": 3,
+  "payment_required": 0,
+  "unauthorized": 5
+}
