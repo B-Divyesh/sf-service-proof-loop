@@ -95,7 +95,7 @@ npm run lint
 npm run typecheck
 npm run build
 ./scripts/deploy-container.sh
-EXPECTED_SHA=$(git rev-parse HEAD) npm run test:live
+EXPECTED_SHA=66ea6b82602624ecdd56b016c54cfd24a125c196 npm run test:live
 PLAYWRIGHT_BASE_URL=https://service-proof-loop.sociobot.in npx playwright test
 ```
 
