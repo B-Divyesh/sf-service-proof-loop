@@ -102,6 +102,31 @@ test('rejects verifier 11\'s exact 140-of-400 reads and zero matching proofs', (
   );
 });
 
+test('rejects verifier 12\'s exact 136-of-400 reads and 6-of-20 proofs', () => {
+  const sequences = Array.from({ length: DEMO_SEQUENCE_COUNT }, healthySequence);
+  let failures = 0;
+  for (const sequence of sequences) {
+    for (const [readIndex] of sequence.reads.entries()) {
+      if (failures < 264) {
+        sequence.reads[readIndex] = { status: 401, location: undefined, visitId: undefined };
+        failures += 1;
+      }
+    }
+  }
+  for (const [index, sequence] of sequences.entries()) {
+    if (index < 14) {
+      sequence.proof = { status: 404, location: undefined, visitId: undefined };
+    }
+  }
+  assert.equal(failures, 264);
+  assert.equal(sequences.flatMap(sequence => sequence.reads).filter(read => read.status === 200).length, 136);
+  assert.equal(sequences.filter(sequence => sequence.proof.status === 200).length, 6);
+  assert.throws(
+    () => assertDemoStateContinuity(sequences),
+    /lost its seeded workspace \(401, no visit\)/,
+  );
+});
+
 test('live continuity probe launches all 400 authenticated reads concurrently', async () => {
   let demoIndex = 0;
   let readCalls = 0;

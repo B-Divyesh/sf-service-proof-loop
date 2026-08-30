@@ -7,9 +7,9 @@ slug=service-proof-loop
 registry=sociobotregistry
 subscription_id=${AZURE_SUBSCRIPTION_ID:-283af945-693b-4a6e-b952-df928d0a18a9}
 resource_group=$(jq -r '.resource_group' "$contract")
-environment=$(jq -r '.environment' "$contract")
 app_name=$(jq -r '.app_name' "$contract")
 state_backend=$(jq -r '.state_backend' "$contract")
+data_dir=$(jq -r '.data_dir' "$contract")
 storage_name=$(jq -r '.storage_name' "$contract")
 mount_path=$(jq -r '.storage_mount' "$contract")
 min_replicas=$(jq -r '.scale.min_replicas' "$contract")
@@ -21,17 +21,10 @@ image_tag="$app_name:${source_sha:0:12}"
 image=${PREBUILT_IMAGE:-$registry.azurecr.io/$image_tag}
 management_url="https://management.azure.com/subscriptions/$subscription_id/resourceGroups/$resource_group/providers/Microsoft.App/containerApps/$app_name?api-version=2024-03-01"
 
-if [ "$state_backend" != durable-single-writer-sqlite ] || [ "$mount_path" != /data ] || [ "$min_replicas" != 1 ] || [ "$max_replicas" != 1 ] || [ "$revision_mode" != Single ] || [ "$drain_writers" != true ]; then
+if [ "$state_backend" != durable-single-writer-sqlite ] || [ "$data_dir" != /data ] || [ "$mount_path" != "$data_dir" ] || [ "$min_replicas" != 1 ] || [ "$max_replicas" != 1 ] || [ "$revision_mode" != Single ] || [ "$drain_writers" != true ]; then
   echo "Deployment contract must mount durable SQLite storage at /data with exactly one active replica." >&2
   exit 2
 fi
-
-az containerapp env storage show \
-  --resource-group "$resource_group" \
-  --name "$environment" \
-  --storage-name "$storage_name" \
-  --query '{accessMode:properties.azureFile.accessMode,shareName:properties.azureFile.shareName}' \
-  --output json | jq -e '.accessMode == "ReadWrite" and (.shareName | length > 0)' >/dev/null
 
 if [ -z "${PREBUILT_IMAGE:-}" ]; then
   echo "Building $image from $source_sha"

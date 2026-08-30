@@ -476,12 +476,14 @@ fn deployment_contract_requires_durable_sqlite_and_one_replica() {
     assert_eq!(contract["scale"]["min_replicas"], 1);
     assert_eq!(contract["scale"]["max_replicas"], 1);
     assert_eq!(contract["state_backend"], "durable-single-writer-sqlite");
+    assert_eq!(contract["data_dir"], "/data");
     assert_eq!(contract["storage_name"], "service-proof-loop-data");
     assert_eq!(contract["storage_mount"], "/data");
     assert_eq!(contract["rollout"]["drain_writers"], true);
 
     let deploy = std::fs::read_to_string(root.join("scripts/deploy-container.sh")).unwrap();
     assert!(deploy.contains(".factory/deployment.json"));
+    assert!(deploy.contains("data_dir=$(jq -r '.data_dir'"));
     assert!(deploy.contains("storageType\":\"AzureFile"));
     assert!(deploy.contains(".containers[0].volumeMounts = [{"));
     assert!(deploy.contains(".scale.maxReplicas = $max"));

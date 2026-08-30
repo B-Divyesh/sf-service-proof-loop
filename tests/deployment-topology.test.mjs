@@ -51,6 +51,17 @@ test('rejects verifier 11\'s exact candidate image with three ephemeral writers'
   );
 });
 
+test('rejects verifier 12\'s exact candidate image with three ephemeral writers', () => {
+  assert.throws(
+    () => assertDeploymentTopology(
+      contract,
+      fixture('deployment-topology-verifier-12.json'),
+      '0e02b1e9c27c7f171545bc4c6549dc9d8b2d9e80',
+    ),
+    /maximum replica count drifted from the deployment contract/,
+  );
+});
+
 test('rejects ephemeral storage even if the replica ceiling is repaired', () => {
   const snapshot = fixture('deployment-topology-verifier-failure.json');
   snapshot.app.maxReplicas = 1;

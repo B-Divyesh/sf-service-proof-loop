@@ -50,6 +50,17 @@ test('rejects verifier 11\'s exact tripled live allowance after the same bursts'
   );
 });
 
+test('rejects verifier 12\'s exact tripled live allowance after the same bursts', () => {
+  assert.throws(
+    () => assertRateBurst(responses(45, 0), { requests: 45, minimumLimited: 3 }),
+    /rate allowance exceeds one replica plus two refill tokens/,
+  );
+  assert.throws(
+    () => assertRateBurst(responses(120, 10), { requests: 130, minimumLimited: 88 }),
+    /rate allowance exceeds one replica plus two refill tokens/,
+  );
+});
+
 test('requires Retry-After: 1 on every limited response', () => {
   const burst = responses(40, 5);
   burst[44].retryAfter = undefined;

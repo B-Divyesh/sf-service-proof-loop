@@ -5,6 +5,7 @@
   "environment": "factory-env",
   "app_name": "sf-service-proof-loop",
   "state_backend": "durable-single-writer-sqlite",
+  "data_dir": "/data",
   "storage_name": "service-proof-loop-data",
   "storage_mount": "/data",
   "active_revisions_mode": "Single",

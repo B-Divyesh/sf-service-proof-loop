@@ -79,10 +79,11 @@ Sociobot paid-unlock contract does not support that billing shape.
 The multi-stage [Dockerfile](Dockerfile) builds the Vite frontend and Rust
 service. It runs as a non-root user and serves the API and frontend from one
 container. The factory supplies `BUILD_SHA`; it may deploy with only `PORT`.
-The checked-in [.factory/deployment.json](.factory/deployment.json) fixes the
-service at one replica and mounts the `service-proof-loop-data` Azure Files
-share at `/data`. The configured deployment command applies the image, durable
-mount, single-revision mode, and replica ceiling in one update. It then verifies
+The checked-in [.factory/deployment.json](.factory/deployment.json) sets
+`data_dir` to `/data`, fixes the service at one replica, and mounts the
+`service-proof-loop-data` Azure Files share there. The configured deployment
+command applies the image, durable mount, single-revision mode, and replica
+ceiling in one update. It then verifies
 the live topology, active writer count, durable storage, and build identity. The
 deploy transaction also creates 20 fresh demos and launches 20 workspace reads
 for each demo at once. All 400 reads and each matching proof must succeed. It
@@ -92,6 +93,7 @@ count without moving SQLite and rate-limit state to shared services.
 ```sh
 ./scripts/deploy-container.sh
 EXPECTED_SHA=$(git rev-parse HEAD) npm run test:live
+EXPECTED_SHA=$(git rev-parse HEAD) npm run test:live:persistence
 ```
 
 ## Privacy and license

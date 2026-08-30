@@ -29,3 +29,10 @@ test('rejects verifier 11\'s exact two-created and six-unauthorized split-state 
     /lost workspace authorization across writers/,
   );
 });
+
+test('rejects verifier 12\'s exact three-created and five-unauthorized split-state result', () => {
+  assert.throws(
+    () => assertConcurrentFreePlan([201, 401, 201, 401, 401, 201, 401, 401]),
+    /lost workspace authorization across writers/,
+  );
+});
