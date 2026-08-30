@@ -105,7 +105,7 @@ async fn health_returns_build_identity() {
 
 #[tokio::test]
 async fn demo_provisions_an_isolated_seeded_workspace() {
-    let (app, _, _) = test_app(40).await;
+    let (app, pool, _) = test_app(40).await;
     let created = app
         .clone()
         .oneshot(Request::post("/api/demo").body(Body::empty()).unwrap())
@@ -132,6 +132,14 @@ async fn demo_provisions_an_isolated_seeded_workspace() {
         .await
         .to_string()
         .contains("Willow Street"));
+    let visit = sqlx::query("SELECT completed_at, proof_expires_at FROM visits LIMIT 1")
+        .fetch_one(&pool)
+        .await
+        .unwrap();
+    let completed_at = chrono::DateTime::parse_from_rfc3339(visit.get("completed_at")).unwrap();
+    let proof_expires_at =
+        chrono::DateTime::parse_from_rfc3339(visit.get("proof_expires_at")).unwrap();
+    assert_eq!(proof_expires_at - completed_at, Duration::days(14));
 }
 
 #[tokio::test]

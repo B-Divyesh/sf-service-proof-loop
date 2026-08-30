@@ -230,6 +230,8 @@ async fn create_demo(State(state): State<AppState>) -> ApiResult<Json<WorkspaceA
     seed_extras(&state.pool, &access.workspace_id).await?;
     let proof_token = random_token();
     let now = Utc::now();
+    let completed_at = now - Duration::minutes(35);
+    let proof_expires_at = completed_at + Duration::days(14);
     let checklist = serde_json::json!([
         {"label":"Kitchen surfaces and sink", "done":true},
         {"label":"Two bathrooms", "done":true},
@@ -242,10 +244,10 @@ async fn create_demo(State(state): State<AppState>) -> ApiResult<Json<WorkspaceA
     ]);
     sqlx::query("INSERT INTO visits (id, workspace_id, client_name, location_label, completed_at, next_visit_at, technician, checklist_json, notes, photos_json, proof_token_hash, proof_token_demo, proof_expires_at, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
         .bind(Uuid::new_v4().to_string()).bind(&access.workspace_id).bind("Maya Chen").bind("Willow Street")
-        .bind((now - Duration::minutes(35)).to_rfc3339()).bind((now + Duration::days(14)).date_naive().to_string())
+        .bind(completed_at.to_rfc3339()).bind((now + Duration::days(14)).date_naive().to_string())
         .bind("Elena").bind(checklist.to_string()).bind("The entry mat was left on the bench to dry.")
         .bind(photos.to_string()).bind(hash_token(&proof_token)).bind(&proof_token)
-        .bind((now + Duration::days(14)).to_rfc3339()).bind(now.to_rfc3339())
+        .bind(proof_expires_at.to_rfc3339()).bind(now.to_rfc3339())
         .execute(&state.pool).await.map_err(db_error)?;
     Ok(Json(access))
 }
