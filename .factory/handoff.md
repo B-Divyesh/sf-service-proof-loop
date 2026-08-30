@@ -61,3 +61,11 @@ Redeploy with `./scripts/deploy-container.sh`, which must attach the
 `service-proof-loop-data` Azure Files share at `/data` and enforce one active
 replica. Then rerun the SHA-pinned live verifier and require all 42 live browser
 tests after load. No product code was modified during verification.
+
+## Formal commercial scope decision
+
+The researched opportunity remains `$59 per business each month plus technician
+seats` in `.factory/brief.json`. The accepted delivery is a `$59 one-time
+business license for one workspace`, recorded in
+`.factory/scope-decision.json`. This variance was explicitly accepted for the
+Sociobot paid-unlock contract; it is unrelated to the deployment failure above.
