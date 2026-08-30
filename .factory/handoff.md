@@ -86,10 +86,11 @@ npm run build
 npm audit --audit-level=high
 ```
 
-This covers 12 Rust integration tests, 26 deployment/runtime Node tests, 42
-browser tests across desktop and 390 px mobile, Rustfmt, Clippy with warnings
-denied, TypeScript, the production build, and an audit with 0 vulnerabilities.
-The Rust suite includes restart persistence. `/opt/fleet/lib/verify-url.sh`
+This covers 12 Rust integration tests, 26 deployment regression checks, one
+runtime test, and 42 browser tests across desktop and 390 px mobile. Rustfmt,
+Clippy with warnings denied, TypeScript, the production build, and an audit
+with 0 vulnerabilities also pass. The Rust suite includes restart persistence.
+`/opt/fleet/lib/verify-url.sh`
 passes `/`, `/demo`, `/privacy`, and `/terms` with one `h1`, `lang=en`, a main
 landmark, complete image alternatives, labelled buttons, and no console errors.
 
@@ -97,6 +98,10 @@ The build produces `dist/`. Initial JavaScript is 31.75 kB raw / 10.15 kB gzip;
 CSS is 15.44 kB raw / 4.41 kB gzip. There is no package/consumer surface. No
 Docker-compatible engine is installed locally; the SHA-tagged ACR build and
 live health check prove the production container builds and starts.
+
+Lighthouse 12.8.2 mobile scores 100 Performance, 100 Accessibility, 100 Best
+Practices, and 100 SEO. FCP is 1.08 s, LCP is 1.23 s, TBT is 0 ms, CLS is 0,
+and total transfer is 68,257 bytes.
 
 ## Run and verify
 
