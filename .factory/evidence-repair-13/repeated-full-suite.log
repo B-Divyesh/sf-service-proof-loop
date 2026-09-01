@@ -1,0 +1,834 @@
+FULL SUITE RUN 1
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/rate-limit.test.mjs tests/plan-limit.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 2.194409
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-replica ephemeral SQLite topology
+ok 2 - rejects verifier 9's exact three-replica ephemeral SQLite topology
+  ---
+  duration_ms: 0.539102
+  type: 'test'
+  ...
+# Subtest: rejects verifier 10's exact candidate topology before any functional probe
+ok 3 - rejects verifier 10's exact candidate topology before any functional probe
+  ---
+  duration_ms: 0.264001
+  type: 'test'
+  ...
+# Subtest: rejects verifier 11's exact candidate image with three ephemeral writers
+ok 4 - rejects verifier 11's exact candidate image with three ephemeral writers
+  ---
+  duration_ms: 0.197601
+  type: 'test'
+  ...
+# Subtest: rejects verifier 12's exact candidate image with three ephemeral writers
+ok 5 - rejects verifier 12's exact candidate image with three ephemeral writers
+  ---
+  duration_ms: 0.256401
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 6 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 0.196901
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 7 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.266501
+  type: 'test'
+  ...
+# Subtest: accepts exactly three created and five payment-required writes
+ok 8 - accepts exactly three created and five payment-required writes
+  ---
+  duration_ms: 3.107612
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-created and five-unauthorized split-state result
+ok 9 - rejects verifier 9's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 0.527402
+  type: 'test'
+  ...
+# Subtest: rejects verifier 10's exact concurrent write statuses
+ok 10 - rejects verifier 10's exact concurrent write statuses
+  ---
+  duration_ms: 0.326601
+  type: 'test'
+  ...
+# Subtest: rejects verifier 11's exact two-created and six-unauthorized split-state result
+ok 11 - rejects verifier 11's exact two-created and six-unauthorized split-state result
+  ---
+  duration_ms: 0.209101
+  type: 'test'
+  ...
+# Subtest: rejects verifier 12's exact three-created and five-unauthorized split-state result
+ok 12 - rejects verifier 12's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 1.273205
+  type: 'test'
+  ...
+# Subtest: accepts one 40-request allowance for the 45-request claim probe
+ok 13 - accepts one 40-request allowance for the 45-request claim probe
+  ---
+  duration_ms: 3.373513
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's 45-of-45 unbounded request result
+ok 14 - rejects verifier 9's 45-of-45 unbounded request result
+  ---
+  duration_ms: 0.702503
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's tripled 120-request allowance
+ok 15 - rejects verifier 9's tripled 120-request allowance
+  ---
+  duration_ms: 0.290501
+  type: 'test'
+  ...
+# Subtest: rejects verifier 10's exact 45 and 130 request bursts
+ok 16 - rejects verifier 10's exact 45 and 130 request bursts
+  ---
+  duration_ms: 0.492802
+  type: 'test'
+  ...
+# Subtest: rejects verifier 11's exact tripled live allowance after the same bursts
+ok 17 - rejects verifier 11's exact tripled live allowance after the same bursts
+  ---
+  duration_ms: 0.339001
+  type: 'test'
+  ...
+# Subtest: rejects verifier 12's exact tripled live allowance after the same bursts
+ok 18 - rejects verifier 12's exact tripled live allowance after the same bursts
+  ---
+  duration_ms: 0.320301
+  type: 'test'
+  ...
+# Subtest: requires Retry-After: 1 on every limited response
+ok 19 - requires Retry-After: 1 on every limited response
+  ---
+  duration_ms: 0.643503
+  type: 'test'
+  ...
+# Subtest: commercial variance is explicitly accepted without rewriting the researched brief
+ok 20 - commercial variance is explicitly accepted without rewriting the researched brief
+  ---
+  duration_ms: 1.263305
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 21 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.48231
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+ok 22 - rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+  ---
+  duration_ms: 1.185305
+  type: 'test'
+  ...
+# Subtest: rejects verifier 10's exact 196-of-400 reads and 6-of-20 proofs
+ok 23 - rejects verifier 10's exact 196-of-400 reads and 6-of-20 proofs
+  ---
+  duration_ms: 0.848503
+  type: 'test'
+  ...
+# Subtest: rejects verifier 11's exact 140-of-400 reads and zero matching proofs
+ok 24 - rejects verifier 11's exact 140-of-400 reads and zero matching proofs
+  ---
+  duration_ms: 1.384205
+  type: 'test'
+  ...
+# Subtest: rejects verifier 12's exact 136-of-400 reads and 6-of-20 proofs
+ok 25 - rejects verifier 12's exact 136-of-400 reads and 6-of-20 proofs
+  ---
+  duration_ms: 0.496302
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 26 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 5.904724
+  type: 'test'
+  ...
+1..26
+# tests 26
+# suites 0
+# pass 26
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 264.035348
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   1.46 kB │ gzip:  0.53 kB
+../dist/index.html                 1.73 kB │ gzip:  0.59 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-BPOfCvU1.js   33.34 kB │ gzip: 10.49 kB
+✓ built in 169ms
+    Finished `release` profile [optimized] target(s) in 0.16s
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 72.413887
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 201.4688
+[WebServer] (node:20847) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 46 tests using 2 workers
+
+(node:20876) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20875) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20875) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20876) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/e2e/product.spec.ts:11:1 › landing explains the job and reaches the demo (1.0s)
+  ✓   2 [mobile-chromium] › tests/e2e/product.spec.ts:11:1 › landing explains the job and reaches the demo (1.2s)
+  ✓   3 [chromium] › tests/e2e/product.spec.ts:20:1 › mobile navigation and footer links have 44px touch targets (375ms)
+  ✓   4 [mobile-chromium] › tests/e2e/product.spec.ts:20:1 › mobile navigation and footer links have 44px touch targets (644ms)
+  ✓   5 [chromium] › tests/e2e/product.spec.ts:37:1 › mobile inline links have 44px touch targets (1.3s)
+  ✓   7 [chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (846ms)
+  ✓   6 [mobile-chromium] › tests/e2e/product.spec.ts:37:1 › mobile inline links have 44px touch targets (1.7s)
+  ✓   9 [mobile-chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (998ms)
+  ✓   8 [chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.1s)
+  ✓  11 [chromium] › tests/e2e/product.spec.ts:87:1 › proof shows its 14-day expiry date (694ms)
+  ✓  12 [chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (775ms)
+  ✓  10 [mobile-chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.7s)
+  ✓  14 [mobile-chromium] › tests/e2e/product.spec.ts:87:1 › proof shows its 14-day expiry date (877ms)
+  ✓  13 [chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.3s)
+  ✓  15 [mobile-chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (882ms)
+  ✓  16 [chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (1.4s)
+  ✓  17 [mobile-chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.4s)
+  ✓  19 [mobile-chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (4.4s)
+  ✓  18 [chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (10.5s)
+  ✓  21 [chromium] › tests/e2e/product.spec.ts:213:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (688ms)
+  ✓  22 [chromium] › tests/e2e/product.spec.ts:232:1 › @claim:rate-limit API traffic is limited per forwarded client (141ms)
+  ✓  23 [chromium] › tests/e2e/product.spec.ts:239:1 › technician can record a visit and receive a proof link (458ms)
+  ✓  24 [chromium] › tests/e2e/product.spec.ts:247:1 › @claim:photo-upload a technician can add a consented photo to proof (1.1s)
+  ✓  25 [chromium] › tests/e2e/product.spec.ts:275:1 › @claim:problem-rating a client problem and rating return to the workspace (697ms)
+  ✓  26 [chromium] › tests/e2e/product.spec.ts:289:1 › @claim:same-origin-demo demo sends data only to this service (307ms)
+  ✓  27 [chromium] › tests/e2e/product.spec.ts:297:1 › @a11y landing and client proof have no serious axe findings (1.6s)
+  ✓  20 [mobile-chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (11.3s)
+  ✓  28 [chromium] › tests/e2e/product.spec.ts:307:1 › @a11y dark treatment, keyboard focus, touch targets, and 200% text reflow (2.3s)
+  ✓  29 [mobile-chromium] › tests/e2e/product.spec.ts:213:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (1.8s)
+  ✓  31 [mobile-chromium] › tests/e2e/product.spec.ts:232:1 › @claim:rate-limit API traffic is limited per forwarded client (275ms)
+  ✓  30 [chromium] › tests/e2e/product.spec.ts:353:1 › @claim:no-tracking landing and demo load no third-party resources (666ms)
+  ✓  33 [chromium] › tests/e2e/product.spec.ts:362:1 › valid deep links return 200 and the real 404 includes social metadata (98ms)
+  ✓  32 [mobile-chromium] › tests/e2e/product.spec.ts:239:1 › technician can record a visit and receive a proof link (804ms)
+  ✓  34 [chromium] › tests/e2e/product.spec.ts:374:1 › each route has matching server and rendered social metadata (830ms)
+  ✓  36 [chromium] › tests/e2e/product.spec.ts:396:1 › security response policy and primary flows have no console errors (708ms)
+  ✓  37 [chromium] › tests/e2e/product.spec.ts:412:1 › offline state and unknown route give a clear next step (588ms)
+  ✓  35 [mobile-chromium] › tests/e2e/product.spec.ts:247:1 › @claim:photo-upload a technician can add a consented photo to proof (1.7s)
+  ✓  38 [mobile-chromium] › tests/e2e/product.spec.ts:275:1 › @claim:problem-rating a client problem and rating return to the workspace (2.5s)
+  ✓  39 [mobile-chromium] › tests/e2e/product.spec.ts:289:1 › @claim:same-origin-demo demo sends data only to this service (371ms)
+  ✓  40 [mobile-chromium] › tests/e2e/product.spec.ts:297:1 › @a11y landing and client proof have no serious axe findings (1.6s)
+  ✓  41 [mobile-chromium] › tests/e2e/product.spec.ts:307:1 › @a11y dark treatment, keyboard focus, touch targets, and 200% text reflow (1.4s)
+  ✓  42 [mobile-chromium] › tests/e2e/product.spec.ts:353:1 › @claim:no-tracking landing and demo load no third-party resources (496ms)
+  ✓  43 [mobile-chromium] › tests/e2e/product.spec.ts:362:1 › valid deep links return 200 and the real 404 includes social metadata (73ms)
+  ✓  44 [mobile-chromium] › tests/e2e/product.spec.ts:374:1 › each route has matching server and rendered social metadata (530ms)
+  ✓  45 [mobile-chromium] › tests/e2e/product.spec.ts:396:1 › security response policy and primary flows have no console errors (577ms)
+  ✓  46 [mobile-chromium] › tests/e2e/product.spec.ts:412:1 › offline state and unknown route give a clear next step (416ms)
+
+  46 passed (41.1s)
+PASS FULL SUITE RUN 1
+FULL SUITE RUN 2
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/rate-limit.test.mjs tests/plan-limit.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 3.146224
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-replica ephemeral SQLite topology
+ok 2 - rejects verifier 9's exact three-replica ephemeral SQLite topology
+  ---
+  duration_ms: 0.715006
+  type: 'test'
+  ...
+# Subtest: rejects verifier 10's exact candidate topology before any functional probe
+ok 3 - rejects verifier 10's exact candidate topology before any functional probe
+  ---
+  duration_ms: 0.390404
+  type: 'test'
+  ...
+# Subtest: rejects verifier 11's exact candidate image with three ephemeral writers
+ok 4 - rejects verifier 11's exact candidate image with three ephemeral writers
+  ---
+  duration_ms: 0.297202
+  type: 'test'
+  ...
+# Subtest: rejects verifier 12's exact candidate image with three ephemeral writers
+ok 5 - rejects verifier 12's exact candidate image with three ephemeral writers
+  ---
+  duration_ms: 0.387903
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 6 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 0.306503
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 7 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.515404
+  type: 'test'
+  ...
+# Subtest: accepts exactly three created and five payment-required writes
+ok 8 - accepts exactly three created and five payment-required writes
+  ---
+  duration_ms: 1.896414
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-created and five-unauthorized split-state result
+ok 9 - rejects verifier 9's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 0.379903
+  type: 'test'
+  ...
+# Subtest: rejects verifier 10's exact concurrent write statuses
+ok 10 - rejects verifier 10's exact concurrent write statuses
+  ---
+  duration_ms: 0.224502
+  type: 'test'
+  ...
+# Subtest: rejects verifier 11's exact two-created and six-unauthorized split-state result
+ok 11 - rejects verifier 11's exact two-created and six-unauthorized split-state result
+  ---
+  duration_ms: 0.143701
+  type: 'test'
+  ...
+# Subtest: rejects verifier 12's exact three-created and five-unauthorized split-state result
+ok 12 - rejects verifier 12's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 1.070608
+  type: 'test'
+  ...
+# Subtest: accepts one 40-request allowance for the 45-request claim probe
+ok 13 - accepts one 40-request allowance for the 45-request claim probe
+  ---
+  duration_ms: 2.920922
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's 45-of-45 unbounded request result
+ok 14 - rejects verifier 9's 45-of-45 unbounded request result
+  ---
+  duration_ms: 0.630505
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's tripled 120-request allowance
+ok 15 - rejects verifier 9's tripled 120-request allowance
+  ---
+  duration_ms: 0.320702
+  type: 'test'
+  ...
+# Subtest: rejects verifier 10's exact 45 and 130 request bursts
+ok 16 - rejects verifier 10's exact 45 and 130 request bursts
+  ---
+  duration_ms: 0.395303
+  type: 'test'
+  ...
+# Subtest: rejects verifier 11's exact tripled live allowance after the same bursts
+ok 17 - rejects verifier 11's exact tripled live allowance after the same bursts
+  ---
+  duration_ms: 0.382203
+  type: 'test'
+  ...
+# Subtest: rejects verifier 12's exact tripled live allowance after the same bursts
+ok 18 - rejects verifier 12's exact tripled live allowance after the same bursts
+  ---
+  duration_ms: 0.397003
+  type: 'test'
+  ...
+# Subtest: requires Retry-After: 1 on every limited response
+ok 19 - requires Retry-After: 1 on every limited response
+  ---
+  duration_ms: 0.323102
+  type: 'test'
+  ...
+# Subtest: commercial variance is explicitly accepted without rewriting the researched brief
+ok 20 - commercial variance is explicitly accepted without rewriting the researched brief
+  ---
+  duration_ms: 1.692513
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 21 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.302218
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+ok 22 - rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+  ---
+  duration_ms: 0.810906
+  type: 'test'
+  ...
+# Subtest: rejects verifier 10's exact 196-of-400 reads and 6-of-20 proofs
+ok 23 - rejects verifier 10's exact 196-of-400 reads and 6-of-20 proofs
+  ---
+  duration_ms: 0.607204
+  type: 'test'
+  ...
+# Subtest: rejects verifier 11's exact 140-of-400 reads and zero matching proofs
+ok 24 - rejects verifier 11's exact 140-of-400 reads and zero matching proofs
+  ---
+  duration_ms: 1.33541
+  type: 'test'
+  ...
+# Subtest: rejects verifier 12's exact 136-of-400 reads and 6-of-20 proofs
+ok 25 - rejects verifier 12's exact 136-of-400 reads and 6-of-20 proofs
+  ---
+  duration_ms: 0.627105
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 26 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 5.497842
+  type: 'test'
+  ...
+1..26
+# tests 26
+# suites 0
+# pass 26
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 265.939465
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   1.46 kB │ gzip:  0.53 kB
+../dist/index.html                 1.73 kB │ gzip:  0.59 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-BPOfCvU1.js   33.34 kB │ gzip: 10.49 kB
+✓ built in 162ms
+    Finished `release` profile [optimized] target(s) in 0.17s
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 68.633233
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 189.762273
+[WebServer] (node:21682) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 46 tests using 2 workers
+
+(node:21710) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21709) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21709) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21710) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/e2e/product.spec.ts:11:1 › landing explains the job and reaches the demo (899ms)
+  ✓   2 [mobile-chromium] › tests/e2e/product.spec.ts:11:1 › landing explains the job and reaches the demo (1.2s)
+  ✓   3 [chromium] › tests/e2e/product.spec.ts:20:1 › mobile navigation and footer links have 44px touch targets (383ms)
+  ✓   4 [mobile-chromium] › tests/e2e/product.spec.ts:20:1 › mobile navigation and footer links have 44px touch targets (636ms)
+  ✓   5 [chromium] › tests/e2e/product.spec.ts:37:1 › mobile inline links have 44px touch targets (1.2s)
+  ✓   7 [chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (855ms)
+  ✓   6 [mobile-chromium] › tests/e2e/product.spec.ts:37:1 › mobile inline links have 44px touch targets (1.9s)
+  ✓   8 [chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.2s)
+  ✓   9 [mobile-chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (882ms)
+  ✓  10 [chromium] › tests/e2e/product.spec.ts:87:1 › proof shows its 14-day expiry date (624ms)
+  ✓  12 [chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (840ms)
+  ✓  11 [mobile-chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.8s)
+  ✓  13 [chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.2s)
+  ✓  14 [mobile-chromium] › tests/e2e/product.spec.ts:87:1 › proof shows its 14-day expiry date (806ms)
+  ✓  16 [mobile-chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (936ms)
+  ✓  15 [chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (1.7s)
+  ✓  17 [mobile-chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.3s)
+  ✓  19 [mobile-chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (4.3s)
+  ✓  18 [chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (10.5s)
+  ✓  21 [chromium] › tests/e2e/product.spec.ts:213:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (811ms)
+  ✓  22 [chromium] › tests/e2e/product.spec.ts:232:1 › @claim:rate-limit API traffic is limited per forwarded client (157ms)
+  ✓  23 [chromium] › tests/e2e/product.spec.ts:239:1 › technician can record a visit and receive a proof link (536ms)
+  ✓  24 [chromium] › tests/e2e/product.spec.ts:247:1 › @claim:photo-upload a technician can add a consented photo to proof (1.2s)
+  ✓  25 [chromium] › tests/e2e/product.spec.ts:275:1 › @claim:problem-rating a client problem and rating return to the workspace (798ms)
+  ✓  26 [chromium] › tests/e2e/product.spec.ts:289:1 › @claim:same-origin-demo demo sends data only to this service (329ms)
+  ✓  20 [mobile-chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (11.2s)
+  ✓  27 [chromium] › tests/e2e/product.spec.ts:297:1 › @a11y landing and client proof have no serious axe findings (2.1s)
+  ✓  28 [mobile-chromium] › tests/e2e/product.spec.ts:213:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (1.7s)
+  ✓  30 [mobile-chromium] › tests/e2e/product.spec.ts:232:1 › @claim:rate-limit API traffic is limited per forwarded client (188ms)
+  ✓  31 [mobile-chromium] › tests/e2e/product.spec.ts:239:1 › technician can record a visit and receive a proof link (1.1s)
+  ✓  29 [chromium] › tests/e2e/product.spec.ts:307:1 › @a11y dark treatment, keyboard focus, touch targets, and 200% text reflow (2.7s)
+  ✓  33 [chromium] › tests/e2e/product.spec.ts:353:1 › @claim:no-tracking landing and demo load no third-party resources (763ms)
+  ✓  34 [chromium] › tests/e2e/product.spec.ts:362:1 › valid deep links return 200 and the real 404 includes social metadata (96ms)
+  ✓  35 [chromium] › tests/e2e/product.spec.ts:374:1 › each route has matching server and rendered social metadata (800ms)
+  ✓  32 [mobile-chromium] › tests/e2e/product.spec.ts:247:1 › @claim:photo-upload a technician can add a consented photo to proof (1.8s)
+  ✓  36 [chromium] › tests/e2e/product.spec.ts:396:1 › security response policy and primary flows have no console errors (700ms)
+  ✓  38 [chromium] › tests/e2e/product.spec.ts:412:1 › offline state and unknown route give a clear next step (498ms)
+  ✓  37 [mobile-chromium] › tests/e2e/product.spec.ts:275:1 › @claim:problem-rating a client problem and rating return to the workspace (1.5s)
+  ✓  39 [mobile-chromium] › tests/e2e/product.spec.ts:289:1 › @claim:same-origin-demo demo sends data only to this service (381ms)
+  ✓  40 [mobile-chromium] › tests/e2e/product.spec.ts:297:1 › @a11y landing and client proof have no serious axe findings (1.6s)
+  ✓  41 [mobile-chromium] › tests/e2e/product.spec.ts:307:1 › @a11y dark treatment, keyboard focus, touch targets, and 200% text reflow (1.6s)
+  ✓  42 [mobile-chromium] › tests/e2e/product.spec.ts:353:1 › @claim:no-tracking landing and demo load no third-party resources (492ms)
+  ✓  43 [mobile-chromium] › tests/e2e/product.spec.ts:362:1 › valid deep links return 200 and the real 404 includes social metadata (78ms)
+  ✓  44 [mobile-chromium] › tests/e2e/product.spec.ts:374:1 › each route has matching server and rendered social metadata (522ms)
+  ✓  45 [mobile-chromium] › tests/e2e/product.spec.ts:396:1 › security response policy and primary flows have no console errors (501ms)
+  ✓  46 [mobile-chromium] › tests/e2e/product.spec.ts:412:1 › offline state and unknown route give a clear next step (409ms)
+
+  46 passed (40.2s)
+PASS FULL SUITE RUN 2
+FULL SUITE RUN 3
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/rate-limit.test.mjs tests/plan-limit.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 3.121914
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-replica ephemeral SQLite topology
+ok 2 - rejects verifier 9's exact three-replica ephemeral SQLite topology
+  ---
+  duration_ms: 0.869404
+  type: 'test'
+  ...
+# Subtest: rejects verifier 10's exact candidate topology before any functional probe
+ok 3 - rejects verifier 10's exact candidate topology before any functional probe
+  ---
+  duration_ms: 0.401202
+  type: 'test'
+  ...
+# Subtest: rejects verifier 11's exact candidate image with three ephemeral writers
+ok 4 - rejects verifier 11's exact candidate image with three ephemeral writers
+  ---
+  duration_ms: 0.344902
+  type: 'test'
+  ...
+# Subtest: rejects verifier 12's exact candidate image with three ephemeral writers
+ok 5 - rejects verifier 12's exact candidate image with three ephemeral writers
+  ---
+  duration_ms: 0.455502
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 6 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 0.317402
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 7 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.426202
+  type: 'test'
+  ...
+# Subtest: accepts exactly three created and five payment-required writes
+ok 8 - accepts exactly three created and five payment-required writes
+  ---
+  duration_ms: 2.418111
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-created and five-unauthorized split-state result
+ok 9 - rejects verifier 9's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 0.552402
+  type: 'test'
+  ...
+# Subtest: rejects verifier 10's exact concurrent write statuses
+ok 10 - rejects verifier 10's exact concurrent write statuses
+  ---
+  duration_ms: 0.375002
+  type: 'test'
+  ...
+# Subtest: rejects verifier 11's exact two-created and six-unauthorized split-state result
+ok 11 - rejects verifier 11's exact two-created and six-unauthorized split-state result
+  ---
+  duration_ms: 0.184501
+  type: 'test'
+  ...
+# Subtest: rejects verifier 12's exact three-created and five-unauthorized split-state result
+ok 12 - rejects verifier 12's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 1.113405
+  type: 'test'
+  ...
+# Subtest: accepts one 40-request allowance for the 45-request claim probe
+ok 13 - accepts one 40-request allowance for the 45-request claim probe
+  ---
+  duration_ms: 3.840217
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's 45-of-45 unbounded request result
+ok 14 - rejects verifier 9's 45-of-45 unbounded request result
+  ---
+  duration_ms: 0.823104
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's tripled 120-request allowance
+ok 15 - rejects verifier 9's tripled 120-request allowance
+  ---
+  duration_ms: 0.300402
+  type: 'test'
+  ...
+# Subtest: rejects verifier 10's exact 45 and 130 request bursts
+ok 16 - rejects verifier 10's exact 45 and 130 request bursts
+  ---
+  duration_ms: 0.379602
+  type: 'test'
+  ...
+# Subtest: rejects verifier 11's exact tripled live allowance after the same bursts
+ok 17 - rejects verifier 11's exact tripled live allowance after the same bursts
+  ---
+  duration_ms: 0.453302
+  type: 'test'
+  ...
+# Subtest: rejects verifier 12's exact tripled live allowance after the same bursts
+ok 18 - rejects verifier 12's exact tripled live allowance after the same bursts
+  ---
+  duration_ms: 0.284501
+  type: 'test'
+  ...
+# Subtest: requires Retry-After: 1 on every limited response
+ok 19 - requires Retry-After: 1 on every limited response
+  ---
+  duration_ms: 0.388102
+  type: 'test'
+  ...
+# Subtest: commercial variance is explicitly accepted without rewriting the researched brief
+ok 20 - commercial variance is explicitly accepted without rewriting the researched brief
+  ---
+  duration_ms: 1.168805
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 21 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.091709
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+ok 22 - rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+  ---
+  duration_ms: 0.900404
+  type: 'test'
+  ...
+# Subtest: rejects verifier 10's exact 196-of-400 reads and 6-of-20 proofs
+ok 23 - rejects verifier 10's exact 196-of-400 reads and 6-of-20 proofs
+  ---
+  duration_ms: 0.669103
+  type: 'test'
+  ...
+# Subtest: rejects verifier 11's exact 140-of-400 reads and zero matching proofs
+ok 24 - rejects verifier 11's exact 140-of-400 reads and zero matching proofs
+  ---
+  duration_ms: 1.212406
+  type: 'test'
+  ...
+# Subtest: rejects verifier 12's exact 136-of-400 reads and 6-of-20 proofs
+ok 25 - rejects verifier 12's exact 136-of-400 reads and 6-of-20 proofs
+  ---
+  duration_ms: 0.495102
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 26 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 5.915026
+  type: 'test'
+  ...
+1..26
+# tests 26
+# suites 0
+# pass 26
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 293.460291
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   1.46 kB │ gzip:  0.53 kB
+../dist/index.html                 1.73 kB │ gzip:  0.59 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-BPOfCvU1.js   33.34 kB │ gzip: 10.49 kB
+✓ built in 214ms
+    Finished `release` profile [optimized] target(s) in 0.17s
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 89.489194
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 220.192768
+[WebServer] (node:22512) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 46 tests using 2 workers
+
+(node:22540) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22539) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22539) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22540) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/e2e/product.spec.ts:11:1 › landing explains the job and reaches the demo (1.1s)
+  ✓   2 [mobile-chromium] › tests/e2e/product.spec.ts:11:1 › landing explains the job and reaches the demo (1.3s)
+  ✓   3 [chromium] › tests/e2e/product.spec.ts:20:1 › mobile navigation and footer links have 44px touch targets (397ms)
+  ✓   4 [mobile-chromium] › tests/e2e/product.spec.ts:20:1 › mobile navigation and footer links have 44px touch targets (606ms)
+  ✓   5 [chromium] › tests/e2e/product.spec.ts:37:1 › mobile inline links have 44px touch targets (1.1s)
+  ✓   6 [mobile-chromium] › tests/e2e/product.spec.ts:37:1 › mobile inline links have 44px touch targets (1.5s)
+  ✓   7 [chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (872ms)
+  ✓   9 [chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (864ms)
+  ✓   8 [mobile-chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (1.3s)
+  ✓  10 [chromium] › tests/e2e/product.spec.ts:87:1 › proof shows its 14-day expiry date (520ms)
+  ✓  12 [chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (811ms)
+  ✓  11 [mobile-chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.5s)
+  ✓  13 [chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.0s)
+  ✓  14 [mobile-chromium] › tests/e2e/product.spec.ts:87:1 › proof shows its 14-day expiry date (806ms)
+  ✓  16 [mobile-chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (816ms)
+  ✓  15 [chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (3.7s)
+  ✓  17 [mobile-chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (3.9s)
+  ✓  19 [mobile-chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (1.5s)
+  ✓  18 [chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (10.7s)
+  ✓  21 [chromium] › tests/e2e/product.spec.ts:213:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (756ms)
+  ✓  22 [chromium] › tests/e2e/product.spec.ts:232:1 › @claim:rate-limit API traffic is limited per forwarded client (176ms)
+  ✓  23 [chromium] › tests/e2e/product.spec.ts:239:1 › technician can record a visit and receive a proof link (432ms)
+  ✓  24 [chromium] › tests/e2e/product.spec.ts:247:1 › @claim:photo-upload a technician can add a consented photo to proof (1.0s)
+  ✓  25 [chromium] › tests/e2e/product.spec.ts:275:1 › @claim:problem-rating a client problem and rating return to the workspace (861ms)
+  ✓  20 [mobile-chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (11.3s)
+  ✓  26 [chromium] › tests/e2e/product.spec.ts:289:1 › @claim:same-origin-demo demo sends data only to this service (486ms)
+  ✓  27 [mobile-chromium] › tests/e2e/product.spec.ts:213:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (1.6s)
+  ✓  29 [mobile-chromium] › tests/e2e/product.spec.ts:232:1 › @claim:rate-limit API traffic is limited per forwarded client (260ms)
+  ✓  30 [mobile-chromium] › tests/e2e/product.spec.ts:239:1 › technician can record a visit and receive a proof link (764ms)
+  ✓  28 [chromium] › tests/e2e/product.spec.ts:297:1 › @a11y landing and client proof have no serious axe findings (2.7s)
+  ✓  31 [mobile-chromium] › tests/e2e/product.spec.ts:247:1 › @claim:photo-upload a technician can add a consented photo to proof (1.7s)
+  ✓  32 [chromium] › tests/e2e/product.spec.ts:307:1 › @a11y dark treatment, keyboard focus, touch targets, and 200% text reflow (2.4s)
+  ✓  34 [chromium] › tests/e2e/product.spec.ts:353:1 › @claim:no-tracking landing and demo load no third-party resources (575ms)
+  ✓  35 [chromium] › tests/e2e/product.spec.ts:362:1 › valid deep links return 200 and the real 404 includes social metadata (132ms)
+  ✓  33 [mobile-chromium] › tests/e2e/product.spec.ts:275:1 › @claim:problem-rating a client problem and rating return to the workspace (1.7s)
+  ✓  37 [mobile-chromium] › tests/e2e/product.spec.ts:289:1 › @claim:same-origin-demo demo sends data only to this service (685ms)
+  ✓  36 [chromium] › tests/e2e/product.spec.ts:374:1 › each route has matching server and rendered social metadata (837ms)
+  ✓  39 [chromium] › tests/e2e/product.spec.ts:396:1 › security response policy and primary flows have no console errors (797ms)
+  ✓  40 [chromium] › tests/e2e/product.spec.ts:412:1 › offline state and unknown route give a clear next step (560ms)
+  ✓  38 [mobile-chromium] › tests/e2e/product.spec.ts:297:1 › @a11y landing and client proof have no serious axe findings (2.5s)
+  ✓  41 [mobile-chromium] › tests/e2e/product.spec.ts:307:1 › @a11y dark treatment, keyboard focus, touch targets, and 200% text reflow (1.5s)
+  ✓  42 [mobile-chromium] › tests/e2e/product.spec.ts:353:1 › @claim:no-tracking landing and demo load no third-party resources (486ms)
+  ✓  43 [mobile-chromium] › tests/e2e/product.spec.ts:362:1 › valid deep links return 200 and the real 404 includes social metadata (79ms)
+  ✓  44 [mobile-chromium] › tests/e2e/product.spec.ts:374:1 › each route has matching server and rendered social metadata (524ms)
+  ✓  45 [mobile-chromium] › tests/e2e/product.spec.ts:396:1 › security response policy and primary flows have no console errors (482ms)
+  ✓  46 [mobile-chromium] › tests/e2e/product.spec.ts:412:1 › offline state and unknown route give a clear next step (404ms)
+
+  46 passed (40.8s)
+PASS FULL SUITE RUN 3

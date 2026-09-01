@@ -1,0 +1,701 @@
+RUN 1
+[WebServer] (node:800) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Updating crates.io index
+[WebServer]  Downloading crates ...
+[WebServer]   Downloaded zerofrom-derive v0.1.7
+[WebServer]   Downloaded block-buffer v0.10.4
+[WebServer]   Downloaded hex v0.4.3
+[WebServer]   Downloaded hyper-timeout v0.5.2
+[WebServer]   Downloaded zeroize v1.9.0
+[WebServer]   Downloaded crc-catalog v2.5.0
+[WebServer]   Downloaded crossbeam-utils v0.8.22
+[WebServer]   Downloaded zerotrie v0.2.5
+[WebServer]   Downloaded icu_collections v2.3.0
+[WebServer]   Downloaded zerovec v0.11.8
+[WebServer]   Downloaded futures-timer v3.0.4
+[WebServer]   Downloaded aho-corasick v1.1.5
+[WebServer]   Downloaded foldhash v0.1.5
+[WebServer]   Downloaded tokio-stream v0.1.19
+[WebServer]   Downloaded untrusted v0.9.0
+[WebServer]   Downloaded axum v0.8.9
+[WebServer]   Downloaded cfg_aliases v0.2.2
+[WebServer]   Downloaded heck v0.5.0
+[WebServer]   Downloaded crc v3.4.0
+[WebServer]   Downloaded atoi v2.0.0
+[WebServer]   Downloaded cpufeatures v0.2.17
+[WebServer]   Downloaded crypto-common v0.1.7
+[WebServer]   Downloaded dashmap v6.2.1
+[WebServer]   Downloaded der v0.7.10
+[WebServer]   Downloaded num-iter v0.1.46
+[WebServer]   Downloaded axum-core v0.5.6
+[WebServer]   Downloaded fnv v1.0.7
+[WebServer]   Downloaded forwarded-header-value v0.1.1
+[WebServer]   Downloaded hashbrown v0.14.5
+[WebServer]   Downloaded lazy_static v1.5.0
+[WebServer]   Downloaded tower_governor v0.8.0
+[WebServer]   Downloaded unicase v2.9.0
+[WebServer]   Downloaded allocator-api2 v0.2.21
+[WebServer]   Downloaded cfg-if v1.0.4
+[WebServer]   Downloaded displaydoc v0.2.7
+[WebServer]   Downloaded dotenvy v0.15.7
+[WebServer]   Downloaded hashbrown v0.17.1
+[WebServer]   Downloaded nu-ansi-term v0.50.3
+[WebServer]   Downloaded flume v0.11.1
+[WebServer]   Downloaded byteorder v1.5.0
+[WebServer]   Downloaded libm v0.2.16
+[WebServer]   Downloaded tracing-subscriber v0.3.23
+[WebServer]   Downloaded httparse v1.10.1
+[WebServer]   Downloaded hashlink v0.10.0
+[WebServer]   Downloaded itoa v1.0.18
+[WebServer]   Downloaded chrono v0.4.45
+[WebServer]   Downloaded tokio v1.53.1
+[WebServer]   Downloaded tracing-core v0.1.36
+[WebServer]   Downloaded http-body v1.1.0
+[WebServer]   Downloaded icu_locale_core v2.3.0
+[WebServer]   Downloaded cpufeatures v0.3.1
+[WebServer]   Downloaded foldhash v0.2.0
+[WebServer]   Downloaded form_urlencoded v1.2.2
+[WebServer]   Downloaded futures-core v0.3.34
+[WebServer]   Downloaded async-trait v0.1.92
+[WebServer]   Downloaded futures-sink v0.3.34
+[WebServer]   Downloaded http-range-header v0.4.2
+[WebServer]   Downloaded errno v0.3.14
+[WebServer]   Downloaded sha1 v0.10.7
+[WebServer]   Downloaded httpdate v1.0.3
+[WebServer]   Downloaded scopeguard v1.2.0
+[WebServer]   Downloaded base64ct v1.8.3
+[WebServer]   Downloaded crossbeam-queue v0.3.13
+[WebServer]   Downloaded digest v0.10.7
+[WebServer]   Downloaded futures-executor v0.3.34
+[WebServer]   Downloaded idna_adapter v1.2.2
+[WebServer]   Downloaded iana-time-zone v0.1.65
+[WebServer]   Downloaded futures-io v0.3.34
+[WebServer]   Downloaded home v0.5.12
+[WebServer]   Downloaded http-body-util v0.1.5
+[WebServer]   Downloaded ipnet v2.12.1
+[WebServer]   Downloaded percent-encoding v2.3.2
+[WebServer]   Downloaded tracing-serde v0.2.0
+[WebServer]   Downloaded chacha20 v0.10.2
+[WebServer]   Downloaded event-listener v5.4.2
+[WebServer]   Downloaded getrandom v0.4.3
+[WebServer]   Downloaded hyper-rustls v0.27.9
+[WebServer]   Downloaded equivalent v1.0.2
+[WebServer]   Downloaded atomic-waker v1.1.2
+[WebServer]   Downloaded futures-channel v0.3.34
+[WebServer]   Downloaded rand_chacha v0.3.1
+[WebServer]   Downloaded tower-service v0.3.3
+[WebServer]   Downloaded yoke-derive v0.8.2
+[WebServer]   Downloaded bitflags v2.13.1
+[WebServer]   Downloaded const-oid v0.9.6
+[WebServer]   Downloaded getrandom v0.2.17
+[WebServer]   Downloaded getrandom v0.3.4
+[WebServer]   Downloaded serde_core v1.0.229
+[WebServer]   Downloaded autocfg v1.5.1
+[WebServer]   Downloaded stable_deref_trait v1.2.1
+[WebServer]   Downloaded md-5 v0.10.6
+[WebServer]   Downloaded sync_wrapper v1.0.2
+[WebServer]   Downloaded zerovec-derive v0.11.6
+[WebServer]   Downloaded matchers v0.2.0
+[WebServer]   Downloaded socket2 v0.6.5
+[WebServer]   Downloaded bytes v1.12.1
+[WebServer]   Downloaded futures-intrusive v0.5.0
+[WebServer]   Downloaded futures-task v0.3.34
+[WebServer]   Downloaded generic-array v0.14.7
+[WebServer]   Downloaded hyper-util v0.1.20
+[WebServer]   Downloaded icu_normalizer_data v2.3.0
+[WebServer]   Downloaded shlex v2.0.1
+[WebServer]   Downloaded slab v0.4.12
+[WebServer]   Downloaded zmij v1.0.23
+[WebServer]   Downloaded base64 v0.22.1
+[WebServer]   Downloaded lru-slab v0.1.2
+[WebServer]   Downloaded tinystr v0.8.4
+[WebServer]   Downloaded tokio-macros v2.7.2
+[WebServer]   Downloaded try-lock v0.2.5
+[WebServer]   Downloaded version_check v0.9.5
+[WebServer]   Downloaded cc v1.4.4
+[WebServer]   Downloaded either v1.18.0
+[WebServer]   Downloaded find-msvc-tools v0.1.11
+[WebServer]   Downloaded hashbrown v0.15.5
+[WebServer]   Downloaded hmac v0.12.1
+[WebServer]   Downloaded http v1.5.0
+[WebServer]   Downloaded icu_properties v2.3.0
+[WebServer]   Downloaded icu_provider v2.3.1
+[WebServer]   Downloaded indexmap v2.14.0
+[WebServer]   Downloaded potential_utf v0.1.6
+[WebServer]   Downloaded serde_derive v1.0.229
+[WebServer]   Downloaded smallvec v1.15.2
+[WebServer]   Downloaded sqlx-core v0.8.6
+[WebServer]   Downloaded tinyvec_macros v0.1.1
+[WebServer]   Downloaded governor v0.10.4
+[WebServer]   Downloaded h2 v0.4.19
+[WebServer]   Downloaded hashbrown v0.16.1
+[WebServer]   Downloaded hyper v1.11.1
+[WebServer]   Downloaded icu_properties_data v2.3.0
+[WebServer]   Downloaded rand_pcg v0.10.2
+[WebServer]   Downloaded serde_urlencoded v0.7.1
+[WebServer]   Downloaded spin v0.9.9
+[WebServer]   Downloaded hkdf v0.12.4
+[WebServer]   Downloaded idna v1.1.0
+[WebServer]   Downloaded rustls-webpki v0.103.15
+[WebServer]   Downloaded thiserror-impl v1.0.69
+[WebServer]   Downloaded thread_local v1.1.10
+[WebServer]   Downloaded futures-util v0.3.34
+[WebServer]   Downloaded nonempty v0.7.0
+[WebServer]   Downloaded pin-project-internal v1.1.13
+[WebServer]   Downloaded rand_chacha v0.9.0
+[WebServer]   Downloaded rand_core v0.9.5
+[WebServer]   Downloaded ryu v1.0.23
+[WebServer]   Downloaded spinning_top v0.3.0
+[WebServer]   Downloaded sqlx-macros-core v0.8.6
+[WebServer]   Downloaded synstructure v0.13.2
+[WebServer]   Downloaded web-time v1.1.0
+[WebServer]   Downloaded lock_api v0.4.14
+[WebServer]   Downloaded multer v3.1.0
+[WebServer]   Downloaded num-integer v0.1.47
+[WebServer]   Downloaded ppv-lite86 v0.2.21
+[WebServer]   Downloaded quinn-udp v0.5.15
+[WebServer]   Downloaded quote v1.0.47
+[WebServer]   Downloaded sqlx-postgres v0.8.6
+[WebServer]   Downloaded sqlx-sqlite v0.8.6
+[WebServer]   Downloaded pem-rfc7468 v0.7.0
+[WebServer]   Downloaded pkcs1 v0.7.5
+[WebServer]   Downloaded pkcs8 v0.10.2
+[WebServer]   Downloaded rustls-pki-types v1.15.1
+[WebServer]   Downloaded tokio-rustls v0.26.4
+[WebServer]   Downloaded unicode-properties v0.1.4
+[WebServer]   Downloaded whoami v1.6.1
+[WebServer]   Downloaded writeable v0.6.4
+[WebServer]   Downloaded yoke v0.8.3
+[WebServer]   Downloaded matchit v0.8.4
+[WebServer]   Downloaded mime_guess v2.0.5
+[WebServer]   Downloaded num-traits v0.2.19
+[WebServer]   Downloaded once_cell v1.21.4
+[WebServer]   Downloaded parking_lot_core v0.9.12
+[WebServer]   Downloaded proc-macro2 v1.0.107
+[WebServer]   Downloaded serde_json v1.0.151
+[WebServer]   Downloaded log v0.4.34
+[WebServer]   Downloaded quanta v0.12.6
+[WebServer]   Downloaded rand_core v0.6.4
+[WebServer]   Downloaded tinyvec v1.12.0
+[WebServer]   Downloaded unicode-ident v1.0.24
+[WebServer]   Downloaded pin-project v1.1.13
+[WebServer]   Downloaded rsa v0.9.10
+[WebServer]   Downloaded url v2.5.8
+[WebServer]   Downloaded uuid v1.26.0
+[WebServer]   Downloaded encoding_rs v0.8.35
+[WebServer]   Downloaded icu_normalizer v2.3.0
+[WebServer]   Downloaded mio v1.2.2
+[WebServer]   Downloaded signature v2.2.0
+[WebServer]   Downloaded stringprep v0.1.5
+[WebServer]   Downloaded thiserror v2.0.20
+[WebServer]   Downloaded tower v0.5.3
+[WebServer]   Downloaded typenum v1.20.1
+[WebServer]   Downloaded unicode-bidi v0.3.18
+[WebServer]   Downloaded unicode-normalization v0.1.25
+[WebServer]   Downloaded litemap v0.8.3
+[WebServer]   Downloaded num-bigint-dig v0.8.6
+[WebServer]   Downloaded rand v0.9.5
+[WebServer]   Downloaded raw-cpuid v11.6.0
+[WebServer]   Downloaded reqwest v0.12.28
+[WebServer]   Downloaded rand v0.8.8
+[WebServer]   Downloaded rustc-hash v2.1.3
+[WebServer]   Downloaded tokio-util v0.7.19
+[WebServer]   Downloaded tower-http v0.6.11
+[WebServer]   Downloaded libc v0.2.189
+[WebServer]   Downloaded mime v0.3.17
+[WebServer]   Downloaded serde v1.0.229
+[WebServer]   Downloaded sqlx-macros v0.8.6
+[WebServer]   Downloaded sqlx-mysql v0.8.6
+[WebServer]   Downloaded thiserror-impl v2.0.20
+[WebServer]   Downloaded serde_path_to_error v0.1.20
+[WebServer]   Downloaded spki v0.7.3
+[WebServer]   Downloaded thiserror v1.0.69
+[WebServer]   Downloaded sha2 v0.10.9
+[WebServer]   Downloaded subtle v2.6.1
+[WebServer]   Downloaded portable-atomic v1.15.0
+[WebServer]   Downloaded sqlx v0.8.6
+[WebServer]   Downloaded sharded-slab v0.1.7
+[WebServer]   Downloaded webpki-roots v1.0.9
+[WebServer]   Downloaded zerocopy v0.8.56
+[WebServer]   Downloaded quinn-proto v0.11.17
+[WebServer]   Downloaded regex-syntax v0.8.11
+[WebServer]   Downloaded rustls v0.23.43
+[WebServer]   Downloaded syn v3.0.4
+[WebServer]   Downloaded tracing v0.1.44
+[WebServer]   Downloaded want v0.3.1
+[WebServer]   Downloaded tracing-log v0.2.0
+[WebServer]   Downloaded nonzero_ext v0.3.0
+[WebServer]   Downloaded pin-project-lite v0.2.17
+[WebServer]   Downloaded ring v0.17.14
+[WebServer]   Downloaded memchr v2.8.3
+[WebServer]   Downloaded webpki-roots v0.26.11
+[WebServer]   Downloaded zerofrom v0.1.8
+[WebServer]   Downloaded utf8_iter v1.0.4
+[WebServer]   Downloaded rand_core v0.10.1
+[WebServer]   Downloaded quinn v0.11.11
+[WebServer]   Downloaded tower-layer v0.3.3
+[WebServer]   Downloaded parking v2.2.1
+[WebServer]   Downloaded signal-hook-registry v1.4.8
+[WebServer]   Downloaded pkg-config v0.3.34
+[WebServer]   Downloaded tracing-attributes v0.1.31
+[WebServer]   Downloaded parking_lot v0.12.5
+[WebServer]   Downloaded rand v0.10.2
+[WebServer]   Downloaded tonic v0.14.6
+[WebServer]   Downloaded vcpkg v0.2.15
+[WebServer]   Downloaded syn v2.0.119
+[WebServer]   Downloaded libsqlite3-sys v0.30.1
+[WebServer]   Downloaded regex-automata v0.4.18
+[WebServer]    Compiling proc-macro2 v1.0.107
+[WebServer]    Compiling unicode-ident v1.0.24
+[WebServer]    Compiling quote v1.0.47
+[WebServer]    Compiling libc v0.2.189
+[WebServer]    Compiling syn v3.0.4
+[WebServer]    Compiling cfg-if v1.0.4
+[WebServer]    Compiling syn v2.0.119
+[WebServer]    Compiling pin-project-lite v0.2.17
+[WebServer]    Compiling futures-core v0.3.34
+[WebServer]    Compiling scopeguard v1.2.0
+[WebServer]    Compiling lock_api v0.4.14
+[WebServer]    Compiling once_cell v1.21.4
+[WebServer]    Compiling parking_lot_core v0.9.12
+[WebServer]    Compiling synstructure v0.13.2
+[WebServer]    Compiling bytes v1.12.1
+[WebServer]    Compiling itoa v1.0.18
+[WebServer]    Compiling smallvec v1.15.2
+[WebServer]    Compiling zerofrom-derive v0.1.7
+[WebServer]    Compiling yoke-derive v0.8.2
+[WebServer]    Compiling stable_deref_trait v1.2.1
+[WebServer]    Compiling memchr v2.8.3
+[WebServer]    Compiling zerofrom v0.1.8
+[WebServer]    Compiling yoke v0.8.3
+[WebServer]    Compiling zerovec-derive v0.11.6
+[WebServer]    Compiling mio v1.2.2
+[WebServer]    Compiling socket2 v0.6.5
+[WebServer]    Compiling zerovec v0.11.8
+[WebServer]    Compiling displaydoc v0.2.7
+[WebServer]    Compiling equivalent v1.0.2
+[WebServer]    Compiling shlex v2.0.1
+[WebServer]    Compiling find-msvc-tools v0.1.11
+[WebServer]    Compiling cc v1.4.4
+[WebServer]    Compiling tracing-attributes v0.1.31
+[WebServer]    Compiling futures-io v0.3.34
+[WebServer]    Compiling futures-task v0.3.34
+[WebServer]    Compiling futures-sink v0.3.34
+[WebServer]    Compiling serde v1.0.229
+[WebServer]    Compiling parking_lot v0.12.5
+[WebServer]    Compiling tinystr v0.8.4
+[WebServer]    Compiling serde_derive v1.0.229
+[WebServer]    Compiling version_check v0.9.5
+[WebServer]    Compiling litemap v0.8.3
+[WebServer]    Compiling percent-encoding v2.3.2
+[WebServer]    Compiling writeable v0.6.4
+[WebServer]    Compiling icu_locale_core v2.3.0
+[WebServer]    Compiling zerotrie v0.2.5
+[WebServer]    Compiling potential_utf v0.1.6
+[WebServer]    Compiling tracing-core v0.1.36
+[WebServer]    Compiling errno v0.3.14
+[WebServer]    Compiling icu_normalizer_data v2.3.0
+[WebServer]    Compiling hashbrown v0.17.1
+[WebServer]    Compiling utf8_iter v1.0.4
+[WebServer]    Compiling icu_collections v2.3.0
+[WebServer]    Compiling indexmap v2.14.0
+[WebServer]    Compiling signal-hook-registry v1.4.8
+[WebServer]    Compiling icu_provider v2.3.1
+[WebServer]    Compiling ring v0.17.14
+[WebServer]    Compiling tokio-macros v2.7.2
+[WebServer]    Compiling log v0.4.34
+[WebServer]    Compiling icu_properties_data v2.3.0
+[WebServer]    Compiling slab v0.4.12
+[WebServer]    Compiling serde_core v1.0.229
+[WebServer]    Compiling tokio v1.53.1
+[WebServer]    Compiling zeroize v1.9.0
+[WebServer]    Compiling rustls-pki-types v1.15.1
+[WebServer]    Compiling tracing v0.1.44
+[WebServer]    Compiling form_urlencoded v1.2.2
+[WebServer]    Compiling zmij v1.0.23
+[WebServer]    Compiling untrusted v0.9.0
+[WebServer]    Compiling icu_properties v2.3.0
+[WebServer]    Compiling futures-util v0.3.34
+[WebServer]    Compiling serde_json v1.0.151
+[WebServer]    Compiling http v1.5.0
+[WebServer]    Compiling generic-array v0.14.7
+[WebServer]    Compiling rustls v0.23.43
+[WebServer]    Compiling autocfg v1.5.1
+[WebServer]    Compiling num-traits v0.2.19
+[WebServer]    Compiling getrandom v0.2.17
+[WebServer]    Compiling subtle v2.6.1
+[WebServer]    Compiling allocator-api2 v0.2.21
+[WebServer]    Compiling typenum v1.20.1
+[WebServer]    Compiling http-body v1.1.0
+[WebServer]    Compiling tokio-util v0.7.19
+[WebServer]    Compiling spin v0.9.9
+[WebServer]    Compiling httparse v1.10.1
+[WebServer]    Compiling[WebServer]  ryu v1.0.23
+[WebServer]    Compiling webpki-roots v1.0.9
+[WebServer]    Compiling futures-channel v0.3.34
+[WebServer]    Compiling crossbeam-utils v0.8.22
+[WebServer]    Compiling tower-service v0.3.3
+[WebServer]    Compiling thiserror v2.0.20
+[WebServer]    Compiling base64 v0.22.1
+[WebServer]    Compiling crypto-common v0.1.7
+[WebServer]    Compiling block-buffer v0.10.4
+[WebServer]    Compiling thiserror-impl v2.0.20
+[WebServer]    Compiling iana-time-zone v0.1.65
+[WebServer]    Compiling zerocopy v0.8.56
+[WebServer]    Compiling foldhash v0.1.5
+[WebServer]    Compiling try-lock v0.2.5
+[WebServer]    Compiling atomic-waker v1.1.2
+[WebServer]    Compiling httpdate v1.0.3
+[WebServer]    Compiling fnv v1.0.7
+[WebServer]    Compiling h2 v0.4.19
+[WebServer]    Compiling hashbrown v0.15.5
+[WebServer]    Compiling want v0.3.1
+[WebServer]    Compiling[WebServer]  digest v0.10.7
+[WebServer]    Compiling icu_normalizer v2.3.0
+[WebServer]    Compiling cpufeatures v0.2.17
+[WebServer]    Compiling parking v2.2.1
+[WebServer]    Compiling pkg-config v0.3.34
+[WebServer]    Compiling crc-catalog v2.5.0
+[WebServer]    Compiling mime v0.3.17
+[WebServer]    Compiling vcpkg v0.2.15
+[WebServer]    Compiling crc v3.4.0
+[WebServer]    Compiling event-listener v5.4.2
+[WebServer]    Compiling libsqlite3-sys v0.30.1
+[WebServer]    Compiling sha2 v0.10.9
+[WebServer]    Compiling idna_adapter v1.2.2
+[WebServer]    Compiling hyper v1.11.1
+[WebServer]    Compiling rustls-webpki v0.103.15
+[WebServer]    Compiling hashlink v0.10.0
+[WebServer]    Compiling webpki-roots v0.26.11
+[WebServer]    Compiling sync_wrapper v1.0.2
+[WebServer]    Compiling ipnet v2.12.1
+[WebServer]    Compiling tower-layer v0.3.3
+[WebServer]    Compiling getrandom v0.3.4
+[WebServer]    Compiling ppv-lite86 v0.2.21
+[WebServer]    Compiling hyper-util v0.1.20
+[WebServer]    Compiling idna v1.1.0
+[WebServer]    Compiling serde_urlencoded v0.7.1
+[WebServer]    Compiling http-body-util v0.1.5
+[WebServer]    Compiling bitflags v2.13.1
+[WebServer]    Compiling tokio-stream v0.1.19
+[WebServer]    Compiling crossbeam-queue v0.3.13
+[WebServer]    Compiling url v2.5.8
+[WebServer]    Compiling futures-intrusive v0.5.0
+[WebServer]    Compiling tower v0.5.3
+[WebServer]    Compiling either v1.18.0
+[WebServer]    Compiling chrono v0.4.45
+[WebServer]    Compiling atoi v2.0.0
+[WebServer]    Compiling multer v3.1.0
+[WebServer]    Compiling unicase v2.9.0
+[WebServer]    Compiling mime_guess v2.0.5
+[WebServer]    Compiling sqlx-core v0.8.6
+[WebServer]    Compiling rand_core v0.9.5
+[WebServer]    Compiling futures-executor v0.3.34
+[WebServer]    Compiling flume v0.11.1
+[WebServer]    Compiling encoding_rs v0.8.35
+[WebServer]    Compiling thiserror v1.0.69
+[WebServer]    Compiling portable-atomic v1.15.0
+[WebServer]    Compiling sqlx-sqlite v0.8.6
+[WebServer]    Compiling rand_chacha v0.9.0
+[WebServer]    Compiling raw-cpuid v11.6.0
+[WebServer]    Compiling axum-core v0.5.6
+[WebServer]    Compiling serde_path_to_error v0.1.20
+[WebServer]    Compiling thiserror-impl v1.0.69
+[WebServer]    Compiling pin-project-internal v1.1.13
+[WebServer]    Compiling hex v0.4.3
+[WebServer]    Compiling heck v0.5.0
+[WebServer]    Compiling dotenvy v0.15.7
+[WebServer]    Compiling hashbrown v0.14.5
+[WebServer]    Compiling foldhash v0.2.0
+[WebServer]    Compiling matchit v0.8.4
+[WebServer]    Compiling getrandom v0.4.3
+[WebServer]    Compiling regex-syntax v0.8.11
+[WebServer]    Compiling dashmap v6.2.1
+[WebServer]    Compiling axum v0.8.9
+[WebServer]    Compiling regex-automata v0.4.18
+[WebServer]    Compiling hashbrown v0.16.1
+[WebServer]    Compiling sqlx-macros-core v0.8.6
+[WebServer]    Compiling pin-project v1.1.13
+[WebServer]    Compiling quanta v0.12.6
+[WebServer]    Compiling rand v0.9.5
+[WebServer]    Compiling tokio-rustls v0.26.4
+[WebServer]    Compiling hyper-timeout v0.5.2
+[WebServer]    Compiling rand_core v0.6.4
+[WebServer]    Compiling spinning_top v0.3.0
+[WebServer]    Compiling async-trait v0.1.92
+[WebServer]    Compiling nonempty v0.7.0
+[WebServer]    Compiling nonzero_ext v0.3.0
+[WebServer]    Compiling lazy_static v1.5.0
+[WebServer]    Compiling http-range-header v0.4.2
+[WebServer]    Compiling web-time v1.1.0
+[WebServer]    Compiling futures-timer v3.0.4
+[WebServer]    Compiling tonic v0.14.6
+[WebServer]    Compiling governor v0.10.4
+[WebServer]    Compiling tower-http v0.6.11
+[WebServer]    Compiling sharded-slab v0.1.7
+[WebServer]    Compiling forwarded-header-value v0.1.1
+[WebServer]    Compiling rand_chacha v0.3.1
+[WebServer]    Compiling hyper-rustls v0.27.9
+[WebServer]    Compiling sqlx-macros v0.8.6
+[WebServer]    Compiling matchers v0.2.0
+[WebServer]    Compiling tracing-serde v0.2.0
+[WebServer]    Compiling tracing-log v0.2.0
+[WebServer]    Compiling thread_local v1.1.10
+[WebServer]    Compiling nu-ansi-term v0.50.3
+[WebServer]    Compiling service-proof-loop v1.0.0 (/work/repo)
+[WebServer]    Compiling tracing-subscriber v0.3.23
+[WebServer]    Compiling uuid v1.26.0
+[WebServer]    Compiling sqlx v0.8.6
+[WebServer]    Compiling reqwest v0.12.28
+[WebServer]    Compiling rand v0.8.8
+[WebServer]    Compiling tower_governor v0.8.0
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 1m 25s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 24 tests using 2 workers
+
+(node:4610) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4611) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4610) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4611) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (1.3s)
+  ✓   2 [mobile-chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (1.4s)
+  ✓   3 [chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.4s)
+  ✓   4 [mobile-chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.8s)
+  ✓   5 [chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (638ms)
+  ✓   6 [mobile-chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (1.0s)
+  ✓   7 [chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.3s)
+  ✓   8 [mobile-chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.4s)
+  ✓  10 [mobile-chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (1.1s)
+  ✓   9 [chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (3.4s)
+  ✓  11 [mobile-chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (4.0s)
+  ✓  12 [chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (2.9s)
+  ✓  14 [chromium] › tests/e2e/product.spec.ts:177:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (1.1s)
+  ✓  15 [chromium] › tests/e2e/product.spec.ts:196:1 › @claim:rate-limit API traffic is limited per forwarded client (213ms)
+  ✓  13 [mobile-chromium] › tests/e2e/product.spec.ts:177:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (1.8s)
+  ✓  17 [mobile-chromium] › tests/e2e/product.spec.ts:196:1 › @claim:rate-limit API traffic is limited per forwarded client (216ms)
+  ✓  16 [chromium] › tests/e2e/product.spec.ts:211:1 › @claim:photo-upload a technician can add a consented photo to proof (1.5s)
+  ✓  18 [mobile-chromium] › tests/e2e/product.spec.ts:211:1 › @claim:photo-upload a technician can add a consented photo to proof (1.7s)
+  ✓  19 [chromium] › tests/e2e/product.spec.ts:239:1 › @claim:problem-rating a client problem and rating return to the workspace (1.2s)
+  ✓  21 [chromium] › tests/e2e/product.spec.ts:253:1 › @claim:same-origin-demo demo sends data only to this service (495ms)
+  ✓  22 [chromium] › tests/e2e/product.spec.ts:317:1 › @claim:no-tracking landing and demo load no third-party resources (608ms)
+  ✓  20 [mobile-chromium] › tests/e2e/product.spec.ts:239:1 › @claim:problem-rating a client problem and rating return to the workspace (1.6s)
+  ✓  23 [mobile-chromium] › tests/e2e/product.spec.ts:253:1 › @claim:same-origin-demo demo sends data only to this service (409ms)
+  ✓  24 [mobile-chromium] › tests/e2e/product.spec.ts:317:1 › @claim:no-tracking landing and demo load no third-party resources (487ms)
+
+  24 passed (1.8m)
+RUN 2
+[WebServer] (node:5005) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 24 tests using 2 workers
+
+(node:5032) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5033) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5033) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5032) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 [chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (1.2s)
+  ✓   1 [mobile-chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (1.4s)
+  ✓   3 [chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.3s)
+  ✓   4 [mobile-chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.8s)
+  ✓   5 [chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (691ms)
+  ✓   6 [mobile-chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (1.0s)
+  ✓   7 [chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.3s)
+  ✓   9 [chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (1.4s)
+  ✓   8 [mobile-chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.8s)
+  ✓  11 [mobile-chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (1.6s)
+  ✓  10 [chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (3.0s)
+  ✓  13 [chromium] › tests/e2e/product.spec.ts:177:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (945ms)
+  ✓  14 [chromium] › tests/e2e/product.spec.ts:196:1 › @claim:rate-limit API traffic is limited per forwarded client (163ms)
+  ✓  15 [chromium] › tests/e2e/product.spec.ts:211:1 › @claim:photo-upload a technician can add a consented photo to proof (1.2s)
+  ✓  12 [mobile-chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (3.9s)
+  ✓  16 [chromium] › tests/e2e/product.spec.ts:239:1 › @claim:problem-rating a client problem and rating return to the workspace (1.2s)
+  ✓  18 [chromium] › tests/e2e/product.spec.ts:253:1 › @claim:same-origin-demo demo sends data only to this service (513ms)
+  ✓  17 [mobile-chromium] › tests/e2e/product.spec.ts:177:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (1.9s)
+  ✓  20 [mobile-chromium] › tests/e2e/product.spec.ts:196:1 › @claim:rate-limit API traffic is limited per forwarded client (225ms)
+  ✓  19 [chromium] › tests/e2e/product.spec.ts:317:1 › @claim:no-tracking landing and demo load no third-party resources (771ms)
+  ✓  21 [mobile-chromium] › tests/e2e/product.spec.ts:211:1 › @claim:photo-upload a technician can add a consented photo to proof (1.2s)
+  ✓  22 [mobile-chromium] › tests/e2e/product.spec.ts:239:1 › @claim:problem-rating a client problem and rating return to the workspace (2.6s)
+  ✓  23 [mobile-chromium] › tests/e2e/product.spec.ts:253:1 › @claim:same-origin-demo demo sends data only to this service (376ms)
+  ✓  24 [mobile-chromium] › tests/e2e/product.spec.ts:317:1 › @claim:no-tracking landing and demo load no third-party resources (491ms)
+
+  24 passed (21.5s)
+RUN 3
+[WebServer] (node:5445) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 24 tests using 2 workers
+
+(node:5472) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5473) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5472) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5473) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (1.2s)
+  ✓   2 [mobile-chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (1.2s)
+  ✓   3 [chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.4s)
+  ✓   4 [mobile-chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.8s)
+  ✓   5 [chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (667ms)
+  ✓   6 [mobile-chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (1.0s)
+  ✓   7 [chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.2s)
+  ✓   8 [mobile-chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.6s)
+  ✓   9 [chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (1.4s)
+  ✓  11 [chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (2.8s)
+  ✓  12 [chromium] › tests/e2e/product.spec.ts:177:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (773ms)
+  ✓  13 [chromium] › tests/e2e/product.spec.ts:196:1 › @claim:rate-limit API traffic is limited per forwarded client (146ms)
+  ✓  10 [mobile-chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (4.3s)
+  ✓  14 [chromium] › tests/e2e/product.spec.ts:211:1 › @claim:photo-upload a technician can add a consented photo to proof (1.6s)
+  ✓  16 [chromium] › tests/e2e/product.spec.ts:239:1 › @claim:problem-rating a client problem and rating return to the workspace (1.0s)
+  ✓  15 [mobile-chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (2.2s)
+  ✓  17 [chromium] › tests/e2e/product.spec.ts:253:1 › @claim:same-origin-demo demo sends data only to this service (593ms)
+  ✓  19 [chromium] › tests/e2e/product.spec.ts:317:1 › @claim:no-tracking landing and demo load no third-party resources (597ms)
+  ✓  18 [mobile-chromium] › tests/e2e/product.spec.ts:177:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (1.6s)
+  ✓  20 [mobile-chromium] › tests/e2e/product.spec.ts:196:1 › @claim:rate-limit API traffic is limited per forwarded client (152ms)
+  ✓  21 [mobile-chromium] › tests/e2e/product.spec.ts:211:1 › @claim:photo-upload a technician can add a consented photo to proof (1.1s)
+  ✓  22 [mobile-chromium] › tests/e2e/product.spec.ts:239:1 › @claim:problem-rating a client problem and rating return to the workspace (2.6s)
+  ✓  23 [mobile-chromium] › tests/e2e/product.spec.ts:253:1 › @claim:same-origin-demo demo sends data only to this service (373ms)
+  ✓  24 [mobile-chromium] › tests/e2e/product.spec.ts:317:1 › @claim:no-tracking landing and demo load no third-party resources (494ms)
+
+  24 passed (21.8s)
+RUN 4
+[WebServer] (node:5863) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.15s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 24 tests using 2 workers
+
+(node:5891) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5890) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5890) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5891) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (1.0s)
+  ✓   2 [mobile-chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (1.4s)
+  ✓   3 [chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.3s)
+  ✓   5 [chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (669ms)
+  ✓   4 [mobile-chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.6s)
+  ✓   7 [mobile-chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (892ms)
+  ✓   6 [chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.3s)
+  ✓   8 [mobile-chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.6s)
+  ✓   9 [chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (1.5s)
+  ✓  11 [chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (2.8s)
+  ✓  12 [chromium] › tests/e2e/product.spec.ts:177:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (918ms)
+  ✓  13 [chromium] › tests/e2e/product.spec.ts:196:1 › @claim:rate-limit API traffic is limited per forwarded client (143ms)
+  ✓  10 [mobile-chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (4.5s)
+  ✓  14 [chromium] › tests/e2e/product.spec.ts:211:1 › @claim:photo-upload a technician can add a consented photo to proof (1.5s)
+  ✓  16 [chromium] › tests/e2e/product.spec.ts:239:1 › @claim:problem-rating a client problem and rating return to the workspace (1.1s)
+  ✓  17 [chromium] › tests/e2e/product.spec.ts:253:1 › @claim:same-origin-demo demo sends data only to this service (321ms)
+  ✓  18 [chromium] › tests/e2e/product.spec.ts:317:1 › @claim:no-tracking landing and demo load no third-party resources (500ms)
+  ✓  15 [mobile-chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (3.5s)
+  ✓  19 [mobile-chromium] › tests/e2e/product.spec.ts:177:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (1.2s)
+  ✓  20 [mobile-chromium] › tests/e2e/product.spec.ts:196:1 › @claim:rate-limit API traffic is limited per forwarded client (150ms)
+  ✓  21 [mobile-chromium] › tests/e2e/product.spec.ts:211:1 › @claim:photo-upload a technician can add a consented photo to proof (1.1s)
+  ✓  22 [mobile-chromium] › tests/e2e/product.spec.ts:239:1 › @claim:problem-rating a client problem and rating return to the workspace (2.6s)
+  ✓  23 [mobile-chromium] › tests/e2e/product.spec.ts:253:1 › @claim:same-origin-demo demo sends data only to this service (346ms)
+  ✓  24 [mobile-chromium] › tests/e2e/product.spec.ts:317:1 › @claim:no-tracking landing and demo load no third-party resources (518ms)
+
+  24 passed (22.6s)
+RUN 5
+[WebServer] (node:6304) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 24 tests using 2 workers
+
+(node:6331) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6331) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 [chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (1.2s)
+  ✓   1 [mobile-chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (1.4s)
+  ✓   3 [chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.3s)
+  ✓   4 [mobile-chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.8s)
+  ✓   5 [chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (643ms)
+  ✓   6 [mobile-chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (878ms)
+  ✓   7 [chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.1s)
+  ✓   8 [mobile-chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.7s)
+  ✓   9 [chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (1.5s)
+  ✓  10 [mobile-chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (1.2s)
+  ✓  11 [chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (1.9s)
+  ✓  13 [chromium] › tests/e2e/product.spec.ts:177:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (1.1s)
+  ✓  14 [chromium] › tests/e2e/product.spec.ts:196:1 › @claim:rate-limit API traffic is limited per forwarded client (164ms)
+  ✓  15 [chromium] › tests/e2e/product.spec.ts:211:1 › @claim:photo-upload a technician can add a consented photo to proof (1.2s)
+  ✓  12 [mobile-chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (4.0s)
+  ✓  16 [chromium] › tests/e2e/product.spec.ts:239:1 › @claim:problem-rating a client problem and rating return to the workspace (934ms)
+  ✓  18 [chromium] › tests/e2e/product.spec.ts:253:1 › @claim:same-origin-demo demo sends data only to this service (494ms)
+  ✓  19 [chromium] › tests/e2e/product.spec.ts:317:1 › @claim:no-tracking landing and demo load no third-party resources (582ms)
+  ✓  17 [mobile-chromium] › tests/e2e/product.spec.ts:177:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (1.5s)
+  ✓  20 [mobile-chromium] › tests/e2e/product.spec.ts:196:1 › @claim:rate-limit API traffic is limited per forwarded client (143ms)
+  ✓  21 [mobile-chromium] › tests/e2e/product.spec.ts:211:1 › @claim:photo-upload a technician can add a consented photo to proof (1.2s)
+  ✓  22 [mobile-chromium] › tests/e2e/product.spec.ts:239:1 › @claim:problem-rating a client problem and rating return to the workspace (2.6s)
+  ✓  23 [mobile-chromium] › tests/e2e/product.spec.ts:253:1 › @claim:same-origin-demo demo sends data only to this service (399ms)
+  ✓  24 [mobile-chromium] › tests/e2e/product.spec.ts:317:1 › @claim:no-tracking landing and demo load no third-party resources (499ms)
+
+  24 passed (20.4s)
+RUN 6
+[WebServer] (node:6744) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.15s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 24 tests using 2 workers
+
+(node:6771) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6771) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 [chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (1.1s)
+  ✓   1 [mobile-chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (1.1s)
+  ✓   3 [chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.4s)
+  ✓   4 [mobile-chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (2.0s)
+  ✓   5 [chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (892ms)
+  ✓   6 [mobile-chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (1.2s)
+  ✓   7 [chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.4s)
+  ✓   8 [mobile-chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.8s)
+  ✓  10 [mobile-chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (1.5s)
+  ✓   9 [chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (2.7s)
+  ✓  12 [chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (2.8s)
+  ✓  11 [mobile-chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (3.6s)
+  ✓  13 [chromium] › tests/e2e/product.spec.ts:177:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (907ms)
+  ✓  15 [chromium] › tests/e2e/product.spec.ts:196:1 › @claim:rate-limit API traffic is limited per forwarded client (261ms)
+  ✓  14 [mobile-chromium] › tests/e2e/product.spec.ts:177:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (1.5s)
+  ✓  17 [mobile-chromium] › tests/e2e/product.spec.ts:196:1 › @claim:rate-limit API traffic is limited per forwarded client (239ms)
+  ✓  16 [chromium] › tests/e2e/product.spec.ts:211:1 › @claim:photo-upload a technician can add a consented photo to proof (1.5s)
+  ✓  19 [chromium] › tests/e2e/product.spec.ts:239:1 › @claim:problem-rating a client problem and rating return to the workspace (1.2s)
+  ✓  20 [chromium] › tests/e2e/product.spec.ts:253:1 › @claim:same-origin-demo demo sends data only to this service (454ms)
+  ✓  18 [mobile-chromium] › tests/e2e/product.spec.ts:211:1 › @claim:photo-upload a technician can add a consented photo to proof (2.1s)
+  ✓  21 [chromium] › tests/e2e/product.spec.ts:317:1 › @claim:no-tracking landing and demo load no third-party resources (853ms)
+  ✓  22 [mobile-chromium] › tests/e2e/product.spec.ts:239:1 › @claim:problem-rating a client problem and rating return to the workspace (2.8s)
+  ✓  23 [mobile-chromium] › tests/e2e/product.spec.ts:253:1 › @claim:same-origin-demo demo sends data only to this service (416ms)
+  ✓  24 [mobile-chromium] › tests/e2e/product.spec.ts:317:1 › @claim:no-tracking landing and demo load no third-party resources (542ms)
+
+  24 passed (22.0s)
