@@ -22,11 +22,30 @@
 
 ## Local evidence
 
-- `npm test`, `cargo test --all-targets`, `npm run lint`, and `npm run build` pass after the repair.
-- All claim commands are rerun from a clean clone before deployment. Exact output is added after that run.
+- Fresh clone `/tmp/service-proof-loop-clean.JGcwZx` at
+  `0076082a591501a5aa35cdf3084ceedb7847f666`: every non-live command listed in
+  `claims.json` passed individually after `npm ci`.
+- `npm test` passed (26 deployment/runtime checks and 46 desktop/mobile browser
+  tests); `cargo test --all-targets`, `npm run lint`, and `npm run build` pass.
 
 ## Live evidence
 
-To be completed after deploying this commit: cold `/`, `/demo`, `/privacy`,
-`/terms`, and token-bearing proof checks; screenshots are stored under
-`.factory/evidence-polish-1/`.
+- Live application build:
+  <https://service-proof-loop.sociobot.in/health> returned the exact SHA
+  `0076082a591501a5aa35cdf3084ceedb7847f666`.
+- `npm run test:live` passed: one active revision and replica, Azure Files at
+  `/data`, 400/400 concurrent demo reads, 20/20 proof reads, and 45/130 rate
+  bursts with 429 responses.
+- Cold URL checks passed with no console errors and one heading/main landmark:
+  [landing desktop](evidence-polish-1/landing/screenshot-desktop.png),
+  [landing mobile](evidence-polish-1/landing/screenshot-mobile.png),
+  [demo mobile](evidence-polish-1/demo/screenshot-mobile.png),
+  [privacy desktop](evidence-polish-1/privacy/screenshot-desktop.png), and
+  [terms desktop](evidence-polish-1/terms/screenshot-desktop.png).
+- The live proof check at a fresh, isolated demo proof URL returned
+  `X-Robots-Tag: noindex, nofollow, noarchive` and `Cache-Control: private,
+  no-store` for both HTML and API, with no canonical in HTML. Screenshot:
+  [proof mobile](evidence-polish-1/proof/proof-mobile.png).
+- Live `verify-url.sh` passed `/`, `/demo`, `/privacy`, and `/terms`. Live
+  Playwright ran the proof-privacy, route-metadata, and Axe tests: 8/8 passed
+  across desktop and mobile.

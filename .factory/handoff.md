@@ -1,4 +1,23 @@
-# Service Proof Loop — review 1 handoff
+# Service Proof Loop — polish 1 handoff
+
+## Result
+
+Review 1 is repaired and deployed. Application build
+`0076082a591501a5aa35cdf3084ceedb7847f666` is live at
+<https://service-proof-loop.sociobot.in>.
+
+## What changed
+
+- Private proof HTML and proof API responses send `X-Robots-Tag: noindex,
+  nofollow, noarchive` and `Cache-Control: private, no-store`. Proof pages do
+  not contain a canonical URL.
+- Stable routes now render route-specific title, description, Open Graph,
+  Twitter, canonical, and Open Graph URL metadata before JavaScript runs.
+- Rewrote every review-targeted landing and README line, standardized client
+  and extra terminology, and clarified that Sociobot billing starts checkout
+  while Dodo hosts the payment page.
+- Added testable proof-privacy and deployment-continuity claims. Updated the
+  catalog description and copy audit.
 
 ## Formal commercial scope decision
 
@@ -9,52 +28,34 @@ license for one workspace**, as recorded in
 by the service-proof-loop-repair-10 work order because the current Sociobot
 billing API supports one-time purchases, not monthly per-seat billing.
 
-## Result
+## Verification
 
-**FAIL.** Review 1 found 15 items: 2 blocking and 13 minor. No product code,
-deployment, data store, or service configuration was changed.
+- Fresh clone at `0076082a591501a5aa35cdf3084ceedb7847f666`: every non-live
+  command in `.factory/claims.json` passed individually after `npm ci`.
+- Local: `npm test`, `cargo test --all-targets`, `npm run lint`, and `npm run
+  build` passed. The browser suite has 46 tests across desktop and 390 px.
+- Live: `npm run test:live` passed with one active revision and replica, the
+  `/data` Azure Files mount, 400/400 concurrent demo reads, 20/20 proof reads,
+  and rate limiting at 45 and 130 requests.
+- Live: `verify-url.sh` passed `/`, `/demo`, `/privacy`, and `/terms` without
+  console errors. Live Playwright metadata, proof-privacy, and Axe checks
+  passed 8/8 across desktop and mobile.
 
-The full report is [.factory/review-1.md](review-1.md). The blocking items are:
+See [.factory/polish-1.md](polish-1.md) and
+`.factory/evidence-polish-1/` for finding-by-finding evidence and screenshots.
 
-1. Token-bearing proof pages and proof API responses lack explicit indexing
-   and no-store controls.
-2. Checkout host, merchant-of-record, and refund wording is not established by
-   the `paid-license` test and conflicts with its observed Dodo redirect.
-
-## What was checked
-
-- Fresh mobile (390 × 844) and desktop (1440 × 900) first reads.
-- One-click sample demo, persistent banner, reset behavior, real/demo browser
-  storage separation, sample quality, and request origins.
-- Every command in `.factory/claims.json`, run separately from a clean clone.
-- Complete live Playwright suite: 42/42 passed.
-- `/opt/fleet/lib/verify-url.sh` on `/`, `/demo`, `/privacy`, and `/terms`.
-- Titles, descriptions, canonicals, social metadata, icons, one-`h1` structure,
-  landmarks, deep links, back/focus behavior, 404 response, and all landing
-  links.
-- Every landing and README sentence or text unit, with word counts.
-- The prior handoff's deployment repair, confirmed by scoped live topology and
-  continuity checks: one active revision, one replica, `/data` Azure Files,
-  400/400 demo reads, and 20/20 proof reads.
-
-Evidence is under `.factory/evidence-review-1/`.
-
-## Commands
+## Run and deploy
 
 ```sh
-node .factory/evidence-review-1/audit-live.mjs
-node scripts/verify-deployment.mjs
-npm run test:live
-PLAYWRIGHT_BASE_URL=https://service-proof-loop.sociobot.in npx playwright test
-npm run build
+npm ci
+npm test
+./scripts/deploy-container.sh
+EXPECTED_SHA=$(git rev-parse HEAD) npm run test:live
 ```
 
-The exact per-claim commands and results are recorded in
-`.factory/review-1.md`.
+The service starts with only `PORT` (default `8080`). It stores SQLite data at
+`/data/service-proof-loop.db` when mounted and keeps one active replica.
 
-## Next steps
+## Known gaps
 
-Apply the concrete fixes in finding order, add the missing claim coverage, and
-repeat the complete review from a fresh browser context and clean clone. Do not
-mark the product ready until the review has zero findings and no untested
-claims.
+None.
