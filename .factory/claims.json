@@ -46,7 +46,7 @@
     "claim": "The $59 license starts at Sociobot billing, opens Dodo's payment page, and supports license restore",
     "where": "landing price section, privacy, terms, and README",
     "test": "npm test -- --grep @claim:paid-license",
-    "sandbox": "fresh landing page; assert the live public Sociobot registry has this $59 product and redirects to Dodo; mock a valid verify response and restore a license"
+    "sandbox": "own empty browser context; wait for explicit form readiness; assert the live public Sociobot registry has this $59 product and redirects to Dodo; restore a license through a valid mocked response delayed past the former seven-second race"
   },
   {
     "id": "rate-limit",

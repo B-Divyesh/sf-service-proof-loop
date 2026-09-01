@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, devices } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 test.beforeEach(async ({ context }, testInfo) => {
@@ -149,12 +149,8 @@ test('@claim:configurable-extras a business can add a client extra', async ({ pa
   await expect(page.getByText('Wipe baseboards', { exact: true })).toBeVisible();
 });
 
-test('@claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page', async ({ page, request }) => {
-  await page.route('https://api.sociobot.in/api/v1/products/service-proof-loop/verify?license=*', route => route.fulfill({ json: { valid: true, reason: 'ok', expires_at: null } }));
-  await page.goto('/#pricing');
-  await expect(page.locator('.price')).toContainText('$59');
-  await expect(page.locator('.price')).toContainText('one-time purchase');
-  await expect(page.getByRole('link', { name: /Buy the business license/ })).toHaveAttribute('href', 'https://api.sociobot.in/api/v1/products/service-proof-loop/checkout');
+test('@claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page', async ({ browser, request }, testInfo) => {
+  test.slow();
   const products = await request.get('https://api.sociobot.in/api/v1/products');
   expect(products.ok()).toBeTruthy();
   const registered = (await products.json()).data.find((product: {slug: string}) => product.slug === 'service-proof-loop');
@@ -162,16 +158,66 @@ test('@claim:paid-license Sociobot billing starts the $59 checkout and Dodo host
   const checkout = await request.get('https://api.sociobot.in/api/v1/products/service-proof-loop/checkout', { maxRedirects: 0 });
   expect(checkout.status()).toBe(303);
   expect(checkout.headers().location).toMatch(/^https:\/\/checkout\.dodopayments\.com\//);
-  await page.goto('/privacy');
-  await expect(page.getByText('Sociobot billing starts checkout. Dodo hosts the payment page and handles payment card details.')).toBeVisible();
-  expect(await page.locator('input').evaluateAll(inputs => inputs.every(input => !['cc-number', 'cc-csc', 'cc-exp'].includes(input.autocomplete)))).toBeTruthy();
-  await page.goto('/terms');
-  await expect(page.getByText('Sociobot billing starts checkout. Dodo hosts the payment page.')).toBeVisible();
-  await expect(page.getByText('See the Dodo payment page for purchase terms.')).toBeVisible();
-  await page.goto('/#pricing');
-  await page.getByLabel('Have a license?').fill('sample-license-token');
-  await page.getByRole('button', { name: 'Verify license' }).click();
-  await expect(page.getByText('License active on this browser.')).toBeVisible();
+
+  const device = testInfo.project.name === 'mobile-chromium'
+    ? { ...devices['Pixel 5'], viewport: { width: 390, height: 844 } }
+    : devices['Desktop Chrome'];
+  const isolatedContext = await browser.newContext({
+    ...device,
+    baseURL: process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:4173',
+    extraHTTPHeaders: { 'x-forwarded-for': `198.18.250.${testInfo.project.name === 'mobile-chromium' ? 2 : 1}` },
+  });
+  try {
+    let verifyRequests = 0;
+    await isolatedContext.route('https://api.sociobot.in/api/v1/products/service-proof-loop/verify?license=*', async route => {
+      verifyRequests += 1;
+      await new Promise(resolve => setTimeout(resolve, 7_500));
+      await route.fulfill({ json: { valid: true, reason: 'ok', expires_at: null } });
+    });
+    const page = await isolatedContext.newPage();
+    await page.goto('/#pricing');
+    await page.locator('#license-form[data-license-state="ready"]').waitFor({ state: 'visible', timeout: 0 });
+    expect(await page.evaluate(() => localStorage.length)).toBe(0);
+    await expect(page.locator('.price')).toContainText('$59');
+    await expect(page.locator('.price')).toContainText('one-time purchase');
+    await expect(page.getByRole('link', { name: /Buy the business license/ })).toHaveAttribute('href', 'https://api.sociobot.in/api/v1/products/service-proof-loop/checkout');
+    await page.goto('/privacy');
+    await expect(page.getByText('Sociobot billing starts checkout. Dodo hosts the payment page and handles payment card details.')).toBeVisible();
+    expect(await page.locator('input').evaluateAll(inputs => inputs.every(input => !['cc-number', 'cc-csc', 'cc-exp'].includes(input.autocomplete)))).toBeTruthy();
+    await page.goto('/terms');
+    await expect(page.getByText('Sociobot billing starts checkout. Dodo hosts the payment page.')).toBeVisible();
+    await expect(page.getByText('See the Dodo payment page for purchase terms.')).toBeVisible();
+    await page.goto('/#pricing');
+    const licenseForm = page.locator('#license-form');
+    await page.locator('#license-form[data-license-state="ready"]').waitFor({ state: 'visible', timeout: 0 });
+    await page.getByLabel('Have a license?').fill('sample-license-token');
+    const verificationResponse = page.waitForResponse(response => response.url().includes('/verify?license=sample-license-token'));
+    await page.getByRole('button', { name: 'Verify license' }).click();
+    await expect(licenseForm).toHaveAttribute('data-license-state', 'checking');
+    await expect(page.getByRole('button', { name: 'Checking license…' })).toBeDisabled();
+    expect((await verificationResponse).status()).toBe(200);
+    await page.waitForFunction(() => document.querySelector('#license-form')?.getAttribute('data-license-state') === 'active', undefined, { timeout: 0 });
+    await expect(page.locator('#license-note')).toHaveText('License active on this browser.');
+    await expect(page.getByRole('button', { name: 'Verify license' })).toBeEnabled();
+    expect(verifyRequests).toBe(1);
+    expect(await page.evaluate(() => ({
+      token: localStorage.getItem('sb_license:service-proof-loop'),
+      valid: localStorage.getItem('sb_license_valid:service-proof-loop'),
+      checked: localStorage.getItem('sb_license_check:service-proof-loop'),
+    }))).toMatchObject({ token: 'sample-license-token', valid: 'true', checked: expect.any(String) });
+
+    await page.evaluate(() => {
+      localStorage.setItem('sb_license:service-proof-loop', 'revoked-license-token');
+      localStorage.setItem('sb_license_valid:service-proof-loop', 'false');
+      localStorage.setItem('sb_license_check:service-proof-loop', String(Date.now()));
+    });
+    await page.reload();
+    await page.waitForFunction(() => document.querySelector('#license-form')?.getAttribute('data-license-state') === 'inactive', undefined, { timeout: 0 });
+    await expect(page.locator('#license-note')).toHaveText('License no longer active. Check the token or buy the plan.');
+    expect(verifyRequests).toBe(1);
+  } finally {
+    await isolatedContext.close();
+  }
 });
 
 test('@claim:privacy-data-flow visit data, replies, and extras follow the stated product path', async ({ page }) => {

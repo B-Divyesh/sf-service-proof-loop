@@ -118,7 +118,7 @@ function landing() {
     <section class="section" id="pricing" aria-labelledby="price-title"><div class="shell"><div class="price-sheet">
       <div><p class="eyebrow">Business license</p><h2 id="price-title">Get unlimited proof links</h2><p>Add unlimited client proof links after three free visits.</p><ul class="plain-list"><li>One business workspace</li><li>Configurable client extras</li><li>Next-visit CSV exports</li></ul></div>
       <div><p class="price">$59 <small>one-time purchase</small></p><a class="button" href="${BILLING}/checkout">Buy the business license <span class="sr-only">at Sociobot checkout</span></a>
-        <form class="license-form" id="license-form"><label for="license">Have a license?</label><input id="license" name="license" autocomplete="off" required><button class="secondary" type="submit">Verify license</button></form><p id="license-note" class="tiny" aria-live="polite">Sociobot billing starts checkout. Dodo hosts the payment page.</p>
+        <form class="license-form" id="license-form" data-license-state="starting" aria-busy="true"><label for="license">Have a license?</label><input id="license" name="license" autocomplete="off" required><button class="secondary" type="submit" disabled>Verify license</button></form><p id="license-note" class="tiny" aria-live="polite">Sociobot billing starts checkout. Dodo hosts the payment page.</p>
         <p class="tiny"><a class="touch-link" href="/privacy" data-route>Privacy</a> · <a class="touch-link" href="/terms" data-route>Terms</a></p></div>
     </div></div></section>`);
   bindLicense();
@@ -341,18 +341,49 @@ function showError(error: unknown) { const node = document.querySelector('#form-
 function toast(message: string) { document.querySelector('.toast')?.remove(); const node = document.createElement('div'); node.className = 'toast'; node.setAttribute('role','status'); node.textContent = message; document.body.append(node); setTimeout(() => node.remove(), 3200); }
 
 function bindLicense() {
-  document.querySelector<HTMLFormElement>('#license-form')?.addEventListener('submit', async event => {
-    event.preventDefault(); const form = event.currentTarget as HTMLFormElement; const token = String(new FormData(form).get('license') || '').trim(); if (!token) return;
-    localStorage.setItem(`sb_license:${SLUG}`, token); await verifyLicense(token, true);
+  const form = document.querySelector<HTMLFormElement>('#license-form');
+  if (!form) return;
+  form.addEventListener('submit', async event => {
+    event.preventDefault(); const token = String(new FormData(form).get('license') || '').trim(); if (!token) return;
+    localStorage.setItem(`sb_license:${SLUG}`, token);
+    localStorage.removeItem(`sb_license_check:${SLUG}`);
+    localStorage.removeItem(`sb_license_valid:${SLUG}`);
+    await verifyLicense(token, true);
   });
   const token = localStorage.getItem(`sb_license:${SLUG}`); const cache = localStorage.getItem(`sb_license_check:${SLUG}`);
-  if (token && (!cache || Date.now() - Number(cache) > 86400000)) verifyLicense(token, false);
+  setLicenseState('ready');
+  if (token && (!cache || Date.now() - Number(cache) > 86400000)) void verifyLicense(token, false);
+  else if (token && licenseActive()) setLicenseState('active', 'License active on this browser.');
+  else if (token) setLicenseState('inactive', 'License no longer active. Check the token or buy the plan.');
 }
 function licenseActive() { return localStorage.getItem(`sb_license_valid:${SLUG}`) === 'true'; }
+function setLicenseState(state: 'ready'|'checking'|'active'|'inactive'|'error', message?: string) {
+  const form = document.querySelector<HTMLFormElement>('#license-form');
+  const button = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+  const note = document.querySelector<HTMLElement>('#license-note');
+  if (form) {
+    form.dataset.licenseState = state;
+    form.setAttribute('aria-busy', String(state === 'checking'));
+  }
+  if (button) {
+    button.disabled = state === 'checking';
+    button.textContent = state === 'checking' ? 'Checking license…' : 'Verify license';
+  }
+  if (note && message) note.textContent = message;
+}
 async function verifyLicense(token: string, announce: boolean) {
-  const note = document.querySelector('#license-note');
-  try { const response = await fetch(`${BILLING}/verify?license=${encodeURIComponent(token)}`); const result = await response.json(); localStorage.setItem(`sb_license_check:${SLUG}`, String(Date.now())); localStorage.setItem(`sb_license_valid:${SLUG}`, String(Boolean(result.valid))); if (note && (announce || !result.valid)) note.textContent = result.valid ? 'License active on this browser.' : 'License no longer active. Check the token or buy the plan.'; }
-  catch { if (note && announce) note.textContent = 'The license could not be checked. Check your connection and try again.'; }
+  setLicenseState('checking', announce ? 'Checking this license…' : 'Checking the saved license…');
+  try {
+    const response = await fetch(`${BILLING}/verify?license=${encodeURIComponent(token)}`);
+    if (!response.ok) throw new Error('License verification failed.');
+    const result = await response.json() as {valid?: unknown};
+    if (typeof result.valid !== 'boolean') throw new Error('License verification returned an invalid response.');
+    localStorage.setItem(`sb_license_check:${SLUG}`, String(Date.now()));
+    localStorage.setItem(`sb_license_valid:${SLUG}`, String(result.valid));
+    setLicenseState(result.valid ? 'active' : 'inactive', result.valid ? 'License active on this browser.' : 'License no longer active. Check the token or buy the plan.');
+  } catch {
+    setLicenseState('error', 'The license could not be checked. Check your connection and try again.');
+  }
 }
 
 async function route(push = false) {
@@ -383,5 +414,10 @@ window.addEventListener('offline', () => { if (document.querySelector('#offline-
 window.addEventListener('online', () => document.querySelector('#offline-note')?.remove());
 
 const returnedLicense = new URLSearchParams(location.search).get('license');
-if (returnedLicense) { localStorage.setItem(`sb_license:${SLUG}`, returnedLicense); const url = new URL(location.href); url.searchParams.delete('license'); history.replaceState({},'',url); }
+if (returnedLicense) {
+  localStorage.setItem(`sb_license:${SLUG}`, returnedLicense);
+  localStorage.removeItem(`sb_license_check:${SLUG}`);
+  localStorage.removeItem(`sb_license_valid:${SLUG}`);
+  const url = new URL(location.href); url.searchParams.delete('license'); history.replaceState({},'',url);
+}
 route();

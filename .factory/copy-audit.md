@@ -53,6 +53,11 @@ to understand them on the first read.
 | Buy the business license | 4 | Pass |
 | Have a license? | 3 | Pass |
 | Verify license | 2 | Pass |
+| Checking this license… | 3 | Pass |
+| Checking the saved license… | 4 | Pass |
+| License active on this browser. | 5 | Pass |
+| License no longer active. Check the token or buy the plan. | 11 | Pass |
+| The license could not be checked. Check your connection and try again. | 12 | Pass |
 | Sociobot billing starts checkout. Dodo hosts the payment page. | 9 | Pass |
 | Send visit proof and plan the next visit. | 8 | Pass |
 | Original product art was generated for this service. | 8 | Pass |
