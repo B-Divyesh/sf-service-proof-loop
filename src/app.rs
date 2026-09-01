@@ -508,8 +508,15 @@ async fn create_visit(
         .bind(&token_hash).bind(&expires_at).bind(&created_at).bind(&workspace_id)
         .execute(&state.pool).await.map_err(db_error)?;
     if inserted.rows_affected() == 0 {
-        if !license_allows_more(&state, &headers).await {
-            return Err(plan_required());
+        match license_access(&state, &headers, &workspace_id).await? {
+            LicenseAccess::Allowed => {}
+            LicenseAccess::Invalid => return Err(plan_required()),
+            LicenseAccess::BoundToAnotherWorkspace => {
+                return Err(problem(
+                    StatusCode::PAYMENT_REQUIRED,
+                    "This license already belongs to another business workspace. Open that workspace or use another license.",
+                ));
+            }
         }
         sqlx::query("INSERT INTO visits (id, workspace_id, client_name, location_label, completed_at, next_visit_at, technician, checklist_json, notes, photos_json, proof_token_hash, proof_expires_at, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
             .bind(&id).bind(&workspace_id).bind(&client_name).bind(&location).bind(&completed_at).bind(next_date.to_string())
@@ -532,14 +539,24 @@ struct LicenseVerdict {
     valid: bool,
 }
 
-async fn license_allows_more(state: &AppState, headers: &HeaderMap) -> bool {
+enum LicenseAccess {
+    Allowed,
+    Invalid,
+    BoundToAnotherWorkspace,
+}
+
+async fn license_access(
+    state: &AppState,
+    headers: &HeaderMap,
+    workspace_id: &str,
+) -> ApiResult<LicenseAccess> {
     let Some(license) = headers
         .get("x-product-license")
         .and_then(|value| value.to_str().ok())
         .map(str::trim)
         .filter(|value| !value.is_empty())
     else {
-        return false;
+        return Ok(LicenseAccess::Invalid);
     };
     let Ok(response) = state
         .http
@@ -548,16 +565,43 @@ async fn license_allows_more(state: &AppState, headers: &HeaderMap) -> bool {
         .send()
         .await
     else {
-        return false;
+        return Ok(LicenseAccess::Invalid);
     };
     if !response.status().is_success() {
-        return false;
+        return Ok(LicenseAccess::Invalid);
     }
-    response
+    let valid = response
         .json::<LicenseVerdict>()
         .await
         .map(|verdict| verdict.valid)
-        .unwrap_or(false)
+        .unwrap_or(false);
+    if !valid {
+        return Ok(LicenseAccess::Invalid);
+    }
+
+    let license_hash = hash_token(license);
+    sqlx::query(
+        "INSERT INTO license_bindings (license_hash, workspace_id, bound_at)
+         VALUES (?, ?, ?)
+         ON CONFLICT(license_hash) DO NOTHING",
+    )
+    .bind(&license_hash)
+    .bind(workspace_id)
+    .bind(Utc::now().to_rfc3339())
+    .execute(&state.pool)
+    .await
+    .map_err(db_error)?;
+    let bound_workspace: String =
+        sqlx::query_scalar("SELECT workspace_id FROM license_bindings WHERE license_hash = ?")
+            .bind(license_hash)
+            .fetch_one(&state.pool)
+            .await
+            .map_err(db_error)?;
+    if bound_workspace == workspace_id {
+        Ok(LicenseAccess::Allowed)
+    } else {
+        Ok(LicenseAccess::BoundToAnotherWorkspace)
+    }
 }
 
 fn plan_required() -> (StatusCode, Json<ErrorBody>) {

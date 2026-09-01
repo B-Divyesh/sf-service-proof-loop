@@ -180,13 +180,17 @@ test('@claim:paid-license Sociobot billing starts the $59 checkout and Dodo host
     expect(await page.evaluate(() => localStorage.length)).toBe(0);
     await expect(page.locator('.price')).toContainText('$59');
     await expect(page.locator('.price')).toContainText('one-time purchase');
+    await expect(page.getByRole('heading', { name: 'Keep creating proof links' })).toBeVisible();
+    await expect(page.getByText('After three free visits, one $59 license covers one business workspace.')).toBeVisible();
+    await expect(page.locator('main')).not.toContainText(/unlimited/i);
     await expect(page.getByRole('link', { name: /Buy the business license/ })).toHaveAttribute('href', 'https://api.sociobot.in/api/v1/products/service-proof-loop/checkout');
     await page.goto('/privacy');
     await expect(page.getByText('Sociobot billing starts checkout. Dodo hosts the payment page and handles payment card details.')).toBeVisible();
+    await expect(page.getByText('Your browser stores the license token. The service stores only its hash when the license covers a workspace.')).toBeVisible();
     expect(await page.locator('input').evaluateAll(inputs => inputs.every(input => !['cc-number', 'cc-csc', 'cc-exp'].includes(input.autocomplete)))).toBeTruthy();
     await page.goto('/terms');
-    await expect(page.getByText('Sociobot billing starts checkout. Dodo hosts the payment page.')).toBeVisible();
-    await expect(page.getByText('See the Dodo payment page for purchase terms.')).toBeVisible();
+    await expect(page.getByText('The business license costs $59 as a one-time purchase. One license applies to one business workspace.')).toBeVisible();
+    await expect(page.getByText('Sociobot billing starts checkout. Dodo hosts the payment page. See that page for purchase terms.')).toBeVisible();
     await page.goto('/#pricing');
     const licenseForm = page.locator('#license-form');
     await page.locator('#license-form[data-license-state="ready"]').waitFor({ state: 'visible', timeout: 0 });
@@ -197,7 +201,7 @@ test('@claim:paid-license Sociobot billing starts the $59 checkout and Dodo host
     await expect(page.getByRole('button', { name: 'Checking license…' })).toBeDisabled();
     expect((await verificationResponse).status()).toBe(200);
     await page.waitForFunction(() => document.querySelector('#license-form')?.getAttribute('data-license-state') === 'active', undefined, { timeout: 0 });
-    await expect(page.locator('#license-note')).toHaveText('License active on this browser.');
+    await expect(page.locator('#license-note')).toHaveText('License verified. It covers one business workspace.');
     await expect(page.getByRole('button', { name: 'Verify license' })).toBeEnabled();
     expect(verifyRequests).toBe(1);
     expect(await page.evaluate(() => ({

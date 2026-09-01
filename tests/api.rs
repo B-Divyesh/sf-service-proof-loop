@@ -419,6 +419,130 @@ async fn claim_plan_limit_is_server_enforced_and_a_valid_license_allows_more() {
 }
 
 #[tokio::test]
+/// @claim:license-workspace-boundary
+async fn claim_one_valid_license_applies_to_only_one_business_workspace() {
+    let verifier = Router::new().route(
+        "/verify",
+        get(|| async { Json(serde_json::json!({"valid": true})) }),
+    );
+    let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
+    let verifier_url = format!("http://{}", listener.local_addr().unwrap());
+    tokio::spawn(async move { axum::serve(listener, verifier).await.unwrap() });
+    let (app, pool, _) = test_app_with_billing(100, &verifier_url).await;
+    let first_workspace = create_workspace(&app).await;
+    let second_workspace = create_workspace(&app).await;
+
+    for workspace in [&first_workspace, &second_workspace] {
+        for _ in 0..3 {
+            let response = app.clone().oneshot(visit_request(workspace)).await.unwrap();
+            assert_eq!(response.status(), StatusCode::CREATED);
+        }
+    }
+
+    let mut first_paid_visit = visit_request(&first_workspace);
+    first_paid_visit
+        .headers_mut()
+        .insert("x-product-license", "one-recorded-license".parse().unwrap());
+    assert_eq!(
+        app.clone()
+            .oneshot(first_paid_visit)
+            .await
+            .unwrap()
+            .status(),
+        StatusCode::CREATED
+    );
+
+    let mut second_paid_visit = visit_request(&second_workspace);
+    second_paid_visit
+        .headers_mut()
+        .insert("x-product-license", "one-recorded-license".parse().unwrap());
+    let rejected = app.clone().oneshot(second_paid_visit).await.unwrap();
+    assert_eq!(
+        rejected.status(),
+        StatusCode::PAYMENT_REQUIRED,
+        "the same recorded license must not unlock a second workspace"
+    );
+    assert_eq!(
+        response_json(rejected).await["error"],
+        "This license already belongs to another business workspace. Open that workspace or use another license."
+    );
+    for _ in 0..4 {
+        let mut continued_visit = visit_request(&first_workspace);
+        continued_visit
+            .headers_mut()
+            .insert("x-product-license", "one-recorded-license".parse().unwrap());
+        assert_eq!(
+            app.clone().oneshot(continued_visit).await.unwrap().status(),
+            StatusCode::CREATED,
+            "the recorded workspace must continue to accept paid visits"
+        );
+    }
+    let stored_hash: String = sqlx::query_scalar("SELECT license_hash FROM license_bindings")
+        .fetch_one(&pool)
+        .await
+        .unwrap();
+    assert_eq!(
+        stored_hash,
+        format!("{:x}", Sha256::digest(b"one-recorded-license")),
+        "the raw license token must not be stored"
+    );
+    assert_ne!(stored_hash, "one-recorded-license");
+
+    let (concurrent_app, concurrent_pool, _) = test_app_with_billing(100, &verifier_url).await;
+    let concurrent_first = create_workspace(&concurrent_app).await;
+    let concurrent_second = create_workspace(&concurrent_app).await;
+    for workspace in [&concurrent_first, &concurrent_second] {
+        for _ in 0..3 {
+            assert_eq!(
+                concurrent_app
+                    .clone()
+                    .oneshot(visit_request(workspace))
+                    .await
+                    .unwrap()
+                    .status(),
+                StatusCode::CREATED
+            );
+        }
+    }
+    let mut attempts = tokio::task::JoinSet::new();
+    for workspace in [concurrent_first, concurrent_second] {
+        let app = concurrent_app.clone();
+        attempts.spawn(async move {
+            let mut request = visit_request(&workspace);
+            request
+                .headers_mut()
+                .insert("x-product-license", "raced-license".parse().unwrap());
+            app.oneshot(request).await.unwrap().status()
+        });
+    }
+    let mut statuses = Vec::new();
+    while let Some(status) = attempts.join_next().await {
+        statuses.push(status.unwrap());
+    }
+    assert_eq!(
+        statuses
+            .iter()
+            .filter(|status| **status == StatusCode::CREATED)
+            .count(),
+        1,
+        "one concurrent workspace must claim the license: {statuses:?}"
+    );
+    assert_eq!(
+        statuses
+            .iter()
+            .filter(|status| **status == StatusCode::PAYMENT_REQUIRED)
+            .count(),
+        1,
+        "the other concurrent workspace must be limited: {statuses:?}"
+    );
+    let binding_count: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM license_bindings")
+        .fetch_one(&concurrent_pool)
+        .await
+        .unwrap();
+    assert_eq!(binding_count, 1);
+}
+
+#[tokio::test]
 async fn controller_regression_rejects_past_dates_and_blank_checklist_labels() {
     let (app, _, _) = test_app(100).await;
     let token = create_workspace(&app).await;

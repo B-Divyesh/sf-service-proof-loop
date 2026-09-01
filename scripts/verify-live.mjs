@@ -10,6 +10,8 @@ import {
 import { assertRateBurst } from './rate-limit.mjs';
 import { assertConcurrentFreePlan } from './plan-limit.mjs';
 
+// @claim:deployment-continuity
+
 const base = new URL(process.env.LIVE_BASE_URL || 'https://service-proof-loop.sociobot.in');
 const transport = base.protocol === 'https:' ? https : http;
 

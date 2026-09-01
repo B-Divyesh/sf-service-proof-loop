@@ -15,7 +15,7 @@ to understand them on the first read.
 | Nothing is saved. | 3 | Pass |
 | Proof links expire after 14 days. | 6 | Pass |
 | Clients open links without an account. | 6 | Pass |
-| Three visits free. $59 once for unlimited visits. | 8 | Pass |
+| Three visits free. $59 once for one workspace. | 8 | Pass |
 | An approved extra appears on the next visit. | 8 | Pass |
 | See proof and next-visit extras | 5 | Pass |
 | Crews record the visit. | 4 | Pass |
@@ -44,9 +44,9 @@ to understand them on the first read.
 | No dispatch, payroll, or worker tracking | 6 | Pass |
 | Do not enter home-entry codes or payment card details | 10 | Pass |
 | No public review campaigns | 4 | Pass |
-| Get unlimited proof links | 4 | Pass |
-| Add unlimited client proof links after three free visits. | 9 | Pass |
-| One business workspace | 3 | Pass |
+| Keep creating proof links | 4 | Pass |
+| After three free visits, one $59 license covers one business workspace. | 11 | Pass |
+| More visits in that workspace | 5 | Pass |
 | Configurable client extras | 3 | Pass |
 | Next-visit CSV exports | 3 | Pass |
 | $59 one-time purchase | 3 | Pass |
@@ -55,7 +55,7 @@ to understand them on the first read.
 | Verify license | 2 | Pass |
 | Checking this license… | 3 | Pass |
 | Checking the saved license… | 4 | Pass |
-| License active on this browser. | 5 | Pass |
+| License verified. It covers one business workspace. | 7 | Pass |
 | License no longer active. Check the token or buy the plan. | 11 | Pass |
 | The license could not be checked. Check your connection and try again. | 12 | Pass |
 | Sociobot billing starts checkout. Dodo hosts the payment page. | 9 | Pass |

@@ -63,6 +63,13 @@
     "sandbox": "create real workspaces; assert visits one through three return 201, the fourth returns 402, a fixture-verified license permits it, and eight concurrent free writes create exactly three visits"
   },
   {
+    "id": "license-workspace-boundary",
+    "claim": "A valid $59 business license is stored as a hash and applies to one business workspace",
+    "where": "landing price section, privacy, terms, and README",
+    "test": "cargo test --test api claim_one_valid_license_applies_to_only_one_business_workspace -- --exact",
+    "sandbox": "use one recorded valid-license response with two fresh workspaces; assert only the first workspace gets paid visits, the second receives 402, simultaneous claims produce one winner, and SQLite stores only one hashed binding"
+  },
+  {
     "id": "demo-expiry",
     "claim": "Demo workspaces expire within 24 hours",
     "where": "privacy page, demo documentation, README",
