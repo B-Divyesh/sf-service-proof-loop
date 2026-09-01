@@ -1,0 +1,278 @@
+{
+  "generated_at": "2026-09-01T23:49:53.901Z",
+  "base": "https://service-proof-loop.sociobot.in",
+  "first_read": {
+    "status": 200,
+    "title": "Service Proof Loop — Send proof after each visit",
+    "h1": [
+      "Send proof. Plan the next visit."
+    ],
+    "audience": "For recurring service teams that need client feedback and approved extras without asking clients to install an app.",
+    "primary_action": "Try it with sample data",
+    "action_explanation": "Loads a sample visit. Nothing is saved.",
+    "facts": [
+      "Proof links expire after 14 days.",
+      "Clients open links without an account.",
+      "Three visits free. $59 once for one workspace."
+    ],
+    "headers": {
+      "content-length": "1785",
+      "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Tue, 01 Sep 2026 23:49:54 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    },
+    "axe_serious_or_critical": []
+  },
+  "demo_flow": {
+    "banner": true,
+    "reset": true,
+    "start_for_real": true,
+    "isolated_storage": true,
+    "proof_href_shape": "/proof/<redacted>?demo=1",
+    "proof_document": {
+      "status": 200,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "x-frame-options": "DENY",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+        "x-robots-tag": "noindex, nofollow, noarchive",
+        "cache-control": "private, no-store",
+        "content-length": "1619",
+        "date": "Tue, 01 Sep 2026 23:49:56 GMT"
+      }
+    },
+    "proof_api": {
+      "status": 200,
+      "headers": {
+        "content-type": "application/json",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "x-frame-options": "DENY",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "content-security-policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+        "x-robots-tag": "noindex, nofollow, noarchive",
+        "cache-control": "private, no-store",
+        "content-length": "1188",
+        "date": "Tue, 01 Sep 2026 23:49:56 GMT"
+      }
+    },
+    "axe_light_serious_or_critical": [],
+    "axe_dark_serious_or_critical": [],
+    "keyboard_focus": {
+      "input_focused": true,
+      "outline_style": "solid",
+      "outline_width": "3px",
+      "outline_color": "rgb(241, 145, 103)",
+      "visible_box": {
+        "x": 375,
+        "y": 420.34375,
+        "width": 339,
+        "height": 60,
+        "top": 420.34375,
+        "right": 714,
+        "bottom": 480.34375,
+        "left": 375
+      }
+    },
+    "saved_focus": {
+      "active_text": "Your reply is saved",
+      "announcement": "Your reply is saved"
+    },
+    "csv_has_header": true,
+    "csv_has_extra": true
+  },
+  "reduced_motion": {
+    "transition_duration": "1e-05s",
+    "scroll_behavior": "auto"
+  },
+  "assets": [
+    {
+      "url": "https://service-proof-loop.sociobot.in/assets/main-Ce5LenRe.js",
+      "bytes": 33629,
+      "cache_control": "public, max-age=31536000, immutable"
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css",
+      "bytes": 15437,
+      "cache_control": "public, max-age=31536000, immutable"
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/assets/proof-loop-hero.webp",
+      "bytes": 18322,
+      "cache_control": "public, max-age=86400"
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/assets/sample-kitchen.svg",
+      "bytes": 589,
+      "cache_control": "public, max-age=86400"
+    },
+    {
+      "url": "https://service-proof-loop.sociobot.in/assets/sample-entry.svg",
+      "bytes": 564,
+      "cache_control": "public, max-age=86400"
+    }
+  ],
+  "network": {
+    "origins": [
+      "https://service-proof-loop.sociobot.in"
+    ],
+    "request_count": 26,
+    "requests": [
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/",
+        "type": "document"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-Ce5LenRe.js",
+        "type": "script"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css",
+        "type": "stylesheet"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/proof-loop-hero.webp",
+        "type": "image"
+      },
+      {
+        "method": "POST",
+        "url": "https://service-proof-loop.sociobot.in/api/demo",
+        "type": "fetch"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/api/visits",
+        "type": "fetch"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/api/proof/<redacted>",
+        "type": "fetch"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/sample-kitchen.svg",
+        "type": "image"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/sample-entry.svg",
+        "type": "image"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/proof/<redacted>?demo=1",
+        "type": "document"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-Ce5LenRe.js",
+        "type": "script"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css",
+        "type": "stylesheet"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/api/proof/<redacted>",
+        "type": "fetch"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/sample-kitchen.svg",
+        "type": "image"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/sample-entry.svg",
+        "type": "image"
+      },
+      {
+        "method": "POST",
+        "url": "https://service-proof-loop.sociobot.in/api/proof/<redacted>",
+        "type": "fetch"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/api/proof/<redacted>",
+        "type": "fetch"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/demo",
+        "type": "document"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-Ce5LenRe.js",
+        "type": "script"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css",
+        "type": "stylesheet"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/api/visits",
+        "type": "fetch"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/api/visits/dfb90ebd-71f3-4d98-b41c-c125b1f070fa/export.csv",
+        "type": "fetch"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/",
+        "type": "document"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-Ce5LenRe.js",
+        "type": "script"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css",
+        "type": "stylesheet"
+      },
+      {
+        "method": "GET",
+        "url": "https://service-proof-loop.sociobot.in/assets/proof-loop-hero.webp",
+        "type": "image"
+      }
+    ],
+    "response_statuses": {
+      "200": 26
+    },
+    "console_errors": [],
+    "page_errors": []
+  },
+  "mobile_reflow": {
+    "normal": {
+      "client_width": 390,
+      "scroll_width": 390
+    },
+    "text_200_percent": {
+      "client_width": 390,
+      "scroll_width": 390
+    }
+  }
+}
