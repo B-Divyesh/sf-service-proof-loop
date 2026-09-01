@@ -1,0 +1,716 @@
+Building sociobotregistry.azurecr.io/sf-service-proof-loop:7887743da39c from 7887743da39c90b49bdcee4ac4fd084b4e123db5
+WARNING: Packing source code into tar to upload...
+WARNING: Excluding '.git' based on default ignore rules
+WARNING: Excluding '.gitignore' based on default ignore rules
+WARNING: Uploading archived source code from '/tmp/build_archive_ffc698fea89d4c9d8281fb6e11faf8df.tar.gz'...
+WARNING: Sending context (39.699 MiB) to registry: sociobotregistry...
+WARNING: Queued a build with ID: ch1q9
+WARNING: Waiting for an agent...
+2026/09/01 20:59:42 Downloading source code...
+2026/09/01 20:59:46 Finished downloading source code
+2026/09/01 20:59:46 Using acb_vol_cec4bab4-6817-43cb-a064-7b288501a74a as the home volume
+2026/09/01 20:59:46 Setting up Docker configuration...
+2026/09/01 20:59:48 Successfully set up Docker configuration
+2026/09/01 20:59:48 Logging in to registry: sociobotregistry.azurecr.io
+2026/09/01 20:59:49 Successfully logged into sociobotregistry.azurecr.io
+2026/09/01 20:59:49 Executing step ID: build. Timeout(sec): 28800, Working directory: '', Network: ''
+2026/09/01 20:59:49 Scanning for dependencies...
+2026/09/01 20:59:49 Successfully scanned dependencies
+2026/09/01 20:59:49 Launching container with name: build
+Sending build context to Docker daemon  53.54MB
+Step 1/23 : FROM node:22-alpine AS web
+22-alpine: Pulling from library/node
+55afa1ecc21d: Pulling fs layer
+efbef6f9e333: Pulling fs layer
+a2980c1fee17: Pulling fs layer
+16da5a640377: Pulling fs layer
+16da5a640377: Waiting
+55afa1ecc21d: Verifying Checksum
+55afa1ecc21d: Download complete
+a2980c1fee17: Verifying Checksum
+a2980c1fee17: Download complete
+16da5a640377: Verifying Checksum
+16da5a640377: Download complete
+55afa1ecc21d: Pull complete
+efbef6f9e333: Verifying Checksum
+efbef6f9e333: Download complete
+efbef6f9e333: Pull complete
+a2980c1fee17: Pull complete
+16da5a640377: Pull complete
+Digest: sha256:c610fcdfb1d5b4740dd70c284ed3cb16bb857e0f7166196e36a5501df7a3aa32
+Status: Downloaded newer image for node:22-alpine
+ ---> 395425e54d98
+Step 2/23 : WORKDIR /build
+ ---> Running in b26109f6da5a
+Removing intermediate container b26109f6da5a
+ ---> b2646bab86a6
+Step 3/23 : COPY package.json package-lock.json* ./
+ ---> 75e5961bc44c
+Step 4/23 : RUN npm ci
+ ---> Running in 5159a6861796
+
+added 22 packages, and audited 23 packages in 2s
+
+5 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+npm notice
+npm notice New major version of npm available! 10.9.8 -> 12.0.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.0.2
+npm notice To update run: npm install -g npm@12.0.2
+npm notice
+Removing intermediate container 5159a6861796
+ ---> 106a9d820780
+Step 5/23 : COPY frontend ./frontend
+ ---> 5ab15f1f5df8
+Step 6/23 : RUN npm run build
+ ---> Running in c964518e8852
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   1.46 kB │ gzip:  0.52 kB
+../dist/index.html                 1.73 kB │ gzip:  0.59 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-w_n47E8G.js   33.41 kB │ gzip: 10.50 kB
+✓ built in 202ms
+Removing intermediate container c964518e8852
+ ---> c299d80eb893
+Step 7/23 : FROM rust:1-slim AS server
+1-slim: Pulling from library/rust
+6310eb16bf42: Pulling fs layer
+f3ff4182662b: Pulling fs layer
+6310eb16bf42: Verifying Checksum
+6310eb16bf42: Download complete
+f3ff4182662b: Verifying Checksum
+f3ff4182662b: Download complete
+6310eb16bf42: Pull complete
+f3ff4182662b: Pull complete
+Digest: sha256:17d1ba895198f9934c6314ec5346a0d5115372f3243390c3d731e242f35c2f27
+Status: Downloaded newer image for rust:1-slim
+ ---> 01f20127fd90
+Step 8/23 : ARG BUILD_SHA=dev
+ ---> Running in 65ef9b68072f
+Removing intermediate container 65ef9b68072f
+ ---> 179683ff8bff
+Step 9/23 : ENV BUILD_SHA=$BUILD_SHA
+ ---> Running in 58cf5d0bb223
+Removing intermediate container 58cf5d0bb223
+ ---> 8a4610d4c4c3
+Step 10/23 : WORKDIR /build
+ ---> Running in 0898b5984aaa
+Removing intermediate container 0898b5984aaa
+ ---> 8c80a6d60609
+Step 11/23 : COPY Cargo.toml Cargo.lock* build.rs ./
+ ---> 86f225cc6e74
+Step 12/23 : COPY migrations ./migrations
+ ---> 44aaf81c70f5
+Step 13/23 : COPY src ./src
+ ---> 9718f2c0754f
+Step 14/23 : RUN cargo build --release
+ ---> Running in 7803af694082
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded zeroize v1.9.0
+  Downloaded tokio-macros v2.7.2
+  Downloaded tokio-rustls v0.26.4
+  Downloaded tracing-serde v0.2.0
+  Downloaded version_check v0.9.5
+  Downloaded tower-layer v0.3.3
+  Downloaded want v0.3.1
+  Downloaded cfg-if v1.0.4
+  Downloaded hex v0.4.3
+  Downloaded zerofrom-derive v0.1.7
+  Downloaded futures-task v0.3.34
+  Downloaded generic-array v0.14.7
+  Downloaded atomic-waker v1.1.2
+  Downloaded block-buffer v0.10.4
+  Downloaded http-range-header v0.4.2
+  Downloaded utf8_iter v1.0.4
+  Downloaded tower-service v0.3.3
+  Downloaded untrusted v0.9.0
+  Downloaded errno v0.3.14
+  Downloaded http-body v1.1.0
+  Downloaded httpdate v1.0.3
+  Downloaded itoa v1.0.18
+  Downloaded lazy_static v1.5.0
+  Downloaded crc v3.4.0
+  Downloaded equivalent v1.0.2
+  Downloaded forwarded-header-value v0.1.1
+  Downloaded home v0.5.12
+  Downloaded idna_adapter v1.2.2
+  Downloaded try-lock v0.2.5
+  Downloaded zerofrom v0.1.8
+  Downloaded cfg_aliases v0.2.2
+  Downloaded cpufeatures v0.2.17
+  Downloaded cpufeatures v0.3.1
+  Downloaded crypto-common v0.1.7
+  Downloaded fnv v1.0.7
+  Downloaded form_urlencoded v1.2.2
+  Downloaded futures-io v0.3.34
+  Downloaded futures-sink v0.3.34
+  Downloaded futures-timer v3.0.4
+  Downloaded heck v0.5.0
+  Downloaded zerotrie v0.2.5
+  Downloaded zerovec-derive v0.11.6
+  Downloaded zmij v1.0.23
+  Downloaded async-trait v0.1.92
+  Downloaded atoi v2.0.0
+  Downloaded autocfg v1.5.1
+  Downloaded axum-core v0.5.6
+  Downloaded base64ct v1.8.3
+  Downloaded byteorder v1.5.0
+  Downloaded crc-catalog v2.5.0
+  Downloaded dashmap v6.2.1
+  Downloaded digest v0.10.7
+  Downloaded displaydoc v0.2.7
+  Downloaded either v1.18.0
+  Downloaded find-msvc-tools v0.1.11
+  Downloaded foldhash v0.1.5
+  Downloaded foldhash v0.2.0
+  Downloaded futures-core v0.3.34
+  Downloaded futures-executor v0.3.34
+  Downloaded hashlink v0.10.0
+  Downloaded http-body-util v0.1.5
+  Downloaded hyper-rustls v0.27.9
+  Downloaded hyper-timeout v0.5.2
+  Downloaded ipnet v2.12.1
+  Downloaded chacha20 v0.10.2
+  Downloaded const-oid v0.9.6
+  Downloaded crossbeam-queue v0.3.13
+  Downloaded crossbeam-utils v0.8.22
+  Downloaded dotenvy v0.15.7
+  Downloaded futures-channel v0.3.34
+  Downloaded getrandom v0.2.17
+  Downloaded iana-time-zone v0.1.65
+  Downloaded allocator-api2 v0.2.21
+  Downloaded bitflags v2.13.1
+  Downloaded event-listener v5.4.2
+  Downloaded getrandom v0.3.4
+  Downloaded hmac v0.12.1
+  Downloaded httparse v1.10.1
+  Downloaded icu_provider v2.3.1
+  Downloaded getrandom v0.4.3
+  Downloaded icu_normalizer_data v2.3.0
+  Downloaded lru-slab v0.1.2
+  Downloaded potential_utf v0.1.6
+  Downloaded icu_locale_core v2.3.0
+  Downloaded flume v0.11.1
+  Downloaded scopeguard v1.2.0
+  Downloaded signal-hook-registry v1.4.8
+  Downloaded socket2 v0.6.5
+  Downloaded spin v0.9.9
+  Downloaded thiserror v2.0.20
+  Downloaded tinystr v0.8.4
+  Downloaded base64 v0.22.1
+  Downloaded bytes v1.12.1
+  Downloaded der v0.7.10
+  Downloaded futures-intrusive v0.5.0
+  Downloaded icu_collections v2.3.0
+  Downloaded indexmap v2.14.0
+  Downloaded cc v1.4.4
+  Downloaded http v1.5.0
+  Downloaded hyper-util v0.1.20
+  Downloaded icu_properties v2.3.0
+  Downloaded serde v1.0.229
+  Downloaded webpki-roots v0.26.11
+  Downloaded zerovec v0.11.8
+  Downloaded aho-corasick v1.1.5
+  Downloaded axum v0.8.9
+  Downloaded governor v0.10.4
+  Downloaded h2 v0.4.19
+  Downloaded hashbrown v0.14.5
+  Downloaded hashbrown v0.15.5
+  Downloaded hashbrown v0.16.1
+  Downloaded hashbrown v0.17.1
+  Downloaded hkdf v0.12.4
+  Downloaded hyper v1.11.1
+  Downloaded icu_properties_data v2.3.0
+  Downloaded idna v1.1.0
+  Downloaded nonzero_ext v0.3.0
+  Downloaded chrono v0.4.45
+  Downloaded futures-util v0.3.34
+  Downloaded syn v2.0.119
+  Downloaded percent-encoding v2.3.2
+  Downloaded serde_path_to_error v0.1.20
+  Downloaded yoke-derive v0.8.2
+  Downloaded subtle v2.6.1
+  Downloaded icu_normalizer v2.3.0
+  Downloaded mime v0.3.17
+  Downloaded serde_json v1.0.151
+  Downloaded sharded-slab v0.1.7
+  Downloaded stringprep v0.1.5
+  Downloaded sqlx-sqlite v0.8.6
+  Downloaded stable_deref_trait v1.2.1
+  Downloaded syn v3.0.4
+  Downloaded thread_local v1.1.10
+  Downloaded tinyvec_macros v0.1.1
+  Downloaded libc v0.2.189
+  Downloaded thiserror v1.0.69
+  Downloaded tokio v1.53.1
+  Downloaded serde_urlencoded v0.7.1
+  Downloaded sqlx-mysql v0.8.6
+  Downloaded tinyvec v1.12.0
+  Downloaded num-iter v0.1.46
+  Downloaded shlex v2.0.1
+  Downloaded sqlx-macros-core v0.8.6
+  Downloaded rand_pcg v0.10.2
+  Downloaded smallvec v1.15.2
+  Downloaded sqlx-macros v0.8.6
+  Downloaded rustc-hash v2.1.3
+  Downloaded signature v2.2.0
+  Downloaded encoding_rs v0.8.35
+  Downloaded serde_core v1.0.229
+  Downloaded nonempty v0.7.0
+  Downloaded rand_chacha v0.3.1
+  Downloaded md-5 v0.10.6
+  Downloaded sqlx-postgres v0.8.6
+  Downloaded slab v0.4.12
+  Downloaded sqlx v0.8.6
+  Downloaded parking v2.2.1
+  Downloaded matchers v0.2.0
+  Downloaded tower_governor v0.8.0
+  Downloaded tracing-log v0.2.0
+  Downloaded ppv-lite86 v0.2.21
+  Downloaded writeable v0.6.4
+  Downloaded nu-ansi-term v0.50.3
+  Downloaded lock_api v0.4.14
+  Downloaded tokio-stream v0.1.19
+  Downloaded tracing-attributes v0.1.31
+  Downloaded sync_wrapper v1.0.2
+  Downloaded multer v3.1.0
+  Downloaded rand_core v0.6.4
+  Downloaded num-integer v0.1.47
+  Downloaded pin-project-lite v0.2.17
+  Downloaded pkg-config v0.3.34
+  Downloaded rand_core v0.9.5
+  Downloaded quinn-udp v0.5.15
+  Downloaded pkcs8 v0.10.2
+  Downloaded whoami v1.6.1
+  Downloaded pem-rfc7468 v0.7.0
+  Downloaded rand_chacha v0.9.0
+  Downloaded rand_core v0.10.1
+  Downloaded unicode-properties v0.1.4
+  Downloaded quote v1.0.47
+  Downloaded sha2 v0.10.9
+  Downloaded unicase v2.9.0
+  Downloaded web-time v1.1.0
+  Downloaded sha1 v0.10.7
+  Downloaded spki v0.7.3
+  Downloaded synstructure v0.13.2
+  Downloaded thiserror-impl v1.0.69
+  Downloaded thiserror-impl v2.0.20
+  Downloaded yoke v0.8.3
+  Downloaded once_cell v1.21.4
+  Downloaded pkcs1 v0.7.5
+  Downloaded rustls-pki-types v1.15.1
+  Downloaded matchit v0.8.4
+  Downloaded mime_guess v2.0.5
+  Downloaded parking_lot v0.12.5
+  Downloaded pin-project-internal v1.1.13
+  Downloaded quanta v0.12.6
+  Downloaded uuid v1.26.0
+  Downloaded tracing-core v0.1.36
+  Downloaded unicode-ident v1.0.24
+  Downloaded unicode-bidi v0.3.18
+  Downloaded litemap v0.8.3
+  Downloaded num-traits v0.2.19
+  Downloaded parking_lot_core v0.9.12
+  Downloaded proc-macro2 v1.0.107
+  Downloaded ryu v1.0.23
+  Downloaded serde_derive v1.0.229
+  Downloaded spinning_top v0.3.0
+  Downloaded log v0.4.34
+  Downloaded tokio-util v0.7.19
+  Downloaded rustls-webpki v0.103.15
+  Downloaded rand v0.8.8
+  Downloaded tower v0.5.3
+  Downloaded url v2.5.8
+  Downloaded rsa v0.9.10
+  Downloaded pin-project v1.1.13
+  Downloaded quinn v0.11.11
+  Downloaded typenum v1.20.1
+  Downloaded libm v0.2.16
+  Downloaded rand v0.9.5
+  Downloaded rand v0.10.2
+  Downloaded tonic v0.14.6
+  Downloaded memchr v2.8.3
+  Downloaded unicode-normalization v0.1.25
+  Downloaded raw-cpuid v11.6.0
+  Downloaded mio v1.2.2
+  Downloaded sqlx-core v0.8.6
+  Downloaded num-bigint-dig v0.8.6
+  Downloaded tower-http v0.6.11
+  Downloaded reqwest v0.12.28
+  Downloaded tracing-subscriber v0.3.23
+  Downloaded portable-atomic v1.15.0
+  Downloaded vcpkg v0.2.15
+  Downloaded webpki-roots v1.0.9
+  Downloaded quinn-proto v0.11.17
+  Downloaded zerocopy v0.8.56
+  Downloaded regex-syntax v0.8.11
+  Downloaded rustls v0.23.43
+  Downloaded tracing v0.1.44
+  Downloaded regex-automata v0.4.18
+  Downloaded ring v0.17.14
+  Downloaded libsqlite3-sys v0.30.1
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.24
+   Compiling libc v0.2.189
+   Compiling syn v3.0.4
+   Compiling syn v2.0.119
+   Compiling cfg-if v1.0.4
+   Compiling synstructure v0.13.2
+   Compiling parking_lot_core v0.9.12
+   Compiling zerovec-derive v0.11.6
+   Compiling zerofrom-derive v0.1.7
+   Compiling yoke-derive v0.8.2
+   Compiling displaydoc v0.2.7
+   Compiling smallvec v1.15.2
+   Compiling find-msvc-tools v0.1.11
+   Compiling shlex v2.0.1
+   Compiling scopeguard v1.2.0
+   Compiling pin-project-lite v0.2.17
+   Compiling lock_api v0.4.14
+   Compiling cc v1.4.4
+   Compiling futures-core v0.3.34
+   Compiling version_check v0.9.5
+   Compiling once_cell v1.21.4
+   Compiling bytes v1.12.1
+   Compiling tracing-attributes v0.1.31
+   Compiling serde v1.0.229
+   Compiling itoa v1.0.18
+   Compiling icu_properties_data v2.3.0
+   Compiling icu_normalizer_data v2.3.0
+   Compiling futures-sink v0.3.34
+   Compiling parking_lot v0.12.5
+   Compiling ring v0.17.14
+   Compiling serde_derive v1.0.229
+   Compiling tracing-core v0.1.36
+   Compiling generic-array v0.14.7
+   Compiling errno v0.3.14
+   Compiling equivalent v1.0.2
+   Compiling signal-hook-registry v1.4.8
+   Compiling zerofrom v0.1.8
+   Compiling tokio-macros v2.7.2
+   Compiling socket2 v0.6.5
+   Compiling mio v1.2.2
+   Compiling stable_deref_trait v1.2.1
+   Compiling memchr v2.8.3
+   Compiling serde_core v1.0.229
+   Compiling zmij v1.0.23
+   Compiling log v0.4.34
+   Compiling slab v0.4.12
+   Compiling yoke v0.8.3
+   Compiling tokio v1.53.1
+   Compiling tracing v0.1.44
+   Compiling futures-task v0.3.34
+   Compiling futures-io v0.3.34
+   Compiling autocfg v1.5.1
+   Compiling serde_json v1.0.151
+   Compiling num-traits v0.2.19
+   Compiling futures-util v0.3.34
+   Compiling zerovec v0.11.8
+   Compiling hashbrown v0.17.1
+   Compiling indexmap v2.14.0
+   Compiling http v1.5.0
+   Compiling percent-encoding v2.3.2
+   Compiling rustls v0.23.43
+   Compiling tinystr v0.8.4
+   Compiling getrandom v0.2.17
+   Compiling litemap v0.8.3
+   Compiling writeable v0.6.4
+   Compiling thiserror v2.0.20
+   Compiling icu_locale_core v2.3.0
+   Compiling http-body v1.1.0
+   Compiling potential_utf v0.1.6
+   Compiling tokio-util v0.7.19
+   Compiling zerotrie v0.2.5
+   Compiling utf8_iter v1.0.4
+   Compiling zeroize v1.9.0
+   Compiling httparse v1.10.1
+   Compiling rustls-pki-types v1.15.1
+   Compiling icu_collections v2.3.0
+   Compiling icu_provider v2.3.1
+   Compiling form_urlencoded v1.2.2
+   Compiling futures-channel v0.3.34
+   Compiling thiserror-impl v2.0.20
+   Compiling pkg-config v0.3.34
+   Compiling typenum v1.20.1
+   Compiling tower-service v0.3.3
+   Compiling crossbeam-utils v0.8.22
+   Compiling base64 v0.22.1
+   Compiling vcpkg v0.2.15
+   Compiling libsqlite3-sys v0.30.1
+   Compiling try-lock v0.2.5
+   Compiling fnv v1.0.7
+   Compiling atomic-waker v1.1.2
+   Compiling zerocopy v0.8.56
+   Compiling httpdate v1.0.3
+   Compiling untrusted v0.9.0
+   Compiling h2 v0.4.19
+   Compiling want v0.3.1
+   Compiling icu_normalizer v2.3.0
+   Compiling icu_properties v2.3.0
+   Compiling allocator-api2 v0.2.21
+   Compiling mime v0.3.17
+   Compiling idna_adapter v1.2.2
+   Compiling hyper v1.11.1
+   Compiling rustls-webpki v0.103.15
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling sync_wrapper v1.0.2
+   Compiling spin v0.9.9
+   Compiling ipnet v2.12.1
+   Compiling subtle v2.6.1
+   Compiling getrandom v0.3.4
+   Compiling tower-layer v0.3.3
+   Compiling foldhash v0.1.5
+   Compiling ryu v1.0.23
+   Compiling serde_urlencoded v0.7.1
+   Compiling hashbrown v0.15.5
+   Compiling hyper-util v0.1.20
+   Compiling ppv-lite86 v0.2.21
+   Compiling digest v0.10.7
+   Compiling idna v1.1.0
+   Compiling webpki-roots v1.0.9
+   Compiling http-body-util v0.1.5
+   Compiling bitflags v2.13.1
+   Compiling crc-catalog v2.5.0
+   Compiling parking v2.2.1
+   Compiling cpufeatures v0.2.17
+   Compiling iana-time-zone v0.1.65
+   Compiling chrono v0.4.45
+   Compiling sha2 v0.10.9
+   Compiling event-listener v5.4.2
+   Compiling crc v3.4.0
+   Compiling webpki-roots v0.26.11
+   Compiling crossbeam-queue v0.3.13
+   Compiling futures-intrusive v0.5.0
+   Compiling url v2.5.8
+   Compiling tokio-stream v0.1.19
+   Compiling hashlink v0.10.0
+   Compiling tower v0.5.3
+   Compiling either v1.18.0
+   Compiling multer v3.1.0
+   Compiling unicase v2.9.0
+   Compiling sqlx-core v0.8.6
+   Compiling mime_guess v2.0.5
+   Compiling flume v0.11.1
+   Compiling rand_core v0.9.5
+   Compiling futures-executor v0.3.34
+   Compiling atoi v2.0.0
+   Compiling encoding_rs v0.8.35
+   Compiling thiserror v1.0.69
+   Compiling portable-atomic v1.15.0
+   Compiling sqlx-sqlite v0.8.6
+   Compiling rand_chacha v0.9.0
+   Compiling raw-cpuid v11.6.0
+   Compiling axum-core v0.5.6
+   Compiling serde_path_to_error v0.1.20
+   Compiling pin-project-internal v1.1.13
+   Compiling thiserror-impl v1.0.69
+   Compiling hex v0.4.3
+   Compiling dotenvy v0.15.7
+   Compiling regex-syntax v0.8.11
+   Compiling heck v0.5.0
+   Compiling hashbrown v0.14.5
+   Compiling getrandom v0.4.3
+   Compiling foldhash v0.2.0
+   Compiling matchit v0.8.4
+   Compiling axum v0.8.9
+   Compiling hashbrown v0.16.1
+   Compiling dashmap v6.2.1
+   Compiling sqlx-macros-core v0.8.6
+   Compiling regex-automata v0.4.18
+   Compiling pin-project v1.1.13
+   Compiling quanta v0.12.6
+   Compiling rand v0.9.5
+   Compiling hyper-timeout v0.5.2
+   Compiling tokio-rustls v0.26.4
+   Compiling rand_core v0.6.4
+   Compiling spinning_top v0.3.0
+   Compiling async-trait v0.1.92
+   Compiling futures-timer v3.0.4
+   Compiling lazy_static v1.5.0
+   Compiling nonzero_ext v0.3.0
+   Compiling http-range-header v0.4.2
+   Compiling nonempty v0.7.0
+   Compiling web-time v1.1.0
+   Compiling governor v0.10.4
+   Compiling forwarded-header-value v0.1.1
+   Compiling tower-http v0.6.11
+   Compiling sharded-slab v0.1.7
+   Compiling tonic v0.14.6
+   Compiling rand_chacha v0.3.1
+   Compiling hyper-rustls v0.27.9
+   Compiling matchers v0.2.0
+   Compiling sqlx-macros v0.8.6
+   Compiling tracing-serde v0.2.0
+   Compiling tracing-log v0.2.0
+   Compiling thread_local v1.1.10
+   Compiling service-proof-loop v1.0.0 (/build)
+   Compiling nu-ansi-term v0.50.3
+   Compiling tracing-subscriber v0.3.23
+
+   Compiling sqlx v0.8.6
+   Compiling uuid v1.26.0
+   Compiling reqwest v0.12.28
+   Compiling rand v0.8.8
+   Compiling tower_governor v0.8.0
+
+    Finished `release` profile [optimized] target(s) in 4m 42s
+Removing intermediate container 7803af694082
+ ---> 3957f4d08127
+Step 15/23 : FROM debian:bookworm-slim AS runtime
+bookworm-slim: Pulling from library/debian
+a8ac7f6c67ab: Pulling fs layer
+a8ac7f6c67ab: Verifying Checksum
+a8ac7f6c67ab: Download complete
+a8ac7f6c67ab: Pull complete
+Digest: sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171
+Status: Downloaded newer image for debian:bookworm-slim
+ ---> 160466e67bb8
+Step 16/23 : RUN groupadd --system service && useradd --system --gid service --home-dir /app service     && mkdir -p /app/public /data && chown -R service:service /app /data
+ ---> Running in ced77bef521b
+Removing intermediate container ced77bef521b
+ ---> 27dbe3d5b954
+Step 17/23 : WORKDIR /app
+ ---> Running in 4f0942da9564
+Removing intermediate container 4f0942da9564
+ ---> 02cd5d6138fb
+Step 18/23 : COPY --from=server /build/target/release/service-proof-loop /app/service-proof-loop
+ ---> d8c4b6f101a6
+Step 19/23 : COPY --from=web /build/dist /app/public
+ ---> b8485489719a
+Step 20/23 : ENV PORT=8080 STATIC_DIR=/app/public
+ ---> Running in 98b05201c298
+Removing intermediate container 98b05201c298
+ ---> 1bc5a86f19bb
+Step 21/23 : USER service
+ ---> Running in 911cf5dc6b5a
+Removing intermediate container 911cf5dc6b5a
+ ---> e44277229e16
+Step 22/23 : EXPOSE 8080
+ ---> Running in 5791b16b807d
+Removing intermediate container 5791b16b807d
+ ---> 477edadd822d
+Step 23/23 : CMD ["/app/service-proof-loop"]
+ ---> Running in 30f1b2b4267e
+Removing intermediate container 30f1b2b4267e
+ ---> 4cb6b40e6293
+[Warning] One or more build-args [GIT_SHA SOURCE_COMMIT] were not consumed
+Successfully built 4cb6b40e6293
+Successfully tagged sociobotregistry.azurecr.io/sf-service-proof-loop:7887743da39c
+2026/09/01 21:05:35 Successfully executed container: build
+2026/09/01 21:05:35 Executing step ID: push. Timeout(sec): 3600, Working directory: '', Network: ''
+2026/09/01 21:05:35 Pushing image: sociobotregistry.azurecr.io/sf-service-proof-loop:7887743da39c, attempt 1
+The push refers to repository [sociobotregistry.azurecr.io/sf-service-proof-loop]
+54d7837d998f: Preparing
+9a4ad66560d1: Preparing
+d9ae2971ffba: Preparing
+1d69a5fd3193: Preparing
+54d7837d998f: Pushed
+d9ae2971ffba: Pushed
+9a4ad66560d1: Pushed
+1d69a5fd3193: Pushed
+7887743da39c: digest: sha256:544d074ef966729053f673510b059e2b30e87048ad09096625c0cbdf4d15ac7e size: 1158
+2026/09/01 21:05:41 Successfully pushed image: sociobotregistry.azurecr.io/sf-service-proof-loop:7887743da39c
+2026/09/01 21:05:41 Step ID: build marked as successful (elapsed time in seconds: 346.030323)
+2026/09/01 21:05:41 Populating digests for step ID: build...
+2026/09/01 21:05:43 Successfully populated digests for step ID: build
+2026/09/01 21:05:43 Step ID: push marked as successful (elapsed time in seconds: 6.036183)
+2026/09/01 21:05:43 The following dependencies were found:
+2026/09/01 21:05:43 
+- image:
+    registry: sociobotregistry.azurecr.io
+    repository: sf-service-proof-loop
+    tag: 7887743da39c
+    digest: sha256:544d074ef966729053f673510b059e2b30e87048ad09096625c0cbdf4d15ac7e
+  runtime-dependency:
+    registry: registry.hub.docker.com
+    repository: library/debian
+    tag: bookworm-slim
+    digest: sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171
+  buildtime-dependency:
+  - registry: registry.hub.docker.com
+    repository: library/node
+    tag: 22-alpine
+    digest: sha256:c610fcdfb1d5b4740dd70c284ed3cb16bb857e0f7166196e36a5501df7a3aa32
+  - registry: registry.hub.docker.com
+    repository: library/rust
+    tag: 1-slim
+    digest: sha256:17d1ba895198f9934c6314ec5346a0d5115372f3243390c3d731e242f35c2f27
+  git: {}
+
+Run ID: ch1q9 was successful after 6m2s
+{
+  "latest_revision": "sf-service-proof-loop--0000046",
+  "active_revisions": 1,
+  "replicas": 1,
+  "min_replicas": 1,
+  "max_replicas": 1,
+  "image": "sociobotregistry.azurecr.io/sf-service-proof-loop:7887743da39c",
+  "mount_path": "/data",
+  "storage_name": "sf-service-proof-loop-data",
+  "storage_type": "AzureFile"
+}
+{
+  "deployment_topology": {
+    "latest_revision": "sf-service-proof-loop--0000046",
+    "active_revisions": 1,
+    "replicas": 1,
+    "min_replicas": 1,
+    "max_replicas": 1,
+    "image": "sociobotregistry.azurecr.io/sf-service-proof-loop:7887743da39c",
+    "mount_path": "/data",
+    "storage_name": "sf-service-proof-loop-data",
+    "storage_type": "AzureFile"
+  },
+  "health": {
+    "build_sha": "7887743da39c90b49bdcee4ac4fd084b4e123db5",
+    "status": "ok"
+  },
+  "concurrent_demo_workspace_proof": {
+    "demos": 20,
+    "simultaneous_reads_per_demo": 20,
+    "total_reads": 400,
+    "successful_reads": 400,
+    "successful_proofs": 20
+  },
+  "concurrent_plan_statuses": [
+    201,
+    402,
+    201,
+    201,
+    402,
+    402,
+    402,
+    402
+  ],
+  "validation_statuses": {
+    "past_date": 400,
+    "blank_checklist_label": 400
+  },
+  "rate_bursts": {
+    "claim_45": {
+      "requests": 45,
+      "allowed": 40,
+      "limited": 5,
+      "elapsed_ms": 87
+    },
+    "verifier_130": {
+      "requests": 130,
+      "allowed": 40,
+      "limited": 90,
+      "elapsed_ms": 230
+    }
+  }
+}

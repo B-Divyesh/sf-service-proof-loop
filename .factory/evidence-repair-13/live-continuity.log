@@ -1,0 +1,56 @@
+
+> service-proof-loop@1.0.0 test:live
+> node scripts/verify-live.mjs
+
+{
+  "deployment_topology": {
+    "latest_revision": "sf-service-proof-loop--0000046",
+    "active_revisions": 1,
+    "replicas": 1,
+    "min_replicas": 1,
+    "max_replicas": 1,
+    "image": "sociobotregistry.azurecr.io/sf-service-proof-loop:7887743da39c",
+    "mount_path": "/data",
+    "storage_name": "sf-service-proof-loop-data",
+    "storage_type": "AzureFile"
+  },
+  "health": {
+    "build_sha": "7887743da39c90b49bdcee4ac4fd084b4e123db5",
+    "status": "ok"
+  },
+  "concurrent_demo_workspace_proof": {
+    "demos": 20,
+    "simultaneous_reads_per_demo": 20,
+    "total_reads": 400,
+    "successful_reads": 400,
+    "successful_proofs": 20
+  },
+  "concurrent_plan_statuses": [
+    402,
+    402,
+    402,
+    201,
+    402,
+    201,
+    201,
+    402
+  ],
+  "validation_statuses": {
+    "past_date": 400,
+    "blank_checklist_label": 400
+  },
+  "rate_bursts": {
+    "claim_45": {
+      "requests": 45,
+      "allowed": 28,
+      "limited": 17,
+      "elapsed_ms": 82
+    },
+    "verifier_130": {
+      "requests": 130,
+      "allowed": 28,
+      "limited": 102,
+      "elapsed_ms": 237
+    }
+  }
+}

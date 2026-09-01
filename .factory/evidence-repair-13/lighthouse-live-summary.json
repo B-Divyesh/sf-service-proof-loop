@@ -1,0 +1,13 @@
+{
+  "categories": {
+    "performance": 100,
+    "accessibility": 100,
+    "best-practices": 100,
+    "seo": 100
+  },
+  "audits": {
+    "lcp": "1.2 s",
+    "cls": "0",
+    "totalByteWeight": "Total size was 68 KiB"
+  }
+}
