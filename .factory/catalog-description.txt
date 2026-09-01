@@ -1,0 +1,1 @@
+Send visit proof and add approved extras to the next recurring visit.

@@ -46,8 +46,8 @@ docker run --rm -p 8080:8080 service-proof-loop
 ```
 
 `npm test` starts the built service and runs Chromium at desktop and 390 px.
-The suite covers the demo sandbox, client reply, extra configuration, CSV
-contents, offline messaging, keyboard-ready semantics, and serious axe issues.
+The suite checks offline messages, keyboard navigation, page structure, and
+serious accessibility issues.
 Every product claim and its command is listed in
 [.factory/claims.json](.factory/claims.json).
 
@@ -71,23 +71,20 @@ adds unlimited visits. Checkout and license verification use the Sociobot billin
 API. The server enforces the limit even when its browser controls are bypassed.
 This delivery model is formally recorded in
 [.factory/scope-decision.json](.factory/scope-decision.json). The researched
-monthly-plus-seat model remains unchanged in the opportunity brief; the supplied
-Sociobot paid-unlock contract does not support that billing shape.
+monthly-plus-seat model remains unchanged in the opportunity brief; the current
+Sociobot billing API supports one-time purchases, not monthly per-seat billing.
 
 ## Deployment
 
 The multi-stage [Dockerfile](Dockerfile) builds the Vite frontend and Rust
-service. It runs as a non-root user and serves the API and frontend from one
-container. The factory supplies `BUILD_SHA`; it may deploy with only `PORT`.
+service. The factory supplies `BUILD_SHA`; it may deploy with only `PORT`.
 The checked-in [.factory/deployment.json](.factory/deployment.json) sets
 `data_dir` to `/data`, fixes the service at one replica, and mounts the
-`sf-service-proof-loop-data` Azure Files share there. The configured deployment
-command applies the image, durable mount, single-revision mode, and replica
-ceiling in one update. It then verifies
-the live topology, active writer count, durable storage, and build identity. The
-deploy transaction also creates 20 fresh demos and launches 20 workspace reads
-for each demo at once. All 400 reads and each matching proof must succeed. It
-also verifies the 45- and 130-request rate bursts. Do not raise the replica
+`sf-service-proof-loop-data` Azure Files share there. Run the deployment command
+to apply the image, durable mount, single-revision mode, and replica ceiling.
+Run `npm run test:live` after deployment to check the live topology, writer
+count, durable storage, build identity, 20 fresh demos with 20 reads each,
+matching proofs, and 45- and 130-request rate bursts. Do not raise the replica
 count without moving SQLite and rate-limit state to shared services.
 
 ```sh

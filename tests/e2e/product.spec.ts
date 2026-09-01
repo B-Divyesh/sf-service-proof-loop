@@ -95,6 +95,23 @@ test('proof shows its 14-day expiry date', async ({ page }) => {
   expect(Math.round((expires.getTime() - completed.getTime()) / 86400000)).toBe(14);
 });
 
+test('@claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored', async ({ page, request }) => {
+  await page.goto('/demo');
+  await page.getByRole('link', { name: 'Open client view' }).click();
+  const proofUrl = page.url();
+  const proofHtml = await request.get(proofUrl);
+  expect(proofHtml.headers()['x-robots-tag']).toBe('noindex, nofollow, noarchive');
+  expect(proofHtml.headers()['cache-control']).toBe('private, no-store');
+  const html = await proofHtml.text();
+  expect(html).toContain('<meta name="robots" content="noindex, nofollow, noarchive">');
+  expect(html).not.toContain('rel="canonical"');
+  const token = new URL(proofUrl).pathname.split('/').pop()!;
+  const apiProof = await request.get(`/api/proof/${token}`);
+  expect(apiProof.ok()).toBeTruthy();
+  expect(apiProof.headers()['x-robots-tag']).toBe('noindex, nofollow, noarchive');
+  expect(apiProof.headers()['cache-control']).toBe('private, no-store');
+});
+
 test('@claim:next-visit-export chosen extras reach the next-visit CSV', async ({ page }) => {
   await page.goto('/demo');
   await page.getByRole('link', { name: 'Open client view' }).click();
@@ -123,7 +140,7 @@ test('@claim:configurable-extras a business can add a client extra', async ({ pa
   await page.getByLabel('Extra name').fill('Wipe baseboards');
   await page.getByLabel('Price in dollars').fill('22');
   await page.getByLabel('What the technician will do').fill('Wipe baseboards in the main rooms');
-  await page.getByRole('button', { name: 'Add client choice' }).click();
+  await page.getByRole('button', { name: 'Add extra' }).click();
   await expect(page.getByRole('heading', { name: 'Manage next-visit extras' })).toBeVisible();
   await expect(page.getByText('Wipe baseboards', { exact: true })).toBeVisible();
   expect(extrasReads).toBe(1);
@@ -132,7 +149,7 @@ test('@claim:configurable-extras a business can add a client extra', async ({ pa
   await expect(page.getByText('Wipe baseboards', { exact: true })).toBeVisible();
 });
 
-test('@claim:paid-license checkout registration and license restore use Sociobot billing', async ({ page, request }) => {
+test('@claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page', async ({ page, request }) => {
   await page.route('https://api.sociobot.in/api/v1/products/service-proof-loop/verify?license=*', route => route.fulfill({ json: { valid: true, reason: 'ok', expires_at: null } }));
   await page.goto('/#pricing');
   await expect(page.locator('.price')).toContainText('$59');
@@ -146,8 +163,11 @@ test('@claim:paid-license checkout registration and license restore use Sociobot
   expect(checkout.status()).toBe(303);
   expect(checkout.headers().location).toMatch(/^https:\/\/checkout\.dodopayments\.com\//);
   await page.goto('/privacy');
-  await expect(page.getByText('Sociobot hosts checkout. Dodo handles payment card details on that checkout page.')).toBeVisible();
+  await expect(page.getByText('Sociobot billing starts checkout. Dodo hosts the payment page and handles payment card details.')).toBeVisible();
   expect(await page.locator('input').evaluateAll(inputs => inputs.every(input => !['cc-number', 'cc-csc', 'cc-exp'].includes(input.autocomplete)))).toBeTruthy();
+  await page.goto('/terms');
+  await expect(page.getByText('Sociobot billing starts checkout. Dodo hosts the payment page.')).toBeVisible();
+  await expect(page.getByText('See the Dodo payment page for purchase terms.')).toBeVisible();
   await page.goto('/#pricing');
   await page.getByLabel('Have a license?').fill('sample-license-token');
   await page.getByRole('button', { name: 'Verify license' }).click();
@@ -313,6 +333,28 @@ test('valid deep links return 200 and the real 404 includes social metadata', as
   expect(html).toContain('<meta property="og:title" content="Page not found — Service Proof Loop">');
   expect(html).toContain('<meta name="twitter:card" content="summary_large_image">');
   expect(html).toContain('https://service-proof-loop.sociobot.in/assets/social.jpg');
+});
+
+test('each route has matching server and rendered social metadata', async ({ page, request }) => {
+  const routes = [
+    ['/demo', 'Demo — Service Proof Loop', 'Try a complete proof-to-next-visit loop with isolated sample data.'],
+    ['/app', 'Start — Service Proof Loop', 'Create a local business workspace for completed visits.'],
+    ['/privacy', 'Privacy — Service Proof Loop', 'How Service Proof Loop handles visit proof and client replies.'],
+    ['/terms', 'Terms — Service Proof Loop', 'Terms for using Service Proof Loop.'],
+  ] as const;
+  for (const [path, title, description] of routes) {
+    const response = await request.get(path);
+    const html = await response.text();
+    expect(html).toContain(`<title>${title}</title>`);
+    expect(html).toContain(`<meta property="og:title" content="${title}">`);
+    expect(html).toContain(`<meta name="twitter:title" content="${title}">`);
+    expect(html).toContain(`<meta property="og:description" content="${description}">`);
+    expect(html).toContain(`<meta property="og:url" content="https://service-proof-loop.sociobot.in${path}">`);
+    await page.goto(path);
+    await expect(page).toHaveTitle(title);
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', title);
+    await expect(page.locator('meta[name="twitter:description"]')).toHaveAttribute('content', description);
+  }
 });
 
 test('security response policy and primary flows have no console errors', async ({ page, request }) => {

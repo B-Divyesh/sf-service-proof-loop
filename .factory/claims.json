@@ -39,14 +39,14 @@
     "claim": "Businesses choose which extras appear on client proof pages",
     "where": "workspace and README",
     "test": "npm test -- --grep @claim:configurable-extras",
-    "sandbox": "add an extra in the demo workspace; open its proof page and assert that choice appears"
+    "sandbox": "add an extra in the demo workspace; open its proof page and assert that extra appears"
   },
   {
     "id": "paid-license",
-    "claim": "The $59 one-time business license uses Sociobot-hosted checkout and supports license restore",
+    "claim": "The $59 license starts at Sociobot billing, opens Dodo's payment page, and supports license restore",
     "where": "landing price section, privacy, terms, and README",
     "test": "npm test -- --grep @claim:paid-license",
-    "sandbox": "fresh landing page; assert the live public Sociobot registry has this $59 product; mock a valid verify response and restore a license"
+    "sandbox": "fresh landing page; assert the live public Sociobot registry has this $59 product and redirects to Dodo; mock a valid verify response and restore a license"
   },
   {
     "id": "rate-limit",
@@ -110,5 +110,19 @@
     "where": "README run and deployment sections",
     "test": "npm run test:runtime",
     "sandbox": "build the frontend and service; start the server binary with an empty environment; assert health and the landing document are served on 127.0.0.1:8080"
+  },
+  {
+    "id": "proof-page-privacy",
+    "claim": "Private proof pages and proof API responses cannot be indexed or stored",
+    "where": "private proof page and privacy policy",
+    "test": "npm test -- --grep @claim:proof-page-privacy",
+    "sandbox": "fresh demo; open its proof URL and assert proof HTML and API responses send noindex and private no-store controls without a canonical URL"
+  },
+  {
+    "id": "deployment-continuity",
+    "claim": "Deployment verification checks one active writer, durable storage, state continuity, and rate limits",
+    "where": "README deployment instructions",
+    "test": "npm run test:live",
+    "sandbox": "deployed product; verify one active revision and replica, /data storage, 20 demo workspaces with 20 concurrent reads each, proof continuity, free-plan concurrency, and 45/130-request rate bursts"
   }
 ]

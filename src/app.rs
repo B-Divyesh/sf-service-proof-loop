@@ -1,10 +1,10 @@
 use axum::{
     body::Body,
-    extract::{DefaultBodyLimit, Path, Request, State},
+    extract::{DefaultBodyLimit, OriginalUri, Path, Request, State},
     http::{header, HeaderMap, HeaderValue, StatusCode},
     middleware::{self, Next},
     response::{IntoResponse, Response},
-    routing::{get, get_service, post},
+    routing::{get, post},
     Json, Router,
 };
 use base64::{engine::general_purpose::URL_SAFE_NO_PAD, Engine};
@@ -26,6 +26,7 @@ pub struct AppState {
     pool: SqlitePool,
     build_sha: String,
     billing_base_url: String,
+    static_dir: PathBuf,
     http: reqwest::Client,
 }
 
@@ -73,6 +74,7 @@ pub fn build_app(pool: SqlitePool, config: AppConfig) -> Router {
         pool,
         build_sha: config.build_sha,
         billing_base_url: config.billing_base_url,
+        static_dir: config.static_dir.clone(),
         http: reqwest::Client::builder()
             .timeout(StdDuration::from_secs(5))
             .build()
@@ -109,18 +111,17 @@ pub fn build_app(pool: SqlitePool, config: AppConfig) -> Router {
                 error.into()
             }
         }));
-    let index = ServeFile::new(config.static_dir.join("index.html"));
     let fallback = ServeDir::new(&config.static_dir)
         .not_found_service(ServeFile::new(config.static_dir.join("404.html")));
     Router::new()
         .route("/health", get(health))
         .nest("/api", api)
-        .route("/", get_service(index.clone()))
-        .route("/demo", get_service(index.clone()))
-        .route("/app", get_service(index.clone()))
-        .route("/privacy", get_service(index.clone()))
-        .route("/terms", get_service(index.clone()))
-        .route("/proof/{token}", get_service(index))
+        .route("/", get(app_page))
+        .route("/demo", get(app_page))
+        .route("/app", get(app_page))
+        .route("/privacy", get(app_page))
+        .route("/terms", get(app_page))
+        .route("/proof/{token}", get(app_page))
         .fallback_service(fallback)
         .layer(middleware::from_fn(security_headers))
         .with_state(state)
@@ -148,7 +149,16 @@ async fn security_headers(req: Request, next: Next) -> Response {
         HeaderValue::from_static("camera=(), microphone=(), geolocation=()"),
     );
     headers.insert("content-security-policy", HeaderValue::from_static("default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'"));
-    if path.starts_with("/assets/") && (path.ends_with(".js") || path.ends_with(".css")) {
+    if path.starts_with("/proof/") || path.starts_with("/api/proof/") {
+        headers.insert(
+            "x-robots-tag",
+            HeaderValue::from_static("noindex, nofollow, noarchive"),
+        );
+        headers.insert(
+            header::CACHE_CONTROL,
+            HeaderValue::from_static("private, no-store"),
+        );
+    } else if path.starts_with("/assets/") && (path.ends_with(".js") || path.ends_with(".css")) {
         headers.insert(
             header::CACHE_CONTROL,
             HeaderValue::from_static("public, max-age=31536000, immutable"),
@@ -160,6 +170,70 @@ async fn security_headers(req: Request, next: Next) -> Response {
         );
     }
     response
+}
+
+async fn app_page(State(state): State<AppState>, OriginalUri(uri): OriginalUri) -> Response {
+    let path = uri.path();
+    let (title, description) = match path {
+        "/" => (
+            "Service Proof Loop — Send proof after each visit",
+            "Send visit proof, collect client feedback, and carry approved extras into the next recurring visit.",
+        ),
+        "/demo" => (
+            "Demo — Service Proof Loop",
+            "Try a complete proof-to-next-visit loop with isolated sample data.",
+        ),
+        "/app" => (
+            "Start — Service Proof Loop",
+            "Create a local business workspace for completed visits.",
+        ),
+        "/privacy" => (
+            "Privacy — Service Proof Loop",
+            "How Service Proof Loop handles visit proof and client replies.",
+        ),
+        "/terms" => ("Terms — Service Proof Loop", "Terms for using Service Proof Loop."),
+        _ if path.starts_with("/proof/") => (
+            "Visit proof — Service Proof Loop",
+            "Review completed work and choose any extras for the next visit.",
+        ),
+        _ => ("Service Proof Loop", "Send visit proof and plan the next visit."),
+    };
+    let Ok(mut html) = tokio::fs::read_to_string(state.static_dir.join("index.html")).await else {
+        return StatusCode::INTERNAL_SERVER_ERROR.into_response();
+    };
+    html = html.replace("Service Proof Loop — Send proof after each visit", title);
+    html = html.replace(
+        "Send visit proof, collect client feedback, and carry approved extras into the next recurring visit.",
+        description,
+    );
+    html = html.replace(
+        "Send visit proof and carry approved extras into the next recurring visit.",
+        description,
+    );
+    let canonical = format!("https://service-proof-loop.sociobot.in{path}");
+    if path.starts_with("/proof/") {
+        html = html.replace(
+            "    <link rel=\"canonical\" href=\"https://service-proof-loop.sociobot.in/\">\n",
+            "    <meta name=\"robots\" content=\"noindex, nofollow, noarchive\">\n",
+        );
+    } else {
+        html = html.replace(
+            "https://service-proof-loop.sociobot.in/\"",
+            &format!("{canonical}\""),
+        );
+        html = html.replace(
+            "<meta property=\"og:url\" content=\"https://service-proof-loop.sociobot.in/\">",
+            &format!("<meta property=\"og:url\" content=\"{canonical}\">"),
+        );
+    }
+    (
+        [(
+            header::CONTENT_TYPE,
+            HeaderValue::from_static("text/html; charset=utf-8"),
+        )],
+        html,
+    )
+        .into_response()
 }
 
 #[derive(Clone)]

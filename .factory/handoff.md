@@ -1,5 +1,14 @@
 # Service Proof Loop — review 1 handoff
 
+## Formal commercial scope decision
+
+The researched opportunity remains **$59 per business each month plus
+technician seats**. The accepted delivery scope is a **$59 one-time business
+license for one workspace**, as recorded in
+[.factory/scope-decision.json](scope-decision.json). This variance is accepted
+by the service-proof-loop-repair-10 work order because the current Sociobot
+billing API supports one-time purchases, not monthly per-seat billing.
+
 ## Result
 
 **FAIL.** Review 1 found 15 items: 2 blocking and 13 minor. No product code,
