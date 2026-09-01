@@ -1,0 +1,9 @@
+   Compiling service-proof-loop v1.0.0 (/work/repo)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.56s
+     Running tests/api.rs (target/debug/deps/api-6fcbe729112709c1)
+
+running 1 test
+test claim_one_valid_license_applies_to_only_one_business_workspace ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 12 filtered out; finished in 0.05s
+

@@ -1,0 +1,494 @@
+
+> service-proof-loop@1.0.0 test
+> npm run typecheck && npm run test:deployment && npm run test:runtime && playwright test
+
+
+> service-proof-loop@1.0.0 typecheck
+> tsc --noEmit -p frontend/tsconfig.json
+
+
+> service-proof-loop@1.0.0 test:deployment
+> node --test tests/deployment-topology.test.mjs tests/state-continuity.test.mjs tests/rate-limit.test.mjs tests/plan-limit.test.mjs tests/release-docs.test.mjs
+
+TAP version 13
+# Subtest: accepts the checked-in durable single-writer topology
+ok 1 - accepts the checked-in durable single-writer topology
+  ---
+  duration_ms: 3.764742
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-replica ephemeral SQLite topology
+ok 2 - rejects verifier 9's exact three-replica ephemeral SQLite topology
+  ---
+  duration_ms: 0.702908
+  type: 'test'
+  ...
+# Subtest: rejects verifier 10's exact candidate topology before any functional probe
+ok 3 - rejects verifier 10's exact candidate topology before any functional probe
+  ---
+  duration_ms: 0.387704
+  type: 'test'
+  ...
+# Subtest: rejects verifier 11's exact candidate image with three ephemeral writers
+ok 4 - rejects verifier 11's exact candidate image with three ephemeral writers
+  ---
+  duration_ms: 0.300603
+  type: 'test'
+  ...
+# Subtest: rejects verifier 12's exact candidate image with three ephemeral writers
+ok 5 - rejects verifier 12's exact candidate image with three ephemeral writers
+  ---
+  duration_ms: 0.408005
+  type: 'test'
+  ...
+# Subtest: rejects ephemeral storage even if the replica ceiling is repaired
+ok 6 - rejects ephemeral storage even if the replica ceiling is repaired
+  ---
+  duration_ms: 0.312903
+  type: 'test'
+  ...
+# Subtest: rejects a second active revision even when the template ceiling is one
+ok 7 - rejects a second active revision even when the template ceiling is one
+  ---
+  duration_ms: 0.422004
+  type: 'test'
+  ...
+# Subtest: accepts exactly three created and five payment-required writes
+ok 8 - accepts exactly three created and five payment-required writes
+  ---
+  duration_ms: 1.935921
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact three-created and five-unauthorized split-state result
+ok 9 - rejects verifier 9's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 0.393904
+  type: 'test'
+  ...
+# Subtest: rejects verifier 10's exact concurrent write statuses
+ok 10 - rejects verifier 10's exact concurrent write statuses
+  ---
+  duration_ms: 0.224402
+  type: 'test'
+  ...
+# Subtest: rejects verifier 11's exact two-created and six-unauthorized split-state result
+ok 11 - rejects verifier 11's exact two-created and six-unauthorized split-state result
+  ---
+  duration_ms: 0.157302
+  type: 'test'
+  ...
+# Subtest: rejects verifier 12's exact three-created and five-unauthorized split-state result
+ok 12 - rejects verifier 12's exact three-created and five-unauthorized split-state result
+  ---
+  duration_ms: 1.064811
+  type: 'test'
+  ...
+# Subtest: accepts one 40-request allowance for the 45-request claim probe
+ok 13 - accepts one 40-request allowance for the 45-request claim probe
+  ---
+  duration_ms: 3.002533
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's 45-of-45 unbounded request result
+ok 14 - rejects verifier 9's 45-of-45 unbounded request result
+  ---
+  duration_ms: 0.681408
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's tripled 120-request allowance
+ok 15 - rejects verifier 9's tripled 120-request allowance
+  ---
+  duration_ms: 0.313004
+  type: 'test'
+  ...
+# Subtest: rejects verifier 10's exact 45 and 130 request bursts
+ok 16 - rejects verifier 10's exact 45 and 130 request bursts
+  ---
+  duration_ms: 0.384604
+  type: 'test'
+  ...
+# Subtest: rejects verifier 11's exact tripled live allowance after the same bursts
+ok 17 - rejects verifier 11's exact tripled live allowance after the same bursts
+  ---
+  duration_ms: 0.368704
+  type: 'test'
+  ...
+# Subtest: rejects verifier 12's exact tripled live allowance after the same bursts
+ok 18 - rejects verifier 12's exact tripled live allowance after the same bursts
+  ---
+  duration_ms: 0.340804
+  type: 'test'
+  ...
+# Subtest: requires Retry-After: 1 on every limited response
+ok 19 - requires Retry-After: 1 on every limited response
+  ---
+  duration_ms: 0.308603
+  type: 'test'
+  ...
+# Subtest: commercial variance is explicitly accepted without rewriting the researched brief
+ok 20 - commercial variance is explicitly accepted without rewriting the researched brief
+  ---
+  duration_ms: 1.440516
+  type: 'test'
+  ...
+# Subtest: paid copy states one workspace and makes no unlimited claim
+ok 21 - paid copy states one workspace and makes no unlimited claim
+  ---
+  duration_ms: 1.937821
+  type: 'test'
+  ...
+# Subtest: accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+ok 22 - accepts the exact 20-demo, 400-read verifier scenario when state is coherent
+  ---
+  duration_ms: 2.413127
+  type: 'test'
+  ...
+# Subtest: rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+ok 23 - rejects verifier 9's exact 138-of-400 reads and 1-of-20 proofs
+  ---
+  duration_ms: 0.834109
+  type: 'test'
+  ...
+# Subtest: rejects verifier 10's exact 196-of-400 reads and 6-of-20 proofs
+ok 24 - rejects verifier 10's exact 196-of-400 reads and 6-of-20 proofs
+  ---
+  duration_ms: 0.571607
+  type: 'test'
+  ...
+# Subtest: rejects verifier 11's exact 140-of-400 reads and zero matching proofs
+ok 25 - rejects verifier 11's exact 140-of-400 reads and zero matching proofs
+  ---
+  duration_ms: 1.356615
+  type: 'test'
+  ...
+# Subtest: rejects verifier 12's exact 136-of-400 reads and 6-of-20 proofs
+ok 26 - rejects verifier 12's exact 136-of-400 reads and 6-of-20 proofs
+  ---
+  duration_ms: 0.504305
+  type: 'test'
+  ...
+# Subtest: live continuity probe launches all 400 authenticated reads concurrently
+ok 27 - live continuity probe launches all 400 authenticated reads concurrently
+  ---
+  duration_ms: 6.157267
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 276.834446
+
+> service-proof-loop@1.0.0 test:runtime
+> npm run build && cargo build --release --bin service-proof-loop && node --test tests/runtime-default.test.mjs
+
+
+> service-proof-loop@1.0.0 build
+> vite build --config frontend/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/404.html                   1.46 kB │ gzip:  0.52 kB
+../dist/index.html                 1.73 kB │ gzip:  0.59 kB
+../dist/assets/main-CgVTc3e8.css  15.44 kB │ gzip:  4.41 kB
+../dist/assets/main-CgzD5Wfy.js   33.51 kB │ gzip: 10.53 kB
+✓ built in 187ms
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.24
+   Compiling libc v0.2.189
+   Compiling syn v3.0.4
+   Compiling syn v2.0.119
+   Compiling cfg-if v1.0.4
+   Compiling synstructure v0.13.2
+   Compiling parking_lot_core v0.9.12
+   Compiling zerovec-derive v0.11.6
+   Compiling zerofrom-derive v0.1.7
+   Compiling yoke-derive v0.8.2
+   Compiling displaydoc v0.2.7
+   Compiling smallvec v1.15.2
+   Compiling find-msvc-tools v0.1.11
+   Compiling shlex v2.0.1
+   Compiling scopeguard v1.2.0
+   Compiling pin-project-lite v0.2.17
+   Compiling cc v1.4.4
+   Compiling lock_api v0.4.14
+   Compiling version_check v0.9.5
+   Compiling futures-core v0.3.34
+   Compiling once_cell v1.21.4
+   Compiling bytes v1.12.1
+   Compiling tracing-attributes v0.1.31
+   Compiling itoa v1.0.18
+   Compiling serde v1.0.229
+   Compiling icu_properties_data v2.3.0
+   Compiling futures-sink v0.3.34
+   Compiling icu_normalizer_data v2.3.0
+   Compiling parking_lot v0.12.5
+   Compiling ring v0.17.14
+   Compiling serde_derive v1.0.229
+   Compiling tracing-core v0.1.36
+   Compiling generic-array v0.14.7
+   Compiling errno v0.3.14
+   Compiling equivalent v1.0.2
+   Compiling signal-hook-registry v1.4.8
+   Compiling zerofrom v0.1.8
+   Compiling tokio-macros v2.7.2
+   Compiling mio v1.2.2
+   Compiling socket2 v0.6.5
+   Compiling stable_deref_trait v1.2.1
+   Compiling serde_core v1.0.229
+   Compiling log v0.4.34
+   Compiling zmij v1.0.23
+   Compiling memchr v2.8.3
+   Compiling slab v0.4.12
+   Compiling yoke v0.8.3
+   Compiling tokio v1.53.1
+   Compiling tracing v0.1.44
+   Compiling serde_json v1.0.151
+   Compiling futures-task v0.3.34
+   Compiling autocfg v1.5.1
+   Compiling futures-io v0.3.34
+   Compiling futures-util v0.3.34
+   Compiling num-traits v0.2.19
+   Compiling zerovec v0.11.8
+   Compiling hashbrown v0.17.1
+   Compiling indexmap v2.14.0
+   Compiling http v1.5.0
+   Compiling percent-encoding v2.3.2
+   Compiling rustls v0.23.43
+   Compiling tinystr v0.8.4
+   Compiling getrandom v0.2.17
+   Compiling thiserror v2.0.20
+   Compiling writeable v0.6.4
+   Compiling litemap v0.8.3
+   Compiling icu_locale_core v2.3.0
+   Compiling http-body v1.1.0
+   Compiling potential_utf v0.1.6
+   Compiling tokio-util v0.7.19
+   Compiling zerotrie v0.2.5
+   Compiling utf8_iter v1.0.4
+   Compiling httparse v1.10.1
+   Compiling zeroize v1.9.0
+   Compiling icu_collections v2.3.0
+   Compiling rustls-pki-types v1.15.1
+   Compiling icu_provider v2.3.1
+   Compiling form_urlencoded v1.2.2
+   Compiling futures-channel v0.3.34
+   Compiling thiserror-impl v2.0.20
+   Compiling base64 v0.22.1
+   Compiling pkg-config v0.3.34
+   Compiling crossbeam-utils v0.8.22
+   Compiling typenum v1.20.1
+   Compiling vcpkg v0.2.15
+   Compiling tower-service v0.3.3
+   Compiling libsqlite3-sys v0.30.1
+   Compiling try-lock v0.2.5
+   Compiling zerocopy v0.8.56
+   Compiling untrusted v0.9.0
+   Compiling atomic-waker v1.1.2
+   Compiling fnv v1.0.7
+   Compiling httpdate v1.0.3
+   Compiling h2 v0.4.19
+   Compiling want v0.3.1
+   Compiling icu_normalizer v2.3.0
+   Compiling icu_properties v2.3.0
+   Compiling allocator-api2 v0.2.21
+   Compiling mime v0.3.17
+   Compiling idna_adapter v1.2.2
+   Compiling hyper v1.11.1
+   Compiling rustls-webpki v0.103.15
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling sync_wrapper v1.0.2
+   Compiling spin v0.9.9
+   Compiling ipnet v2.12.1
+   Compiling ryu v1.0.23
+   Compiling subtle v2.6.1
+   Compiling foldhash v0.1.5
+   Compiling tower-layer v0.3.3
+   Compiling getrandom v0.3.4
+   Compiling hashbrown v0.15.5
+   Compiling serde_urlencoded v0.7.1
+   Compiling hyper-util v0.1.20
+   Compiling digest v0.10.7
+   Compiling ppv-lite86 v0.2.21
+   Compiling idna v1.1.0
+   Compiling webpki-roots v1.0.9
+   Compiling http-body-util v0.1.5
+   Compiling parking v2.2.1
+   Compiling crc-catalog v2.5.0
+   Compiling iana-time-zone v0.1.65
+   Compiling cpufeatures v0.2.17
+   Compiling bitflags v2.13.1
+   Compiling sha2 v0.10.9
+   Compiling chrono v0.4.45
+   Compiling crc v3.4.0
+   Compiling event-listener v5.4.2
+   Compiling webpki-roots v0.26.11
+   Compiling crossbeam-queue v0.3.13
+   Compiling futures-intrusive v0.5.0
+   Compiling url v2.5.8
+   Compiling tokio-stream v0.1.19
+   Compiling hashlink v0.10.0
+   Compiling tower v0.5.3
+   Compiling either v1.18.0
+   Compiling multer v3.1.0
+   Compiling unicase v2.9.0
+   Compiling sqlx-core v0.8.6
+   Compiling mime_guess v2.0.5
+   Compiling flume v0.11.1
+   Compiling rand_core v0.9.5
+   Compiling futures-executor v0.3.34
+   Compiling atoi v2.0.0
+   Compiling encoding_rs v0.8.35
+   Compiling portable-atomic v1.15.0
+   Compiling thiserror v1.0.69
+   Compiling sqlx-sqlite v0.8.6
+   Compiling rand_chacha v0.9.0
+   Compiling raw-cpuid v11.6.0
+   Compiling axum-core v0.5.6
+   Compiling serde_path_to_error v0.1.20
+   Compiling thiserror-impl v1.0.69
+   Compiling pin-project-internal v1.1.13
+   Compiling getrandom v0.4.3
+   Compiling regex-syntax v0.8.11
+   Compiling dotenvy v0.15.7
+   Compiling foldhash v0.2.0
+   Compiling hex v0.4.3
+   Compiling matchit v0.8.4
+   Compiling heck v0.5.0
+   Compiling hashbrown v0.14.5
+   Compiling dashmap v6.2.1
+   Compiling sqlx-macros-core v0.8.6
+   Compiling axum v0.8.9
+   Compiling hashbrown v0.16.1
+   Compiling regex-automata v0.4.18
+   Compiling pin-project v1.1.13
+   Compiling quanta v0.12.6
+   Compiling rand v0.9.5
+   Compiling hyper-timeout v0.5.2
+   Compiling tokio-rustls v0.26.4
+   Compiling rand_core v0.6.4
+   Compiling spinning_top v0.3.0
+   Compiling async-trait v0.1.92
+   Compiling futures-timer v3.0.4
+   Compiling web-time v1.1.0
+   Compiling http-range-header v0.4.2
+   Compiling nonzero_ext v0.3.0
+   Compiling nonempty v0.7.0
+   Compiling lazy_static v1.5.0
+   Compiling sharded-slab v0.1.7
+   Compiling forwarded-header-value v0.1.1
+   Compiling governor v0.10.4
+   Compiling tower-http v0.6.11
+   Compiling tonic v0.14.6
+   Compiling rand_chacha v0.3.1
+   Compiling hyper-rustls v0.27.9
+   Compiling matchers v0.2.0
+   Compiling sqlx-macros v0.8.6
+   Compiling tracing-serde v0.2.0
+   Compiling tracing-log v0.2.0
+   Compiling thread_local v1.1.10
+   Compiling service-proof-loop v1.0.0 (/work/repo)
+   Compiling nu-ansi-term v0.50.3
+   Compiling tracing-subscriber v0.3.23
+   Compiling sqlx v0.8.6
+   Compiling uuid v1.26.0
+   Compiling reqwest v0.12.28
+   Compiling rand v0.8.8
+   Compiling tower_governor v0.8.0
+    Finished `release` profile [optimized] target(s) in 2m 59s
+TAP version 13
+# Subtest: @claim:zero-config-runtime starts with an empty environment on port 8080
+ok 1 - @claim:zero-config-runtime starts with an empty environment on port 8080
+  ---
+  duration_ms: 174.669563
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 305.937713
+[WebServer] (node:13100) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]    Compiling bitflags v2.13.1
+[WebServer]    Compiling raw-cpuid v11.6.0
+[WebServer]    Compiling tower-http v0.6.11
+[WebServer]    Compiling reqwest v0.12.28
+[WebServer]    Compiling quanta v0.12.6
+[WebServer]    Compiling governor v0.10.4
+[WebServer]    Compiling tower_governor v0.8.0
+[WebServer]    Compiling service-proof-loop v1.0.0 (/work/repo)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 10.91s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 46 tests using 2 workers
+
+(node:13729) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13735) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13729) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13735) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/e2e/product.spec.ts:11:1 › landing explains the job and reaches the demo (1.7s)
+  ✓   2 [mobile-chromium] › tests/e2e/product.spec.ts:11:1 › landing explains the job and reaches the demo (1.9s)
+  ✓   3 [chromium] › tests/e2e/product.spec.ts:20:1 › mobile navigation and footer links have 44px touch targets (420ms)
+  ✓   4 [mobile-chromium] › tests/e2e/product.spec.ts:20:1 › mobile navigation and footer links have 44px touch targets (724ms)
+  ✓   5 [chromium] › tests/e2e/product.spec.ts:37:1 › mobile inline links have 44px touch targets (1.4s)
+  ✓   6 [mobile-chromium] › tests/e2e/product.spec.ts:37:1 › mobile inline links have 44px touch targets (1.7s)
+  ✓   7 [chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (775ms)
+  ✓   9 [chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.0s)
+  ✓   8 [mobile-chromium] › tests/e2e/product.spec.ts:62:1 › @claim:demo-sandbox demo reset creates a fresh isolated workspace (1.5s)
+  ✓  10 [chromium] › tests/e2e/product.spec.ts:87:1 › proof shows its 14-day expiry date (671ms)
+  ✓  12 [chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (873ms)
+  ✓  11 [mobile-chromium] › tests/e2e/product.spec.ts:75:1 › @claim:no-account clients open proof without an account (1.7s)
+  ✓  14 [mobile-chromium] › tests/e2e/product.spec.ts:87:1 › proof shows its 14-day expiry date (899ms)
+  ✓  13 [chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.4s)
+  ✓  15 [mobile-chromium] › tests/e2e/product.spec.ts:98:1 › @claim:proof-page-privacy private proof HTML and API responses cannot be indexed or stored (994ms)
+  ✓  17 [mobile-chromium] › tests/e2e/product.spec.ts:115:1 › @claim:next-visit-export chosen extras reach the next-visit CSV (1.5s)
+  ✓  18 [mobile-chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (1.2s)
+  ✓  16 [chromium] › tests/e2e/product.spec.ts:132:1 › @claim:configurable-extras a business can add a client extra (3.7s)
+  ✓  20 [chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (11.3s)
+  ✓  19 [mobile-chromium] › tests/e2e/product.spec.ts:152:1 › @claim:paid-license Sociobot billing starts the $59 checkout and Dodo hosts the payment page (12.3s)
+  ✓  21 [chromium] › tests/e2e/product.spec.ts:226:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (1.2s)
+  ✓  23 [chromium] › tests/e2e/product.spec.ts:245:1 › @claim:rate-limit API traffic is limited per forwarded client (222ms)
+  ✓  24 [chromium] › tests/e2e/product.spec.ts:252:1 › technician can record a visit and receive a proof link (584ms)
+  ✓  22 [mobile-chromium] › tests/e2e/product.spec.ts:226:1 › @claim:privacy-data-flow visit data, replies, and extras follow the stated product path (1.9s)
+  ✓  26 [mobile-chromium] › tests/e2e/product.spec.ts:245:1 › @claim:rate-limit API traffic is limited per forwarded client (209ms)
+  ✓  25 [chromium] › tests/e2e/product.spec.ts:260:1 › @claim:photo-upload a technician can add a consented photo to proof (1.8s)
+  ✓  27 [mobile-chromium] › tests/e2e/product.spec.ts:252:1 › technician can record a visit and receive a proof link (1.0s)
+  ✓  28 [chromium] › tests/e2e/product.spec.ts:288:1 › @claim:problem-rating a client problem and rating return to the workspace (1.2s)
+  ✓  30 [chromium] › tests/e2e/product.spec.ts:302:1 › @claim:same-origin-demo demo sends data only to this service (498ms)
+  ✓  29 [mobile-chromium] › tests/e2e/product.spec.ts:260:1 › @claim:photo-upload a technician can add a consented photo to proof (2.1s)
+  ✓  32 [mobile-chromium] › tests/e2e/product.spec.ts:288:1 › @claim:problem-rating a client problem and rating return to the workspace (1.6s)
+  ✓  33 [mobile-chromium] › tests/e2e/product.spec.ts:302:1 › @claim:same-origin-demo demo sends data only to this service (541ms)
+  ✓  31 [chromium] › tests/e2e/product.spec.ts:310:1 › @a11y landing and client proof have no serious axe findings (2.8s)
+  ✓  35 [chromium] › tests/e2e/product.spec.ts:320:1 › @a11y dark treatment, keyboard focus, touch targets, and 200% text reflow (2.9s)
+  ✓  34 [mobile-chromium] › tests/e2e/product.spec.ts:310:1 › @a11y landing and client proof have no serious axe findings (3.3s)
+  ✓  36 [chromium] › tests/e2e/product.spec.ts:366:1 › @claim:no-tracking landing and demo load no third-party resources (643ms)
+  ✓  38 [chromium] › tests/e2e/product.spec.ts:375:1 › valid deep links return 200 and the real 404 includes social metadata (101ms)
+  ✓  39 [chromium] › tests/e2e/product.spec.ts:387:1 › each route has matching server and rendered social metadata (919ms)
+  ✓  40 [chromium] › tests/e2e/product.spec.ts:409:1 › security response policy and primary flows have no console errors (749ms)
+  ✓  41 [chromium] › tests/e2e/product.spec.ts:425:1 › offline state and unknown route give a clear next step (703ms)
+  ✓  37 [mobile-chromium] › tests/e2e/product.spec.ts:320:1 › @a11y dark treatment, keyboard focus, touch targets, and 200% text reflow (3.0s)
+  ✓  42 [mobile-chromium] › tests/e2e/product.spec.ts:366:1 › @claim:no-tracking landing and demo load no third-party resources (506ms)
+  ✓  43 [mobile-chromium] › tests/e2e/product.spec.ts:375:1 › valid deep links return 200 and the real 404 includes social metadata (81ms)
+  ✓  44 [mobile-chromium] › tests/e2e/product.spec.ts:387:1 › each route has matching server and rendered social metadata (526ms)
+  ✓  45 [mobile-chromium] › tests/e2e/product.spec.ts:409:1 › security response policy and primary flows have no console errors (509ms)
+  ✓  46 [mobile-chromium] › tests/e2e/product.spec.ts:425:1 › offline state and unknown route give a clear next step (390ms)
+
+  46 passed (55.6s)

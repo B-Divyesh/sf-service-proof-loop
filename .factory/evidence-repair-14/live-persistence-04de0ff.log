@@ -1,0 +1,28 @@
+
+> service-proof-loop@1.0.0 test:live:persistence
+> node scripts/verify-live-persistence.mjs
+
+{
+  "build_sha": "04de0ff89b383c8d581b106e5803a7a7f9b1fe8b",
+  "revision": "sf-service-proof-loop--0000048",
+  "replicas_before": [
+    "sf-service-proof-loop--0000048-56b5755978-zsjf2"
+  ],
+  "replicas_after": [
+    "sf-service-proof-loop--0000048-679bbc9857-5gpq8"
+  ],
+  "topology_after": {
+    "latest_revision": "sf-service-proof-loop--0000048",
+    "active_revisions": 1,
+    "replicas": 1,
+    "min_replicas": 1,
+    "max_replicas": 1,
+    "image": "sociobotregistry.azurecr.io/sf-service-proof-loop:04de0ff89b38",
+    "mount_path": "/data",
+    "storage_name": "sf-service-proof-loop-data",
+    "storage_type": "AzureFile"
+  },
+  "persisted_workspace": true,
+  "persisted_visit": "489c0bbd-75a8-4351-a7ca-10c0ab792637",
+  "persisted_proof": true
+}

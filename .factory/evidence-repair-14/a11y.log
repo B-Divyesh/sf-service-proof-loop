@@ -1,0 +1,25 @@
+
+> service-proof-loop@1.0.0 test:a11y
+> playwright test --grep @a11y
+
+[WebServer] (node:20043) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.32s
+[WebServer]      Running `target/debug/service-proof-loop`
+
+Running 4 tests using 2 workers
+
+(node:20070) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20071) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20070) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20071) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/e2e/product.spec.ts:311:1 › @a11y landing and client proof have no serious axe findings (3.6s)
+  ✓  2 [mobile-chromium] › tests/e2e/product.spec.ts:311:1 › @a11y landing and client proof have no serious axe findings (3.7s)
+  ✓  3 [chromium] › tests/e2e/product.spec.ts:321:1 › @a11y dark treatment, keyboard focus, touch targets, and 200% text reflow (3.0s)
+  ✓  4 [mobile-chromium] › tests/e2e/product.spec.ts:321:1 › @a11y dark treatment, keyboard focus, touch targets, and 200% text reflow (3.0s)
+
+  4 passed (10.9s)
