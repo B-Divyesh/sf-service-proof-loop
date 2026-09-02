@@ -84,10 +84,9 @@ The checked-in [.factory/deployment.json](.factory/deployment.json) sets
 `data_dir` to `/data`, fixes the service at one replica, and mounts the
 `sf-service-proof-loop-data` Azure Files share there. Run the deployment command
 to apply the image, durable mount, single-revision mode, and replica ceiling.
-Run `npm run test:live` after deployment to check the live topology, writer
-count, durable storage, build identity, 20 fresh demos with 20 reads each,
-matching proofs, and 45- and 130-request rate bursts. Do not raise the replica
-count without moving SQLite and rate-limit state to shared services.
+Run `npm run test:live` after deployment. It checks topology, durable storage,
+build identity, demo reads, matching proofs, and rate limits. Do not raise the
+replica count without moving SQLite and rate-limit state to shared services.
 
 ```sh
 ./scripts/deploy-container.sh

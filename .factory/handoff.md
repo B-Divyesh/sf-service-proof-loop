@@ -1,38 +1,33 @@
-# Service Proof Loop — review 2 handoff
+# Service Proof Loop — polish 2 handoff
+
+## Formal commercial scope decision
+
+The accepted commercial decision is recorded in
+[.factory/scope-decision.json](.factory/scope-decision.json). Research keeps
+the opportunity at **$59 per business each month plus technician seats**. This
+container delivers a **$59 one-time business license for one workspace**.
+The variance is accepted because the required Sociobot paid-unlock contract
+supports a one-time license, not recurring technician-seat billing. The brief
+remains unchanged for a future subscription-capable billing work order.
 
 ## Result
 
-**FAIL** at reviewed source `0beb24927af62656b665105b99669539a21741ff` on
-2026-09-02 UTC. No product code was changed.
+Polish 2 repairs F-2-1 and F-2-2 from `.factory/review-2.md`. The evidence,
+live build SHA, and deployment result are recorded in `.factory/polish-2.md`.
 
-## What was done
-
-- Reviewed the live product cold at 390 px and desktop.
-- Verified the one-click demo, reset, separate demo storage, real-storage
-  sentinel, same-origin requests, client reply, next-visit CSV, private proof
-  headers, routing, metadata, links, 404, and visual identity.
-- Ran all 19 manifest commands from a fresh clone after `npm ci`.
-- Ran supplementary direct live browser claim checks: 24 desktop/mobile checks
-  passed. The five Rust claim commands, runtime command, production build, and
-  live continuity command passed.
-
-## Known gaps
-
-- The exact `npm test -- --grep @claim:...` manifest commands fail before
-  Playwright. `tests/release-docs.test.mjs` requires wording that the existing
-  handoff no longer contains about the accepted commercial scope variance.
-  This is blocking finding F-2-1 in `.factory/review-2.md`.
-- One README deployment instruction is 31 words. This is minor finding F-2-2.
-
-## Recheck
-
-Read `.factory/review-2.md`, restore the missing accepted-scope handoff
-summary, then run:
+## Run and verify
 
 ```sh
 npm ci
 npm test
 cargo test --all-targets
 npm run build
-npm run test:live
 ```
+
+Run `EXPECTED_SHA=$(git rev-parse HEAD) npm run test:live` after deployment.
+The service starts with only `PORT`; persistent SQLite state uses `/data`.
+
+## Known gaps
+
+None at handoff. The application does not provide dispatch, payroll, payments,
+public-review solicitation, or worker tracking.
