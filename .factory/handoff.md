@@ -1,51 +1,47 @@
-# Service Proof Loop — verification 16 handoff
+# Service Proof Loop — verification 17 handoff
 
 ## Result
 
-**FAIL** for candidate `04de0ff89b383c8d581b106e5803a7a7f9b1fe8b` at
-<https://service-proof-loop.sociobot.in> on 2026-09-01 UTC.
+**PASS** for candidate `5253b51abfc56b5d71e807a3b7e751cd9cc6c7e3` at
+<https://service-proof-loop.sociobot.in> on 2026-09-02 UTC.
 
-The product works locally and live, but the public service identifies image and
-health build `5253b51abfc56b5d71e807a3b7e751cd9cc6c7e3`, not the candidate.
-`EXPECTED_SHA=04de0ff89b383c8d581b106e5803a7a7f9b1fe8b npm run test:live`
-fails on image identity. `5253b51` is a direct child whose only changes from the
-candidate are `.factory` evidence and handoff files; the live and candidate
-frontend bundles are byte-identical. Exact build traceability still fails the
-acceptance contract.
+The live `/health` endpoint returned that exact SHA. The pinned live verifier
+also passed, identifying image
+`sociobotregistry.azurecr.io/sf-service-proof-loop:5253b51abfc5`, one active
+revision, one replica, and the durable `/data` Azure Files mount. Candidate-built
+JS, CSS, and hero assets matched their live counterparts byte-for-byte by
+SHA-256.
 
 ## Verification summary
 
-- All 19 exact claim commands passed.
-- Cold first-read and one-click sample demo passed.
-- `cargo test --all-targets`: 13/13.
-- `npm run lint`, TypeScript, audit, release/runtime build: passed.
-- First `npm test`: 45/46 due to a transient null `boundingBox()` in one desktop
-  accessibility test; exact rerun: 46/46.
-- Full live Playwright: 46/46.
-- `verify-url.sh` passed landing, demo, privacy, and terms.
-- Axe: no serious/critical issues in light or dark modes.
-- Lighthouse mobile: 100 performance, accessibility, best practices, and SEO;
-  LCP 1.4 s, CLS 0, 69 KiB transferred.
-- Browser audit: 26/26 requests stayed on product origin; no console/page errors;
-  proof HTML and API used private no-store/noindex controls.
-- Product API rate limit: 40-request allowance; `Retry-After: 1` on 429.
-- Sociobot license verify: 30-request allowance; `Retry-After: 4` on 429.
-- One active replica with Azure Files at `/data`; 400/400 concurrent reads and
-  3/8 concurrent free writes passed.
-- A scoped restart of only `sf-service-proof-loop` preserved workspace, visit,
-  and proof state.
+- All 20 manifest claims passed through their 19 exact commands from a fresh
+  detached candidate clone.
+- `cargo test --all-targets` passed 13 tests; lint, TypeScript, empty-runtime,
+  and the production `dist/` build passed.
+- `npm test` passed all 46 desktop and 390 px browser tests.
+- The cold first screen plainly identifies the job, audience, and first
+  “Try it with sample data” action. The one-click demo sandbox passed.
+- Independent live QA completed the proof-to-next-visit sample flow and CSV
+  export; private proof responses were no-store/noindex.
+- Live request logs stayed same-origin and had no console or page errors. Axe
+  found no serious or critical issues. Keyboard focus, 390 px layout, touch
+  target sizing, and reduced motion passed.
+- Mobile Lighthouse recorded Performance 100, Accessibility 100, LCP 1.25 s,
+  TBT 50 ms, and CLS 0.
+- The product API rate-limit allowance was 40 requests per forwarded IP burst;
+  excess requests returned `429` with `Retry-After: 1`.
 
-Product source was not changed. Full evidence and defects are in
-`.factory/verification-16.md` and `.factory/evidence-verification-16/`.
+No product code was changed. Full neutral QA evidence, including checks,
+constraints, and the test-environment container-build limitation, is in
+`.factory/verification-17.md`.
 
-## Retest
+## Recheck
 
 ```sh
 npm ci
-npm run test:all
+cargo test --all-targets
 npm run lint
-npm audit --audit-level=moderate
+npm test
 npm run build
-EXPECTED_SHA=04de0ff89b383c8d581b106e5803a7a7f9b1fe8b npm run test:live
-PLAYWRIGHT_BASE_URL=https://service-proof-loop.sociobot.in npx playwright test
+EXPECTED_SHA=5253b51abfc56b5d71e807a3b7e751cd9cc6c7e3 npm run test:live
 ```
