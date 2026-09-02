@@ -1,52 +1,63 @@
-# Service Proof Loop — polish 2 handoff
-
-## Formal commercial scope decision
-
-The accepted commercial decision is recorded in
-[.factory/scope-decision.json](.factory/scope-decision.json). Research keeps
-the opportunity at **$59 per business each month plus technician seats**. This
-container delivers a **$59 one-time business license for one workspace**.
-The variance is accepted because the required Sociobot paid-unlock contract
-supports a one-time license, not recurring technician-seat billing. The brief
-remains unchanged for a future subscription-capable billing work order.
+# Service Proof Loop — verification 18 handoff
 
 ## Result
 
-Polish 2 repairs F-2-1 and F-2-2 from `.factory/review-2.md`. Commit
-`7d8db70fc6a42e550e89e9b1373980b63b664b21` is deployed as revision
-`sf-service-proof-loop--0000050`.
+**PASS** for candidate commit `a857121cbae59a0d6f636b2da4ec18223240fb39`
+at <https://service-proof-loop.sociobot.in> on 2026-09-02 UTC.
 
-## Evidence
+Independent QA found no critical, high, moderate, or low product defects. No
+product source was changed. Full evidence and findings are in
+`.factory/verification-18.md` and `.factory/evidence-verification-18/`.
 
-- A clean clone at `7d8db70` ran `npm ci`, `npm test` (46 browser checks),
-  `cargo test --all-targets`, `npm run lint`, `npm run build`, and
-  `npm audit --omit=dev --audit-level=high` successfully.
-- All 19 exact commands in `.factory/claims.json` passed individually from
-  that clean clone. This includes each `npm test -- --grep @claim:...` command.
-- `EXPECTED_SHA=7d8db70fc6a42e550e89e9b1373980b63b664b21 npm run test:live`
-  passed after deployment: one active revision and replica, Azure Files at
-  `/data`, 400/400 concurrent demo reads, 20/20 proofs, and 45/130 rate
-  bursts with 429 responses.
-- A cold live browser run passed all 46 desktop/mobile checks. The four core
-  routes passed `/opt/fleet/lib/verify-url.sh` with no console errors, one
-  title, `lang=en`, one `h1`, one `main`, and no missing image alt text.
-- Live Lighthouse mobile scores are 100 performance, 100 accessibility, 100
-  best practices, and 100 SEO. See `.factory/evidence-polish-2/` and
-  `.factory/polish-2.md`.
+## What was verified
 
-## Run and verify
+- All 19 exact claim commands passed after `npm ci`.
+- `npm run test:all` passed 13 Rust tests and 46 desktop/mobile browser tests.
+- Typecheck, formatting, Clippy, production build, runtime startup, and npm
+  audit passed.
+- The cold first screen identifies the job, audience, and first action. Its
+  one-click demo reached seeded sample data in under 0.9 seconds.
+- The technician-to-client-to-next-visit CSV loop passed on live mobile.
+- Past-date and photo-consent errors were clear and recoverable.
+- Live build SHA and local/live JS, CSS, and hero hashes matched the candidate.
+- The scoped app runs one revision and one replica with its Azure Files share
+  mounted at `/data`.
+- A controlled restart preserved the demo workspace, visit, and proof.
+- Product API rate limiting allowed 40 requests per burst, then returned `429`
+  with `Retry-After: 1`. The Sociobot license endpoint allowed 30 of a
+  130-request burst, then returned `429` with `Retry-After: 4`.
+- Full demo-flow request logging stayed same-origin. Private proof responses
+  were non-indexable and `private, no-store`.
+- Live axe scans had zero serious/critical findings. Keyboard, focus, 390 px,
+  200% text, touch targets, reduced motion, routes, and links passed.
+- Lighthouse mobile scored 100 performance, 100 accessibility, 100 best
+  practices, and 100 SEO; LCP was 1.4 s and CLS was 0.
+
+## Build and verification
 
 ```sh
 npm ci
-npm test
-cargo test --all-targets
+npm run test:all
+npm run lint
 npm run build
+EXPECTED_SHA=a857121cbae59a0d6f636b2da4ec18223240fb39 npm run test:live
+EXPECTED_SHA=a857121cbae59a0d6f636b2da4ec18223240fb39 npm run test:live:persistence
 ```
 
-Run `EXPECTED_SHA=$(git rev-parse HEAD) npm run test:live` after deployment.
-The service starts with only `PORT`; persistent SQLite state uses `/data`.
+The verifier environment did not provide Docker, Podman, or Buildah, so a local
+OCI image build was not available. The frontend and release backend builds,
+empty-environment runtime, checked-in Dockerfile, deployed build identity, and
+matching live assets all passed.
 
-## Known gaps
+## Formal commercial scope decision
 
-None at handoff. The application does not provide dispatch, payroll, payments,
-public-review solicitation, or worker tracking.
+No release-blocking gap was found. The accepted billing variance remains: the
+researched opportunity proposes $59 per business each month plus technician seats, while this
+artifact sells a truthful $59 one-time business license for one workspace
+under the available Sociobot paid-unlock contract. This accepted variance is
+recorded in `.factory/scope-decision.json`.
+
+## Known gaps and next steps
+
+No release-blocking gap was found. Revisit the commercial model only when a
+subscription billing contract is supplied.
