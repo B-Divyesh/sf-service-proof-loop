@@ -1,1 +1,1 @@
-Send visit proof and add approved extras to the next recurring visit.
+Send visit proof and carry approved extras into the next recurring visit.

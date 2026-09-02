@@ -1,0 +1,126 @@
+{
+  "base": "https://service-proof-loop.sociobot.in",
+  "routes": {
+    "/": {
+      "status": 200,
+      "title": "Service Proof Loop — Send proof after each visit",
+      "description": "Send visit proof, collect client feedback, and carry approved extras into the next recurring visit.",
+      "canonical": "https://service-proof-loop.sociobot.in/",
+      "og_title": "Service Proof Loop — Send proof after each visit",
+      "h1": [
+        "Send proof. Plan the next visit."
+      ],
+      "main": 1
+    },
+    "/demo": {
+      "status": 200,
+      "title": "Demo — Service Proof Loop",
+      "description": "Try a complete proof-to-next-visit loop with isolated sample data.",
+      "canonical": "https://service-proof-loop.sociobot.in/demo",
+      "og_title": "Demo — Service Proof Loop",
+      "h1": [
+        "Completed visits"
+      ],
+      "main": 1
+    },
+    "/app": {
+      "status": 200,
+      "title": "Start — Service Proof Loop",
+      "description": "Create a local business workspace for completed visits.",
+      "canonical": "https://service-proof-loop.sociobot.in/app",
+      "og_title": "Start — Service Proof Loop",
+      "h1": [
+        "Create your business workspace"
+      ],
+      "main": 1
+    },
+    "/privacy": {
+      "status": 200,
+      "title": "Privacy — Service Proof Loop",
+      "description": "How Service Proof Loop handles visit proof and client replies.",
+      "canonical": "https://service-proof-loop.sociobot.in/privacy",
+      "og_title": "Privacy — Service Proof Loop",
+      "h1": [
+        "Privacy for visit proof"
+      ],
+      "main": 1
+    },
+    "/terms": {
+      "status": 200,
+      "title": "Terms — Service Proof Loop",
+      "description": "Terms for using Service Proof Loop.",
+      "canonical": "https://service-proof-loop.sociobot.in/terms",
+      "og_title": "Terms — Service Proof Loop",
+      "h1": [
+        "Terms of service"
+      ],
+      "main": 1
+    },
+    "/definitely-missing": {
+      "status": 404,
+      "title": "Page not found — Service Proof Loop",
+      "description": "Return to Service Proof Loop.",
+      "canonical": "https://service-proof-loop.sociobot.in/definitely-missing",
+      "og_title": "Page not found — Service Proof Loop",
+      "h1": [
+        "This page does not exist"
+      ],
+      "main": 1
+    }
+  },
+  "views": {
+    "desktop": {
+      "status": 200,
+      "title": "Service Proof Loop — Send proof after each visit",
+      "h1": [
+        "Send proof. Plan the next visit."
+      ],
+      "main": 1,
+      "overflow": false,
+      "axe_serious_critical": [],
+      "errors": [],
+      "origins": [
+        "https://service-proof-loop.sociobot.in"
+      ],
+      "demo": {
+        "url": "https://service-proof-loop.sociobot.in/demo",
+        "banner": true,
+        "sample": true
+      }
+    },
+    "mobile": {
+      "status": 200,
+      "title": "Service Proof Loop — Send proof after each visit",
+      "h1": [
+        "Send proof. Plan the next visit."
+      ],
+      "main": 1,
+      "overflow": false,
+      "axe_serious_critical": [],
+      "errors": [],
+      "origins": [
+        "https://service-proof-loop.sociobot.in"
+      ],
+      "demo": {
+        "url": "https://service-proof-loop.sociobot.in/demo",
+        "banner": true,
+        "sample": true
+      }
+    }
+  },
+  "proof": {
+    "url": "https://service-proof-loop.sociobot.in/proof/<redacted-demo-token>?demo=1",
+    "status": 200,
+    "html_headers": {
+      "robots": "noindex, nofollow, noarchive",
+      "cache": "private, no-store"
+    },
+    "api_status": 200,
+    "api_headers": {
+      "robots": "noindex, nofollow, noarchive",
+      "cache": "private, no-store"
+    },
+    "canonical_present": false
+  },
+  "generated_at": "2026-09-02T01:13:07.718Z"
+}
