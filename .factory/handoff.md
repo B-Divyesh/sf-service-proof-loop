@@ -1,63 +1,64 @@
-# Service Proof Loop — verification 18 handoff
+# Service Proof Loop — adversarial review 3 handoff
 
 ## Result
 
-**PASS** for candidate commit `a857121cbae59a0d6f636b2da4ec18223240fb39`
-at <https://service-proof-loop.sociobot.in> on 2026-09-02 UTC.
+**PASS** on 2026-09-02 UTC with zero blocking or minor findings.
 
-Independent QA found no critical, high, moderate, or low product defects. No
-product source was changed. Full evidence and findings are in
-`.factory/verification-18.md` and `.factory/evidence-verification-18/`.
+The review covered source commit
+`162723a92fba9a6cd1f3e2177fd7da58eef71092` and live build
+`a857121cbae59a0d6f636b2da4ec18223240fb39`. Their product source is
+identical; later commits contain QA documentation and evidence only. Product
+code was not modified.
+
+The complete report is `.factory/review-3.md`. Reproducible browser, claim,
+flow, accessibility, and route evidence is in
+`.factory/evidence-review-3/`.
 
 ## What was verified
 
-- All 19 exact claim commands passed after `npm ci`.
-- `npm run test:all` passed 13 Rust tests and 46 desktop/mobile browser tests.
-- Typecheck, formatting, Clippy, production build, runtime startup, and npm
-  audit passed.
-- The cold first screen identifies the job, audience, and first action. Its
-  one-click demo reached seeded sample data in under 0.9 seconds.
-- The technician-to-client-to-next-visit CSV loop passed on live mobile.
-- Past-date and photo-consent errors were clear and recoverable.
-- Live build SHA and local/live JS, CSS, and hero hashes matched the candidate.
-- The scoped app runs one revision and one replica with its Azure Files share
-  mounted at `/data`.
-- A controlled restart preserved the demo workspace, visit, and proof.
-- Product API rate limiting allowed 40 requests per burst, then returned `429`
-  with `Retry-After: 1`. The Sociobot license endpoint allowed 30 of a
-  130-request burst, then returned `429` with `Retry-After: 4`.
-- Full demo-flow request logging stayed same-origin. Private proof responses
-  were non-indexable and `private, no-store`.
-- Live axe scans had zero serious/critical findings. Keyboard, focus, 390 px,
-  200% text, touch targets, reduced motion, routes, and links passed.
-- Lighthouse mobile scored 100 performance, 100 accessibility, 100 best
-  practices, and 100 SEO; LCP was 1.4 s and CLS was 0.
+- Fresh 390 px and desktop first screens state the job, audience, and first
+  action without scrolling.
+- The one-click demo immediately shows realistic visit data. Reset changes its
+  workspace and token without changing real storage.
+- A live client reply and extra returned to the workspace and exported in the
+  next-visit CSV. Leaving demo removed its session key.
+- Every one of the 19 exact `.factory/claims.json` commands passed from a clean
+  clone after `npm ci`.
+- The aggregate gate passed 13 Rust tests, 28 deployment/documentation tests,
+  the runtime check, and 46 desktop/mobile browser tests. Lint and build pass.
+- Every finding from reviews 1 and 2 remains fixed in live behavior and code.
+- All stable routes, metadata, links, 404 behavior, back navigation, route
+  focus, privacy headers, and same-origin demo requests passed.
+- Live Axe scans found zero WCAG A/AA violations on five routes in light and
+  dark modes. The four-route URL verifier reported no console errors or basic
+  accessibility failures.
+- The landing and README sentence audit found no over-cap sentence, banned
+  marketing word, vague heading, inconsistent term, or weak action label.
 
-## Build and verification
+## How to reproduce
 
 ```sh
 npm ci
 npm run test:all
 npm run lint
 npm run build
-EXPECTED_SHA=a857121cbae59a0d6f636b2da4ec18223240fb39 npm run test:live
-EXPECTED_SHA=a857121cbae59a0d6f636b2da4ec18223240fb39 npm run test:live:persistence
+npm run test:a11y
+npm run test:live
 ```
 
-The verifier environment did not provide Docker, Podman, or Buildah, so a local
-OCI image build was not available. The frontend and release backend builds,
-empty-environment runtime, checked-in Dockerfile, deployed build identity, and
-matching live assets all passed.
+The review additionally runs every command in `.factory/claims.json`
+individually from a fresh clone and opens the deployed service in fresh
+Playwright contexts.
 
 ## Formal commercial scope decision
 
-No release-blocking gap was found. The accepted billing variance remains: the
-researched opportunity proposes $59 per business each month plus technician seats, while this
-artifact sells a truthful $59 one-time business license for one workspace
-under the available Sociobot paid-unlock contract. This accepted variance is
-recorded in `.factory/scope-decision.json`.
+The accepted variance remains recorded in `.factory/scope-decision.json`.
+Research proposes **$59 per business each month plus technician seats**. The
+available Sociobot paid-unlock contract supports the delivered **$59 one-time
+business license for one workspace**, not recurring technician-seat billing.
+The product and checkout describe the delivered terms accurately.
 
 ## Known gaps and next steps
 
-No release-blocking gap was found. Revisit the commercial model only when a
-subscription billing contract is supplied.
+No product gap remains in the reviewed scope. Re-run the claim manifest and
+adversarial checklist after future product or deployment changes.

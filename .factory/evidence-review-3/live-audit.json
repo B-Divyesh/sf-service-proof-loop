@@ -1,0 +1,2910 @@
+{
+  "generatedAt": "2026-09-02T02:19:58.527Z",
+  "base": "https://service-proof-loop.sociobot.in",
+  "views": {
+    "mobile": {
+      "status": 200,
+      "title": "Service Proof Loop — Send proof after each visit",
+      "lang": "en",
+      "h1": [
+        "Send proof. Plan the next visit."
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "text": "Send proof. Plan the next visit."
+        },
+        {
+          "level": 2,
+          "text": "See proof and next-visit extras"
+        },
+        {
+          "level": 3,
+          "text": "Maya’s visit at Willow Street"
+        },
+        {
+          "level": 2,
+          "text": "How proof reaches the next visit"
+        },
+        {
+          "level": 3,
+          "text": "Record the visit"
+        },
+        {
+          "level": 3,
+          "text": "Collect one clear reply"
+        },
+        {
+          "level": 3,
+          "text": "Add approved extras to the next visit"
+        },
+        {
+          "level": 2,
+          "text": "What this service handles"
+        },
+        {
+          "level": 3,
+          "text": "What it handles"
+        },
+        {
+          "level": 3,
+          "text": "What it leaves alone"
+        },
+        {
+          "level": 2,
+          "text": "Keep creating proof links"
+        }
+      ],
+      "mainCount": 1,
+      "description": "Send visit proof, collect client feedback, and carry approved extras into the next recurring visit.",
+      "canonical": "https://service-proof-loop.sociobot.in/",
+      "ogTitle": "Service Proof Loop — Send proof after each visit",
+      "ogDescription": "Send visit proof, collect client feedback, and carry approved extras into the next recurring visit.",
+      "ogUrl": "https://service-proof-loop.sociobot.in/",
+      "ogImage": "https://service-proof-loop.sociobot.in/assets/social.jpg",
+      "twitterTitle": "Service Proof Loop — Send proof after each visit",
+      "twitterDescription": "Send visit proof, collect client feedback, and carry approved extras into the next recurring visit.",
+      "twitterCard": "summary_large_image",
+      "favicon": "https://service-proof-loop.sociobot.in/favicon.svg",
+      "appleTouchIcon": "https://service-proof-loop.sociobot.in/apple-touch-icon.png",
+      "aboveFold": [
+        {
+          "tag": "span",
+          "text": "Service Proof Loop",
+          "top": 26,
+          "bottom": 42
+        },
+        {
+          "tag": "a",
+          "text": "Demo",
+          "top": 56,
+          "bottom": 100
+        },
+        {
+          "tag": "a",
+          "text": "Workspace",
+          "top": 56,
+          "bottom": 100
+        },
+        {
+          "tag": "a",
+          "text": "Privacy",
+          "top": 56,
+          "bottom": 100
+        },
+        {
+          "tag": "p",
+          "text": "After-visit proof for recurring services",
+          "top": 153,
+          "bottom": 192
+        },
+        {
+          "tag": "h1",
+          "text": "Send proof. Plan the next visit.",
+          "top": 204,
+          "bottom": 313
+        },
+        {
+          "tag": "p",
+          "text": "For recurring service teams that need client feedback and approved extras without asking clients to install an app.",
+          "top": 337,
+          "bottom": 418
+        },
+        {
+          "tag": "a",
+          "text": "Try it with sample data",
+          "top": 450,
+          "bottom": 499
+        },
+        {
+          "tag": "small",
+          "text": "Loads a sample visit. Nothing is saved.",
+          "top": 515,
+          "bottom": 557
+        },
+        {
+          "tag": "li",
+          "text": "Proof links expire after 14 days.",
+          "top": 589,
+          "bottom": 613
+        },
+        {
+          "tag": "li",
+          "text": "Clients open links without an account.",
+          "top": 623,
+          "bottom": 648
+        },
+        {
+          "tag": "li",
+          "text": "Three visits free. $59 once for one workspace.",
+          "top": 658,
+          "bottom": 683
+        }
+      ],
+      "copyUnits": [
+        {
+          "tag": "a",
+          "text": "Skip to main content"
+        },
+        {
+          "tag": "a",
+          "text": "Service Proof Loop"
+        },
+        {
+          "tag": "a",
+          "text": "Demo"
+        },
+        {
+          "tag": "a",
+          "text": "Workspace"
+        },
+        {
+          "tag": "a",
+          "text": "Price"
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "p",
+          "text": "After-visit proof for recurring services"
+        },
+        {
+          "tag": "h1",
+          "text": "Send proof. Plan the next visit."
+        },
+        {
+          "tag": "p",
+          "text": "For recurring service teams that need client feedback and approved extras without asking clients to install an app."
+        },
+        {
+          "tag": "a",
+          "text": "Try it with sample data"
+        },
+        {
+          "tag": "li",
+          "text": "Proof links expire after 14 days."
+        },
+        {
+          "tag": "li",
+          "text": "Clients open links without an account."
+        },
+        {
+          "tag": "li",
+          "text": "Three visits free. $59 once for one workspace."
+        },
+        {
+          "tag": "p",
+          "text": "The product"
+        },
+        {
+          "tag": "h2",
+          "text": "See proof and next-visit extras"
+        },
+        {
+          "tag": "p",
+          "text": "Crews record the visit. Clients review the proof. The office exports approved extras without typing them again."
+        },
+        {
+          "tag": "li",
+          "text": "Willow StreetToday · Elena"
+        },
+        {
+          "tag": "li",
+          "text": "Lake AvenueYesterday · Sam"
+        },
+        {
+          "tag": "p",
+          "text": "Visit complete"
+        },
+        {
+          "tag": "h3",
+          "text": "Maya’s visit at Willow Street"
+        },
+        {
+          "tag": "p",
+          "text": "Four checks · Two photos · Next visit Sep 11"
+        },
+        {
+          "tag": "li",
+          "text": "✓Kitchen surfaces and sink"
+        },
+        {
+          "tag": "li",
+          "text": "✓Two bathrooms"
+        },
+        {
+          "tag": "li",
+          "text": "✓Floors vacuumed and mopped"
+        },
+        {
+          "tag": "p",
+          "text": "Inside refrigerator · Client approved · $28"
+        },
+        {
+          "tag": "p",
+          "text": "How it works"
+        },
+        {
+          "tag": "h2",
+          "text": "How proof reaches the next visit"
+        },
+        {
+          "tag": "h3",
+          "text": "Record the visit"
+        },
+        {
+          "tag": "p",
+          "text": "The technician checks the work, adds photos with consent, and sends one private link."
+        },
+        {
+          "tag": "h3",
+          "text": "Collect one clear reply"
+        },
+        {
+          "tag": "p",
+          "text": "The client accepts the work or reports a problem. They can rate it and choose extras."
+        },
+        {
+          "tag": "h3",
+          "text": "Add approved extras to the next visit"
+        },
+        {
+          "tag": "p",
+          "text": "Export the next date, client, location, extra, detail, and price as CSV."
+        },
+        {
+          "tag": "p",
+          "text": "Clear boundaries"
+        },
+        {
+          "tag": "h2",
+          "text": "What this service handles"
+        },
+        {
+          "tag": "p",
+          "text": "It stores visit proof, client replies, and approved extras."
+        },
+        {
+          "tag": "h3",
+          "text": "What it handles"
+        },
+        {
+          "tag": "li",
+          "text": "Visit checklists and consented photos"
+        },
+        {
+          "tag": "li",
+          "text": "Client acceptance, problems, and ratings"
+        },
+        {
+          "tag": "li",
+          "text": "Approved extras for the next visit"
+        },
+        {
+          "tag": "h3",
+          "text": "What it leaves alone"
+        },
+        {
+          "tag": "li",
+          "text": "No dispatch, payroll, or worker tracking"
+        },
+        {
+          "tag": "li",
+          "text": "Do not enter home-entry codes or payment card details"
+        },
+        {
+          "tag": "li",
+          "text": "No public review campaigns"
+        },
+        {
+          "tag": "p",
+          "text": "Business license"
+        },
+        {
+          "tag": "h2",
+          "text": "Keep creating proof links"
+        },
+        {
+          "tag": "p",
+          "text": "After three free visits, one $59 license covers one business workspace."
+        },
+        {
+          "tag": "li",
+          "text": "More visits in that workspace"
+        },
+        {
+          "tag": "li",
+          "text": "Configurable client extras"
+        },
+        {
+          "tag": "li",
+          "text": "Next-visit CSV exports"
+        },
+        {
+          "tag": "p",
+          "text": "$59 one-time purchase"
+        },
+        {
+          "tag": "a",
+          "text": "Buy the business license at Sociobot checkout"
+        },
+        {
+          "tag": "label",
+          "text": "Have a license?"
+        },
+        {
+          "tag": "button",
+          "text": "Verify license"
+        },
+        {
+          "tag": "p",
+          "text": "Sociobot billing starts checkout. Dodo hosts the payment page."
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "a",
+          "text": "Terms"
+        },
+        {
+          "tag": "p",
+          "text": "Send visit proof and plan the next visit."
+        },
+        {
+          "tag": "p",
+          "text": "Original product art was generated for this service."
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "a",
+          "text": "Terms"
+        },
+        {
+          "tag": "a",
+          "text": "Built by Param Factory (external site)"
+        },
+        {
+          "tag": "p",
+          "text": "Version 1.0.0 · Build 2026.08"
+        }
+      ],
+      "bodyText": "Skip to main content\nService Proof Loop\nDemo\nWorkspace\nPrivacy\n\nAFTER-VISIT PROOF FOR RECURRING SERVICES\n\nSend proof. Plan the next visit.\n\nFor recurring service teams that need client feedback and approved extras without asking clients to install an app.\n\nTry it with sample data\nLoads a sample visit. Nothing is saved.\nProof links expire after 14 days.\nClients open links without an account.\nThree visits free. $59 once for one workspace.\nAn approved extra appears on the next visit.\n\nTHE PRODUCT\n\nSee proof and next-visit extras\n\nCrews record the visit. Clients review the proof. The office exports approved extras without typing them again.\n\nNorthstar Home Care\nWAITING FOR CLIENT\n\nVISIT COMPLETE\n\nMaya’s visit at Willow Street\n\nFour checks · Two photos · Next visit Sep 11\n\n✓\nKitchen surfaces and sink\n✓\nTwo bathrooms\n✓\nFloors vacuumed and mopped\nNext visit\n\nInside refrigerator · Client approved · $28\n\nHOW IT WORKS\n\nHow proof reaches the next visit\nRecord the visit\n\nThe technician checks the work, adds photos with consent, and sends one private link.\n\nCollect one clear reply\n\nThe client accepts the work or reports a problem. They can rate it and choose extras.\n\nAdd approved extras to the next visit\n\nExport the next date, client, location, extra, detail, and price as CSV.\n\nCLEAR BOUNDARIES\n\nWhat this service handles\n\nIt stores visit proof, client replies, and approved extras.\n\nWhat it handles\nVisit checklists and consented photos\nClient acceptance, problems, and ratings\nApproved extras for the next visit\nWhat it leaves alone\nNo dispatch, payroll, or worker tracking\nDo not enter home-entry codes or payment card details\nNo public review campaigns\n\nBUSINESS LICENSE\n\nKeep creating proof links\n\nAfter three free visits, one $59 license covers one business workspace.\n\nMore visits in that workspace\nConfigurable client extras\nNext-visit CSV exports\n\n$59 one-time purchase\n\nBuy the business license\nat Sociobot checkout\nHave a license?\nVerify license\n\nSociobot billing starts checkout. Dodo hosts the payment page.\n\nPrivacy · Terms\n\nService Proof Loop\n\nSend visit proof and plan the next visit.\n\nOriginal product art was generated for this service.\n\nPrivacy\nTerms\nBuilt by Param Factory\n(external site)\n\nVersion 1.0.0 · Build 2026.08\n\nSend proof. Plan the next visit.",
+      "consoleMessages": [],
+      "requests": [
+        {
+          "method": "GET",
+          "url": "https://service-proof-loop.sociobot.in/",
+          "resourceType": "document"
+        },
+        {
+          "method": "GET",
+          "url": "https://service-proof-loop.sociobot.in/assets/main-Ce5LenRe.js",
+          "resourceType": "script"
+        },
+        {
+          "method": "GET",
+          "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css",
+          "resourceType": "stylesheet"
+        },
+        {
+          "method": "GET",
+          "url": "https://service-proof-loop.sociobot.in/assets/proof-loop-hero.webp",
+          "resourceType": "image"
+        }
+      ]
+    },
+    "desktop": {
+      "status": 200,
+      "title": "Service Proof Loop — Send proof after each visit",
+      "lang": "en",
+      "h1": [
+        "Send proof. Plan the next visit."
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "text": "Send proof. Plan the next visit."
+        },
+        {
+          "level": 2,
+          "text": "See proof and next-visit extras"
+        },
+        {
+          "level": 3,
+          "text": "Maya’s visit at Willow Street"
+        },
+        {
+          "level": 2,
+          "text": "How proof reaches the next visit"
+        },
+        {
+          "level": 3,
+          "text": "Record the visit"
+        },
+        {
+          "level": 3,
+          "text": "Collect one clear reply"
+        },
+        {
+          "level": 3,
+          "text": "Add approved extras to the next visit"
+        },
+        {
+          "level": 2,
+          "text": "What this service handles"
+        },
+        {
+          "level": 3,
+          "text": "What it handles"
+        },
+        {
+          "level": 3,
+          "text": "What it leaves alone"
+        },
+        {
+          "level": 2,
+          "text": "Keep creating proof links"
+        }
+      ],
+      "mainCount": 1,
+      "description": "Send visit proof, collect client feedback, and carry approved extras into the next recurring visit.",
+      "canonical": "https://service-proof-loop.sociobot.in/",
+      "ogTitle": "Service Proof Loop — Send proof after each visit",
+      "ogDescription": "Send visit proof, collect client feedback, and carry approved extras into the next recurring visit.",
+      "ogUrl": "https://service-proof-loop.sociobot.in/",
+      "ogImage": "https://service-proof-loop.sociobot.in/assets/social.jpg",
+      "twitterTitle": "Service Proof Loop — Send proof after each visit",
+      "twitterDescription": "Send visit proof, collect client feedback, and carry approved extras into the next recurring visit.",
+      "twitterCard": "summary_large_image",
+      "favicon": "https://service-proof-loop.sociobot.in/favicon.svg",
+      "appleTouchIcon": "https://service-proof-loop.sociobot.in/apple-touch-icon.png",
+      "aboveFold": [
+        {
+          "tag": "span",
+          "text": "Service Proof Loop",
+          "top": 23,
+          "bottom": 48
+        },
+        {
+          "tag": "a",
+          "text": "Demo",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Workspace",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Price",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Privacy",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "p",
+          "text": "After-visit proof for recurring services",
+          "top": 221,
+          "bottom": 240
+        },
+        {
+          "tag": "h1",
+          "text": "Send proof. Plan the next visit.",
+          "top": 253,
+          "bottom": 422
+        },
+        {
+          "tag": "p",
+          "text": "For recurring service teams that need client feedback and approved extras without asking clients to install an app.",
+          "top": 446,
+          "bottom": 543
+        },
+        {
+          "tag": "a",
+          "text": "Try it with sample data",
+          "top": 575,
+          "bottom": 624
+        },
+        {
+          "tag": "small",
+          "text": "Loads a sample visit. Nothing is saved.",
+          "top": 579,
+          "bottom": 620
+        },
+        {
+          "tag": "li",
+          "text": "Proof links expire after 14 days.",
+          "top": 656,
+          "bottom": 681
+        },
+        {
+          "tag": "li",
+          "text": "Clients open links without an account.",
+          "top": 691,
+          "bottom": 715
+        },
+        {
+          "tag": "li",
+          "text": "Three visits free. $59 once for one workspace.",
+          "top": 725,
+          "bottom": 750
+        },
+        {
+          "tag": "div",
+          "text": "An approved extra appears on the next visit.",
+          "top": 751,
+          "bottom": 827
+        }
+      ],
+      "copyUnits": [
+        {
+          "tag": "a",
+          "text": "Skip to main content"
+        },
+        {
+          "tag": "a",
+          "text": "Service Proof Loop"
+        },
+        {
+          "tag": "a",
+          "text": "Demo"
+        },
+        {
+          "tag": "a",
+          "text": "Workspace"
+        },
+        {
+          "tag": "a",
+          "text": "Price"
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "p",
+          "text": "After-visit proof for recurring services"
+        },
+        {
+          "tag": "h1",
+          "text": "Send proof. Plan the next visit."
+        },
+        {
+          "tag": "p",
+          "text": "For recurring service teams that need client feedback and approved extras without asking clients to install an app."
+        },
+        {
+          "tag": "a",
+          "text": "Try it with sample data"
+        },
+        {
+          "tag": "li",
+          "text": "Proof links expire after 14 days."
+        },
+        {
+          "tag": "li",
+          "text": "Clients open links without an account."
+        },
+        {
+          "tag": "li",
+          "text": "Three visits free. $59 once for one workspace."
+        },
+        {
+          "tag": "p",
+          "text": "The product"
+        },
+        {
+          "tag": "h2",
+          "text": "See proof and next-visit extras"
+        },
+        {
+          "tag": "p",
+          "text": "Crews record the visit. Clients review the proof. The office exports approved extras without typing them again."
+        },
+        {
+          "tag": "li",
+          "text": "Willow StreetToday · Elena"
+        },
+        {
+          "tag": "li",
+          "text": "Lake AvenueYesterday · Sam"
+        },
+        {
+          "tag": "p",
+          "text": "Visit complete"
+        },
+        {
+          "tag": "h3",
+          "text": "Maya’s visit at Willow Street"
+        },
+        {
+          "tag": "p",
+          "text": "Four checks · Two photos · Next visit Sep 11"
+        },
+        {
+          "tag": "li",
+          "text": "✓Kitchen surfaces and sink"
+        },
+        {
+          "tag": "li",
+          "text": "✓Two bathrooms"
+        },
+        {
+          "tag": "li",
+          "text": "✓Floors vacuumed and mopped"
+        },
+        {
+          "tag": "p",
+          "text": "Inside refrigerator · Client approved · $28"
+        },
+        {
+          "tag": "p",
+          "text": "How it works"
+        },
+        {
+          "tag": "h2",
+          "text": "How proof reaches the next visit"
+        },
+        {
+          "tag": "h3",
+          "text": "Record the visit"
+        },
+        {
+          "tag": "p",
+          "text": "The technician checks the work, adds photos with consent, and sends one private link."
+        },
+        {
+          "tag": "h3",
+          "text": "Collect one clear reply"
+        },
+        {
+          "tag": "p",
+          "text": "The client accepts the work or reports a problem. They can rate it and choose extras."
+        },
+        {
+          "tag": "h3",
+          "text": "Add approved extras to the next visit"
+        },
+        {
+          "tag": "p",
+          "text": "Export the next date, client, location, extra, detail, and price as CSV."
+        },
+        {
+          "tag": "p",
+          "text": "Clear boundaries"
+        },
+        {
+          "tag": "h2",
+          "text": "What this service handles"
+        },
+        {
+          "tag": "p",
+          "text": "It stores visit proof, client replies, and approved extras."
+        },
+        {
+          "tag": "h3",
+          "text": "What it handles"
+        },
+        {
+          "tag": "li",
+          "text": "Visit checklists and consented photos"
+        },
+        {
+          "tag": "li",
+          "text": "Client acceptance, problems, and ratings"
+        },
+        {
+          "tag": "li",
+          "text": "Approved extras for the next visit"
+        },
+        {
+          "tag": "h3",
+          "text": "What it leaves alone"
+        },
+        {
+          "tag": "li",
+          "text": "No dispatch, payroll, or worker tracking"
+        },
+        {
+          "tag": "li",
+          "text": "Do not enter home-entry codes or payment card details"
+        },
+        {
+          "tag": "li",
+          "text": "No public review campaigns"
+        },
+        {
+          "tag": "p",
+          "text": "Business license"
+        },
+        {
+          "tag": "h2",
+          "text": "Keep creating proof links"
+        },
+        {
+          "tag": "p",
+          "text": "After three free visits, one $59 license covers one business workspace."
+        },
+        {
+          "tag": "li",
+          "text": "More visits in that workspace"
+        },
+        {
+          "tag": "li",
+          "text": "Configurable client extras"
+        },
+        {
+          "tag": "li",
+          "text": "Next-visit CSV exports"
+        },
+        {
+          "tag": "p",
+          "text": "$59 one-time purchase"
+        },
+        {
+          "tag": "a",
+          "text": "Buy the business license at Sociobot checkout"
+        },
+        {
+          "tag": "label",
+          "text": "Have a license?"
+        },
+        {
+          "tag": "button",
+          "text": "Verify license"
+        },
+        {
+          "tag": "p",
+          "text": "Sociobot billing starts checkout. Dodo hosts the payment page."
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "a",
+          "text": "Terms"
+        },
+        {
+          "tag": "p",
+          "text": "Send visit proof and plan the next visit."
+        },
+        {
+          "tag": "p",
+          "text": "Original product art was generated for this service."
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "a",
+          "text": "Terms"
+        },
+        {
+          "tag": "a",
+          "text": "Built by Param Factory (external site)"
+        },
+        {
+          "tag": "p",
+          "text": "Version 1.0.0 · Build 2026.08"
+        }
+      ],
+      "bodyText": "Skip to main content\nService Proof Loop\nDemo\nWorkspace\nPrice\nPrivacy\n\nAFTER-VISIT PROOF FOR RECURRING SERVICES\n\nSend proof. Plan the next visit.\n\nFor recurring service teams that need client feedback and approved extras without asking clients to install an app.\n\nTry it with sample data\nLoads a sample visit. Nothing is saved.\nProof links expire after 14 days.\nClients open links without an account.\nThree visits free. $59 once for one workspace.\nAn approved extra appears on the next visit.\n\nTHE PRODUCT\n\nSee proof and next-visit extras\n\nCrews record the visit. Clients review the proof. The office exports approved extras without typing them again.\n\nNorthstar Home Care\nWAITING FOR CLIENT\nVisits\nWillow Street\nToday · Elena\nLake Avenue\nYesterday · Sam\n\nVISIT COMPLETE\n\nMaya’s visit at Willow Street\n\nFour checks · Two photos · Next visit Sep 11\n\n✓\nKitchen surfaces and sink\n✓\nTwo bathrooms\n✓\nFloors vacuumed and mopped\nNext visit\n\nInside refrigerator · Client approved · $28\n\nHOW IT WORKS\n\nHow proof reaches the next visit\nRecord the visit\n\nThe technician checks the work, adds photos with consent, and sends one private link.\n\nCollect one clear reply\n\nThe client accepts the work or reports a problem. They can rate it and choose extras.\n\nAdd approved extras to the next visit\n\nExport the next date, client, location, extra, detail, and price as CSV.\n\nCLEAR BOUNDARIES\n\nWhat this service handles\n\nIt stores visit proof, client replies, and approved extras.\n\nWhat it handles\nVisit checklists and consented photos\nClient acceptance, problems, and ratings\nApproved extras for the next visit\nWhat it leaves alone\nNo dispatch, payroll, or worker tracking\nDo not enter home-entry codes or payment card details\nNo public review campaigns\n\nBUSINESS LICENSE\n\nKeep creating proof links\n\nAfter three free visits, one $59 license covers one business workspace.\n\nMore visits in that workspace\nConfigurable client extras\nNext-visit CSV exports\n\n$59 one-time purchase\n\nBuy the business license\nat Sociobot checkout\nHave a license?\nVerify license\n\nSociobot billing starts checkout. Dodo hosts the payment page.\n\nPrivacy · Terms\n\nService Proof Loop\n\nSend visit proof and plan the next visit.\n\nOriginal product art was generated for this service.\n\nPrivacy\nTerms\nBuilt by Param Factory\n(external site)\n\nVersion 1.0.0 · Build 2026.08\n\nSend proof. Plan the next visit.",
+      "consoleMessages": [],
+      "requests": [
+        {
+          "method": "GET",
+          "url": "https://service-proof-loop.sociobot.in/",
+          "resourceType": "document"
+        },
+        {
+          "method": "GET",
+          "url": "https://service-proof-loop.sociobot.in/assets/main-Ce5LenRe.js",
+          "resourceType": "script"
+        },
+        {
+          "method": "GET",
+          "url": "https://service-proof-loop.sociobot.in/assets/main-CgVTc3e8.css",
+          "resourceType": "stylesheet"
+        },
+        {
+          "method": "GET",
+          "url": "https://service-proof-loop.sociobot.in/assets/proof-loop-hero.webp",
+          "resourceType": "image"
+        }
+      ]
+    }
+  },
+  "demo": {
+    "url": "https://service-proof-loop.sociobot.in/demo",
+    "banner": true,
+    "resetVisible": true,
+    "startVisible": true,
+    "initialRealUntouched": true,
+    "afterRealUntouched": true,
+    "resetRealUntouched": true,
+    "initialDemo": {
+      "present": false
+    },
+    "afterDemo": {
+      "present": true,
+      "workspaceId": "893451ac-f313-4608-bf55-6f8d0bff5899",
+      "demo": true,
+      "expiresAt": "2026-09-03T02:20:00.840684943+00:00",
+      "hasAccessToken": true
+    },
+    "resetDemo": {
+      "present": true,
+      "workspaceId": "2b1c2caf-b42a-4695-8358-fcabd4dc7257",
+      "demo": true,
+      "expiresAt": "2026-09-03T02:20:02.330471531+00:00",
+      "hasAccessToken": true
+    },
+    "resetChangedToken": true,
+    "requestOrigins": [
+      "https://service-proof-loop.sociobot.in"
+    ],
+    "proof": {
+      "href": "/proof/<redacted>?demo=1",
+      "status": 200,
+      "canonical": null,
+      "robots": "noindex, nofollow, noarchive",
+      "headers": {
+        "cache-control": "private, no-store",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "x-robots-tag": "noindex, nofollow, noarchive"
+      },
+      "apiStatus": 200,
+      "apiHeaders": {
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "x-robots-tag": "noindex, nofollow, noarchive",
+        "cache-control": "private, no-store"
+      }
+    },
+    "screen": {
+      "title": "Demo — Service Proof Loop",
+      "lang": "en",
+      "h1": [
+        "Completed visits"
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "text": "Completed visits"
+        },
+        {
+          "level": 2,
+          "text": "Maya Chen · Willow Street"
+        },
+        {
+          "level": 3,
+          "text": "Next visit · Sep 16, 2026"
+        }
+      ],
+      "mainCount": 1,
+      "description": "Try a complete proof-to-next-visit loop with isolated sample data.",
+      "canonical": "https://service-proof-loop.sociobot.in/demo",
+      "ogTitle": "Demo — Service Proof Loop",
+      "ogDescription": "Try a complete proof-to-next-visit loop with isolated sample data.",
+      "ogUrl": "https://service-proof-loop.sociobot.in/demo",
+      "ogImage": "https://service-proof-loop.sociobot.in/assets/social.jpg",
+      "twitterTitle": "Demo — Service Proof Loop",
+      "twitterDescription": "Try a complete proof-to-next-visit loop with isolated sample data.",
+      "twitterCard": "summary_large_image",
+      "favicon": "https://service-proof-loop.sociobot.in/favicon.svg",
+      "appleTouchIcon": "https://service-proof-loop.sociobot.in/apple-touch-icon.png",
+      "aboveFold": [
+        {
+          "tag": "strong",
+          "text": "Demo — sample data, nothing is saved",
+          "top": 6,
+          "bottom": 28
+        },
+        {
+          "tag": "button",
+          "text": "Reset demo",
+          "top": 39,
+          "bottom": 83
+        },
+        {
+          "tag": "a",
+          "text": "Start for real",
+          "top": 40,
+          "bottom": 84
+        },
+        {
+          "tag": "span",
+          "text": "Service Proof Loop",
+          "top": 116,
+          "bottom": 133
+        },
+        {
+          "tag": "a",
+          "text": "Demo",
+          "top": 146,
+          "bottom": 190
+        },
+        {
+          "tag": "a",
+          "text": "Workspace",
+          "top": 146,
+          "bottom": 190
+        },
+        {
+          "tag": "a",
+          "text": "Privacy",
+          "top": 146,
+          "bottom": 190
+        },
+        {
+          "tag": "p",
+          "text": "Sample workspace",
+          "top": 259,
+          "bottom": 279
+        },
+        {
+          "tag": "h1",
+          "text": "Completed visits",
+          "top": 291,
+          "bottom": 334
+        },
+        {
+          "tag": "p",
+          "text": "Proof, feedback, and next-visit work stay together.",
+          "top": 342,
+          "bottom": 396
+        },
+        {
+          "tag": "button",
+          "text": "Manage extras",
+          "top": 438,
+          "bottom": 486
+        },
+        {
+          "tag": "button",
+          "text": "Record a visit",
+          "top": 438,
+          "bottom": 486
+        },
+        {
+          "tag": "strong",
+          "text": "Recent visits",
+          "top": 529,
+          "bottom": 546
+        },
+        {
+          "tag": "span",
+          "text": "waiting",
+          "top": 590,
+          "bottom": 591
+        },
+        {
+          "tag": "span",
+          "text": "Waiting for client",
+          "top": 690,
+          "bottom": 712
+        },
+        {
+          "tag": "h2",
+          "text": "Maya Chen · Willow Street",
+          "top": 713,
+          "bottom": 781
+        },
+        {
+          "tag": "p",
+          "text": "Completed Sep 2, 2026 by Elena",
+          "top": 787,
+          "bottom": 809
+        }
+      ],
+      "copyUnits": [
+        {
+          "tag": "button",
+          "text": "Reset demo"
+        },
+        {
+          "tag": "a",
+          "text": "Start for real"
+        },
+        {
+          "tag": "a",
+          "text": "Skip to main content"
+        },
+        {
+          "tag": "a",
+          "text": "Service Proof Loop"
+        },
+        {
+          "tag": "a",
+          "text": "Demo"
+        },
+        {
+          "tag": "a",
+          "text": "Workspace"
+        },
+        {
+          "tag": "a",
+          "text": "Price"
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "p",
+          "text": "Sample workspace"
+        },
+        {
+          "tag": "h1",
+          "text": "Completed visits"
+        },
+        {
+          "tag": "p",
+          "text": "Proof, feedback, and next-visit work stay together."
+        },
+        {
+          "tag": "button",
+          "text": "Manage extras"
+        },
+        {
+          "tag": "button",
+          "text": "Record a visit"
+        },
+        {
+          "tag": "button",
+          "text": "Willow Street waiting"
+        },
+        {
+          "tag": "h2",
+          "text": "Maya Chen · Willow Street"
+        },
+        {
+          "tag": "p",
+          "text": "Completed Sep 2, 2026 by Elena"
+        },
+        {
+          "tag": "label",
+          "text": "Private proof link"
+        },
+        {
+          "tag": "button",
+          "text": "Copy proof link"
+        },
+        {
+          "tag": "a",
+          "text": "Open client view"
+        },
+        {
+          "tag": "h3",
+          "text": "Next visit · Sep 16, 2026"
+        },
+        {
+          "tag": "p",
+          "text": "No extras requested yet. Available extras appear here."
+        },
+        {
+          "tag": "button",
+          "text": "Export next-visit CSV"
+        },
+        {
+          "tag": "p",
+          "text": "Send visit proof and plan the next visit."
+        },
+        {
+          "tag": "p",
+          "text": "Original product art was generated for this service."
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "a",
+          "text": "Terms"
+        },
+        {
+          "tag": "a",
+          "text": "Built by Param Factory (external site)"
+        },
+        {
+          "tag": "p",
+          "text": "Version 1.0.0 · Build 2026.08"
+        }
+      ],
+      "bodyText": "Demo — sample data, nothing is saved\nReset demo\nStart for real\nSkip to main content\nService Proof Loop\nDemo\nWorkspace\nPrivacy\n\nSAMPLE WORKSPACE\n\nCompleted visits\n\nProof, feedback, and next-visit work stay together.\n\nManage extras\nRecord a visit\nRecent visits\nWillow Street\nwaiting\nWAITING FOR CLIENT\nMaya Chen · Willow Street\n\nCompleted Sep 2, 2026 by Elena\n\nPrivate proof link\nCopy proof link\nOpen client view\nNext visit · Sep 16, 2026\n\nNo extras requested yet. Available extras appear here.\n\nExport next-visit CSV\nService Proof Loop\n\nSend visit proof and plan the next visit.\n\nOriginal product art was generated for this service.\n\nPrivacy\nTerms\nBuilt by Param Factory\n(external site)\n\nVersion 1.0.0 · Build 2026.08"
+    }
+  },
+  "routes": {
+    "/": {
+      "status": 200,
+      "title": "Service Proof Loop — Send proof after each visit",
+      "lang": "en",
+      "h1": [
+        "Send proof. Plan the next visit."
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "text": "Send proof. Plan the next visit."
+        },
+        {
+          "level": 2,
+          "text": "See proof and next-visit extras"
+        },
+        {
+          "level": 3,
+          "text": "Maya’s visit at Willow Street"
+        },
+        {
+          "level": 2,
+          "text": "How proof reaches the next visit"
+        },
+        {
+          "level": 3,
+          "text": "Record the visit"
+        },
+        {
+          "level": 3,
+          "text": "Collect one clear reply"
+        },
+        {
+          "level": 3,
+          "text": "Add approved extras to the next visit"
+        },
+        {
+          "level": 2,
+          "text": "What this service handles"
+        },
+        {
+          "level": 3,
+          "text": "What it handles"
+        },
+        {
+          "level": 3,
+          "text": "What it leaves alone"
+        },
+        {
+          "level": 2,
+          "text": "Keep creating proof links"
+        }
+      ],
+      "mainCount": 1,
+      "description": "Send visit proof, collect client feedback, and carry approved extras into the next recurring visit.",
+      "canonical": "https://service-proof-loop.sociobot.in/",
+      "ogTitle": "Service Proof Loop — Send proof after each visit",
+      "ogDescription": "Send visit proof, collect client feedback, and carry approved extras into the next recurring visit.",
+      "ogUrl": "https://service-proof-loop.sociobot.in/",
+      "ogImage": "https://service-proof-loop.sociobot.in/assets/social.jpg",
+      "twitterTitle": "Service Proof Loop — Send proof after each visit",
+      "twitterDescription": "Send visit proof, collect client feedback, and carry approved extras into the next recurring visit.",
+      "twitterCard": "summary_large_image",
+      "favicon": "https://service-proof-loop.sociobot.in/favicon.svg",
+      "appleTouchIcon": "https://service-proof-loop.sociobot.in/apple-touch-icon.png",
+      "aboveFold": [
+        {
+          "tag": "span",
+          "text": "Service Proof Loop",
+          "top": 23,
+          "bottom": 48
+        },
+        {
+          "tag": "a",
+          "text": "Demo",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Workspace",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Price",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Privacy",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "p",
+          "text": "After-visit proof for recurring services",
+          "top": 221,
+          "bottom": 240
+        },
+        {
+          "tag": "h1",
+          "text": "Send proof. Plan the next visit.",
+          "top": 253,
+          "bottom": 422
+        },
+        {
+          "tag": "p",
+          "text": "For recurring service teams that need client feedback and approved extras without asking clients to install an app.",
+          "top": 446,
+          "bottom": 543
+        },
+        {
+          "tag": "a",
+          "text": "Try it with sample data",
+          "top": 575,
+          "bottom": 624
+        },
+        {
+          "tag": "small",
+          "text": "Loads a sample visit. Nothing is saved.",
+          "top": 579,
+          "bottom": 620
+        },
+        {
+          "tag": "li",
+          "text": "Proof links expire after 14 days.",
+          "top": 656,
+          "bottom": 681
+        },
+        {
+          "tag": "li",
+          "text": "Clients open links without an account.",
+          "top": 691,
+          "bottom": 715
+        },
+        {
+          "tag": "li",
+          "text": "Three visits free. $59 once for one workspace.",
+          "top": 725,
+          "bottom": 750
+        },
+        {
+          "tag": "div",
+          "text": "An approved extra appears on the next visit.",
+          "top": 751,
+          "bottom": 827
+        }
+      ],
+      "copyUnits": [
+        {
+          "tag": "a",
+          "text": "Skip to main content"
+        },
+        {
+          "tag": "a",
+          "text": "Service Proof Loop"
+        },
+        {
+          "tag": "a",
+          "text": "Demo"
+        },
+        {
+          "tag": "a",
+          "text": "Workspace"
+        },
+        {
+          "tag": "a",
+          "text": "Price"
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "p",
+          "text": "After-visit proof for recurring services"
+        },
+        {
+          "tag": "h1",
+          "text": "Send proof. Plan the next visit."
+        },
+        {
+          "tag": "p",
+          "text": "For recurring service teams that need client feedback and approved extras without asking clients to install an app."
+        },
+        {
+          "tag": "a",
+          "text": "Try it with sample data"
+        },
+        {
+          "tag": "li",
+          "text": "Proof links expire after 14 days."
+        },
+        {
+          "tag": "li",
+          "text": "Clients open links without an account."
+        },
+        {
+          "tag": "li",
+          "text": "Three visits free. $59 once for one workspace."
+        },
+        {
+          "tag": "p",
+          "text": "The product"
+        },
+        {
+          "tag": "h2",
+          "text": "See proof and next-visit extras"
+        },
+        {
+          "tag": "p",
+          "text": "Crews record the visit. Clients review the proof. The office exports approved extras without typing them again."
+        },
+        {
+          "tag": "li",
+          "text": "Willow StreetToday · Elena"
+        },
+        {
+          "tag": "li",
+          "text": "Lake AvenueYesterday · Sam"
+        },
+        {
+          "tag": "p",
+          "text": "Visit complete"
+        },
+        {
+          "tag": "h3",
+          "text": "Maya’s visit at Willow Street"
+        },
+        {
+          "tag": "p",
+          "text": "Four checks · Two photos · Next visit Sep 11"
+        },
+        {
+          "tag": "li",
+          "text": "✓Kitchen surfaces and sink"
+        },
+        {
+          "tag": "li",
+          "text": "✓Two bathrooms"
+        },
+        {
+          "tag": "li",
+          "text": "✓Floors vacuumed and mopped"
+        },
+        {
+          "tag": "p",
+          "text": "Inside refrigerator · Client approved · $28"
+        },
+        {
+          "tag": "p",
+          "text": "How it works"
+        },
+        {
+          "tag": "h2",
+          "text": "How proof reaches the next visit"
+        },
+        {
+          "tag": "h3",
+          "text": "Record the visit"
+        },
+        {
+          "tag": "p",
+          "text": "The technician checks the work, adds photos with consent, and sends one private link."
+        },
+        {
+          "tag": "h3",
+          "text": "Collect one clear reply"
+        },
+        {
+          "tag": "p",
+          "text": "The client accepts the work or reports a problem. They can rate it and choose extras."
+        },
+        {
+          "tag": "h3",
+          "text": "Add approved extras to the next visit"
+        },
+        {
+          "tag": "p",
+          "text": "Export the next date, client, location, extra, detail, and price as CSV."
+        },
+        {
+          "tag": "p",
+          "text": "Clear boundaries"
+        },
+        {
+          "tag": "h2",
+          "text": "What this service handles"
+        },
+        {
+          "tag": "p",
+          "text": "It stores visit proof, client replies, and approved extras."
+        },
+        {
+          "tag": "h3",
+          "text": "What it handles"
+        },
+        {
+          "tag": "li",
+          "text": "Visit checklists and consented photos"
+        },
+        {
+          "tag": "li",
+          "text": "Client acceptance, problems, and ratings"
+        },
+        {
+          "tag": "li",
+          "text": "Approved extras for the next visit"
+        },
+        {
+          "tag": "h3",
+          "text": "What it leaves alone"
+        },
+        {
+          "tag": "li",
+          "text": "No dispatch, payroll, or worker tracking"
+        },
+        {
+          "tag": "li",
+          "text": "Do not enter home-entry codes or payment card details"
+        },
+        {
+          "tag": "li",
+          "text": "No public review campaigns"
+        },
+        {
+          "tag": "p",
+          "text": "Business license"
+        },
+        {
+          "tag": "h2",
+          "text": "Keep creating proof links"
+        },
+        {
+          "tag": "p",
+          "text": "After three free visits, one $59 license covers one business workspace."
+        },
+        {
+          "tag": "li",
+          "text": "More visits in that workspace"
+        },
+        {
+          "tag": "li",
+          "text": "Configurable client extras"
+        },
+        {
+          "tag": "li",
+          "text": "Next-visit CSV exports"
+        },
+        {
+          "tag": "p",
+          "text": "$59 one-time purchase"
+        },
+        {
+          "tag": "a",
+          "text": "Buy the business license at Sociobot checkout"
+        },
+        {
+          "tag": "label",
+          "text": "Have a license?"
+        },
+        {
+          "tag": "button",
+          "text": "Verify license"
+        },
+        {
+          "tag": "p",
+          "text": "Sociobot billing starts checkout. Dodo hosts the payment page."
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "a",
+          "text": "Terms"
+        },
+        {
+          "tag": "p",
+          "text": "Send visit proof and plan the next visit."
+        },
+        {
+          "tag": "p",
+          "text": "Original product art was generated for this service."
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "a",
+          "text": "Terms"
+        },
+        {
+          "tag": "a",
+          "text": "Built by Param Factory (external site)"
+        },
+        {
+          "tag": "p",
+          "text": "Version 1.0.0 · Build 2026.08"
+        }
+      ],
+      "bodyText": "Skip to main content\nService Proof Loop\nDemo\nWorkspace\nPrice\nPrivacy\n\nAFTER-VISIT PROOF FOR RECURRING SERVICES\n\nSend proof. Plan the next visit.\n\nFor recurring service teams that need client feedback and approved extras without asking clients to install an app.\n\nTry it with sample data\nLoads a sample visit. Nothing is saved.\nProof links expire after 14 days.\nClients open links without an account.\nThree visits free. $59 once for one workspace.\nAn approved extra appears on the next visit.\n\nTHE PRODUCT\n\nSee proof and next-visit extras\n\nCrews record the visit. Clients review the proof. The office exports approved extras without typing them again.\n\nNorthstar Home Care\nWAITING FOR CLIENT\nVisits\nWillow Street\nToday · Elena\nLake Avenue\nYesterday · Sam\n\nVISIT COMPLETE\n\nMaya’s visit at Willow Street\n\nFour checks · Two photos · Next visit Sep 11\n\n✓\nKitchen surfaces and sink\n✓\nTwo bathrooms\n✓\nFloors vacuumed and mopped\nNext visit\n\nInside refrigerator · Client approved · $28\n\nHOW IT WORKS\n\nHow proof reaches the next visit\nRecord the visit\n\nThe technician checks the work, adds photos with consent, and sends one private link.\n\nCollect one clear reply\n\nThe client accepts the work or reports a problem. They can rate it and choose extras.\n\nAdd approved extras to the next visit\n\nExport the next date, client, location, extra, detail, and price as CSV.\n\nCLEAR BOUNDARIES\n\nWhat this service handles\n\nIt stores visit proof, client replies, and approved extras.\n\nWhat it handles\nVisit checklists and consented photos\nClient acceptance, problems, and ratings\nApproved extras for the next visit\nWhat it leaves alone\nNo dispatch, payroll, or worker tracking\nDo not enter home-entry codes or payment card details\nNo public review campaigns\n\nBUSINESS LICENSE\n\nKeep creating proof links\n\nAfter three free visits, one $59 license covers one business workspace.\n\nMore visits in that workspace\nConfigurable client extras\nNext-visit CSV exports\n\n$59 one-time purchase\n\nBuy the business license\nat Sociobot checkout\nHave a license?\nVerify license\n\nSociobot billing starts checkout. Dodo hosts the payment page.\n\nPrivacy · Terms\n\nService Proof Loop\n\nSend visit proof and plan the next visit.\n\nOriginal product art was generated for this service.\n\nPrivacy\nTerms\nBuilt by Param Factory\n(external site)\n\nVersion 1.0.0 · Build 2026.08\n\nSend proof. Plan the next visit."
+    },
+    "/demo": {
+      "status": 200,
+      "title": "Demo — Service Proof Loop",
+      "lang": "en",
+      "h1": [
+        "Completed visits"
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "text": "Completed visits"
+        },
+        {
+          "level": 2,
+          "text": "Maya Chen · Willow Street"
+        },
+        {
+          "level": 3,
+          "text": "Next visit · Sep 16, 2026"
+        }
+      ],
+      "mainCount": 1,
+      "description": "Try a complete proof-to-next-visit loop with isolated sample data.",
+      "canonical": "https://service-proof-loop.sociobot.in/demo",
+      "ogTitle": "Demo — Service Proof Loop",
+      "ogDescription": "Try a complete proof-to-next-visit loop with isolated sample data.",
+      "ogUrl": "https://service-proof-loop.sociobot.in/demo",
+      "ogImage": "https://service-proof-loop.sociobot.in/assets/social.jpg",
+      "twitterTitle": "Demo — Service Proof Loop",
+      "twitterDescription": "Try a complete proof-to-next-visit loop with isolated sample data.",
+      "twitterCard": "summary_large_image",
+      "favicon": "https://service-proof-loop.sociobot.in/favicon.svg",
+      "appleTouchIcon": "https://service-proof-loop.sociobot.in/apple-touch-icon.png",
+      "aboveFold": [
+        {
+          "tag": "strong",
+          "text": "Demo — sample data, nothing is saved",
+          "top": 17,
+          "bottom": 39
+        },
+        {
+          "tag": "button",
+          "text": "Reset demo",
+          "top": 6,
+          "bottom": 50
+        },
+        {
+          "tag": "a",
+          "text": "Start for real",
+          "top": 6,
+          "bottom": 50
+        },
+        {
+          "tag": "span",
+          "text": "Service Proof Loop",
+          "top": 79,
+          "bottom": 104
+        },
+        {
+          "tag": "a",
+          "text": "Demo",
+          "top": 70,
+          "bottom": 114
+        },
+        {
+          "tag": "a",
+          "text": "Workspace",
+          "top": 70,
+          "bottom": 114
+        },
+        {
+          "tag": "a",
+          "text": "Price",
+          "top": 70,
+          "bottom": 114
+        },
+        {
+          "tag": "a",
+          "text": "Privacy",
+          "top": 70,
+          "bottom": 114
+        },
+        {
+          "tag": "p",
+          "text": "Sample workspace",
+          "top": 184,
+          "bottom": 203
+        },
+        {
+          "tag": "h1",
+          "text": "Completed visits",
+          "top": 216,
+          "bottom": 292
+        },
+        {
+          "tag": "p",
+          "text": "Proof, feedback, and next-visit work stay together.",
+          "top": 300,
+          "bottom": 332
+        },
+        {
+          "tag": "button",
+          "text": "Manage extras",
+          "top": 304,
+          "bottom": 353
+        },
+        {
+          "tag": "button",
+          "text": "Record a visit",
+          "top": 304,
+          "bottom": 353
+        },
+        {
+          "tag": "strong",
+          "text": "Recent visits",
+          "top": 396,
+          "bottom": 413
+        },
+        {
+          "tag": "span",
+          "text": "waiting",
+          "top": 458,
+          "bottom": 459
+        },
+        {
+          "tag": "span",
+          "text": "Waiting for client",
+          "top": 444,
+          "bottom": 466
+        },
+        {
+          "tag": "h2",
+          "text": "Maya Chen · Willow Street",
+          "top": 467,
+          "bottom": 501
+        },
+        {
+          "tag": "p",
+          "text": "Completed Sep 2, 2026 by Elena",
+          "top": 507,
+          "bottom": 529
+        },
+        {
+          "tag": "label",
+          "text": "Private proof link",
+          "top": 569,
+          "bottom": 593
+        },
+        {
+          "tag": "button",
+          "text": "Copy proof link",
+          "top": 680,
+          "bottom": 729
+        },
+        {
+          "tag": "a",
+          "text": "Open client view",
+          "top": 680,
+          "bottom": 729
+        },
+        {
+          "tag": "h3",
+          "text": "Next visit · Sep 16, 2026",
+          "top": 763,
+          "bottom": 788
+        },
+        {
+          "tag": "p",
+          "text": "No extras requested yet. Available extras appear here.",
+          "top": 796,
+          "bottom": 820
+        },
+        {
+          "tag": "button",
+          "text": "Export next-visit CSV",
+          "top": 866,
+          "bottom": 915
+        }
+      ],
+      "copyUnits": [
+        {
+          "tag": "button",
+          "text": "Reset demo"
+        },
+        {
+          "tag": "a",
+          "text": "Start for real"
+        },
+        {
+          "tag": "a",
+          "text": "Skip to main content"
+        },
+        {
+          "tag": "a",
+          "text": "Service Proof Loop"
+        },
+        {
+          "tag": "a",
+          "text": "Demo"
+        },
+        {
+          "tag": "a",
+          "text": "Workspace"
+        },
+        {
+          "tag": "a",
+          "text": "Price"
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "p",
+          "text": "Sample workspace"
+        },
+        {
+          "tag": "h1",
+          "text": "Completed visits"
+        },
+        {
+          "tag": "p",
+          "text": "Proof, feedback, and next-visit work stay together."
+        },
+        {
+          "tag": "button",
+          "text": "Manage extras"
+        },
+        {
+          "tag": "button",
+          "text": "Record a visit"
+        },
+        {
+          "tag": "button",
+          "text": "Willow Street waiting"
+        },
+        {
+          "tag": "h2",
+          "text": "Maya Chen · Willow Street"
+        },
+        {
+          "tag": "p",
+          "text": "Completed Sep 2, 2026 by Elena"
+        },
+        {
+          "tag": "label",
+          "text": "Private proof link"
+        },
+        {
+          "tag": "button",
+          "text": "Copy proof link"
+        },
+        {
+          "tag": "a",
+          "text": "Open client view"
+        },
+        {
+          "tag": "h3",
+          "text": "Next visit · Sep 16, 2026"
+        },
+        {
+          "tag": "p",
+          "text": "No extras requested yet. Available extras appear here."
+        },
+        {
+          "tag": "button",
+          "text": "Export next-visit CSV"
+        },
+        {
+          "tag": "p",
+          "text": "Send visit proof and plan the next visit."
+        },
+        {
+          "tag": "p",
+          "text": "Original product art was generated for this service."
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "a",
+          "text": "Terms"
+        },
+        {
+          "tag": "a",
+          "text": "Built by Param Factory (external site)"
+        },
+        {
+          "tag": "p",
+          "text": "Version 1.0.0 · Build 2026.08"
+        }
+      ],
+      "bodyText": "Demo — sample data, nothing is saved\nReset demo\nStart for real\nSkip to main content\nService Proof Loop\nDemo\nWorkspace\nPrice\nPrivacy\n\nSAMPLE WORKSPACE\n\nCompleted visits\n\nProof, feedback, and next-visit work stay together.\n\nManage extras\nRecord a visit\nRecent visits\nWillow Street\nwaiting\nWAITING FOR CLIENT\nMaya Chen · Willow Street\n\nCompleted Sep 2, 2026 by Elena\n\nPrivate proof link\nCopy proof link\nOpen client view\nNext visit · Sep 16, 2026\n\nNo extras requested yet. Available extras appear here.\n\nExport next-visit CSV\nService Proof Loop\n\nSend visit proof and plan the next visit.\n\nOriginal product art was generated for this service.\n\nPrivacy\nTerms\nBuilt by Param Factory\n(external site)\n\nVersion 1.0.0 · Build 2026.08\n\nCompleted visits"
+    },
+    "/app": {
+      "status": 200,
+      "title": "Start — Service Proof Loop",
+      "lang": "en",
+      "h1": [
+        "Create your business workspace"
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "text": "Create your business workspace"
+        }
+      ],
+      "mainCount": 1,
+      "description": "Create a local business workspace for completed visits.",
+      "canonical": "https://service-proof-loop.sociobot.in/app",
+      "ogTitle": "Start — Service Proof Loop",
+      "ogDescription": "Create a local business workspace for completed visits.",
+      "ogUrl": "https://service-proof-loop.sociobot.in/app",
+      "ogImage": "https://service-proof-loop.sociobot.in/assets/social.jpg",
+      "twitterTitle": "Start — Service Proof Loop",
+      "twitterDescription": "Create a local business workspace for completed visits.",
+      "twitterCard": "summary_large_image",
+      "favicon": "https://service-proof-loop.sociobot.in/favicon.svg",
+      "appleTouchIcon": "https://service-proof-loop.sociobot.in/apple-touch-icon.png",
+      "aboveFold": [
+        {
+          "tag": "span",
+          "text": "Service Proof Loop",
+          "top": 23,
+          "bottom": 48
+        },
+        {
+          "tag": "a",
+          "text": "Demo",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Workspace",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Price",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Privacy",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "p",
+          "text": "Start for real",
+          "top": 144,
+          "bottom": 163
+        },
+        {
+          "tag": "h1",
+          "text": "Create your business workspace",
+          "top": 176,
+          "bottom": 261
+        },
+        {
+          "tag": "p",
+          "text": "Name the service business that clients will see on proof links.",
+          "top": 314,
+          "bottom": 346
+        },
+        {
+          "tag": "label",
+          "text": "Business name",
+          "top": 416,
+          "bottom": 441
+        },
+        {
+          "tag": "button",
+          "text": "Create workspace",
+          "top": 522,
+          "bottom": 571
+        },
+        {
+          "tag": "p",
+          "text": "This browser stores an access key. Save work on a device your office controls.",
+          "top": 571,
+          "bottom": 591
+        },
+        {
+          "tag": "strong",
+          "text": "Service Proof Loop",
+          "top": 804,
+          "bottom": 821
+        },
+        {
+          "tag": "p",
+          "text": "Send visit proof and plan the next visit.",
+          "top": 826,
+          "bottom": 846
+        },
+        {
+          "tag": "p",
+          "text": "Original product art was generated for this service.",
+          "top": 859,
+          "bottom": 880
+        },
+        {
+          "tag": "a",
+          "text": "Privacy",
+          "top": 801,
+          "bottom": 845
+        },
+        {
+          "tag": "a",
+          "text": "Terms",
+          "top": 801,
+          "bottom": 845
+        },
+        {
+          "tag": "span",
+          "text": "(external site)",
+          "top": 822,
+          "bottom": 823
+        },
+        {
+          "tag": "p",
+          "text": "Version 1.0.0 · Build 2026.08",
+          "top": 801,
+          "bottom": 821
+        }
+      ],
+      "copyUnits": [
+        {
+          "tag": "a",
+          "text": "Skip to main content"
+        },
+        {
+          "tag": "a",
+          "text": "Service Proof Loop"
+        },
+        {
+          "tag": "a",
+          "text": "Demo"
+        },
+        {
+          "tag": "a",
+          "text": "Workspace"
+        },
+        {
+          "tag": "a",
+          "text": "Price"
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "p",
+          "text": "Start for real"
+        },
+        {
+          "tag": "h1",
+          "text": "Create your business workspace"
+        },
+        {
+          "tag": "p",
+          "text": "Name the service business that clients will see on proof links."
+        },
+        {
+          "tag": "label",
+          "text": "Business name"
+        },
+        {
+          "tag": "button",
+          "text": "Create workspace"
+        },
+        {
+          "tag": "p",
+          "text": "This browser stores an access key. Save work on a device your office controls."
+        },
+        {
+          "tag": "p",
+          "text": "Send visit proof and plan the next visit."
+        },
+        {
+          "tag": "p",
+          "text": "Original product art was generated for this service."
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "a",
+          "text": "Terms"
+        },
+        {
+          "tag": "a",
+          "text": "Built by Param Factory (external site)"
+        },
+        {
+          "tag": "p",
+          "text": "Version 1.0.0 · Build 2026.08"
+        }
+      ],
+      "bodyText": "Skip to main content\nService Proof Loop\nDemo\nWorkspace\nPrice\nPrivacy\n\nSTART FOR REAL\n\nCreate your business workspace\n\nName the service business that clients will see on proof links.\n\nBusiness name\nCreate workspace\n\nThis browser stores an access key. Save work on a device your office controls.\n\nService Proof Loop\n\nSend visit proof and plan the next visit.\n\nOriginal product art was generated for this service.\n\nPrivacy\nTerms\nBuilt by Param Factory\n(external site)\n\nVersion 1.0.0 · Build 2026.08\n\nCreate your business workspace"
+    },
+    "/privacy": {
+      "status": 200,
+      "title": "Privacy — Service Proof Loop",
+      "lang": "en",
+      "h1": [
+        "Privacy for visit proof"
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "text": "Privacy for visit proof"
+        },
+        {
+          "level": 2,
+          "text": "What we store"
+        },
+        {
+          "level": 2,
+          "text": "How the product uses it"
+        },
+        {
+          "level": 2,
+          "text": "Proof links"
+        },
+        {
+          "level": 2,
+          "text": "Demo data"
+        },
+        {
+          "level": 2,
+          "text": "Billing"
+        },
+        {
+          "level": 2,
+          "text": "Your choices"
+        },
+        {
+          "level": 2,
+          "text": "Contact"
+        }
+      ],
+      "mainCount": 1,
+      "description": "How Service Proof Loop handles visit proof and client replies.",
+      "canonical": "https://service-proof-loop.sociobot.in/privacy",
+      "ogTitle": "Privacy — Service Proof Loop",
+      "ogDescription": "How Service Proof Loop handles visit proof and client replies.",
+      "ogUrl": "https://service-proof-loop.sociobot.in/privacy",
+      "ogImage": "https://service-proof-loop.sociobot.in/assets/social.jpg",
+      "twitterTitle": "Privacy — Service Proof Loop",
+      "twitterDescription": "How Service Proof Loop handles visit proof and client replies.",
+      "twitterCard": "summary_large_image",
+      "favicon": "https://service-proof-loop.sociobot.in/favicon.svg",
+      "appleTouchIcon": "https://service-proof-loop.sociobot.in/apple-touch-icon.png",
+      "aboveFold": [
+        {
+          "tag": "span",
+          "text": "Service Proof Loop",
+          "top": 23,
+          "bottom": 48
+        },
+        {
+          "tag": "a",
+          "text": "Demo",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Workspace",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Price",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Privacy",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "p",
+          "text": "Last updated August 28, 2026",
+          "top": 144,
+          "bottom": 163
+        },
+        {
+          "tag": "h1",
+          "text": "Privacy for visit proof",
+          "top": 176,
+          "bottom": 345
+        },
+        {
+          "tag": "p",
+          "text": "Service Proof Loop stores the details needed to share completed work and plan the next visit.",
+          "top": 399,
+          "bottom": 449
+        },
+        {
+          "tag": "h2",
+          "text": "What we store",
+          "top": 497,
+          "bottom": 525
+        },
+        {
+          "tag": "p",
+          "text": "We store business names, client labels, visit notes, consented photos, ratings, comments, and chosen extras.",
+          "top": 548,
+          "bottom": 598
+        },
+        {
+          "tag": "p",
+          "text": "Do not enter door codes, payment cards, health records, or other unnecessary private details.",
+          "top": 614,
+          "bottom": 663
+        },
+        {
+          "tag": "h2",
+          "text": "How the product uses it",
+          "top": 711,
+          "bottom": 740
+        },
+        {
+          "tag": "p",
+          "text": "Visit details appear in proof links. Client replies and chosen extras appear in the workspace and next-visit exports.",
+          "top": 763,
+          "bottom": 812
+        },
+        {
+          "tag": "h2",
+          "text": "Proof links",
+          "top": 860,
+          "bottom": 889
+        }
+      ],
+      "copyUnits": [
+        {
+          "tag": "a",
+          "text": "Skip to main content"
+        },
+        {
+          "tag": "a",
+          "text": "Service Proof Loop"
+        },
+        {
+          "tag": "a",
+          "text": "Demo"
+        },
+        {
+          "tag": "a",
+          "text": "Workspace"
+        },
+        {
+          "tag": "a",
+          "text": "Price"
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "p",
+          "text": "Last updated August 28, 2026"
+        },
+        {
+          "tag": "h1",
+          "text": "Privacy for visit proof"
+        },
+        {
+          "tag": "p",
+          "text": "Service Proof Loop stores the details needed to share completed work and plan the next visit."
+        },
+        {
+          "tag": "h2",
+          "text": "What we store"
+        },
+        {
+          "tag": "p",
+          "text": "We store business names, client labels, visit notes, consented photos, ratings, comments, and chosen extras."
+        },
+        {
+          "tag": "p",
+          "text": "Do not enter door codes, payment cards, health records, or other unnecessary private details."
+        },
+        {
+          "tag": "h2",
+          "text": "How the product uses it"
+        },
+        {
+          "tag": "p",
+          "text": "Visit details appear in proof links. Client replies and chosen extras appear in the workspace and next-visit exports."
+        },
+        {
+          "tag": "h2",
+          "text": "Proof links"
+        },
+        {
+          "tag": "p",
+          "text": "Each proof link uses a random token and expires after 14 days. We tell browsers and caches not to retain it."
+        },
+        {
+          "tag": "h2",
+          "text": "Demo data"
+        },
+        {
+          "tag": "p",
+          "text": "Each demo uses an isolated workspace. It expires within 24 hours and never opens a real workspace."
+        },
+        {
+          "tag": "h2",
+          "text": "Billing"
+        },
+        {
+          "tag": "p",
+          "text": "Sociobot billing starts checkout. Dodo hosts the payment page and handles payment card details."
+        },
+        {
+          "tag": "p",
+          "text": "Your browser stores the license token. The service stores only its hash when the license covers a workspace."
+        },
+        {
+          "tag": "h2",
+          "text": "Your choices"
+        },
+        {
+          "tag": "p",
+          "text": "Ask the business that sent your link to correct or remove visit data. Businesses can contact support for account deletion."
+        },
+        {
+          "tag": "h2",
+          "text": "Contact"
+        },
+        {
+          "tag": "a",
+          "text": "privacy@sociobot.in"
+        },
+        {
+          "tag": "p",
+          "text": "Send visit proof and plan the next visit."
+        },
+        {
+          "tag": "p",
+          "text": "Original product art was generated for this service."
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "a",
+          "text": "Terms"
+        },
+        {
+          "tag": "a",
+          "text": "Built by Param Factory (external site)"
+        },
+        {
+          "tag": "p",
+          "text": "Version 1.0.0 · Build 2026.08"
+        }
+      ],
+      "bodyText": "Skip to main content\nService Proof Loop\nDemo\nWorkspace\nPrice\nPrivacy\n\nLAST UPDATED AUGUST 28, 2026\n\nPrivacy for visit proof\n\nService Proof Loop stores the details needed to share completed work and plan the next visit.\n\nWhat we store\n\nWe store business names, client labels, visit notes, consented photos, ratings, comments, and chosen extras.\n\nDo not enter door codes, payment cards, health records, or other unnecessary private details.\n\nHow the product uses it\n\nVisit details appear in proof links. Client replies and chosen extras appear in the workspace and next-visit exports.\n\nProof links\n\nEach proof link uses a random token and expires after 14 days. We tell browsers and caches not to retain it.\n\nDemo data\n\nEach demo uses an isolated workspace. It expires within 24 hours and never opens a real workspace.\n\nBilling\n\nSociobot billing starts checkout. Dodo hosts the payment page and handles payment card details.\n\nYour browser stores the license token. The service stores only its hash when the license covers a workspace.\n\nYour choices\n\nAsk the business that sent your link to correct or remove visit data. Businesses can contact support for account deletion.\n\nContact\n\nEmail privacy@sociobot.in with privacy questions.\n\nService Proof Loop\n\nSend visit proof and plan the next visit.\n\nOriginal product art was generated for this service.\n\nPrivacy\nTerms\nBuilt by Param Factory\n(external site)\n\nVersion 1.0.0 · Build 2026.08\n\nPrivacy for visit proof"
+    },
+    "/terms": {
+      "status": 200,
+      "title": "Terms — Service Proof Loop",
+      "lang": "en",
+      "h1": [
+        "Terms of service"
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "text": "Terms of service"
+        },
+        {
+          "level": 2,
+          "text": "Use the service fairly"
+        },
+        {
+          "level": 2,
+          "text": "Your responsibilities"
+        },
+        {
+          "level": 2,
+          "text": "Business license"
+        },
+        {
+          "level": 2,
+          "text": "Service limits"
+        },
+        {
+          "level": 2,
+          "text": "Availability"
+        },
+        {
+          "level": 2,
+          "text": "Contact"
+        }
+      ],
+      "mainCount": 1,
+      "description": "Terms for using Service Proof Loop.",
+      "canonical": "https://service-proof-loop.sociobot.in/terms",
+      "ogTitle": "Terms — Service Proof Loop",
+      "ogDescription": "Terms for using Service Proof Loop.",
+      "ogUrl": "https://service-proof-loop.sociobot.in/terms",
+      "ogImage": "https://service-proof-loop.sociobot.in/assets/social.jpg",
+      "twitterTitle": "Terms — Service Proof Loop",
+      "twitterDescription": "Terms for using Service Proof Loop.",
+      "twitterCard": "summary_large_image",
+      "favicon": "https://service-proof-loop.sociobot.in/favicon.svg",
+      "appleTouchIcon": "https://service-proof-loop.sociobot.in/apple-touch-icon.png",
+      "aboveFold": [
+        {
+          "tag": "span",
+          "text": "Service Proof Loop",
+          "top": 23,
+          "bottom": 48
+        },
+        {
+          "tag": "a",
+          "text": "Demo",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Workspace",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Price",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Privacy",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "p",
+          "text": "Last updated August 28, 2026",
+          "top": 144,
+          "bottom": 163
+        },
+        {
+          "tag": "h1",
+          "text": "Terms of service",
+          "top": 176,
+          "bottom": 261
+        },
+        {
+          "tag": "p",
+          "text": "These terms apply when you use Service Proof Loop.",
+          "top": 314,
+          "bottom": 339
+        },
+        {
+          "tag": "h2",
+          "text": "Use the service fairly",
+          "top": 387,
+          "bottom": 416
+        },
+        {
+          "tag": "p",
+          "text": "Use the service for lawful visit proof and client feedback. Get consent before taking or sharing photos.",
+          "top": 438,
+          "bottom": 488
+        },
+        {
+          "tag": "p",
+          "text": "Do not upload harmful content, access another workspace, or test proof links you did not receive.",
+          "top": 504,
+          "bottom": 554
+        },
+        {
+          "tag": "h2",
+          "text": "Your responsibilities",
+          "top": 602,
+          "bottom": 630
+        },
+        {
+          "tag": "p",
+          "text": "You control what your team records. Keep workspace access keys on devices your business controls.",
+          "top": 653,
+          "bottom": 703
+        },
+        {
+          "tag": "h2",
+          "text": "Business license",
+          "top": 751,
+          "bottom": 779
+        },
+        {
+          "tag": "p",
+          "text": "The business license costs $59 as a one-time purchase. One license applies to one business workspace.",
+          "top": 802,
+          "bottom": 852
+        },
+        {
+          "tag": "p",
+          "text": "Sociobot billing starts checkout. Dodo hosts the payment page. See that page for purchase terms.",
+          "top": 868,
+          "bottom": 917
+        }
+      ],
+      "copyUnits": [
+        {
+          "tag": "a",
+          "text": "Skip to main content"
+        },
+        {
+          "tag": "a",
+          "text": "Service Proof Loop"
+        },
+        {
+          "tag": "a",
+          "text": "Demo"
+        },
+        {
+          "tag": "a",
+          "text": "Workspace"
+        },
+        {
+          "tag": "a",
+          "text": "Price"
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "p",
+          "text": "Last updated August 28, 2026"
+        },
+        {
+          "tag": "h1",
+          "text": "Terms of service"
+        },
+        {
+          "tag": "p",
+          "text": "These terms apply when you use Service Proof Loop."
+        },
+        {
+          "tag": "h2",
+          "text": "Use the service fairly"
+        },
+        {
+          "tag": "p",
+          "text": "Use the service for lawful visit proof and client feedback. Get consent before taking or sharing photos."
+        },
+        {
+          "tag": "p",
+          "text": "Do not upload harmful content, access another workspace, or test proof links you did not receive."
+        },
+        {
+          "tag": "h2",
+          "text": "Your responsibilities"
+        },
+        {
+          "tag": "p",
+          "text": "You control what your team records. Keep workspace access keys on devices your business controls."
+        },
+        {
+          "tag": "h2",
+          "text": "Business license"
+        },
+        {
+          "tag": "p",
+          "text": "The business license costs $59 as a one-time purchase. One license applies to one business workspace."
+        },
+        {
+          "tag": "p",
+          "text": "Sociobot billing starts checkout. Dodo hosts the payment page. See that page for purchase terms."
+        },
+        {
+          "tag": "h2",
+          "text": "Service limits"
+        },
+        {
+          "tag": "p",
+          "text": "This product does not provide dispatch, payments, payroll, worker tracking, or emergency communication."
+        },
+        {
+          "tag": "h2",
+          "text": "Availability"
+        },
+        {
+          "tag": "p",
+          "text": "We work to keep the service available. We cannot promise uninterrupted access or permanent storage."
+        },
+        {
+          "tag": "h2",
+          "text": "Contact"
+        },
+        {
+          "tag": "a",
+          "text": "support@sociobot.in"
+        },
+        {
+          "tag": "p",
+          "text": "Send visit proof and plan the next visit."
+        },
+        {
+          "tag": "p",
+          "text": "Original product art was generated for this service."
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "a",
+          "text": "Terms"
+        },
+        {
+          "tag": "a",
+          "text": "Built by Param Factory (external site)"
+        },
+        {
+          "tag": "p",
+          "text": "Version 1.0.0 · Build 2026.08"
+        }
+      ],
+      "bodyText": "Skip to main content\nService Proof Loop\nDemo\nWorkspace\nPrice\nPrivacy\n\nLAST UPDATED AUGUST 28, 2026\n\nTerms of service\n\nThese terms apply when you use Service Proof Loop.\n\nUse the service fairly\n\nUse the service for lawful visit proof and client feedback. Get consent before taking or sharing photos.\n\nDo not upload harmful content, access another workspace, or test proof links you did not receive.\n\nYour responsibilities\n\nYou control what your team records. Keep workspace access keys on devices your business controls.\n\nBusiness license\n\nThe business license costs $59 as a one-time purchase. One license applies to one business workspace.\n\nSociobot billing starts checkout. Dodo hosts the payment page. See that page for purchase terms.\n\nService limits\n\nThis product does not provide dispatch, payments, payroll, worker tracking, or emergency communication.\n\nAvailability\n\nWe work to keep the service available. We cannot promise uninterrupted access or permanent storage.\n\nContact\n\nEmail support@sociobot.in with service questions.\n\nService Proof Loop\n\nSend visit proof and plan the next visit.\n\nOriginal product art was generated for this service.\n\nPrivacy\nTerms\nBuilt by Param Factory\n(external site)\n\nVersion 1.0.0 · Build 2026.08\n\nTerms of service"
+    },
+    "/definitely-missing": {
+      "status": 404,
+      "title": "Page not found — Service Proof Loop",
+      "lang": "en",
+      "h1": [
+        "This page does not exist"
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "text": "This page does not exist"
+        }
+      ],
+      "mainCount": 1,
+      "description": "Return to Service Proof Loop.",
+      "canonical": "https://service-proof-loop.sociobot.in/definitely-missing",
+      "ogTitle": "Page not found — Service Proof Loop",
+      "ogDescription": "Return to Service Proof Loop.",
+      "ogImage": "https://service-proof-loop.sociobot.in/assets/social.jpg",
+      "twitterTitle": "Page not found — Service Proof Loop",
+      "twitterDescription": "Return to Service Proof Loop.",
+      "twitterCard": "summary_large_image",
+      "favicon": "https://service-proof-loop.sociobot.in/favicon.svg",
+      "appleTouchIcon": "https://service-proof-loop.sociobot.in/apple-touch-icon.png",
+      "aboveFold": [
+        {
+          "tag": "span",
+          "text": "Service Proof Loop",
+          "top": 23,
+          "bottom": 48
+        },
+        {
+          "tag": "a",
+          "text": "Demo",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Workspace",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Price",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "a",
+          "text": "Privacy",
+          "top": 14,
+          "bottom": 58
+        },
+        {
+          "tag": "p",
+          "text": "404",
+          "top": 144,
+          "bottom": 163
+        },
+        {
+          "tag": "h1",
+          "text": "This page does not exist",
+          "top": 176,
+          "bottom": 261
+        },
+        {
+          "tag": "p",
+          "text": "Check the address or return to the home page.",
+          "top": 434,
+          "bottom": 459
+        },
+        {
+          "tag": "a",
+          "text": "Return home",
+          "top": 475,
+          "bottom": 524
+        },
+        {
+          "tag": "strong",
+          "text": "Service Proof Loop",
+          "top": 784,
+          "bottom": 801
+        },
+        {
+          "tag": "p",
+          "text": "Send visit proof and plan the next visit.",
+          "top": 806,
+          "bottom": 826
+        },
+        {
+          "tag": "p",
+          "text": "Original product art was generated for this service.",
+          "top": 839,
+          "bottom": 860
+        },
+        {
+          "tag": "a",
+          "text": "Privacy",
+          "top": 781,
+          "bottom": 825
+        },
+        {
+          "tag": "a",
+          "text": "Terms",
+          "top": 781,
+          "bottom": 825
+        },
+        {
+          "tag": "span",
+          "text": "(external site)",
+          "top": 803,
+          "bottom": 804
+        },
+        {
+          "tag": "p",
+          "text": "Version 1.0.0 · Build 2026.08",
+          "top": 781,
+          "bottom": 801
+        }
+      ],
+      "copyUnits": [
+        {
+          "tag": "a",
+          "text": "Skip to main content"
+        },
+        {
+          "tag": "a",
+          "text": "Service Proof Loop"
+        },
+        {
+          "tag": "a",
+          "text": "Demo"
+        },
+        {
+          "tag": "a",
+          "text": "Workspace"
+        },
+        {
+          "tag": "a",
+          "text": "Price"
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "p",
+          "text": "404"
+        },
+        {
+          "tag": "h1",
+          "text": "This page does not exist"
+        },
+        {
+          "tag": "p",
+          "text": "Check the address or return to the home page."
+        },
+        {
+          "tag": "a",
+          "text": "Return home"
+        },
+        {
+          "tag": "p",
+          "text": "Send visit proof and plan the next visit."
+        },
+        {
+          "tag": "p",
+          "text": "Original product art was generated for this service."
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "a",
+          "text": "Terms"
+        },
+        {
+          "tag": "a",
+          "text": "Built by Param Factory (external site)"
+        },
+        {
+          "tag": "p",
+          "text": "Version 1.0.0 · Build 2026.08"
+        }
+      ],
+      "bodyText": "Skip to main content\nService Proof Loop\nDemo\nWorkspace\nPrice\nPrivacy\n\n404\n\nThis page does not exist\n\nCheck the address or return to the home page.\n\nReturn home\nService Proof Loop\n\nSend visit proof and plan the next visit.\n\nOriginal product art was generated for this service.\n\nPrivacy\nTerms\nBuilt by Param Factory\n(external site)\n\nVersion 1.0.0 · Build 2026.08\n\nThis page does not exist"
+    }
+  },
+  "links": {
+    "discovered": [
+      "https://service-proof-loop.sociobot.in/#main",
+      "https://service-proof-loop.sociobot.in/",
+      "https://service-proof-loop.sociobot.in/demo",
+      "https://service-proof-loop.sociobot.in/app",
+      "https://service-proof-loop.sociobot.in/#pricing",
+      "https://service-proof-loop.sociobot.in/privacy",
+      "https://api.sociobot.in/api/v1/products/service-proof-loop/checkout",
+      "https://service-proof-loop.sociobot.in/terms",
+      "https://sociobot.in/",
+      "https://service-proof-loop.sociobot.in/demo#main",
+      "https://service-proof-loop.sociobot.in/proof/<redacted>?demo=1",
+      "https://service-proof-loop.sociobot.in/app#main",
+      "https://service-proof-loop.sociobot.in/privacy#main",
+      "mailto:privacy@sociobot.in",
+      "https://service-proof-loop.sociobot.in/terms#main",
+      "mailto:support@sociobot.in",
+      "https://service-proof-loop.sociobot.in/definitely-missing#main"
+    ],
+    "results": [
+      {
+        "href": "https://service-proof-loop.sociobot.in/#main",
+        "status": 200,
+        "location": null
+      },
+      {
+        "href": "https://service-proof-loop.sociobot.in/",
+        "status": 200,
+        "location": null
+      },
+      {
+        "href": "https://service-proof-loop.sociobot.in/demo",
+        "status": 200,
+        "location": null
+      },
+      {
+        "href": "https://service-proof-loop.sociobot.in/app",
+        "status": 200,
+        "location": null
+      },
+      {
+        "href": "https://service-proof-loop.sociobot.in/#pricing",
+        "status": 200,
+        "location": null
+      },
+      {
+        "href": "https://service-proof-loop.sociobot.in/privacy",
+        "status": 200,
+        "location": null
+      },
+      {
+        "href": "https://api.sociobot.in/api/v1/products/service-proof-loop/checkout",
+        "status": 303,
+        "location": "https://checkout.dodopayments.com/session/<redacted>"
+      },
+      {
+        "href": "https://service-proof-loop.sociobot.in/terms",
+        "status": 200,
+        "location": null
+      },
+      {
+        "href": "https://sociobot.in/",
+        "status": 200,
+        "location": null
+      },
+      {
+        "href": "https://service-proof-loop.sociobot.in/demo#main",
+        "status": 200,
+        "location": null
+      },
+      {
+        "href": "https://service-proof-loop.sociobot.in/proof/<redacted>?demo=1",
+        "status": 200,
+        "location": null
+      },
+      {
+        "href": "https://service-proof-loop.sociobot.in/app#main",
+        "status": 200,
+        "location": null
+      },
+      {
+        "href": "https://service-proof-loop.sociobot.in/privacy#main",
+        "status": 200,
+        "location": null
+      },
+      {
+        "href": "mailto:privacy@sociobot.in",
+        "skipped": "mailto"
+      },
+      {
+        "href": "https://service-proof-loop.sociobot.in/terms#main",
+        "status": 200,
+        "location": null
+      },
+      {
+        "href": "mailto:support@sociobot.in",
+        "skipped": "mailto"
+      },
+      {
+        "href": "https://service-proof-loop.sociobot.in/definitely-missing#main",
+        "status": 404,
+        "location": null
+      }
+    ]
+  },
+  "navigation": {
+    "afterRoute": {
+      "url": "https://service-proof-loop.sociobot.in/privacy",
+      "focused": "Privacy for visit proof",
+      "title": "Privacy — Service Proof Loop"
+    },
+    "afterBack": {
+      "url": "https://service-proof-loop.sociobot.in/",
+      "focused": "Send proof. Plan the next visit.",
+      "scrollY": 0
+    }
+  }
+}

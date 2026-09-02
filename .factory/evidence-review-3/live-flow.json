@@ -1,0 +1,22 @@
+{
+  "liveFlow": {
+    "savedHeading": "Your reply is saved",
+    "nextVisit": "Next visit · Sep 16, 2026\nInside refrigerator\nWipe shelves and drawers\n$28",
+    "csv": "next_visit,client,location,extra,detail,price\n\"2026-09-16\",\"Maya Chen\",\"Willow Street\",\"Inside refrigerator\",\"Wipe shelves and drawers\",28.00\n",
+    "requestOrigins": [
+      "https://service-proof-loop.sociobot.in"
+    ]
+  },
+  "leaveDemo": {
+    "before": {
+      "hasDemo": true,
+      "real": "review-3-sentinel"
+    },
+    "after": {
+      "hasDemo": false,
+      "real": "review-3-sentinel",
+      "url": "https://service-proof-loop.sociobot.in/app",
+      "h1": "Create your business workspace"
+    }
+  }
+}

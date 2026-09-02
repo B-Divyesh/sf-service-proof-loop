@@ -1,0 +1,52 @@
+[
+  {
+    "colorScheme": "light",
+    "path": "/",
+    "violations": []
+  },
+  {
+    "colorScheme": "light",
+    "path": "/demo",
+    "violations": []
+  },
+  {
+    "colorScheme": "light",
+    "path": "/privacy",
+    "violations": []
+  },
+  {
+    "colorScheme": "light",
+    "path": "/terms",
+    "violations": []
+  },
+  {
+    "colorScheme": "light",
+    "path": "/proof/<redacted>?demo=1",
+    "violations": []
+  },
+  {
+    "colorScheme": "dark",
+    "path": "/",
+    "violations": []
+  },
+  {
+    "colorScheme": "dark",
+    "path": "/demo",
+    "violations": []
+  },
+  {
+    "colorScheme": "dark",
+    "path": "/privacy",
+    "violations": []
+  },
+  {
+    "colorScheme": "dark",
+    "path": "/terms",
+    "violations": []
+  },
+  {
+    "colorScheme": "dark",
+    "path": "/proof/<redacted>?demo=1",
+    "violations": []
+  }
+]
